@@ -114,8 +114,8 @@ document.getElementById("sentence-jp").innerHTML = `
   <div class="top-meta">${shownCounts[en]}回目 （総回数: ${totalShown}）</div>
   <div>${currentSentence.jp}</div>
 `;
-  document.getElementById("sentence-en").innerText = currentSentence.en;
-  document.getElementById("okBtn").disabled = false;
+document.getElementById("sentence-en").innerText = currentSentence.en;
+document.getElementById("okBtn").disabled = false;
 }
   
 function confirmSentence() {
@@ -153,6 +153,7 @@ document.getElementById("resetBtn").onclick = resetData;
 
 </body>
 </html>
+
 
 
 
