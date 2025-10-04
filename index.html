@@ -69,6 +69,15 @@ button {
   <button id="resetBtn">Reset</button>
 </div>
 
+<thead>
+  <tr>
+    <th>日本語</th>
+    <th>英語</th>
+    <th>YES押下</th>     <!-- ✅ -->
+    <th>表示回数</th>     <!-- ✅ -->
+  </tr>
+</thead>
+  
 <script>
 let allSentences = [];
 let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {};
@@ -137,6 +146,26 @@ function resetData() {
   }
 }
 
+function showStats() {
+  let tbody = document.getElementById("statsBody");
+  tbody.innerHTML = "";
+
+  allSentences.forEach(s => {
+    const count = shownCounts[s.en] || 0;
+    const yes = remaining.includes(s.en) ? "❌" : "✅";
+    const row = `
+      <tr>
+        <td>${s.jp}</td>
+        <td>${s.en}</td>
+        <td style="text-align:center;">${yes}</td>       <!-- ✅ YES押下を先に -->
+        <td style="text-align:center;">${count}</td>     <!-- ✅ 表示回数を後に -->
+      </tr>`;
+    tbody.innerHTML += row;
+  });
+
+  document.getElementById("statsArea").style.display = "block";
+}
+
 document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("okBtn").onclick = confirmSentence;
 document.getElementById("resetBtn").onclick = resetData;
@@ -144,6 +173,7 @@ document.getElementById("resetBtn").onclick = resetData;
 
 </body>
 </html>
+
 
 
 
