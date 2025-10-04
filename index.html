@@ -7,16 +7,14 @@
 body {
   font-family: sans-serif;
   margin: 0;
-  padding: 0 0 160px 0; /* 下だけ余白（ボタン分） */
+  padding: 0 0 160px 0;
   background-color: #fafafa;
 }
-
 #content {
-  margin-top: 20px;   /* ← 80pxから縮める */
+  margin-top: 20px;
   padding-left: 40px;
   max-width: 900px;
 }
-
 .count-label,
 #sentence-jp,
 #sentence-en {
@@ -25,17 +23,6 @@ body {
   font-size: 28px;
   color: #000;
 }
-
-.count-label,
-#sentence-jp,
-#sentence-en,
-#sentence-jp div,
-#sentence-en div {
-  margin: 32px 0;       /* ← 今より少し余裕を残す（完全に0にしない） */
-  line-height: 1.2;    /* 行間はややタイトに */
-}
-
-/* 🔹 ボタンエリアは下固定 */
 #button-area {
   position: fixed;
   bottom: 0;
@@ -47,12 +34,24 @@ body {
   box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
   text-align: center;
 }
-
 button {
   padding: 15px 30px;
   font-size: 22px;
   margin: 10px;
   border-radius: 10px;
+}
+#statsArea {
+  display: none;
+  padding: 20px 40px;
+}
+#statsArea table {
+  border-collapse: collapse;
+  width: 100%;
+}
+#statsArea th, #statsArea td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
 }
 </style>
 </head>
@@ -67,17 +66,25 @@ button {
   <button id="showBtn">Show Random</button>
   <button id="okBtn" disabled>OK</button>
   <button id="resetBtn">Reset</button>
+  <button id="statsBtn">Show Stats</button>
 </div>
 
-<thead>
-  <tr>
-    <th>日本語</th>
-    <th>英語</th>
-    <th>YES押下</th>     <!-- ✅ -->
-    <th>表示回数</th>     <!-- ✅ -->
-  </tr>
-</thead>
-  
+<!-- ✅ 一覧表示領域 -->
+<div id="statsArea">
+  <h3>📊 表示履歴一覧</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>日本語</th>
+        <th>英語</th>
+        <th>YES押下</th>
+        <th>表示回数</th>
+      </tr>
+    </thead>
+    <tbody id="statsBody"></tbody>
+  </table>
+</div>
+
 <script>
 let allSentences = [];
 let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {};
@@ -109,16 +116,14 @@ function showRandom() {
 
   const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
 
-  // ✅ 上段に「x回目」と「Total Shown」を横並びで表示
-  // ✅ 上段に「x回目」と「Total Shown」を1行で表示
-document.getElementById("sentence-jp").innerHTML = `
-  <div class="top-meta">${shownCounts[en]}回目 （総回数: ${totalShown}）</div>
-  <div>${currentSentence.jp}</div>
-`;
-document.getElementById("sentence-en").innerText = currentSentence.en;
-document.getElementById("okBtn").disabled = false;
+  document.getElementById("sentence-jp").innerHTML = `
+    <div class="top-meta">${shownCounts[en]}回目 （総回数: ${totalShown}）</div>
+    <div>${currentSentence.jp}</div>
+  `;
+  document.getElementById("sentence-en").innerText = currentSentence.en;
+  document.getElementById("okBtn").disabled = false;
 }
-  
+
 function confirmSentence() {
   if (!currentSentence) return;
   remaining = remaining.filter(s => s !== currentSentence.en);
@@ -143,6 +148,7 @@ function resetData() {
     document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
     document.getElementById("sentence-en").innerText = "";
     document.getElementById("showBtn").disabled = false;
+    document.getElementById("statsArea").style.display = "none";
   }
 }
 
@@ -157,8 +163,8 @@ function showStats() {
       <tr>
         <td>${s.jp}</td>
         <td>${s.en}</td>
-        <td style="text-align:center;">${yes}</td>       <!-- ✅ YES押下を先に -->
-        <td style="text-align:center;">${count}</td>     <!-- ✅ 表示回数を後に -->
+        <td style="text-align:center;">${yes}</td>
+        <td style="text-align:center;">${count}</td>
       </tr>`;
     tbody.innerHTML += row;
   });
@@ -169,29 +175,8 @@ function showStats() {
 document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("okBtn").onclick = confirmSentence;
 document.getElementById("resetBtn").onclick = resetData;
+document.getElementById("statsBtn").onclick = showStats;
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
