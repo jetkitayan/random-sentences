@@ -64,7 +64,7 @@ button {
 
 <div id="button-area">
   <button id="showBtn">Show Random</button>
-  <button id="okBtn" disabled>OK</button>
+  <button id="okBtn" disabled>OK (YES)</button>
   <button id="resetBtn">Reset</button>
   <button id="statsBtn">Show Stats</button>
   <button id="copyBtn">Copy Stats</button>
@@ -89,6 +89,7 @@ button {
 <script>
 let allSentences = [];
 let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {};
+let yesMarks = JSON.parse(localStorage.getItem("yesMarks")) || {}; // ✅ YES押下履歴を保持
 let remaining = JSON.parse(localStorage.getItem("remaining")) || [];
 let currentSentence = null;
 
@@ -127,15 +128,23 @@ function showRandom() {
 
 function confirmSentence() {
   if (!currentSentence) return;
+
+  // ✅ YES押下を記録
+  yesMarks[currentSentence.en] = true;
+  localStorage.setItem("yesMarks", JSON.stringify(yesMarks));
+
+  // ✅ 表示対象から除外
   remaining = remaining.filter(s => s !== currentSentence.en);
   localStorage.setItem("remaining", JSON.stringify(remaining));
 
-  document.getElementById("sentence-jp").innerText = "Press 'Show Random' again";
-  document.getElementById("sentence-en").innerText = "";
-  document.getElementById("okBtn").disabled = true;
-
-  if (remaining.length === 0) {
+  // ✅ 次の英文を自動表示
+  if (remaining.length > 0) {
+    showRandom();
+  } else {
+    document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
+    document.getElementById("sentence-en").innerText = "";
     document.getElementById("showBtn").disabled = true;
+    document.getElementById("okBtn").disabled = true;
   }
 }
 
@@ -143,7 +152,9 @@ function resetData() {
   if (confirm("Reset all data?")) {
     localStorage.removeItem("shownCounts");
     localStorage.removeItem("remaining");
+    localStorage.removeItem("yesMarks");
     shownCounts = {};
+    yesMarks = {};
     remaining = allSentences.map(s => s.en);
     currentSentence = null;
     document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
@@ -159,7 +170,7 @@ function showStats() {
 
   allSentences.forEach(s => {
     const count = shownCounts[s.en] || 0;
-    const yes = remaining.includes(s.en) ? "○" : "●";
+    const yes = yesMarks[s.en] ? "●" : "○"; // ✅ YES押下したものを「●」で表示
     const row = `
       <tr>
         <td>${s.en}</td>
@@ -200,4 +211,3 @@ document.getElementById("copyBtn").onclick = copyStats;
 
 </body>
 </html>
-
