@@ -48,55 +48,45 @@ let allSentences = [
 ];
 
 // localStorageから読み込み
-let shownCount = parseInt(localStorage.getItem("shownCount")) || 0;
-let remaining = JSON.parse(localStorage.getItem("remaining")) || [...allSentences];
-
-document.getElementById("count").innerText = shownCount;
+let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {};  // 各英文ごとの表示回数
+document.getElementById("count").innerText = Object.values(shownCounts).reduce((a,b)=>a+b,0);
 
 function showRandom() {
-  if (remaining.length === 0) {
-    document.getElementById("sentence").innerText = "All sentences shown!";
-    document.getElementById("showBtn").disabled = true;
-    document.getElementById("okBtn").disabled = true;
-    return;
-  }
+  const sentence = allSentences[Math.floor(Math.random() * allSentences.length)];
 
-  // 👇 英文表示時にカウントを1増やす
-  shownCount++;
-  localStorage.setItem("shownCount", shownCount);
+  // 👇 この英文の表示回数をカウントアップ
+  if (!shownCounts[sentence]) shownCounts[sentence] = 0;
+  shownCounts[sentence]++;
+  
+  // 保存
+  localStorage.setItem("shownCounts", JSON.stringify(shownCounts));
 
-  const idx = Math.floor(Math.random() * remaining.length);
-  const sentence = remaining[idx];
+  // 全体の合計表示数も更新
+  const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
+  document.getElementById("count").innerText = totalShown;
 
-  // 👇 番号と英文を同時に表示
+  // 👇 英文と、その英文が何回目かを表示
   document.getElementById("sentence").innerHTML = `
-    <div style="font-size:18px; color:gray;">Sentence #${shownCount}</div>
+    <div style="font-size:18px; color:gray;">
+      This sentence has been shown <b>${shownCounts[sentence]}</b> time${shownCounts[sentence] > 1 ? 's' : ''}.
+    </div>
     <div style="margin-top:10px;">${sentence}</div>
   `;
 
-  document.getElementById("count").innerText = shownCount;
   document.getElementById("okBtn").disabled = false;
-
-  // 👇 表示済み英文を削除して重複を防ぐ
-  remaining = remaining.filter(s => s !== sentence);
-  localStorage.setItem("remaining", JSON.stringify(remaining));
 }
 
 function confirmSentence() {
-  // OKボタンは単に「次の英文を見せる準備」
   document.getElementById("sentence").innerText = "Press 'Show Random' again";
   document.getElementById("okBtn").disabled = true;
 }
 
 function resetData() {
   if (confirm("Reset all data?")) {
-    localStorage.removeItem("shownCount");
-    localStorage.removeItem("remaining");
-    shownCount = 0;
-    remaining = [...allSentences];
-    document.getElementById("count").innerText = shownCount;
+    localStorage.removeItem("shownCounts");
+    shownCounts = {};
+    document.getElementById("count").innerText = 0;
     document.getElementById("sentence").innerText = "Press 'Show Random' to start";
-    document.getElementById("showBtn").disabled = false;
   }
 }
 
@@ -104,9 +94,7 @@ document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("okBtn").onclick = confirmSentence;
 document.getElementById("resetBtn").onclick = resetData;
 </script>
-
-
-
-
+  
 </body>
 </html>
+
