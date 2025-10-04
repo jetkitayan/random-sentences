@@ -162,8 +162,8 @@ function showStats() {
     const yes = remaining.includes(s.en) ? "○" : "●";
     const row = `
       <tr>
-        <td>${s.jp}</td>
         <td>${s.en}</td>
+        <td>${s.jp}</td>
         <td style="text-align:center;">${yes}</td>
         <td style="text-align:center;">${count}</td>
       </tr>`;
@@ -200,3 +200,4 @@ document.getElementById("copyBtn").onclick = copyStats;
 
 </body>
 </html>
+
