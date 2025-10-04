@@ -47,49 +47,73 @@ let allSentences = [
   "Actions speak louder than words."
 ];
 
-// localStorageから英文ごとのカウントを読み込み
-let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {}; 
-let totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
-document.getElementById("count").innerText = totalShown;
+// localStorageから英文ごとのカウントと残りリストを読み込み
+let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {};
+let remaining = JSON.parse(localStorage.getItem("remaining")) || [...allSentences];
+let currentSentence = "";
+
+document.getElementById("count").innerText = Object.values(shownCounts).reduce((a,b)=>a+b,0);
 
 function showRandom() {
-  // ランダムに英文を1つ選ぶ
-  const sentence = allSentences[Math.floor(Math.random() * allSentences.length)];
+  if (remaining.length === 0) {
+    document.getElementById("sentence").innerHTML = "<b>All sentences have been shown!</b>";
+    document.getElementById("showBtn").disabled = true;
+    document.getElementById("okBtn").disabled = true;
+    return;
+  }
 
-  // 👇 英文ごとに独立カウント
+  // ランダムに残りの文から選ぶ
+  const sentence = remaining[Math.floor(Math.random() * remaining.length)];
+  currentSentence = sentence;
+
+  // この英文の表示回数をカウント
   if (!shownCounts[sentence]) shownCounts[sentence] = 0;
   shownCounts[sentence]++;
-
-  // 保存
   localStorage.setItem("shownCounts", JSON.stringify(shownCounts));
 
-  // 総表示回数も更新（合計）
-  totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
+  // 総表示数を更新
+  const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
   document.getElementById("count").innerText = totalShown;
 
-  // 👇 表示（この英文が何回目かを明示）
+  // 画面に表示
   document.getElementById("sentence").innerHTML = `
     <div style="font-size:18px; color:gray;">
       This sentence has been shown <b>${shownCounts[sentence]}</b> time${shownCounts[sentence] > 1 ? 's' : ''}.
     </div>
     <div style="margin-top:10px;">${sentence}</div>
   `;
-
   document.getElementById("okBtn").disabled = false;
 }
 
 function confirmSentence() {
+  if (!currentSentence) return;
+
+  // 👇 OKを押された英文をリストから削除
+  remaining = remaining.filter(s => s !== currentSentence);
+  localStorage.setItem("remaining", JSON.stringify(remaining));
+
+  // 状態更新
   document.getElementById("sentence").innerText = "Press 'Show Random' again";
   document.getElementById("okBtn").disabled = true;
+
+  // 👇 すべての文が終わったらボタンを無効化
+  if (remaining.length === 0) {
+    document.getElementById("sentence").innerHTML = "<b>All sentences have been shown!</b>";
+    document.getElementById("showBtn").disabled = true;
+  }
 }
 
 function resetData() {
   if (confirm("Reset all data?")) {
     localStorage.removeItem("shownCounts");
+    localStorage.removeItem("remaining");
     shownCounts = {};
-    totalShown = 0;
+    remaining = [...allSentences];
+    currentSentence = "";
     document.getElementById("count").innerText = 0;
     document.getElementById("sentence").innerText = "Press 'Show Random' to start";
+    document.getElementById("showBtn").disabled = false;
+    document.getElementById("okBtn").disabled = true;
   }
 }
 
