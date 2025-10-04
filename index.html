@@ -11,20 +11,20 @@ body {
 }
 
 #sentence {
-  font-size: 36px;     /* 👈 英文を大きく */
+  font-size: 36px;
   margin: 40px 20px;
   line-height: 1.5;
 }
 
 button {
-  padding: 15px 30px;  /* 👈 ボタンも少し大きく */
+  padding: 15px 30px;
   font-size: 22px;
   margin: 10px;
   border-radius: 10px;
 }
 
 #count {
-  font-size: 24px;     /* カウンタも見やすく */
+  font-size: 24px;
   font-weight: bold;
 }
 </style>
@@ -36,7 +36,7 @@ button {
 <button id="showBtn">Show Random</button>
 <button id="okBtn" disabled>OK</button>
 <button id="resetBtn">Reset</button>
-<p>Displayed Count: <span id="count">0</span></p>
+<p>Total Shown: <span id="count">0</span></p>
 
 <script>
 let allSentences = [
@@ -47,25 +47,27 @@ let allSentences = [
   "Actions speak louder than words."
 ];
 
-// localStorageから読み込み
-let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {};  // 各英文ごとの表示回数
-document.getElementById("count").innerText = Object.values(shownCounts).reduce((a,b)=>a+b,0);
+// localStorageから英文ごとのカウントを読み込み
+let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {}; 
+let totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
+document.getElementById("count").innerText = totalShown;
 
 function showRandom() {
+  // ランダムに英文を1つ選ぶ
   const sentence = allSentences[Math.floor(Math.random() * allSentences.length)];
 
-  // 👇 この英文の表示回数をカウントアップ
+  // 👇 英文ごとに独立カウント
   if (!shownCounts[sentence]) shownCounts[sentence] = 0;
   shownCounts[sentence]++;
-  
+
   // 保存
   localStorage.setItem("shownCounts", JSON.stringify(shownCounts));
 
-  // 全体の合計表示数も更新
-  const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
+  // 総表示回数も更新（合計）
+  totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
   document.getElementById("count").innerText = totalShown;
 
-  // 👇 英文と、その英文が何回目かを表示
+  // 👇 表示（この英文が何回目かを明示）
   document.getElementById("sentence").innerHTML = `
     <div style="font-size:18px; color:gray;">
       This sentence has been shown <b>${shownCounts[sentence]}</b> time${shownCounts[sentence] > 1 ? 's' : ''}.
@@ -85,6 +87,7 @@ function resetData() {
   if (confirm("Reset all data?")) {
     localStorage.removeItem("shownCounts");
     shownCounts = {};
+    totalShown = 0;
     document.getElementById("count").innerText = 0;
     document.getElementById("sentence").innerText = "Press 'Show Random' to start";
   }
@@ -94,7 +97,6 @@ document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("okBtn").onclick = confirmSentence;
 document.getElementById("resetBtn").onclick = resetData;
 </script>
-  
+
 </body>
 </html>
-
