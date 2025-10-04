@@ -36,17 +36,26 @@ h1 {
 
 #sentence-jp {
   font-size: 28px;
-  margin-top: 20px;
+  margin: 5px 0;   /* ← 上下マージンを縮小 */
   color: #333;
-  min-height: 60px;
+  min-height: auto; /* ← 固定高さを外す */
+  line-height: 1.4; /* ← 行間もやや狭め */
 }
 
 #sentence-en {
   font-size: 32px;
-  margin-top: 10px;
+  margin: 5px 0 10px 0; /* ← 余白縮小 */
   color: #0078d7;
-  min-height: 80px;
+  min-height: auto;
+  line-height: 1.4;
 }
+
+.count-label {
+  font-size: 18px;
+  color: gray;
+  margin: 0 0 5px 0; /* ← 下だけちょっと余白 */
+}
+
 
 /* 🔹 ボタンエリアは下固定 */
 #button-area {
@@ -168,6 +177,7 @@ document.getElementById("resetBtn").onclick = resetData;
 
 </body>
 </html>
+
 
 
 
