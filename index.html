@@ -4,9 +4,29 @@
 <meta charset="UTF-8">
 <title>Random English Sentences</title>
 <style>
-body { font-family: sans-serif; text-align: center; margin-top: 100px; }
-#sentence { font-size: 24px; margin: 40px 0; }
-button { padding: 10px 20px; font-size: 18px; margin: 5px; }
+body {
+  font-family: sans-serif;
+  text-align: center;
+  margin-top: 80px;
+}
+
+#sentence {
+  font-size: 36px;     /* 👈 英文を大きく */
+  margin: 40px 20px;
+  line-height: 1.5;
+}
+
+button {
+  padding: 15px 30px;  /* 👈 ボタンも少し大きく */
+  font-size: 22px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+#count {
+  font-size: 24px;     /* カウンタも見やすく */
+  font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -33,7 +53,6 @@ let remaining = JSON.parse(localStorage.getItem("remaining")) || [...allSentence
 
 document.getElementById("count").innerText = shownCount;
 
-// ランダム表示
 function showRandom() {
   if (remaining.length === 0) {
     document.getElementById("sentence").innerText = "All sentences shown!";
@@ -43,14 +62,20 @@ function showRandom() {
   }
   const idx = Math.floor(Math.random() * remaining.length);
   const sentence = remaining[idx];
-  document.getElementById("sentence").innerText = sentence;
+  
+  // 👇「次は何回目の表示か」を計算して表示
+  const nextNumber = shownCount + 1;
+  document.getElementById("sentence").innerHTML = 
+    `<div style="font-size:18px; color:gray;">Sentence #${nextNumber}</div>` +
+    `<div style="margin-top:10px;">${sentence}</div>`;
+
   document.getElementById("okBtn").disabled = false;
 }
 
-// OKボタンで確定
 function confirmSentence() {
-  const current = document.getElementById("sentence").innerText;
-  remaining = remaining.filter(s => s !== current);
+  const textOnly = document.getElementById("sentence").innerText
+                     .replace(/Sentence #\d+\s*/, ""); // 英文部分のみ抽出
+  remaining = remaining.filter(s => s !== textOnly);
   shownCount++;
 
   // localStorageに保存
@@ -62,7 +87,6 @@ function confirmSentence() {
   document.getElementById("sentence").innerText = "Press 'Show Random' again";
 }
 
-// リセット機能
 function resetData() {
   if (confirm("Reset all data?")) {
     localStorage.removeItem("shownCount");
@@ -79,6 +103,7 @@ document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("okBtn").onclick = confirmSentence;
 document.getElementById("resetBtn").onclick = resetData;
 </script>
+
 
 </body>
 </html>
