@@ -17,26 +17,13 @@ body {
   max-width: 900px;
 }
 
-/* 🔹 テキストは左揃え */
-#sentence-jp, #sentence-en, .count-label {
-  text-align: left;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  margin: 5px 0;       /* ← 行間を詰める */
-  padding: 0;
-  color: #000;         /* ← 全部黒文字 */
-  line-height: 1.4;    /* ← 行間を統一 */
-}
-
-.count-label {
-  font-size: 28px;     /* ← 日本語と同じサイズに */
-  font-weight: normal; /* ← 太さも統一 */
-}
-#sentence-jp {
-  font-size: 28px;
-}
+.count-label,
+#sentence-jp,
 #sentence-en {
-  font-size: 28px;     /* ← 英文も28pxに統一（強調したければ大きくしてもOK） */
+  margin: 2px 0;       /* ← 上下余白をぐっと縮小 */
+  line-height: 1.2;    /* ← 行間を狭く（現在1.4〜1.6くらいなら半分相当） */
+  font-size: 28px;
+  color: #000;
 }
 
 /* 🔹 ボタンエリアは下固定 */
@@ -158,6 +145,7 @@ document.getElementById("resetBtn").onclick = resetData;
 
 </body>
 </html>
+
 
 
 
