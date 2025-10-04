@@ -17,11 +17,18 @@ body {
   max-width: 900px;
 }
 
+#sentence-jp div, 
+#sentence-en div {
+  margin: 0;  /* ← 入れ子の余白を完全に消す */
+  padding: 0;
+}
+  
 .count-label,
 #sentence-jp,
 #sentence-en {
-  margin: 2px 0;       /* ← 上下余白をぐっと縮小 */
-  line-height: 1.2;    /* ← 行間を狭く（現在1.4〜1.6くらいなら半分相当） */
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;  /* ← 行間だけで調整 */
   font-size: 28px;
   color: #000;
 }
@@ -145,6 +152,7 @@ document.getElementById("resetBtn").onclick = resetData;
 
 </body>
 </html>
+
 
 
 
