@@ -7,24 +7,42 @@
 body {
   font-family: sans-serif;
   text-align: center;
-  margin-top: 80px;
+  margin: 0;
+  padding-bottom: 160px; /* ボタンぶんの余白を確保 */
 }
+
 #sentence-jp {
   font-size: 28px;
-  margin: 20px 10px;
+  margin: 40px 20px 10px 20px;
   color: #333;
+  min-height: 60px; /* 高さを固定して揺れ防止 */
 }
+
 #sentence-en {
   font-size: 32px;
-  margin: 20px 10px;
+  margin: 10px 20px 20px 20px;
   color: #0078d7;
+  min-height: 80px; /* 英文部分も固定高さ */
 }
+
+#button-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  padding: 20px 0;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+}
+
 button {
   padding: 15px 30px;
   font-size: 22px;
   margin: 10px;
   border-radius: 10px;
 }
+
 #count {
   font-size: 24px;
   font-weight: bold;
@@ -36,10 +54,14 @@ button {
 <h1>Japanese ↔ English Sentences</h1>
 <div id="sentence-jp">Press "Show Random" to start</div>
 <div id="sentence-en"></div>
-<button id="showBtn">Show Random</button>
-<button id="okBtn" disabled>OK</button>
-<button id="resetBtn">Reset</button>
-<p>Total Shown: <span id="count">0</span></p>
+
+<!-- ✅ ボタンエリアをまとめて固定配置 -->
+<div id="button-area">
+  <button id="showBtn">Show Random</button>
+  <button id="okBtn" disabled>OK</button>
+  <button id="resetBtn">Reset</button>
+  <p>Total Shown: <span id="count">0</span></p>
+</div>
 
 <script>
 let allSentences = [];
@@ -52,7 +74,6 @@ fetch("sentences.json")
   .then(response => response.json())
   .then(data => {
     allSentences = data;
-    // 初回ロード時にremainingが空なら全件セット
     if (remaining.length === 0) remaining = allSentences.map(s => s.en);
   });
 
@@ -67,30 +88,25 @@ function showRandom() {
     return;
   }
 
-  // 残りの中からランダム選択
   const en = remaining[Math.floor(Math.random() * remaining.length)];
   currentSentence = allSentences.find(s => s.en === en);
 
-  // カウントアップ（英文ごとに独立）
   if (!shownCounts[en]) shownCounts[en] = 0;
   shownCounts[en]++;
   localStorage.setItem("shownCounts", JSON.stringify(shownCounts));
 
-  // 合計更新
   const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
   document.getElementById("count").innerText = totalShown;
 
-  // 日本語＋英語を表示
   document.getElementById("sentence-jp").innerText = currentSentence.jp;
-  document.getElementById("sentence-en").innerText = currentSentence.en + 
-    `  (${shownCounts[en]}回目)`;
+  document.getElementById("sentence-en").innerText =
+    currentSentence.en + `  (${shownCounts[en]}回目)`;
 
   document.getElementById("okBtn").disabled = false;
 }
 
 function confirmSentence() {
   if (!currentSentence) return;
-  // OKされた英文を除外
   remaining = remaining.filter(s => s !== currentSentence.en);
   localStorage.setItem("remaining", JSON.stringify(remaining));
 
