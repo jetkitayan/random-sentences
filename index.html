@@ -1,3 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Random English Sentences</title>
+<style>
+body {
+  font-family: sans-serif;
+  text-align: center;
+  margin-top: 80px;
+}
+
+#sentence {
+  font-size: 36px;     /* 👈 英文を大きく */
+  margin: 40px 20px;
+  line-height: 1.5;
+}
+
+button {
+  padding: 15px 30px;  /* 👈 ボタンも少し大きく */
+  font-size: 22px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+#count {
+  font-size: 24px;     /* カウンタも見やすく */
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1>Random English Sentences</h1>
+<div id="sentence">Press "Show Random" to start</div>
+<button id="showBtn">Show Random</button>
+<button id="okBtn" disabled>OK</button>
+<button id="resetBtn">Reset</button>
+<p>Displayed Count: <span id="count">0</span></p>
+
 <script>
 let allSentences = [
   "Keep your chin up.",
@@ -64,3 +104,9 @@ document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("okBtn").onclick = confirmSentence;
 document.getElementById("resetBtn").onclick = resetData;
 </script>
+
+
+
+
+</body>
+</html>
