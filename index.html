@@ -123,13 +123,13 @@ function showRandom() {
   const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
   document.getElementById("count").innerText = totalShown;
 
-  // ✅ 日本語の下に (X回目) を表示
+  // ✅ 「X回目」を最上段に、その下に日本語、その下に英語
   document.getElementById("sentence-jp").innerHTML = `
+    <div style="font-size:18px; color:gray; margin-bottom:10px;">
+      ${shownCounts[en]}回目
+    </div>
     <div>${currentSentence.jp}</div>
-    <div style="font-size:18px; color:gray;">（${shownCounts[en]}回目）</div>
   `;
-
-  // ✅ 英語は英文だけ（回数は付けない）
   document.getElementById("sentence-en").innerText = currentSentence.en;
 
   document.getElementById("okBtn").disabled = false;
@@ -170,4 +170,5 @@ document.getElementById("resetBtn").onclick = resetData;
 
 </body>
 </html>
+
 
