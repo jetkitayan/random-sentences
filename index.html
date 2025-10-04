@@ -11,27 +11,31 @@ body {
   background-color: #fafafa;
 }
 
-/* 全体を中央寄せではなく、文章部分のみ左揃え */
+/* 🔹 全体レイアウト */
 #content {
-  max-width: 800px;
-  margin: 80px auto 0 auto;
-  padding: 0 20px;
+  margin-top: 80px;
+  padding-left: 40px; /* ← 左の余白を固定値で確保（両言語がここに揃う） */
+  max-width: 900px;
 }
 
+/* タイトルは中央揃え */
 h1 {
   text-align: center;
+  margin-bottom: 40px;
 }
 
+/* 🔹 テキストは左揃え・固定幅フォントマージンなし */
 #sentence-jp, #sentence-en {
-  text-align: left;           /* ← 左揃えに変更 */
-  display: block;
-  white-space: pre-wrap;      /* 改行保持 */
+  text-align: left;
+  white-space: pre-wrap;
   word-wrap: break-word;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 #sentence-jp {
   font-size: 28px;
-  margin: 40px 0 10px 0;
+  margin: 20px 0 10px 0;
   color: #333;
   min-height: 60px;
 }
@@ -43,6 +47,7 @@ h1 {
   min-height: 80px;
 }
 
+/* 🔹 ボタンエリアは下固定 */
 #button-area {
   position: fixed;
   bottom: 0;
@@ -52,7 +57,7 @@ h1 {
   border-top: 1px solid #ddd;
   padding: 20px 0;
   box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
-  text-align: center; /* ボタンだけ中央配置 */
+  text-align: center;
 }
 
 button {
@@ -89,7 +94,6 @@ let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {};
 let remaining = JSON.parse(localStorage.getItem("remaining")) || [];
 let currentSentence = null;
 
-// ✅ JSONファイルを読み込む
 fetch("sentences.json")
   .then(response => response.json())
   .then(data => {
