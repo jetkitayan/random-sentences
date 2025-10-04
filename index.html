@@ -170,6 +170,7 @@ function showStats() {
     tbody.innerHTML += row;
   });
   document.getElementById("statsArea").style.display = "block";
+}
 
 function copyStats() {
   const table = document.querySelector("#statsArea table");
@@ -179,7 +180,6 @@ function copyStats() {
   }
 
   let text = "";
-  // 各行をタブ区切りでテキスト化
   table.querySelectorAll("tr").forEach(tr => {
     const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
     text += cols.join("\t") + "\n";
@@ -189,17 +189,14 @@ function copyStats() {
     .then(() => alert("一覧をコピーしました！"))
     .catch(() => alert("コピーに失敗しました。"));
 }
-document.getElementById("copyBtn").onclick = copyStats;
-}
 
+// ✅ イベント登録
 document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("okBtn").onclick = confirmSentence;
 document.getElementById("resetBtn").onclick = resetData;
 document.getElementById("statsBtn").onclick = showStats;
+document.getElementById("copyBtn").onclick = copyStats;
 </script>
 
 </body>
 </html>
-
-
-
