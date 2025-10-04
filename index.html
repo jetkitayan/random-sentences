@@ -54,11 +54,6 @@ button {
   margin: 10px;
   border-radius: 10px;
 }
-
-#count {
-  font-size: 24px;
-  font-weight: bold;
-}
 </style>
 </head>
 <body>
@@ -87,8 +82,6 @@ fetch("sentences.json")
     if (remaining.length === 0) remaining = allSentences.map(s => s.en);
   });
 
-document.getElementById("count").innerText = Object.values(shownCounts).reduce((a,b)=>a+b,0);
-
 function showRandom() {
   if (remaining.length === 0) {
     document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
@@ -106,7 +99,6 @@ function showRandom() {
   localStorage.setItem("shownCounts", JSON.stringify(shownCounts));
 
   const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
-  document.getElementById("count").innerText = totalShown;
 
   // ✅ 上段に「x回目」と「Total Shown」を横並びで表示
   // ✅ 上段に「x回目」と「Total Shown」を1行で表示
@@ -139,7 +131,6 @@ function resetData() {
     shownCounts = {};
     remaining = allSentences.map(s => s.en);
     currentSentence = null;
-    document.getElementById("count").innerText = 0;
     document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
     document.getElementById("sentence-en").innerText = "";
     document.getElementById("showBtn").disabled = false;
@@ -153,6 +144,7 @@ document.getElementById("resetBtn").onclick = resetData;
 
 </body>
 </html>
+
 
 
 
