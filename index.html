@@ -71,6 +71,34 @@ button {
   font-size: 24px;
   font-weight: bold;
 }
+#content {
+  max-width: 900px;
+  margin: 80px auto 0 auto; /* 中央寄せコンテナ */
+  padding: 0;
+}
+
+#sentence-jp, #sentence-en {
+  text-align: left;        /* 左揃え */
+  margin-left: 40px;       /* 左端を揃える位置 */
+  margin-right: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+#sentence-jp {
+  font-size: 28px;
+  margin-top: 20px;
+  color: #333;
+  min-height: 60px;
+}
+
+#sentence-en {
+  font-size: 32px;
+  margin-top: 10px;
+  color: #0078d7;
+  min-height: 80px;
+}
+
 </style>
 </head>
 <body>
@@ -164,3 +192,4 @@ document.getElementById("resetBtn").onclick = resetData;
 
 </body>
 </html>
+
