@@ -111,12 +111,9 @@ function showRandom() {
 
   // ✅ 上段に「x回目」と「Total Shown」を横並びで表示
   document.getElementById("sentence-jp").innerHTML = `
-    <div class="top-meta">
-      <div>${shownCounts[en]}回目</div>
-      <div>Total Shown: ${totalShown}</div>
-    </div>
-    <div>${currentSentence.jp}</div>
-  `;
+  <div class="top-meta">${shownCounts[en]}回目 （Total Shown: ${totalShown}）</div>
+  <div>${currentSentence.jp}</div>
+　`;
 
   document.getElementById("sentence-en").innerText = currentSentence.en;
 
@@ -158,6 +155,7 @@ document.getElementById("resetBtn").onclick = resetData;
 
 </body>
 </html>
+
 
 
 
