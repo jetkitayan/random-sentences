@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Random English Sentences</title>
+<style>
+body { font-family: sans-serif; text-align: center; margin-top: 100px; }
+#sentence { font-size: 24px; margin: 40px 0; }
+button { padding: 10px 20px; font-size: 18px; margin: 5px; }
+</style>
+</head>
+<body>
+
+<h1>Random English Sentences</h1>
+<div id="sentence">Press "Show Random" to start</div>
+<button id="showBtn">Show Random</button>
+<button id="okBtn" disabled>OK</button>
+<button id="resetBtn">Reset</button>
+<p>Displayed Count: <span id="count">0</span></p>
+
+<script>
+let allSentences = [
+  "Keep your chin up.",
+  "Practice makes perfect.",
+  "Every cloud has a silver lining.",
+  "Better late than never.",
+  "Actions speak louder than words."
+];
+
+// localStorageからデータを読み込み
+let shownCount = parseInt(localStorage.getItem("shownCount")) || 0;
+let remaining = JSON.parse(localStorage.getItem("remaining")) || [...allSentences];
+
+document.getElementById("count").innerText = shownCount;
+
+// ランダム表示
+function showRandom() {
+  if (remaining.length === 0) {
+    document.getElementById("sentence").innerText = "All sentences shown!";
+    document.getElementById("showBtn").disabled = true;
+    document.getElementById("okBtn").disabled = true;
+    return;
+  }
+  const idx = Math.floor(Math.random() * remaining.length);
+  const sentence = remaining[idx];
+  document.getElementById("sentence").innerText = sentence;
+  document.getElementById("okBtn").disabled = false;
+}
+
+// OKボタンで確定
+function confirmSentence() {
+  const current = document.getElementById("sentence").innerText;
+  remaining = remaining.filter(s => s !== current);
+  shownCount++;
+
+  // localStorageに保存
+  localStorage.setItem("shownCount", shownCount);
+  localStorage.setItem("remaining", JSON.stringify(remaining));
+
+  document.getElementById("count").innerText = shownCount;
+  document.getElementById("okBtn").disabled = true;
+  document.getElementById("sentence").innerText = "Press 'Show Random' again";
+}
+
+// リセット機能
+function resetData() {
+  if (confirm("Reset all data?")) {
+    localStorage.removeItem("shownCount");
+    localStorage.removeItem("remaining");
+    shownCount = 0;
+    remaining = [...allSentences];
+    document.getElementById("count").innerText = shownCount;
+    document.getElementById("sentence").innerText = "Press 'Show Random' to start";
+    document.getElementById("showBtn").disabled = false;
+  }
+}
+
+document.getElementById("showBtn").onclick = showRandom;
+document.getElementById("okBtn").onclick = confirmSentence;
+document.getElementById("resetBtn").onclick = resetData;
+</script>
+
+</body>
+</html>
