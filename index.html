@@ -14,8 +14,9 @@ body {
 /* 🔹 全体レイアウト */
 #content {
   margin-top: 80px;
-  padding-left: 40px; /* ← 左の余白を固定値で確保（両言語がここに揃う） */
   max-width: 900px;
+  margin: 80px auto 0 auto; /* 中央寄せコンテナ */
+  padding: 0;
 }
 
 /* タイトルは中央揃え */
@@ -24,25 +25,25 @@ h1 {
   margin-bottom: 40px;
 }
 
-/* 🔹 テキストは左揃え・固定幅フォントマージンなし */
+/* 🔹 テキストは左揃え */
 #sentence-jp, #sentence-en {
   text-align: left;
+  margin-left: 40px;
+  margin-right: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
-  margin-left: 0;
-  padding-left: 0;
 }
 
 #sentence-jp {
   font-size: 28px;
-  margin: 20px 0 10px 0;
+  margin-top: 20px;
   color: #333;
   min-height: 60px;
 }
 
 #sentence-en {
   font-size: 32px;
-  margin: 10px 0 20px 0;
+  margin-top: 10px;
   color: #0078d7;
   min-height: 80px;
 }
@@ -71,34 +72,6 @@ button {
   font-size: 24px;
   font-weight: bold;
 }
-#content {
-  max-width: 900px;
-  margin: 80px auto 0 auto; /* 中央寄せコンテナ */
-  padding: 0;
-}
-
-#sentence-jp, #sentence-en {
-  text-align: left;        /* 左揃え */
-  margin-left: 40px;       /* 左端を揃える位置 */
-  margin-right: auto;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-#sentence-jp {
-  font-size: 28px;
-  margin-top: 20px;
-  color: #333;
-  min-height: 60px;
-}
-
-#sentence-en {
-  font-size: 32px;
-  margin-top: 10px;
-  color: #0078d7;
-  min-height: 80px;
-}
-
 </style>
 </head>
 <body>
@@ -150,9 +123,14 @@ function showRandom() {
   const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
   document.getElementById("count").innerText = totalShown;
 
-  document.getElementById("sentence-jp").innerText = currentSentence.jp;
-  document.getElementById("sentence-en").innerText =
-    currentSentence.en + `  (${shownCounts[en]}回目)`;
+  // ✅ 日本語 + （回数）を sentence-jp にまとめて表示
+  document.getElementById("sentence-jp").innerHTML = `
+    <div>${currentSentence.jp}</div>
+    <div style="font-size:18px; color:gray;">（${shownCounts[en]}回目）</div>
+  `;
+
+  // ✅ 英文は別の段に表示
+  document.getElementById("sentence-en").innerText = currentSentence.en;
 
   document.getElementById("okBtn").disabled = false;
 }
@@ -192,4 +170,3 @@ document.getElementById("resetBtn").onclick = resetData;
 
 </body>
 </html>
-
