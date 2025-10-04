@@ -6,23 +6,41 @@
 <style>
 body {
   font-family: sans-serif;
-  text-align: center;
   margin: 0;
-  padding-bottom: 160px; /* ボタンぶんの余白を確保 */
+  padding-bottom: 160px; /* ボタン分の余白 */
+  background-color: #fafafa;
+}
+
+/* 全体を中央寄せではなく、文章部分のみ左揃え */
+#content {
+  max-width: 800px;
+  margin: 80px auto 0 auto;
+  padding: 0 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#sentence-jp, #sentence-en {
+  text-align: left;           /* ← 左揃えに変更 */
+  display: block;
+  white-space: pre-wrap;      /* 改行保持 */
+  word-wrap: break-word;
 }
 
 #sentence-jp {
   font-size: 28px;
-  margin: 40px 20px 10px 20px;
+  margin: 40px 0 10px 0;
   color: #333;
-  min-height: 60px; /* 高さを固定して揺れ防止 */
+  min-height: 60px;
 }
 
 #sentence-en {
   font-size: 32px;
-  margin: 10px 20px 20px 20px;
+  margin: 10px 0 20px 0;
   color: #0078d7;
-  min-height: 80px; /* 英文部分も固定高さ */
+  min-height: 80px;
 }
 
 #button-area {
@@ -34,6 +52,7 @@ body {
   border-top: 1px solid #ddd;
   padding: 20px 0;
   box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+  text-align: center; /* ボタンだけ中央配置 */
 }
 
 button {
@@ -51,11 +70,12 @@ button {
 </head>
 <body>
 
-<h1>Japanese ↔ English Sentences</h1>
-<div id="sentence-jp">Press "Show Random" to start</div>
-<div id="sentence-en"></div>
+<div id="content">
+  <h1>Japanese ↔ English Sentences</h1>
+  <div id="sentence-jp">Press "Show Random" to start</div>
+  <div id="sentence-en"></div>
+</div>
 
-<!-- ✅ ボタンエリアをまとめて固定配置 -->
 <div id="button-area">
   <button id="showBtn">Show Random</button>
   <button id="okBtn" disabled>OK</button>
