@@ -31,30 +31,34 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 220px; /* 高さを少し拡大 */
+  height: auto; /* 高さを自動に */
   background: #fff;
   border-top: 1px solid #ddd;
   box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
 
-  /* ★ 縦方向に並べる */
+  /* ★2段構成＋上下余白を広めに */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 上下中央 */
-  align-items: center;     /* 左右中央 */
-  gap: 20px; /* 段の間隔 */
+  justify-content: center;
+  align-items: center;
+  gap: 40px; /* 段の間隔（上下の段の距離） */
+  padding: 50px 0; /* ← ボタン全体ブロックの上下余白 */
 }
 
 /* 各段のボタンを横に並べる */
 .button-row {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 40px; /* ← ボタン同士の左右間隔 */
 }
 
+/* 各ボタンの上下の余白をさらに広げる */
 button {
-  padding: 30px 60px;
+  padding: 30px 70px; /* ボタンサイズをさらにゆったり */
   font-size: 26px;
-  border-radius: 12px;
+  border-radius: 14px;
+  margin-top: 10px;   /* ボタン上の余白 */
+  margin-bottom: 10px;/* ボタン下の余白 */
   cursor: pointer;
 }
 
@@ -241,6 +245,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 
 </body>
 </html>
+
 
 
 
