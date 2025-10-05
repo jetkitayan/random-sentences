@@ -87,11 +87,15 @@ button {
 </div>
 
 <div id="button-area">
-  <button id="showBtn">Show Random</button>
-  <button id="okBtn" disabled>OK (YES)</button>
-  <button id="resetBtn">Reset</button>
-  <button id="statsBtn">Show Stats</button>
-  <button id="copyBtn">Copy Stats</button>
+  <div class="button-row">
+    <button id="showBtn">Show Random</button>
+    <button id="okBtn" disabled>OK (YES)</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+  <div class="button-row">
+    <button id="statsBtn">Show Stats</button>
+    <button id="copyBtn">Copy Stats</button>
+  </div>
 </div>
 
 <!-- ✅ 一覧表示領域 -->
@@ -236,6 +240,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 
 </body>
 </html>
+
 
 
 
