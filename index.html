@@ -35,13 +35,28 @@ body {
   text-align: center;
 }
 
+#button-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 160px; /* 高さを固定して中央寄せしやすくする */
+  background: #fff;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+
+  /* ★ flexで上下左右中央配置 */
+  display: flex;
+  justify-content: center; /* 左右中央 */
+  align-items: center;     /* 上下中央 */
+  gap: 20px; /* ボタンの間隔 */
+}
+
 button {
-  padding: 30px 60px; /* ← 高さ＆横幅を倍にする（前:15px 30px） */
-  font-size: 26px;    /* ← 文字サイズも少し大きく */
-  margin: 10px;
-  margin-bottom: 40px; /* 下にだけ20pxの余白 */
-  margin-bottom: 40px; /* 下にだけ20pxの余白 */
+  padding: 30px 60px;
+  font-size: 26px;
   border-radius: 12px;
+  cursor: pointer;
 }
 
 #statsArea {
@@ -221,6 +236,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 
 </body>
 </html>
+
 
 
 
