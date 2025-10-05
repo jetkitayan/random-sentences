@@ -45,12 +45,11 @@ body {
   gap: 40px; /* ← ボタン同士の左右間隔 */
 }
 
-/* 各ボタンの上下の余白をさらに広げる */
 button {
-  padding: 60px 80px; /* ← 高さ＆横幅をさらに倍増（以前: 30px 60px） */
-  font-size: 32px;    /* ← 文字も少し大きく（26px → 32px） */
-  margin: 25px;       /* ← ボタン同士の上下間隔を広げる */
-  border-radius: 16px; /* ← 見た目を少し柔らかく */
+  padding: 60px 80px;   /* ← 高さと横幅は前回のまま（大きめ） */
+  font-size: 32px;      /* ← 大きな文字 */
+  margin: 25px 12px;    /* ← 上下は25px、左右は12px（以前は両方25px） */
+  border-radius: 16px;  /* ← 角をやや丸く */
 }
 
 #statsArea {
@@ -236,6 +235,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 
 </body>
 </html>
+
 
 
 
