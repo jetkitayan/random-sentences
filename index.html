@@ -28,12 +28,15 @@ body {
 
 #button-area {
   position: fixed;
-  bottom: 60px; /* ← 下端から60px上に（以前:30px） */
+  bottom: 30px;
   left: 0;
   width: 100%;
   background: #fff;
   border-top: 1px solid #ddd;
-  padding: 60px 0; /* ← ボタン全体の上下にゆとりを持たせる（以前:30px） */
+  padding-top: 60px;     /* 上下はそのまま */
+  padding-bottom: 60px;
+  padding-left: 30px;   /* ← 左右の余白を拡大（お好みで調整） */
+  padding-right: 30px;  /* ← ここも同じ値でOK */
   box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
   text-align: center;
 }
@@ -235,6 +238,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 
 </body>
 </html>
+
 
 
 
