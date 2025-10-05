@@ -10,11 +10,13 @@ body {
   padding: 0 0 160px 0;
   background-color: #fafafa;
 }
+
 #content {
   margin-top: 20px;
   padding-left: 40px;
   max-width: 900px;
 }
+
 .count-label,
 #sentence-jp,
 #sentence-en {
@@ -23,33 +25,30 @@ body {
   font-size: 48px;
   color: #000;
 }
-#button-area {
-  position: fixed;
-  bottom: 30px; /* ← 下端から30px上に配置 */
-  left: 0;
-  width: 100%;
-  background: #fff;
-  border-top: 1px solid #ddd;
-  padding: 30px 0; /* ← 高さに余裕を持たせる */
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
-  text-align: center;
-}
 
 #button-area {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 160px; /* 高さを固定して中央寄せしやすくする */
+  height: 220px; /* 高さを少し拡大 */
   background: #fff;
   border-top: 1px solid #ddd;
   box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
 
-  /* ★ flexで上下左右中央配置 */
+  /* ★ 縦方向に並べる */
   display: flex;
-  justify-content: center; /* 左右中央 */
-  align-items: center;     /* 上下中央 */
-  gap: 20px; /* ボタンの間隔 */
+  flex-direction: column;
+  justify-content: center; /* 上下中央 */
+  align-items: center;     /* 左右中央 */
+  gap: 20px; /* 段の間隔 */
+}
+
+/* 各段のボタンを横に並べる */
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 button {
@@ -63,10 +62,12 @@ button {
   display: none;
   padding: 20px 40px;
 }
+
 #statsArea table {
   border-collapse: collapse;
   width: 100%;
 }
+
 #statsArea th, #statsArea td {
   border: 1px solid #ccc;
   padding: 8px;
@@ -240,6 +241,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 
 </body>
 </html>
+
 
 
 
