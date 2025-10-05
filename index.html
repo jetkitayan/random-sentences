@@ -201,7 +201,7 @@ function copyStats() {
   table.querySelectorAll("tr").forEach(tr => {
     // ✅ 区切り文字を「,」に変更
     const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
-    text += cols.join("|") + "\n";
+    text += cols.join("@") + "\n";
   });
 
   navigator.clipboard.writeText(text)
@@ -219,6 +219,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 
 </body>
 </html>
+
 
 
 
