@@ -115,15 +115,29 @@ button {
 <script>
 let allSentences = [];
 let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {};
-let yesMarks = JSON.parse(localStorage.getItem("yesMarks")) || {}; // ✅ YES押下履歴を保持
+let yesMarks = JSON.parse(localStorage.getItem("yesMarks")) || {};
 let remaining = JSON.parse(localStorage.getItem("remaining")) || [];
 let currentSentence = null;
 
-fetch("sentences.json")
-  .then(response => response.json())
+// ✅ URLパラメータからファイル名を取得
+const params = new URLSearchParams(window.location.search);
+const fileParam = params.get("file"); // 例: ?file=sentences2
+const jsonFile = fileParam ? `${fileParam}.json` : "sentences.json"; // デフォルトはsentences.json
+
+console.log("📄 読み込むJSONファイル:", jsonFile);
+
+fetch(jsonFile)
+  .then(response => {
+    if (!response.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`);
+    return response.json();
+  })
   .then(data => {
     allSentences = data;
     if (remaining.length === 0) remaining = allSentences.map(s => s.en);
+  })
+  .catch(err => {
+    document.getElementById("sentence-jp").innerText = "❌ JSONファイルの読み込みに失敗しました。";
+    document.getElementById("sentence-en").innerText = err.message;
   });
 
 function showRandom() {
@@ -238,6 +252,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 
 </body>
 </html>
+
 
 
 
