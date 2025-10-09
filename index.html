@@ -42,7 +42,7 @@
     .button-row {
       display: flex;
       justify-content: center;
-      gap: 25px; /* ボタン同士の間隔 */
+      gap: 25px;
     }
 
     button {
@@ -117,6 +117,7 @@
     let yesMarks = JSON.parse(localStorage.getItem("yesMarks")) || {};
     let remaining = JSON.parse(localStorage.getItem("remaining")) || [];
     let currentSentence = null;
+    let toggleMode = true; // trueならランダム表示、falseなら最少回数表示
 
     // URLパラメータからファイル名を取得
     const params = new URLSearchParams(window.location.search);
@@ -142,7 +143,7 @@
 
     // ====== 関数定義 ======
 
-    // ランダム表示
+    // ✅ ランダム／最少回数表示を交互に実行
     function showRandom() {
       if (remaining.length === 0) {
         document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
@@ -152,7 +153,34 @@
         return;
       }
 
-      const en = remaining[Math.floor(Math.random() * remaining.length)];
+      let en;
+
+      if (toggleMode) {
+        // ランダム表示
+        en = remaining[Math.floor(Math.random() * remaining.length)];
+      } else {
+        // 表示回数の最も少ないものを選ぶ
+        let minCount = Infinity;
+        let leastShownList = [];
+
+        remaining.forEach(s => {
+          const count = shownCounts[s] || 0;
+          if (count < minCount) {
+            minCount = count;
+            leastShownList = [s];
+          } else if (count === minCount) {
+            leastShownList.push(s);
+          }
+        });
+
+        // 同率最小が複数ある場合はランダムで1つ選択
+        en = leastShownList[Math.floor(Math.random() * leastShownList.length)];
+      }
+
+      // 次回切り替え
+      toggleMode = !toggleMode;
+
+      // ===== 表示更新処理 =====
       currentSentence = allSentences.find(s => s.en === en);
 
       shownCounts[en] = (shownCounts[en] || 0) + 1;
@@ -168,7 +196,7 @@
       document.getElementById("okBtn").disabled = false;
     }
 
-    // YESボタン押下
+    // ✅ YESボタン押下
     function confirmSentence() {
       if (!currentSentence) return;
 
@@ -188,7 +216,7 @@
       }
     }
 
-    // リセット処理
+    // ✅ リセット処理
     function resetData() {
       if (!confirm("Reset all data?")) return;
 
@@ -207,7 +235,7 @@
       document.getElementById("statsArea").style.display = "none";
     }
 
-    // 統計表示
+    // ✅ 統計表示
     function showStats() {
       const tbody = document.getElementById("statsBody");
       tbody.innerHTML = "";
@@ -228,7 +256,7 @@
       document.getElementById("statsArea").style.display = "block";
     }
 
-    // コピー機能
+    // ✅ コピー機能
     function copyStats() {
       const table = document.querySelector("#statsArea table");
       if (!table) {
