@@ -111,176 +111,166 @@
   </div>
 
   <script>
-    // ====== 初期化 ======
-    let allSentences = [];
-    let shownCounts = JSON.parse(localStorage.getItem("shownCounts")) || {};
-    let yesMarks = JSON.parse(localStorage.getItem("yesMarks")) || {};
-    let remaining = JSON.parse(localStorage.getItem("remaining")) || [];
-    let currentSentence = null;
-    let toggleMode = true; // trueならランダム表示、falseなら最少回数表示
+  // ====== 初期化 ======
+  let allSentences = [];
+  const params = new URLSearchParams(window.location.search);
+  const fileParam = params.get("file") || "default";
+  const jsonFile = `${fileParam}.json`;
 
-    // URLパラメータからファイル名を取得
-    const params = new URLSearchParams(window.location.search);
-    const fileParam = params.get("file");
-    const jsonFile = fileParam ? `${fileParam}.json` : "sentences.json";
+  // ファイル別のキーを作成
+  const keyPrefix = `randomApp_${fileParam}_`;
 
-    console.log("📄 読み込むJSONファイル:", jsonFile);
+  let shownCounts = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
+  let yesMarks    = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
+  let remaining   = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
 
-    // JSONデータ読み込み
-    fetch(jsonFile)
-      .then(response => {
-        if (!response.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`);
-        return response.json();
-      })
-      .then(data => {
-        allSentences = data;
-        if (remaining.length === 0) remaining = allSentences.map(s => s.en);
-      })
-      .catch(err => {
-        document.getElementById("sentence-jp").innerText = "❌ JSONファイルの読み込みに失敗しました。";
-        document.getElementById("sentence-en").innerText = err.message;
-      });
+  let currentSentence = null;
+  let toggleMode = true; // trueならランダム表示、falseなら最少回数表示
 
-    // ====== 関数定義 ======
+  console.log("📄 読み込むJSONファイル:", jsonFile);
 
-    // ✅ ランダム／最少回数表示を交互に実行
-    function showRandom() {
-      if (remaining.length === 0) {
-        document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
-        document.getElementById("sentence-en").innerText = "";
-        document.getElementById("showBtn").disabled = true;
-        document.getElementById("okBtn").disabled = true;
-        return;
-      }
+  // JSONデータ読み込み
+  fetch(jsonFile)
+    .then(response => {
+      if (!response.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`);
+      return response.json();
+    })
+    .then(data => {
+      allSentences = data;
+      if (remaining.length === 0) remaining = allSentences.map(s => s.en);
+    })
+    .catch(err => {
+      document.getElementById("sentence-jp").innerText = "❌ JSONファイルの読み込みに失敗しました。";
+      document.getElementById("sentence-en").innerText = err.message;
+    });
 
-      let en;
+  // ====== 関数定義 ======
 
-      if (toggleMode) {
-        // ランダム表示
-        en = remaining[Math.floor(Math.random() * remaining.length)];
-      } else {
-        // 表示回数の最も少ないものを選ぶ
-        let minCount = Infinity;
-        let leastShownList = [];
-
-        remaining.forEach(s => {
-          const count = shownCounts[s] || 0;
-          if (count < minCount) {
-            minCount = count;
-            leastShownList = [s];
-          } else if (count === minCount) {
-            leastShownList.push(s);
-          }
-        });
-
-        // 同率最小が複数ある場合はランダムで1つ選択
-        en = leastShownList[Math.floor(Math.random() * leastShownList.length)];
-      }
-
-      // 次回切り替え
-      toggleMode = !toggleMode;
-
-      // ===== 表示更新処理 =====
-      currentSentence = allSentences.find(s => s.en === en);
-
-      shownCounts[en] = (shownCounts[en] || 0) + 1;
-      localStorage.setItem("shownCounts", JSON.stringify(shownCounts));
-
-      const totalShown = Object.values(shownCounts).reduce((a, b) => a + b, 0);
-
-      document.getElementById("sentence-jp").innerHTML = `
-        <div class="top-meta">${shownCounts[en]}回目 （総回数: ${totalShown}）</div>
-        <div>${currentSentence.jp}</div>
-      `;
-      document.getElementById("sentence-en").innerText = currentSentence.en;
-      document.getElementById("okBtn").disabled = false;
-    }
-
-    // ✅ YESボタン押下
-    function confirmSentence() {
-      if (!currentSentence) return;
-
-      yesMarks[currentSentence.en] = true;
-      localStorage.setItem("yesMarks", JSON.stringify(yesMarks));
-
-      remaining = remaining.filter(s => s !== currentSentence.en);
-      localStorage.setItem("remaining", JSON.stringify(remaining));
-
-      if (remaining.length > 0) {
-        showRandom();
-      } else {
-        document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
-        document.getElementById("sentence-en").innerText = "";
-        document.getElementById("showBtn").disabled = true;
-        document.getElementById("okBtn").disabled = true;
-      }
-    }
-
-    // ✅ リセット処理
-    function resetData() {
-      if (!confirm("Reset all data?")) return;
-
-      localStorage.removeItem("shownCounts");
-      localStorage.removeItem("remaining");
-      localStorage.removeItem("yesMarks");
-
-      shownCounts = {};
-      yesMarks = {};
-      remaining = allSentences.map(s => s.en);
-      currentSentence = null;
-
-      document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
+  // ✅ ランダム／最少回数表示を交互に実行
+  function showRandom() {
+    if (remaining.length === 0) {
+      document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
       document.getElementById("sentence-en").innerText = "";
-      document.getElementById("showBtn").disabled = false;
-      document.getElementById("statsArea").style.display = "none";
+      document.getElementById("showBtn").disabled = true;
+      document.getElementById("okBtn").disabled = true;
+      return;
     }
 
-    // ✅ 統計表示
-    function showStats() {
-      const tbody = document.getElementById("statsBody");
-      tbody.innerHTML = "";
-
-      allSentences.forEach(s => {
-        const count = shownCounts[s.en] || 0;
-        const yes = yesMarks[s.en] ? "●" : "○";
-        const row = `
-          <tr>
-            <td>${s.en}</td>
-            <td>${s.jp}</td>
-            <td style="text-align:center;">${yes}</td>
-            <td style="text-align:center;">${count}</td>
-          </tr>`;
-        tbody.innerHTML += row;
+    let en;
+    if (toggleMode) {
+      en = remaining[Math.floor(Math.random() * remaining.length)];
+    } else {
+      let minCount = Infinity;
+      let leastShownList = [];
+      remaining.forEach(s => {
+        const count = shownCounts[s] || 0;
+        if (count < minCount) {
+          minCount = count;
+          leastShownList = [s];
+        } else if (count === minCount) {
+          leastShownList.push(s);
+        }
       });
-
-      document.getElementById("statsArea").style.display = "block";
+      en = leastShownList[Math.floor(Math.random() * leastShownList.length)];
     }
+    toggleMode = !toggleMode;
 
-    // ✅ コピー機能
-    function copyStats() {
-      const table = document.querySelector("#statsArea table");
-      if (!table) {
-        alert("一覧が表示されていません。");
-        return;
-      }
+    currentSentence = allSentences.find(s => s.en === en);
 
-      let text = "";
-      table.querySelectorAll("tr").forEach(tr => {
-        const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
-        text += cols.join("@") + "\n";
-      });
+    shownCounts[en] = (shownCounts[en] || 0) + 1;
+    localStorage.setItem(keyPrefix + "shownCounts", JSON.stringify(shownCounts));
 
-      navigator.clipboard.writeText(text)
-        .then(() => alert("一覧をコピーしました！"))
-        .catch(() => alert("コピーに失敗しました。"));
+    const totalShown = Object.values(shownCounts).reduce((a, b) => a + b, 0);
+
+    document.getElementById("sentence-jp").innerHTML = `
+      <div class="top-meta">${shownCounts[en]}回目 （総回数: ${totalShown}）</div>
+      <div>${currentSentence.jp}</div>
+    `;
+    document.getElementById("sentence-en").innerText = currentSentence.en;
+    document.getElementById("okBtn").disabled = false;
+  }
+
+  // ✅ YESボタン押下
+  function confirmSentence() {
+    if (!currentSentence) return;
+    yesMarks[currentSentence.en] = true;
+    localStorage.setItem(keyPrefix + "yesMarks", JSON.stringify(yesMarks));
+
+    // （※ YESしても remaining を減らさないようにしたい場合はここをコメントアウト）
+    remaining = remaining.filter(s => s !== currentSentence.en);
+    localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remaining));
+
+    if (remaining.length > 0) {
+      showRandom();
+    } else {
+      document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
+      document.getElementById("sentence-en").innerText = "";
+      document.getElementById("showBtn").disabled = true;
+      document.getElementById("okBtn").disabled = true;
     }
+  }
 
-    // ====== イベント登録 ======
-    document.getElementById("showBtn").onclick = showRandom;
-    document.getElementById("okBtn").onclick = confirmSentence;
-    document.getElementById("resetBtn").onclick = resetData;
-    document.getElementById("statsBtn").onclick = showStats;
-    document.getElementById("copyBtn").onclick = copyStats;
-  </script>
+  // ✅ リセット処理
+  function resetData() {
+    if (!confirm("Reset all data?")) return;
+    localStorage.removeItem(keyPrefix + "shownCounts");
+    localStorage.removeItem(keyPrefix + "remaining");
+    localStorage.removeItem(keyPrefix + "yesMarks");
+
+    shownCounts = {};
+    yesMarks = {};
+    remaining = allSentences.map(s => s.en);
+    currentSentence = null;
+
+    document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
+    document.getElementById("sentence-en").innerText = "";
+    document.getElementById("showBtn").disabled = false;
+    document.getElementById("statsArea").style.display = "none";
+  }
+
+  // ✅ 統計表示
+  function showStats() {
+    const tbody = document.getElementById("statsBody");
+    tbody.innerHTML = "";
+    allSentences.forEach(s => {
+      const count = shownCounts[s.en] || 0;
+      const yes = yesMarks[s.en] ? "●" : "○";
+      const row = `
+        <tr>
+          <td>${s.en}</td>
+          <td>${s.jp}</td>
+          <td style="text-align:center;">${yes}</td>
+          <td style="text-align:center;">${count}</td>
+        </tr>`;
+      tbody.innerHTML += row;
+    });
+    document.getElementById("statsArea").style.display = "block";
+  }
+
+  // ✅ コピー機能
+  function copyStats() {
+    const table = document.querySelector("#statsArea table");
+    if (!table) {
+      alert("一覧が表示されていません。");
+      return;
+    }
+    let text = "";
+    table.querySelectorAll("tr").forEach(tr => {
+      const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
+      text += cols.join("@") + "\n";
+    });
+    navigator.clipboard.writeText(text)
+      .then(() => alert("一覧をコピーしました！"))
+      .catch(() => alert("コピーに失敗しました。"));
+  }
+
+  // ====== イベント登録 ======
+  document.getElementById("showBtn").onclick = showRandom;
+  document.getElementById("okBtn").onclick = confirmSentence;
+  document.getElementById("resetBtn").onclick = resetData;
+  document.getElementById("statsBtn").onclick = showStats;
+  document.getElementById("copyBtn").onclick = copyStats;
+</script>
 </body>
 </html>
+
