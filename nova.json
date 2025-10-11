@@ -1,223 +1,231 @@
 [
   {
-    "jp": "大丈夫だよ。",
-    "en": "You'll be fine."
+    "jp": "驚き、不信、または苛立ちを表すために、予期しない情報の部分に疑問詞を使って文を繰り返すことができる。",
+    "en": "Sentences can be repeated back, with question words used in place of unexpected information, to show surprise, disbelief or annoyance."
   },
   {
     "jp": "回顧録？",
     "en": "Memoirs?"
   },
   {
-    "jp": "人々が素晴らしいんだ。",
-    "en": "The people are wonderful."
+    "jp": "過去完了形と過去完了進行形",
+    "en": "Past perfect and past perfect progressive tense"
   },
   {
     "jp": "あんな大きな変化に彼が対応できるとは思えない。",
     "en": "I don't think he's ready for such a big change."
   },
   {
-    "jp": "セカンド・コンディショナルは非現実的な状況を話すときに使われます。",
-    "en": "Second conditionals can be used to talk about unreal situations."
+    "jp": "賃貸の利点は何ですか？",
+    "en": "What are the benefits of renting?"
   },
   {
     "jp": "同僚から文房具を盗み続けていたのです。",
     "en": "She'd been stealing stationery from her coworkers."
   },
   {
-    "jp": "世界を見るチャンスを断るべきじゃないよ",
-    "en": "You shouldn't turn down the opportunity to see the world."
+    "jp": "うん、すごく楽しみだけど、ちょっと不安でもあるんだ。",
+    "en": "Yeah, I'm pretty excited, but I'm a bit worried, too."
   },
   {
     "jp": "うん、でも食べ物はどうかな？",
     "en": "Yeah, but what about the food?"
   },
   {
-    "jp": "もっと前向きになってくれればいいのに",
-    "en": "I wish she wasn't so negative."
+    "jp": "本気？",
+    "en": "Really?"
   },
   {
     "jp": "人々の生活パターンにどんな変化があるのに気づいた？",
     "en": "What changes to peoples' routines have you noticed?"
   },
   {
-    "jp": "誰かの行動について話題を切り出すのに \"you know how\" を使うことができる。",
-    "en": "you know how can be used to introduce the topic of somebody's behavior."
+    "jp": "うまくやってるの？",
+    "en": "How's it working out for him?"
   },
   {
     "jp": "まだね、今のところは。",
     "en": "Not yet, I haven't."
   },
   {
-    "jp": "最近の退職者は何をしているの？",
-    "en": "What are retirees doing these days?"
+    "jp": "天気には少し慣れが必要かもしれません。",
+    "en": "The weather may take a bit of getting used to."
   },
   {
     "jp": "最近ブレンダが上司と閉じた部屋でよく会ってるの知ってる？",
     "en": "You know how Brenda's been having closed-door meetings with the boss this last week or so?"
   },
   {
-    "jp": "でも、もし枯れても僕のせいにしないでね！",
-    "en": "But don't blame me if they don't make it!"
+    "jp": "座席に足をのせるのはやめてもらえますか？",
+    "en": "Would you mind not putting your feet on my seat?"
   },
   {
     "jp": "これが事故の原因となりました。",
     "en": "This led to the accident."
   },
   {
-    "jp": "今朝コーヒー飲みながら彼が話してくれたよ。※just の役割は：「ついさっき」「ごく最近」という時間の強調",
-    "en": "He told me just this morning over coffee."
+    "jp": "外国に行ったことはありますか？",
+    "en": "Have you ever visited a foreign country?"
   },
   {
     "jp": "see、picture、imagine は、myself や yourself のような再帰代名詞と一緒に使って予測を表すことがよくあります。",
     "en": "see, picture and imagine are often used with reflexive pronouns, such as myself and yourself, to make predictions."
   },
   {
-    "jp": "このチャンスを逃すなんてバカげてる",
-    "en": "You'd be silly to pass this chance up."
+    "jp": "うわぁ。",
+    "en": "Wow."
   },
   {
-    "jp": "次に、先週木曜日に溶接部門で起きた事故について話し合いたいと思います。",
-    "en": "Next, we'd like to discuss the accident in the welding section last Thursday."
-  },
-  {
-    "jp": "辛くない食べ物もたくさんあるよ。",
-    "en": "There's lots of non-spicy food as well."
-  },
-  {
-    "jp": "旅行の準備は全部できた？",
-    "en": "All ready for the trip?"
-  },
-  {
-    "jp": "実は、ちょっといい？",
-    "en": "Actually, do you have a minute?"
-  },
-  {
-    "jp": "夜間学校に通ってるらしいよ。",
-    "en": "It seems he's been going to night school."
-  },
-  {
-    "jp": "人々がそんなにひどい状況で暮らしているのを見るのは恐ろしい。",
-    "en": "It's horrifying to see people living in such poor conditions."
-  },
-  {
-    "jp": "30年後に自分が庭仕事をしている姿なんて想像できないな。",
-    "en": "I can't see myself gardening in thirty years' time."
-  },
-  {
-    "jp": "コンサルタントは自動改札機の導入を提案しています。",
-    "en": "The consultants are suggesting implementing the use of automatic ticket gates."
-  },
-  {
-    "jp": "そうですね、すべての訓練にもかかわらず、彼は安全手順に従っていなかったようです。これは私たちの責任が問われないことを意味するはずです。",
-    "en": "Well, it seems that despite all the training, he hadn't been following safety procedures, which should leave us in the clear."
-  },
-  {
-    "jp": "集中できないよ",
-    "en": "I can't concentrate."
-  },
-  {
-    "jp": "パスカルが家を出ていくのは嬉しくないな。",
-    "en": "I'm not happy about Pascal leaving home."
-  },
-  {
-    "jp": "私たちは相乗り通勤者への配慮策を検討しています。",
-    "en": "We're considering making concessions for commuters who carpool."
-  },
-  {
-    "jp": "ジョン？",
-    "en": "John?"
-  },
-  {
-    "jp": "不動産を買う利点は何ですか？",
-    "en": "What are the benefits of buying property?"
-  },
-  {
-    "jp": "何かできることある？",
-    "en": "What can I do for you?"
-  },
-  {
-    "jp": "それで、お願いしづらいんだけど、もし時間があったら、ときどき水をやってもらえないかな？",
-    "en": "So, I hate to ask, but if you get the chance, would you mind watering them from time to time?"
-  },
-  {
-    "jp": "提案書を出して。それについて話し合おう。",
-    "en": "Get me a proposal, and we'll discuss it."
-  },
-  {
-    "jp": "【過去完了進行形】",
-    "en": "Past perfect progressive"
-  },
-  {
-    "jp": "プロジェクトは中止になりました。なぜなら、良いアイデアが出てこなかったからです。",
-    "en": "The project was canceled because we hadn't come up with any good ideas."
-  },
-  {
-    "jp": "彼女は庭で過ごす時間が増えるのを楽しみにしてるって言ってたわ。",
-    "en": "She said she's looking forward to spending more time in her garden."
-  },
-  {
-    "jp": "「a bit of（少しの）」や「a lot of（たくさんの）」のような数量詞は、「take... getting used to（慣れるのに～を要する）」という表現と一緒に使って、ある状況にどれくらい適応しやすいかを表すことができます。",
-    "en": "Quantifiers such as a bit of and a lot of can be used with take... getting used to to show how easy it is to adapt to a certain situation."
+    "jp": "人々が素晴らしいんだ。",
+    "en": "The people are wonderful."
   },
   {
     "jp": "地下鉄の出入口の数を増やしてアクセス性を高めることを検討しています。",
     "en": "We are looking at increasing the number of subway exits to improve accessibility."
   },
   {
-    "jp": "最近マイクがすごく疲れた様子で出勤してるの知ってる？※「really tired」は付帯状況（＝〜しながら、〜という状態で）",
-    "en": "You know how Mike's always turning up to work really tired recently?"
+    "jp": "次に、先週木曜日に溶接部門で起きた事故について話し合いたいと思います。",
+    "en": "Next, we'd like to discuss the accident in the welding section last Thursday."
   },
   {
-    "jp": "海外の災害のニュースを見るとき、どんな気持ちになりますか？",
-    "en": "How do you feel when you see news about disasters overseas?"
+    "jp": "無理です、耐えられません。",
+    "en": "No, I can't bear to."
   },
   {
-    "jp": "スティーブン、私たちに法的責任があるかどうか教えてもらえますか？",
-    "en": "Steven, could you let us know if we're liable?"
+    "jp": "旅行の準備は全部できた？",
+    "en": "All ready for the trip?"
+  },
+  {
+    "jp": "もし家を買ったら、長い間同じ場所に住み続ける覚悟が必要になります。",
+    "en": "If I bought a house, I'd have to commit to staying in one place for a very long time."
+  },
+  {
+    "jp": "夜間学校に通ってるらしいよ。",
+    "en": "It seems he's been going to night school."
+  },
+  {
+    "jp": "なんで？",
+    "en": "Why?"
+  },
+  {
+    "jp": "30年後に自分が庭仕事をしている姿なんて想像できないな。",
+    "en": "I can't see myself gardening in thirty years' time."
+  },
+  {
+    "jp": "彼にはまだ準備ができていないと思う。",
+    "en": "I don't think he's ready."
+  },
+  {
+    "jp": "そうですね、すべての訓練にもかかわらず、彼は安全手順に従っていなかったようです。これは私たちの責任が問われないことを意味するはずです。",
+    "en": "Well, it seems that despite all the training, he hadn't been following safety procedures, which should leave us in the clear."
+  },
+  {
+    "jp": "なんで？",
+    "en": "Why's that?"
+  },
+  {
+    "jp": "パスカルが家を出ていくのは嬉しくないな。",
+    "en": "I'm not happy about Pascal leaving home."
+  },
+  {
+    "jp": "実は妊娠してるんだって。",
+    "en": "Well, it turns out she's pregnant."
+  },
+  {
+    "jp": "ジョン？",
+    "en": "John?"
+  },
+  {
+    "jp": "自分が海外でボランティア活動をしている姿を思い浮かべる。",
+    "en": "I picture myself doing overseas volunteer work."
+  },
+  {
+    "jp": "何かできることある？",
+    "en": "What can I do for you?"
+  },
+  {
+    "jp": "労働組合からストライキをすると言われたので、有給休暇の方針を変更しました。",
+    "en": "We changed the paid holiday policy because the union had told us they would strike."
+  },
+  {
+    "jp": "提案書を出して。それについて話し合おう。",
+    "en": "Get me a proposal, and we'll discuss it."
+  },
+  {
+    "jp": "今はどうやら、そこが一番活気があるみたいなんだ。",
+    "en": "Apparently, that's where it's all happening now."
+  },
+  {
+    "jp": "プロジェクトは中止になりました。なぜなら、良いアイデアが出てこなかったからです。",
+    "en": "The project was canceled because we hadn't come up with any good ideas."
+  },
+  {
+    "jp": "映画館で人がする迷惑なことにはどんなものがありますか？",
+    "en": "What are some annoying things people do in a movie theater?"
+  },
+  {
+    "jp": "「a bit of（少しの）」や「a lot of（たくさんの）」のような数量詞は、「take... getting used to（慣れるのに～を要する）」という表現と一緒に使って、ある状況にどれくらい適応しやすいかを表すことができます。",
+    "en": "Quantifiers such as a bit of and a lot of can be used with take... getting used to to show how easy it is to adapt to a certain situation."
   },
   {
     "jp": "自分がニューヨークで作家として働いている姿が浮かぶよ。",
     "en": "I see myself working in New York as a writer."
   },
   {
+    "jp": "最近マイクがすごく疲れた様子で出勤してるの知ってる？",
+    "en": "You know how Mike's always turning up to work really tired recently?"
+  },
+  {
+    "jp": "じゃあ何をしていると思うの？",
+    "en": "What will you be doing?"
+  },
+  {
+    "jp": "スティーブン、私たちに法的責任があるかどうか教えてもらえますか？",
+    "en": "Steven, could you let us know if we're liable?"
+  },
+  {
+    "jp": "何て言えばいいか分からない",
+    "en": "I don't know what to say."
+  },
+  {
     "jp": "合鍵を預かってもらえる？",
     "en": "Could you keep the spare key for me?"
   },
   {
-    "jp": "数年前に休暇で行ったけど、とても楽しかったよ。",
-    "en": "I went there on vacation a couple of years ago and had a great time."
+    "jp": "夜間学校？",
+    "en": "Night school?"
   },
   {
     "jp": "バンコクで1年？",
     "en": "A year in Bangkok?"
   },
   {
-    "jp": "大丈夫ですか？",
-    "en": "Are you okay?"
-  },
-  {
-    "jp": "過去完了形と過去完了進行形",
-    "en": "Past perfect and past perfect progressive tense"
-  },
-  {
-    "jp": "もし6か月間海外に引っ越すとしたら、近所の人に何をお願いする？",
-    "en": "If you were moving abroad for six months, what would you ask your neighbor to do?"
+    "jp": "どうやって知ったの？",
+    "en": "How did you find out?"
   },
   {
     "jp": "留守の間に枯れてしまわないか心配で。特に今年の夏はすごく暑いから。",
     "en": "I'm worried that they're going to die while I'm away, especially with this summer being so hot."
   },
   {
-    "jp": "pass up と turn down はどちらも「断る」という意味の分離可能な句動詞です",
-    "en": "pass up and turn down are separable phrasal verbs that both mean decline."
+    "jp": "落ち着いて",
+    "en": "Calm down."
+  },
+  {
+    "jp": "それで、お願いしづらいんだけど、もし時間があったら、ときどき水をやってもらえないかな？",
+    "en": "So, I hate to ask, but if you get the chance, would you mind watering them from time to time?"
+  },
+  {
+    "jp": "さっき休憩室で、君のこと何て言ってたか聞いたらびっくりするよ",
+    "en": "You should have heard what she was just saying about you in the break room."
   },
   {
     "jp": "難しい依頼をする際は、長い文の方が遠回しで適切だと見なされることが多い。",
     "en": "When making difficult requests, longer sentences are usually seen as more indirect and appropriate."
   },
   {
-    "jp": "外国に行ったことはありますか？",
-    "en": "Have you ever visited a foreign country?"
+    "jp": "職場で事故が起きる理由にはどんなものがありますか？",
+    "en": "What are some reasons that workplace accidents occur?"
   },
   {
     "jp": "まあ、だいたいね。",
@@ -232,571 +240,163 @@
     "en": "I know you're kind of busy, but it would really help me out if you could check on the garden from time to time."
   },
   {
-    "jp": "都会での生活にも少し慣れが必要かもしれない。",
-    "en": "Living in the city could take some getting used to."
+    "jp": "そのような行動を描写する際、しばしば苛立ちの意味を含む",
+    "en": "When used to describe behavior, it often carries a connotation of annoyance."
   },
   {
     "jp": "少し慣れは必要かもしれないけど、問題ないよ。",
     "en": "It'll take a bit of getting used to, but it won't be a problem."
   },
   {
-    "jp": "お願いしづらいんだけど、熱帯魚を預かってもらえたりしないかなって思ってて。",
-    "en": "I hate to ask, but I was wondering if you'd be able to keep my tropical fish."
-  },
-  {
-    "jp": "彼にはまだ準備ができていないと思う。",
-    "en": "I don't think he's ready."
-  },
-  {
-    "jp": "パーミンダーがいつもレポート手伝ってって言ってくるの",
-    "en": "Parminder is always asking me to help her with her reports."
+    "jp": "A：彼はなぜ停職になったの？",
+    "en": "A: Why was he suspended?"
   },
   {
     "jp": "過去完了形と過去完了進行形は、過去の出来事に影響を与えた要因を説明するためによく使われます。",
     "en": "The past perfect and past perfect progressive tenses can often be used to describe factors that contributed to a past event."
   },
   {
-    "jp": "「イエス」って言いなよ",
-    "en": "Say \"yes\"!"
+    "jp": "はい。でも、医者から数日間安静にするように言われました。",
+    "en": "Yeah, but the doctor advised me to rest up for a couple of days."
   },
   {
     "jp": "ジョシュアが最初の仕事をこんなに早く辞めるのには乗り気じゃない。",
     "en": "I'm not keen on Joshua quitting his first job so quickly."
   },
   {
-    "jp": "賃貸の利点は何ですか？",
-    "en": "What are the benefits of renting?"
-  },
-  {
-    "jp": "地下鉄網にはどのような改善が可能でしょうか？",
-    "en": "What improvements can be made to a subway network?"
-  },
-  {
-    "jp": "うん",
-    "en": "Yeah."
-  },
-  {
-    "jp": "うん。",
-    "en": "Yeah."
-  },
-  {
-    "jp": "それで、将来家を買うことには興味がないのですか？",
-    "en": "And you're not interested in buying a house in the future?"
-  },
-  {
-    "jp": "たくさんの人に囲まれるのには慣れていないんだ。",
-    "en": "I'm not used to being around so many people."
-  },
-  {
-    "jp": "A：彼はなぜ停職になったの？",
-    "en": "A: Why was he suspended?"
-  },
-  {
-    "jp": "誰かの行動を話題に出す",
-    "en": "Introducing someone's behavior as a topic"
-  },
-  {
-    "jp": "今まで聞いた中で、一番変わった欠勤理由は何ですか？",
-    "en": "What is the most unusual reason for taking a day off that you have ever heard?"
-  },
-  {
-    "jp": "彼女は解雇せざるを得ませんでした。",
-    "en": "We had to let her go."
-  },
-  {
-    "jp": "私の地元では、ほとんど雪が降らないんだ。※\"really\" は、「まったく〜ない（not at all）」という否定を強調するために使われています",
-    "en": "Where I'm from, it doesn't really snow at all."
-  },
-  {
-    "jp": "天気には少し慣れが必要かもしれません。※\"take getting used to\" の主語に \"I\" は基本的になりません",
-    "en": "The weather may take a bit of getting used to."
-  },
-  {
-    "jp": "全てを失い、何もない状態からやり直さなければならない人々のことを読むと胸が痛みます。",
-    "en": "It's heartbreaking to read about people losing absolutely everything and having to start all over again with nothing."
-  },
-  {
-    "jp": "最近ティナがいつも笑ってるの知ってる？",
-    "en": "You know how Tina's always smiling recently?"
-  },
-  {
-    "jp": "B：何したって？",
-    "en": "B: You what?"
-  },
-  {
-    "jp": "現在進行形で使われる「考える・言う」動詞は、将来の計画について述べる際に動名詞を伴うことが多い。",
-    "en": "Thinking and saying verbs in the present progressive tense are often followed by gerunds when describing future plans under current consideration."
-  },
-  {
-    "jp": "寄付を受け付けるためのウェブサイトが開設されたそうです。",
-    "en": "I saw that they set up a website to accept donations."
-  },
-  {
-    "jp": "「fine with」や「not keen on」といった表現は、さまざまな状況に対する快適さの度合いを表すのに使えます。",
-    "en": "Phrases such as fine with and not keen on can be used to express levels of comfort with different situations."
-  },
-  {
-    "jp": "レオがバンドでツアーに出るのも私は大丈夫だよ。",
-    "en": "I'm okay with Leo going on tour with his band."
-  },
-  {
-    "jp": "私は高温が苦手です。",
-    "en": "I'm not good with high temperatures."
-  },
-  {
-    "jp": "私たちは列車を新型モデルに置き換えることを提案しています。",
-    "en": "We're proposing replacing the trains with newer models."
-  },
-  {
-    "jp": "まあ、彼をインドに転勤させたいらしいよ。",
-    "en": "Well, they want him to transfer to India."
-  },
-  {
-    "jp": "そのチャンスを逃すなんて正気じゃないよ",
-    "en": "You'd be crazy to pass up the opportunity."
-  },
-  {
-    "jp": "セカンド・コンディショナルを使って選択を正当化する表現",
-    "en": "Second conditionals to justify choices"
-  },
-  {
-    "jp": "あなた、ずっとテレビに出たがってたじゃん",
-    "en": "You've always wanted to be on TV."
-  },
-  {
-    "jp": "それは良い考えだとは思いません。",
-    "en": "I don't think it would be a good idea."
-  },
-  {
-    "jp": "友達が、あのリアリティ番組のひとつに応募したんだ",
-    "en": "So, my friend's applied to be on one of those reality TV shows."
-  },
-  {
-    "jp": "実はうちの部署のリーダーに昇進することになってるらしいよ。",
-    "en": "Well, it turns out she's about to get promoted to head of our section."
-  },
-  {
-    "jp": "すごく楽しそうだね！",
-    "en": "That sounds so exciting!"
-  },
-  {
-    "jp": "履歴書の印象が悪くなると思うよ。",
-    "en": "It won't look good on his resume."
-  },
-  {
-    "jp": "その通りです。",
-    "en": "You're right."
-  },
-  {
-    "jp": "もし賃貸にしたら、それはまるでお金を捨てるようなものです。",
-    "en": "If I rented, it would be like throwing my money away."
-  },
-  {
-    "jp": "彼女とジェイクが結婚するのは、彼女が本当にそう望んでいるなら、私はかまわないよ。",
-    "en": "I'm fine with her and Jake getting married if that's what she really wants."
-  },
-  {
-    "jp": "いや、特に（興味はありません）。",
-    "en": "Not really."
-  },
-  {
-    "jp": "今度は何したの？",
-    "en": "What's she done now?"
-  },
-  {
-    "jp": "ちょっと遠すぎない？",
-    "en": "That's a bit far, isn't it?"
-  },
-  {
-    "jp": "うまくやってるの？",
-    "en": "How's it working out for him?"
-  },
-  {
-    "jp": "彼は一人で掘削機を使い続けていました。",
-    "en": "He'd been using the digger by himself."
-  },
-  {
-    "jp": "彼女って本当にイライラするんだよね",
-    "en": "She's just so irritating."
-  },
-  {
-    "jp": "それってどういうこと？",
-    "en": "What's that about?"
-  },
-  {
-    "jp": "有名になってテレビに出たいと思わない？",
-    "en": "Would you like to be famous and on TV?"
-  },
-  {
-    "jp": "だって、大学を出たばかりだしね。",
-    "en": "I mean, he's only just left university."
-  },
-  {
-    "jp": "自分がタヒチみたいな場所のビーチで回顧録を書いたり、カクテルを飲んだりしてる姿を思い浮かべるよ。",
-    "en": "I picture myself sitting on a beach, somewhere like Tahiti, writing my memoirs and drinking cocktails."
-  },
-  {
-    "jp": "彼らは右側通行で、制限速度もずっと高いんだ。",
-    "en": "They drive on the right and the speed limits are much higher."
-  },
-  {
-    "jp": "そこまで悪くないんじゃない？",
-    "en": "I'm sure she can't be that bad."
-  },
-  {
-    "jp": "もし家を買ったら、長い間同じ場所に住み続ける覚悟が必要になります。",
-    "en": "If I bought a house, I'd have to commit to staying in one place for a very long time."
-  },
-  {
-    "jp": "誰かに何かを勧めるとき",
-    "en": "Encouraging someone to do something"
-  },
-  {
-    "jp": "【過去完了】",
-    "en": "Past perfect"
-  },
-  {
-    "jp": "丁寧にやめるよう頼む",
-    "en": "Politely asking someone to stop"
-  },
-  {
-    "jp": "自分の夢を追いかけるのは大切なことだからね。",
-    "en": "It's important for him to follow his dreams."
-  },
-  {
-    "jp": "うん、すごく楽しみだけど、ちょっと不安でもあるんだ。",
-    "en": "Yeah, I'm pretty excited, but I'm a bit worried, too."
-  },
-  {
-    "jp": "ジェイクが美大に進むのは構わないよ、彼がそれで本当にキャリアを築けると確信してるなら。※make a career out of it：　→ 「それを職業（キャリア）にする」「仕事にする」",
-    "en": "I'm fine with Jake going to art school, as long as he's sure he can make a career out of it."
-  },
-  {
-    "jp": "失礼ですが、映画の間中ずっとコメントするのは控えてもらえますか？",
-    "en": "I don't mean to be rude, but would you mind not commenting all the way through the movie?"
-  },
-  {
-    "jp": "私は都会で暮らす方が好きです。",
-    "en": "I prefer living in the city."
-  },
-  {
-    "jp": "他人の行動に対する苛立ちを表す",
-    "en": "Expressing annoyance at other people's behavior"
-  },
-  {
-    "jp": "普段あまり辛いものは食べないんだよね。",
-    "en": "I don't usually eat much spicy stuff."
-  },
-  {
-    "jp": "はい。でも、医者から数日間安静にするように言われました。",
-    "en": "Yeah, but the doctor advised me to rest up for a couple of days."
-  },
-  {
-    "jp": "彼は落ち着いた生活をする自分なんて想像できないって言ってたよ。",
-    "en": "He said he couldn't imagine himself settling down."
-  },
-  {
-    "jp": "落ち着いて",
-    "en": "Calm down."
-  },
-  {
-    "jp": "労働組合からストライキをすると言われたので、有給休暇の方針を変更しました。",
-    "en": "We changed the paid holiday policy because the union had told us they would strike."
-  },
-  {
-    "jp": "でも、こんな形じゃないんだ",
-    "en": "But not like this."
-  },
-  {
-    "jp": "正直に言うと、彼が行くのにはあまり乗り気じゃないんだ。",
-    "en": "To be honest, I'm not too keen on him going."
-  },
-  {
-    "jp": "人がなぜ?しなかった／しないのかを説明するためによく用いられます。",
-    "en": "They are often used to justify why someone did not or does not do something."
-  },
-  {
-    "jp": "ニュース項目が感情的な反応を引き起こすときに、「it's + 形容詞 + to see / read / hear / think about」を使うことができる。",
-    "en": "it's + adjective + to see or read/hear/think about can be used when a news item prompts an emotional reaction."
-  },
-  {
-    "jp": "本気？",
-    "en": "Really?"
-  },
-  {
-    "jp": "運転にはかなり慣れが必要だろう。",
-    "en": "The driving will take a lot of getting used to."
-  },
-  {
-    "jp": "ずっとやりたかったことみたい。※\"Apparently\" は、「どうやら～らしい」「見たところ～のようだ」といった意味を持つ副詞",
-    "en": "Apparently, it's something he's always wanted to do."
-  },
-  {
-    "jp": "人々がそんなひどい状況でもがいていることを考えると胸が痛みます。",
-    "en": "It's heartbreaking to think about people struggling in such terrible conditions."
-  },
-  {
-    "jp": "これからは静かにします。",
-    "en": "We'll be quiet from now on."
-  },
-  {
-    "jp": "ソーニャは来月退職するの。",
-    "en": "Sonya's retiring next month."
-  },
-  {
-    "jp": "じゃあ何をしていると思うの？",
-    "en": "What will you be doing?"
-  },
-  {
-    "jp": "私たちは路線の延伸を提案しています。",
-    "en": "We're proposing extending the line."
-  },
-  {
-    "jp": "北東部から来る第4の路線の導入も検討していましたが、予算の都合によりその提案は今後5年ほど棚上げにする予定です。",
-    "en": "We were also considering introducing a fourth line coming in from the northeast, but, due to budget constraints, I'm anticipating putting that proposal on the back burner for another five years or so."
-  },
-  {
     "jp": "実はバラのことなんだ。",
     "en": "Well, it's the roses."
   },
   {
-    "jp": "あれってすごかったよね… すみません。",
-    "en": "Wasn't it great when... Excuse me."
-  },
-  {
-    "jp": "B：オフィスで寝泊まりしていたんだ。",
-    "en": "B: He'd been sleeping in the office."
-  },
-  {
-    "jp": "あなたは有名になるチャンスを逃すべきじゃないよ",
-    "en": "You shouldn't pass up the chance to be famous."
-  },
-  {
-    "jp": "理由を知ってる？",
-    "en": "Do you know the reason?"
-  },
-  {
-    "jp": "そうすれば、そんなに悪い気持ちにはならないでしょう。",
-    "en": "Then you wouldn't feel so bad."
-  },
-  {
-    "jp": "実は妊娠してるんだって。",
-    "en": "Well, it turns out she's pregnant."
-  },
-  {
-    "jp": "なんで？",
-    "en": "Why?"
-  },
-  {
-    "jp": "私たちは南北線の終点を超えて郊外が成長していることを調査しており、路線の延伸を提案しています。",
-    "en": "We've been looking at the growth of the suburbs beyond the ends of the North-South line, and we're proposing extending the line."
-  },
-  {
-    "jp": "こんにちは、キャラハンさん？",
-    "en": "Hello, Ms. Callahan?"
-  },
-  {
-    "jp": "無理です、耐えられません。",
-    "en": "No, I can't bear to."
-  },
-  {
-    "jp": "映画館で人がする迷惑なことにはどんなものがありますか？",
-    "en": "What are some annoying things people do in a movie theater?"
-  },
-  {
-    "jp": "職場で事故が起きる理由にはどんなものがありますか？",
-    "en": "What are some reasons that workplace accidents occur?"
-  },
-  {
-    "jp": "現在進行形は「continually」や「always」といった副詞と一緒に使うことで、頻繁に起こる行動を表すことができる",
-    "en": "The present progressive can be used with adverbs such as continually and always to describe a frequently occurring action."
-  },
-  {
-    "jp": "どうしてそう言うんですか？",
-    "en": "Why do you say that?"
-  },
-  {
-    "jp": "タランチュラに噛まれてしまって…",
-    "en": "I was bitten by a tarantula and... "
-  },
-  {
-    "jp": "どうやって知ったの？",
-    "en": "How did you find out?"
+    "jp": "大丈夫だよ。",
+    "en": "You'll be fine."
   },
   {
     "jp": "もし田舎に住んでいたら、息子たちが遊ぶ友達の子がそんなにいないでしょう。",
     "en": "If I lived in the countryside, there wouldn't be so many other children for my boys to play with."
   },
   {
-    "jp": "自分の成人した子どもが他の国に転勤するって聞いたら、どう感じる？",
-    "en": "How would you feel about your adult child transferring to another country?"
+    "jp": "地下鉄網にはどのような改善が可能でしょうか？",
+    "en": "What improvements can be made to a subway network?"
   },
   {
-    "jp": "はい、そうです。",
-    "en": "Yes, it is."
+    "jp": "誰かに何かを勧めるとき",
+    "en": "Encouraging someone to do something"
   },
   {
-    "jp": "もし賃貸だったら、それが自分のものではないと分かっていて、完全にリラックスできることは決してないでしょう。",
-    "en": "If I rented, I would never be able to completely relax, knowing that it didn't actually belong to me."
+    "jp": "うん。",
+    "en": "Yeah."
   },
   {
-    "jp": "安全な飲み水にアクセスできずに暮らしている人々の話を聞くのはひどいことです。",
-    "en": "It's awful to hear about people living without access to safe drinking water."
+    "jp": "どうしてそう言うんですか？",
+    "en": "Why do you say that?"
   },
   {
-    "jp": "なんで？",
-    "en": "Why's that?"
+    "jp": "たくさんの人に囲まれるのには慣れていないんだ。",
+    "en": "I'm not used to being around so many people."
   },
   {
-    "jp": "驚き、不信、または苛立ちを表すために、予期しない情報の部分に疑問詞を使って文を繰り返すことができる。",
-    "en": "Sentences can be repeated back, with question words used in place of unexpected information, to show surprise, disbelief or annoyance."
+    "jp": "他人の行動に対する苛立ちを表す",
+    "en": "Expressing annoyance at other people's behavior"
   },
   {
-    "jp": "今はどうやら、そこが一番活気があるみたいなんだ。",
-    "en": "Apparently, that's where it's all happening now."
+    "jp": "誰かの行動を話題に出す",
+    "en": "Introducing someone's behavior as a topic"
   },
   {
-    "jp": "慣れるのは簡単でしたか？",
-    "en": "Was it easy to adapt to?"
+    "jp": "彼女は解雇せざるを得ませんでした。",
+    "en": "We had to let her go."
   },
   {
-    "jp": "形容詞の選択によって感情の強さを表現する。",
-    "en": "The choice of adjective is used to convey the strength of the emotion."
+    "jp": "セカンド・コンディショナルは非現実的な状況を話すときに使われます。",
+    "en": "Second conditionals can be used to talk about unreal situations."
   },
   {
-    "jp": "その理由を明かすのに \"it turns out (that)\" を使うことができる。※\"then\" は、**「次に」「その結果として」「それから」**といった意味で使われており、話の流れや手順を示す副詞",
-    "en": "it turns out (that) can then be used to reveal the reason behind it."
+    "jp": "もし6か月間海外に引っ越すとしたら、近所の人に何をお願いする？",
+    "en": "If you were moving abroad for six months, what would you ask your neighbor to do?"
   },
   {
-    "jp": "ニュース項目に対する感情的な反応の表現",
-    "en": "Expressing emotional reactions to news items"
+    "jp": "最近ティナがいつも笑ってるの知ってる？",
+    "en": "You know how Tina's always smiling recently?"
   },
   {
-    "jp": "バリーがソフトウェア会社に就職したの知ってるでしょ？",
-    "en": "You know how Barry got that job with the software developer?"
+    "jp": "もっと前向きになってくれればいいのに",
+    "en": "I wish she wasn't so negative."
   },
   {
-    "jp": "天気にも少し慣れる必要があるかもしれない。",
-    "en": "The weather might take a bit of getting used to."
+    "jp": "現在進行形で使われる「考える・言う」動詞は、将来の計画について述べる際に動名詞を伴うことが多い。",
+    "en": "Thinking and saying verbs in the present progressive tense are often followed by gerunds when describing future plans under current consideration."
   },
   {
-    "jp": "夜間学校？",
-    "en": "Night school?"
+    "jp": "パーミンダーがいつもレポート手伝ってって言ってくるの",
+    "en": "Parminder is always asking me to help her with her reports."
   },
   {
-    "jp": "そうなの？",
-    "en": "No?"
-  },
-  {
-    "jp": "実は獣医になるためにパートタイムで勉強してるんだって。",
-    "en": "Well, it turns out he's studying part-time to be a vet."
-  },
-  {
-    "jp": "私たちはもっと助けるべきです。",
-    "en": "We should be doing more to help."
-  },
-  {
-    "jp": "なるほど。",
-    "en": "I see."
-  },
-  {
-    "jp": "仕事柄、転勤の可能性が常に高いので、全然意味がありません。",
-    "en": "With my job, there's always a high likelihood of getting transferred, so it just wouldn't make sense."
-  },
-  {
-    "jp": "そんなに大きな音を立てないでもらえますか？",
-    "en": "Could you please not make so much noise?"
-  },
-  {
-    "jp": "タランチュラです。友人のペットのクモで、それで…",
-    "en": "A tarantula, my friend's pet spider, and, well... "
-  },
-  {
-    "jp": "自分でやればいいのに",
-    "en": "Why can't she just do them by herself?"
-  },
-  {
-    "jp": "もちろんいいよ。",
-    "en": "Yes, of course."
-  },
-  {
-    "jp": "上司はずっと、何もかもがうまくいってないって文句ばかり",
-    "en": "My boss is continually complaining about how everything is going terribly."
-  },
-  {
-    "jp": "すみませんが、今日は仕事に行けそうにありません。",
-    "en": "Sorry, but I won't be able to come to work today."
-  },
-  {
-    "jp": "迷惑をかけているとは思いませんでした。",
-    "en": "We didn't realize we were bothering you."
-  },
-  {
-    "jp": "こんにちは。ジェームズですか？",
-    "en": "Hi. Is that James?"
-  },
-  {
-    "jp": "全然やめないの",
-    "en": "She never stops!"
-  },
-  {
-    "jp": "他の国では十分に食べ物があるのに、子どもたちが飢えているのを見るのは恐ろしい。",
-    "en": "It's horrifying to see children starving while other countries have more than enough to eat."
-  },
-  {
-    "jp": "ニュースに反応するための疑問詞",
-    "en": "Question words to react to news"
-  },
-  {
-    "jp": "君は何か面白いことをしたことがないじゃない。",
-    "en": "You've never done anything interesting."
-  },
-  {
-    "jp": "大金を稼げるかもしれないんだよ",
-    "en": "You could make so much money."
-  },
-  {
-    "jp": "感謝します。",
-    "en": "I'd appreciate it."
-  },
-  {
-    "jp": "まさか全部コンピューターで作られてるなんて思わないよね？",
-    "en": "You wouldn't know it was done entirely by computer, would you?"
-  },
-  {
-    "jp": "A：仕事に行けません。足を骨折しました。",
-    "en": "A: I can't come to work. I broke my leg."
-  },
-  {
-    "jp": "上司がいつも電話で人に怒鳴ってる",
-    "en": "My boss is always shouting at people on the phone."
-  },
-  {
-    "jp": "さっき休憩室で、君のこと何て言ってたか聞いたらびっくりするよ",
-    "en": "You should have heard what she was just saying about you in the break room."
-  },
-  {
-    "jp": "わぁ",
-    "en": "Wow!"
-  },
-  {
-    "jp": "同僚のどんな行動がイライラすると思う？",
-    "en": "What kind of behavior do people find annoying about their coworkers?"
-  },
-  {
-    "jp": "自分が海外でボランティア活動をしている姿を思い浮かべる。",
-    "en": "I picture myself doing overseas volunteer work."
-  },
-  {
-    "jp": "森の中に数週間滞在しなきゃいけないやつ、あるでしょ",
-    "en": "You know, where you have to go and stay in the forest for a few weeks."
+    "jp": "「fine with」や「not keen on」といった表現は、さまざまな状況に対する快適さの度合いを表すのに使えます。",
+    "en": "Phrases such as fine with and not keen on can be used to express levels of comfort with different situations."
   },
   {
     "jp": "何に噛まれたって？",
     "en": "You were bitten by a what?"
   },
   {
-    "jp": "スーザンが信じられない",
-    "en": "I can't believe Susan."
+    "jp": "私は高温が苦手です。",
+    "en": "I'm not good with high temperatures."
+  },
+  {
+    "jp": "でも、こんな形じゃないんだ",
+    "en": "But not like this."
+  },
+  {
+    "jp": "今朝コーヒー飲みながら彼が話してくれたよ。",
+    "en": "He told me just this morning over coffee."
+  },
+  {
+    "jp": "これらは主に「機会」や「チャンス」に対して使われます",
+    "en": "They are often used with opportunity and chance."
+  },
+  {
+    "jp": "まあ、彼をインドに転勤させたいらしいよ。",
+    "en": "Well, they want him to transfer to India."
+  },
+  {
+    "jp": "自分が他のことをするなんて想像できない。",
+    "en": "I can't imagine myself ever doing anything else."
+  },
+  {
+    "jp": "セカンド・コンディショナルを使って選択を正当化する表現",
+    "en": "Second conditionals to justify choices"
+  },
+  {
+    "jp": "不動産を買う利点は何ですか？",
+    "en": "What are the benefits of buying property?"
+  },
+  {
+    "jp": "それは良い考えだとは思いません。",
+    "en": "I don't think it would be a good idea."
+  },
+  {
+    "jp": "ただ、再発しないように、対策を強化する必要がありますね。",
+    "en": "We do need to tighten things up, though, so that it doesn't happen again."
+  },
+  {
+    "jp": "実はうちの部署のリーダーに昇進することになってるらしいよ。",
+    "en": "Well, it turns out she's about to get promoted to head of our section."
+  },
+  {
+    "jp": "天気にも少し慣れる必要があるかもしれない。",
+    "en": "The weather might take a bit of getting used to."
+  },
+  {
+    "jp": "すごく楽しそうだね！",
+    "en": "That sounds so exciting!"
+  },
+  {
+    "jp": "私は都会で暮らす方が好きです。",
+    "en": "I prefer living in the city."
+  },
+  {
+    "jp": "履歴書の印象が悪くなると思うよ。",
+    "en": "It won't look good on his resume."
   }
 ]
