@@ -268,28 +268,24 @@
     text += cols.join("@") + "\n";
   });
 
-  // クリップボードへコピー
-  navigator.clipboard.writeText(text)
-    .then(() => {
-      alert("一覧をコピーしました！ これからメール作成画面を開きます。");
+// クリップボードへコピー
+navigator.clipboard.writeText(text)
+  .then(() => {
+    alert("一覧をコピーしました！ これからメール作成画面を開きます。");
 
-      // 件名・本文を作成（mailtoのURL制限対策で少し短く）
-      const to = "jetkitayan@gmail.com"; // 必要なら gmail.com に直してください
-      const subject = "Random English Sentences - Stats";
-      const limit = 1800; // URL文字数の安全ライン（環境により前後）
-      let body = text;
-      if (body.length > limit) {
-        body = body.slice(0, limit) + "\n...\n(本文が長いため途中までを貼り付けました。クリップボードには全量が入っています。)";
-      }
+    // 件名・本文を作成
+    const to = "jetkitayan@gmail.com"; // 必要なら gmail.com に直してください
+    const subject = "Random English Sentences - Stats";
+    // 本文は空欄にする
+    const body = "";
 
-      // mailto でメール作成画面を開く（または Gmail の新規作成画面でもOK）
-      const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      // ページ遷移を避けるため別タブ/ウィンドウで
-      window.open(mailtoUrl, "_blank");
-    })
-    .catch(() => {
-      alert("コピーに失敗しました。もう一度お試しください。");
-    });
+    // mailto でメール作成画面を開く
+    const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoUrl, "_blank"); // ページ遷移を避けて別タブで開く
+  })
+  .catch(() => {
+    alert("コピーに失敗しました。もう一度お試しください。");
+  });
   }
 
   // イベント登録
@@ -301,4 +297,5 @@
   </script>
 </body>
 </html>
+
 
