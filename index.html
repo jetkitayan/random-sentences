@@ -255,16 +255,41 @@
   }
 
   function copyStats() {
-    const table = document.querySelector("#statsArea table");
-    if (!table) return alert("一覧が表示されていません。");
-    let text = "";
-    table.querySelectorAll("tr").forEach(tr => {
-      const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
-      text += cols.join("@") + "\n";
+  const table = document.querySelector("#statsArea table");
+  if (!table) {
+    alert("一覧が表示されていません。");
+    return;
+  }
+
+  // テーブルをテキスト化
+  let text = "";
+  table.querySelectorAll("tr").forEach(tr => {
+    const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
+    text += cols.join("@") + "\n";
+  });
+
+  // クリップボードへコピー
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      alert("一覧をコピーしました！ これからメール作成画面を開きます。");
+
+      // 件名・本文を作成（mailtoのURL制限対策で少し短く）
+      const to = "jetkitayan@gmai.com"; // 必要なら gmail.com に直してください
+      const subject = "Random English Sentences - Stats";
+      const limit = 1800; // URL文字数の安全ライン（環境により前後）
+      let body = text;
+      if (body.length > limit) {
+        body = body.slice(0, limit) + "\n...\n(本文が長いため途中までを貼り付けました。クリップボードには全量が入っています。)";
+      }
+
+      // mailto でメール作成画面を開く（または Gmail の新規作成画面でもOK）
+      const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      // ページ遷移を避けるため別タブ/ウィンドウで
+      window.open(mailtoUrl, "_blank");
+    })
+    .catch(() => {
+      alert("コピーに失敗しました。もう一度お試しください。");
     });
-    navigator.clipboard.writeText(text)
-      .then(()=>alert("一覧をコピーしました！"))
-      .catch(()=>alert("コピーに失敗しました。"));
   }
 
   // イベント登録
@@ -276,3 +301,4 @@
   </script>
 </body>
 </html>
+
