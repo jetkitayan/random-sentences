@@ -200,7 +200,7 @@
 
     const prevIso = lastShownMap[en];
     document.getElementById("last-shown").textContent =
-      prevIso ? `[${humanElapsed(prevIso)}] ${formatJp(prevIso)}` : "[初回表示]";
+      prevIso ? `［${humanElapsed(prevIso)}］${formatJp(prevIso)}` : "［初回表示］";
     lastShownMap[en] = new Date().toISOString();
     localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
   }
@@ -301,5 +301,6 @@
   </script>
 </body>
 </html>
+
 
 
