@@ -293,7 +293,7 @@ function copyStats() {
       const body = text;
 
       // mailto でメール作成画面を開く
-      const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}`;
+      const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.open(mailtoUrl, "_blank");
     })
     .catch(() => {
@@ -310,8 +310,6 @@ function copyStats() {
   </script>
 </body>
 </html>
-
-
 
 
 
