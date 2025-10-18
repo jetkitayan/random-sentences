@@ -11,6 +11,9 @@
       background-color: #fafafa;
     }
 
+    /* 追加：ボタン上配置用スペーサー（通常は高さ0） */
+    #button-spacer { height: 0; }
+
     #content {
       margin-top: 20px;
       padding-left: 40px;
@@ -43,7 +46,7 @@
       padding: 60px 13px;
       box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
-      z-index: 999; /* ← 重なり順を明示 */
+      z-index: 999; /* 重なり順 */
     }
 
     /* 各段のボタンを横に並べる */
@@ -100,6 +103,9 @@
   </style>
 </head>
 <body>
+
+  <!-- 追加：上配置時だけ高さを持たせるスペーサー -->
+  <div id="button-spacer"></div>
 
   <div id="content">
     <div id="sentence-jp">Press "Show Random" to start</div>
@@ -322,49 +328,57 @@
     document.getElementById("statsArea").style.display = "block";
   }
 
-  // ✅ ボタン群を上下に移動するトグル機能（本文を確実に押し下げる版）
+  // ✅ ボタン群を上下に移動するトグル機能（スペーサー方式）
   let isButtonTop = false;
-  const moveBtn = document.getElementById("moveToggleBtn");
+  const moveBtn    = document.getElementById("moveToggleBtn");
   const buttonArea = document.getElementById("button-area");
+  const spacer     = document.getElementById("button-spacer");
 
-  function applyTopLayout() {
-    // 1) 先に余白を確保（本文＝bodyのpadding-top を使う）
+  function updateSpacerHeight() {
     const h = buttonArea.getBoundingClientRect().height;
-    document.body.style.paddingTop = (h + 40) + "px";
-    document.body.style.paddingBottom = "0";
-    // 2) 位置切替
-    buttonArea.style.top = "0";
-    buttonArea.style.bottom = "";
-    moveBtn.textContent = "⬇ Move Buttons Down";
-    isButtonTop = true;
+    spacer.style.height = (h + 40) + "px"; // ボタン高さ + 余白
   }
 
-  function applyBottomLayout() {
-    // 1) 余白を元に戻す
-    document.body.style.paddingTop = "0";
-    document.body.style.paddingBottom = "160px";
-    // 2) 位置切替
+  function moveButtonsTop() {
+    // 位置を上に
+    buttonArea.style.top = "0";
+    buttonArea.style.bottom = "";
+    isButtonTop = true;
+    moveBtn.textContent = "⬇ Move Buttons Down";
+
+    // レイアウト反映後にスペーサーの高さを更新
+    requestAnimationFrame(updateSpacerHeight);
+
+    // 下側の余白は不要
+    document.body.style.paddingBottom = "0";
+  }
+
+  function moveButtonsBottom() {
+    // スペーサーを0に戻す
+    spacer.style.height = "0";
+
+    // 位置を下に
     buttonArea.style.bottom = "30px";
     buttonArea.style.top = "";
-    moveBtn.textContent = "⬆ Move Buttons Up";
     isButtonTop = false;
+    moveBtn.textContent = "⬆ Move Buttons Up";
+
+    // 下側余白を元通り
+    document.body.style.paddingBottom = "160px";
   }
 
   moveBtn.onclick = () => {
-    if (isButtonTop) applyBottomLayout();
-    else applyTopLayout();
+    if (isButtonTop) moveButtonsBottom();
+    else moveButtonsTop();
   };
 
-  // リサイズ時：上配置のときは余白を再計算（高さ変動対策）
+  // リサイズ時：上配置ならスペーサー再計算
   window.addEventListener("resize", () => {
-    if (isButtonTop) {
-      const h = buttonArea.getBoundingClientRect().height;
-      document.body.style.paddingTop = (h + 40) + "px";
-    }
+    if (isButtonTop) updateSpacerHeight();
   });
 
   // 初期は下配置
-  applyBottomLayout();
+  moveButtonsBottom();
 
   // ====== イベント登録 ======
   document.getElementById("showBtn").onclick = showRandom;
