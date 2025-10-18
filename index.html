@@ -7,15 +7,13 @@
     body {
       font-family: sans-serif;
       margin: 0;
-      padding: 0 0 160px 0; /* 下配置時の余白 */
+      /* 下固定をやめたので下余白は不要。上余白はJSで自動調整 */
+      padding: 0;
       background-color: #fafafa;
     }
 
-    /* 追加：ボタン上配置用スペーサー（通常は高さ0） */
-    #button-spacer { height: 0; }
-
     #content {
-      margin-top: 20px;
+      margin-top: 20px;         /* ベースの余白。上部はJSでさらに加算される */
       padding-left: 40px;
       max-width: 900px;
     }
@@ -36,19 +34,21 @@
       color: #555;
     }
 
+    /* ボタン群を常に上固定 */
     #button-area {
       position: fixed;
-      bottom: 30px;
+      top: 0;
       left: 0;
       width: 100%;
       background: #fff;
-      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;   /* 上固定なので枠線は下側に */
       padding: 60px 13px;
-      box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
       text-align: center;
-      z-index: 999; /* 重なり順 */
+      z-index: 999;
     }
 
+    /* 各段のボタンを横に並べる */
     .button-row {
       display: flex;
       justify-content: center;
@@ -80,36 +80,13 @@
       text-align: left;
     }
 
+    /* 表示回数などの上部メタ情報 */
     .top-meta {
       margin-bottom: 50px;
-    }
-
-    /* ⬆/⬇ トグルボタン */
-    #moveToggleBtn {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      z-index: 1000;
-      font-size: 20px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      cursor: pointer;
     }
   </style>
 </head>
 <body>
-
-  <!-- 上配置時だけ高さを持たせるスペーサー -->
-  <div id="button-spacer"></div>
-
-  <div id="content">
-    <div id="sentence-jp">Press "Show Random" to start</div>
-    <div id="sentence-en"></div>
-    <div id="last-shown"></div>
-  </div>
 
   <div id="button-area">
     <div class="button-row">
@@ -123,6 +100,13 @@
     </div>
   </div>
 
+  <div id="content">
+    <div id="sentence-jp">Press "Show Random" to start</div>
+    <div id="sentence-en"></div>
+    <div id="last-shown"></div>
+  </div>
+
+  <!-- 表示履歴一覧 -->
   <div id="statsArea">
     <h3>📊 表示履歴一覧</h3>
     <table>
@@ -137,8 +121,6 @@
       <tbody id="statsBody"></tbody>
     </table>
   </div>
-
-  <button id="moveToggleBtn">⬆ Move Buttons Up</button>
 
   <script>
   // ====== 初期化 ======
@@ -157,21 +139,63 @@
   let currentSentence = null;
   let toggleMode = true; // true: ランダム / false: 最少回数
 
+  // ====== 上固定のための自動余白調整 ======
+  function applyTopPadding() {
+    const buttonArea = document.getElementById('button-area');
+    // レイアウト確定後に高さ取得（フォント・改行の影響を考慮）
+    requestAnimationFrame(() => {
+      const h = buttonArea.getBoundingClientRect().height;
+      // ボタンの影/余裕ぶんを少し足す。大きすぎる場合は 16 にしてOK
+      document.body.style.paddingTop = (h + 40) + 'px';
+    });
+  }
+  // 初期&リサイズ時に適用
+  window.addEventListener('load', applyTopPadding);
+  window.addEventListener('resize', applyTopPadding);
+
+  // ====== データ読み込み ======
   fetch(jsonFile)
-    .then(r => { if (!r.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`); return r.json(); })
-    .then(data => { allSentences = data; if (remaining.length === 0) remaining = allSentences.map(s => s.en); })
+    .then(response => {
+      if (!response.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`);
+      return response.json();
+    })
+    .then(data => {
+      allSentences = data;
+      if (remaining.length === 0) remaining = allSentences.map(s => s.en);
+      applyTopPadding(); // ボタン行が折り返される場合に備えて再適用
+    })
     .catch(err => {
       document.getElementById("sentence-jp").innerText = "❌ JSONファイルの読み込みに失敗しました。";
       document.getElementById("sentence-en").innerText = err.message;
     });
 
   // ====== ユーティリティ ======
-  const formatJp = iso => { try { return new Date(iso).toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }); } catch { return iso||""; } };
-  function humanElapsed(iso){ try{const d=new Date(iso).getTime(),n=Date.now(),s=Math.floor((n-d)/1000); if(s<60)return`${s}秒前`; const m=Math.floor(s/60); if(m<60)return`${m}分前`; const h=Math.floor(m/60); if(h<24)return`${h}時間前`; const day=Math.floor(h/24); return`${day}日前`;}catch{return"";} }
+  function formatJp(dtIso) {
+    try {
+      const d = new Date(dtIso);
+      return d.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
+    } catch { return dtIso || ""; }
+  }
+
+  function humanElapsed(fromIso) {
+    try {
+      const from = new Date(fromIso).getTime();
+      const now = Date.now();
+      const diffSec = Math.floor((now - from) / 1000);
+      if (diffSec < 60) return `${diffSec}秒前`;
+      const diffMin = Math.floor(diffSec / 60);
+      if (diffMin < 60) return `${diffMin}分前`;
+      const diffHr = Math.floor(diffMin / 60);
+      if (diffHr < 24) return `${diffHr}時間前`;
+      const diffDay = Math.floor(diffHr / 24);
+      return `${diffDay}日前`;
+    } catch { return ""; }
+  }
 
   // ====== 表示処理 ======
   function showRandom() {
     const lastShownDiv = document.getElementById("last-shown");
+
     if (remaining.length === 0) {
       document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
       document.getElementById("sentence-en").innerText = "";
@@ -185,30 +209,37 @@
     if (toggleMode) {
       en = remaining[Math.floor(Math.random() * remaining.length)];
     } else {
-      let min = Infinity, least = [];
+      let minCount = Infinity;
+      let leastShownList = [];
       remaining.forEach(s => {
-        const c = shownCounts[s] || 0;
-        if (c < min) { min = c; least = [s]; }
-        else if (c === min) { least.push(s); }
+        const count = shownCounts[s] || 0;
+        if (count < minCount) { minCount = count; leastShownList = [s]; }
+        else if (count === minCount) { leastShownList.push(s); }
       });
-      en = least[Math.floor(Math.random() * least.length)];
+      en = leastShownList[Math.floor(Math.random() * leastShownList.length)];
     }
     toggleMode = !toggleMode;
 
     currentSentence = allSentences.find(s => s.en === en);
+
     shownCounts[en] = (shownCounts[en] || 0) + 1;
     localStorage.setItem(keyPrefix + "shownCounts", JSON.stringify(shownCounts));
-    const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
+
+    const totalShown = Object.values(shownCounts).reduce((a, b) => a + b, 0);
 
     document.getElementById("sentence-jp").innerHTML = `
       <div class="top-meta">${shownCounts[en]}回目 （総回数: ${totalShown}）</div>
-      <div>${currentSentence.jp}</div>`;
+      <div>${currentSentence.jp}</div>
+    `;
     document.getElementById("sentence-en").innerText = currentSentence.en;
     document.getElementById("okBtn").disabled = false;
 
     const prevIso = lastShownMap[en];
-    document.getElementById("last-shown").textContent =
-      prevIso ? `（${humanElapsed(prevIso)}）${formatJp(prevIso)}` : "（初回表示）";
+    if (prevIso) {
+      lastShownDiv.textContent = `（${humanElapsed(prevIso)}）${formatJp(prevIso)}`;
+    } else {
+      lastShownDiv.textContent = "（初回表示）";
+    }
     lastShownMap[en] = new Date().toISOString();
     localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
   }
@@ -217,10 +248,13 @@
     if (!currentSentence) return;
     yesMarks[currentSentence.en] = true;
     localStorage.setItem(keyPrefix + "yesMarks", JSON.stringify(yesMarks));
+
     remaining = remaining.filter(s => s !== currentSentence.en);
     localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remaining));
-    if (remaining.length > 0) showRandom();
-    else {
+
+    if (remaining.length > 0) {
+      showRandom();
+    } else {
       document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
       document.getElementById("sentence-en").innerText = "";
       document.getElementById("last-shown").textContent = "";
@@ -235,27 +269,35 @@
     localStorage.removeItem(keyPrefix + "remaining");
     localStorage.removeItem(keyPrefix + "yesMarks");
     localStorage.removeItem(keyPrefix + "lastShown");
-    shownCounts = {}; yesMarks = {}; lastShownMap = {};
-    remaining = allSentences.map(s => s.en); currentSentence = null;
+
+    shownCounts = {};
+    yesMarks = {};
+    lastShownMap = {};
+    remaining = allSentences.map(s => s.en);
+    currentSentence = null;
+
     document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
     document.getElementById("sentence-en").innerText = "";
     document.getElementById("last-shown").textContent = "";
     document.getElementById("showBtn").disabled = false;
     document.getElementById("statsArea").style.display = "none";
+
+    // 念のため余白再計算
+    applyTopPadding();
   }
 
   function showStats() {
     const tbody = document.getElementById("statsBody");
     tbody.innerHTML = "";
     allSentences.forEach(s => {
-      const c = shownCounts[s.en] || 0;
+      const count = shownCounts[s.en] || 0;
       const yes = yesMarks[s.en] ? "●" : "○";
       tbody.innerHTML += `
         <tr>
           <td>${s.en}</td>
           <td>${s.jp}</td>
           <td style="text-align:center;">${yes}</td>
-          <td style="text-align:center;">${c}</td>
+          <td style="text-align:center;">${count}</td>
         </tr>`;
     });
     document.getElementById("statsArea").style.display = "block";
@@ -263,7 +305,7 @@
 
   function copyStats() {
     const table = document.querySelector("#statsArea table");
-    if (!table) return alert("一覧が表示されていません。");
+    if (!table) { alert("一覧が表示されていません。"); return; }
     let text = "";
     table.querySelectorAll("tr").forEach(tr => {
       const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
@@ -274,83 +316,12 @@
       .catch(()=>alert("コピーに失敗しました。"));
   }
 
-// ====== ボタン群トグル（スペーサー＋厳密スクロール補正） ======
-let isButtonTop = false;
-const moveBtn    = document.getElementById("moveToggleBtn");
-const buttonArea = document.getElementById("button-area");
-const spacer     = document.getElementById("button-spacer");
-const content    = document.getElementById("content");
-let spacerHeight = 0;
-
-// スペーサー高さを設定 → その差分でスクロール → さらに #content を目標位置まで微調整
-function setSpacerHeightAndScroll(newHeight) {
-  const diff = newHeight - spacerHeight;
-  spacer.style.height = newHeight + "px";
-
-  // まず差分スクロール（環境差の影響を減らす）
-  if (diff !== 0) window.scrollBy(0, diff);
-  spacerHeight = newHeight;
-
-  // レイアウト確定後に #content の先頭を安全な位置まで調整
-  requestAnimationFrame(() => {
-    const rect = content.getBoundingClientRect();
-    const targetTop = 80; // 画面上から60pxの位置に来るように（好みで調整OK）
-    const delta = rect.top - targetTop;
-    if (Math.abs(delta) > 1) {
-      window.scrollBy(0, delta);
-    }
-  });
-}
-
-function moveButtonsTop() {
-  // 上に固定
-  buttonArea.style.top = "0";
-  buttonArea.style.bottom = "";
-  isButtonTop = true;
-  moveBtn.textContent = "⬇ Move Buttons Down";
-  document.body.style.paddingBottom = "0";
-
-  // レイアウト反映後に高さ計測 → スペーサー反映＋厳密スクロール
-  requestAnimationFrame(() => {
-    const h = buttonArea.getBoundingClientRect().height;
-    setSpacerHeightAndScroll(h + 40);
-  });
-}
-
-function moveButtonsBottom() {
-  // 先にスペーサーを0に（見えている位置を保つため、差分スクロールも行う）
-  setSpacerHeightAndScroll(0);
-
-  // 下に固定
-  buttonArea.style.bottom = "30px";
-  buttonArea.style.top = "";
-  isButtonTop = false;
-  moveBtn.textContent = "⬆ Move Buttons Up";
-  document.body.style.paddingBottom = "160px";
-}
-
-moveBtn.onclick = () => (isButtonTop ? moveButtonsBottom() : moveButtonsTop());
-
-// リサイズ時：上配置なら高さ再計算＋調整
-window.addEventListener("resize", () => {
-  if (isButtonTop) {
-    const h = buttonArea.getBoundingClientRect().height;
-    setSpacerHeightAndScroll(h + 40);
-  }
-});
-
-// 初期は下配置
-moveButtonsBottom();
-    
   // ====== イベント登録 ======
   document.getElementById("showBtn").onclick = showRandom;
   document.getElementById("okBtn").onclick = confirmSentence;
   document.getElementById("resetBtn").onclick = resetData;
   document.getElementById("statsBtn").onclick = showStats;
   document.getElementById("copyBtn").onclick = copyStats;
-</script>
+  </script>
 </body>
 </html>
-
-
-
