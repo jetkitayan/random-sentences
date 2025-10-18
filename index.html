@@ -43,6 +43,7 @@
       padding: 60px 13px;
       box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
+      z-index: 999; /* ← 重なり順を明示 */
     }
 
     /* 各段のボタンを横に並べる */
@@ -321,72 +322,49 @@
     document.getElementById("statsArea").style.display = "block";
   }
 
-  // ✅ コピー機能
-  function copyStats() {
-    const table = document.querySelector("#statsArea table");
-    if (!table) {
-      alert("一覧が表示されていません。");
-      return;
-    }
-    let text = "";
-    table.querySelectorAll("tr").forEach(tr => {
-      const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
-      text += cols.join("@") + "\n";
-    });
-    navigator.clipboard.writeText(text)
-      .then(() => alert("一覧をコピーしました！"))
-      .catch(() => alert("コピーに失敗しました。"));
-  }
-
-  // ✅ ボタン群を上下に移動するトグル機能（重なり防止＆リサイズ再計算付き）
+  // ✅ ボタン群を上下に移動するトグル機能（本文を確実に押し下げる版）
   let isButtonTop = false;
   const moveBtn = document.getElementById("moveToggleBtn");
   const buttonArea = document.getElementById("button-area");
-  const contentArea = document.getElementById("content");
 
-  // 位置に応じて余白を設定
-  function applyLayoutForPosition() {
-    if (isButtonTop) {
-      const buttonHeight = buttonArea.getBoundingClientRect().height;
-      contentArea.style.marginTop = (buttonHeight + 40) + "px"; // 被らない余白
-      contentArea.style.marginBottom = "0";
-      document.body.style.paddingBottom = "0";
-    } else {
-      contentArea.style.marginTop = "20px";
-      contentArea.style.marginBottom = "0";
-      document.body.style.paddingBottom = "160px"; // 初期値に合わせる
-    }
-  }
-
-  function moveButtonsTop() {
-    // 余白を先に確保 → 位置切替
-    isButtonTop = true;
-    applyLayoutForPosition();
+  function applyTopLayout() {
+    // 1) 先に余白を確保（本文＝bodyのpadding-top を使う）
+    const h = buttonArea.getBoundingClientRect().height;
+    document.body.style.paddingTop = (h + 40) + "px";
+    document.body.style.paddingBottom = "0";
+    // 2) 位置切替
     buttonArea.style.top = "0";
     buttonArea.style.bottom = "";
     moveBtn.textContent = "⬇ Move Buttons Down";
+    isButtonTop = true;
   }
 
-  function moveButtonsBottom() {
-    isButtonTop = false;
-    applyLayoutForPosition();
+  function applyBottomLayout() {
+    // 1) 余白を元に戻す
+    document.body.style.paddingTop = "0";
+    document.body.style.paddingBottom = "160px";
+    // 2) 位置切替
     buttonArea.style.bottom = "30px";
     buttonArea.style.top = "";
     moveBtn.textContent = "⬆ Move Buttons Up";
+    isButtonTop = false;
   }
 
-  document.getElementById("moveToggleBtn").onclick = () => {
-    if (isButtonTop) moveButtonsBottom();
-    else moveButtonsTop();
+  moveBtn.onclick = () => {
+    if (isButtonTop) applyBottomLayout();
+    else applyTopLayout();
   };
 
-  // リサイズ時に再計算（行の折返し等で高さが変わるため）
+  // リサイズ時：上配置のときは余白を再計算（高さ変動対策）
   window.addEventListener("resize", () => {
-    if (isButtonTop) applyLayoutForPosition();
+    if (isButtonTop) {
+      const h = buttonArea.getBoundingClientRect().height;
+      document.body.style.paddingTop = (h + 40) + "px";
+    }
   });
 
-  // 初期適用
-  applyLayoutForPosition();
+  // 初期は下配置
+  applyBottomLayout();
 
   // ====== イベント登録 ======
   document.getElementById("showBtn").onclick = showRandom;
