@@ -7,7 +7,7 @@
     body {
       font-family: sans-serif;
       margin: 0;
-      padding: 0 0 160px 0;
+      padding: 0 0 160px 0;  /* 下固定用の余白 */
       background-color: #fafafa;
     }
 
@@ -26,10 +26,10 @@
       color: #000;
     }
 
-    /* 追加: 前回表示日時の見た目 */
+    /* 前回表示の見た目（サイズを同じに） */
     #last-shown {
       margin-top: 16px;
-      font-size: 48px;   /* ← ここを 18px → 48px に変更 */
+      font-size: 48px;
       color: #555;
     }
 
@@ -57,6 +57,7 @@
       font-size: 32px;
       margin: 25px 5px;
       border-radius: 16px;
+      cursor: pointer;
     }
 
     #statsArea {
@@ -80,6 +81,21 @@
     .top-meta {
       margin-bottom: 50px;
     }
+
+    /* ⬆/⬇ トグルボタン */
+    #moveToggleBtn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      font-size: 20px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -87,7 +103,7 @@
   <div id="content">
     <div id="sentence-jp">Press "Show Random" to start</div>
     <div id="sentence-en"></div>
-    <!-- 追加: 前回表示日時 -->
+    <!-- 前回表示日時 -->
     <div id="last-shown"></div>
   </div>
 
@@ -118,6 +134,9 @@
       <tbody id="statsBody"></tbody>
     </table>
   </div>
+
+  <!-- ボタン群の上下切替 -->
+  <button id="moveToggleBtn">⬆ Move Buttons Up</button>
 
   <script>
   // ====== 初期化 ======
@@ -230,7 +249,7 @@
     document.getElementById("sentence-en").innerText = currentSentence.en;
     document.getElementById("okBtn").disabled = false;
 
-    // ★ ここから：前回表示日時の表示 → 今回時刻の保存
+    // ★ 前回表示を先頭に（括弧内）表示 → 今回時刻を保存
     const prevIso = lastShownMap[en];
     if (prevIso) {
       lastShownDiv.textContent = `（${humanElapsed(prevIso)}）${formatJp(prevIso)}`;
@@ -239,7 +258,6 @@
     }
     lastShownMap[en] = new Date().toISOString();
     localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
-    // ★ ここまで
   }
 
   // ✅ YESボタン押下
@@ -269,7 +287,7 @@
     localStorage.removeItem(keyPrefix + "shownCounts");
     localStorage.removeItem(keyPrefix + "remaining");
     localStorage.removeItem(keyPrefix + "yesMarks");
-    localStorage.removeItem(keyPrefix + "lastShown"); // 追加: 前回表示時刻も消す
+    localStorage.removeItem(keyPrefix + "lastShown"); // 前回表示時刻も消す
 
     shownCounts = {};
     yesMarks = {};
@@ -320,6 +338,40 @@
       .catch(() => alert("コピーに失敗しました。"));
   }
 
+  // ✅ ボタン群を上下に移動するトグル機能（余白調整付き）
+  let isButtonTop = false;
+  const moveBtn = document.getElementById("moveToggleBtn");
+  const buttonArea = document.getElementById("button-area");
+  const contentArea = document.getElementById("content");
+
+  moveBtn.onclick = () => {
+    isButtonTop = !isButtonTop;
+
+    if (isButtonTop) {
+      // 上に固定
+      buttonArea.style.top = "0";
+      buttonArea.style.bottom = "";
+      moveBtn.textContent = "⬇ Move Buttons Down";
+
+      // 文章が重ならないように上余白をボタン高さに応じて追加
+      // レイアウト反映後の高さを取得するため、一度計算を遅延
+      requestAnimationFrame(() => {
+        const buttonHeight = buttonArea.offsetHeight;
+        contentArea.style.marginTop = (buttonHeight + 40) + "px"; // ボタン高さ + 余裕
+        contentArea.style.marginBottom = "0";
+      });
+    } else {
+      // 下に戻す
+      buttonArea.style.bottom = "30px";
+      buttonArea.style.top = "";
+      moveBtn.textContent = "⬆ Move Buttons Up";
+
+      // 元の余白に戻す（上は20pxに、下はbodyのpadding-bottomに任せる）
+      contentArea.style.marginTop = "20px";
+      contentArea.style.marginBottom = "0";
+    }
+  };
+
   // ====== イベント登録 ======
   document.getElementById("showBtn").onclick = showRandom;
   document.getElementById("okBtn").onclick = confirmSentence;
@@ -329,5 +381,3 @@
 </script>
 </body>
 </html>
-
-
