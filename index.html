@@ -26,6 +26,13 @@
       color: #000;
     }
 
+    /* 追加: 前回表示日時の見た目 */
+    #last-shown {
+      margin-top: 16px;
+      font-size: 18px;
+      color: #555;
+    }
+
     #button-area {
       position: fixed;
       bottom: 30px;
@@ -80,6 +87,8 @@
   <div id="content">
     <div id="sentence-jp">Press "Show Random" to start</div>
     <div id="sentence-en"></div>
+    <!-- 追加: 前回表示日時 -->
+    <div id="last-shown"></div>
   </div>
 
   <div id="button-area">
@@ -120,9 +129,11 @@
   // ファイル別のキーを作成
   const keyPrefix = `randomApp_${fileParam}_`;
 
-  let shownCounts = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
-  let yesMarks    = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
-  let remaining   = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
+  let shownCounts   = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
+  let yesMarks      = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
+  let remaining     = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
+  // 追加: 前回表示時刻（ISO文字列）を英文明文キーで保持
+  let lastShownMap  = JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
 
   let currentSentence = null;
   let toggleMode = true; // trueならランダム表示、falseなら最少回数表示
@@ -144,13 +155,43 @@
       document.getElementById("sentence-en").innerText = err.message;
     });
 
+  // ====== ユーティリティ ======
+  function formatJp(dtIso) {
+    try {
+      const d = new Date(dtIso);
+      return d.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
+    } catch {
+      return dtIso || "";
+    }
+  }
+
+  function humanElapsed(fromIso) {
+    try {
+      const from = new Date(fromIso).getTime();
+      const now = Date.now();
+      const diffSec = Math.floor((now - from) / 1000);
+      if (diffSec < 60) return `${diffSec}秒前`;
+      const diffMin = Math.floor(diffSec / 60);
+      if (diffMin < 60) return `${diffMin}分前`;
+      const diffHr = Math.floor(diffMin / 60);
+      if (diffHr < 24) return `${diffHr}時間前`;
+      const diffDay = Math.floor(diffHr / 24);
+      return `${diffDay}日前`;
+    } catch {
+      return "";
+    }
+  }
+
   // ====== 関数定義 ======
 
   // ✅ ランダム／最少回数表示を交互に実行
   function showRandom() {
+    const lastShownDiv = document.getElementById("last-shown");
+
     if (remaining.length === 0) {
       document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
       document.getElementById("sentence-en").innerText = "";
+      lastShownDiv.textContent = "";
       document.getElementById("showBtn").disabled = true;
       document.getElementById("okBtn").disabled = true;
       return;
@@ -188,6 +229,17 @@
     `;
     document.getElementById("sentence-en").innerText = currentSentence.en;
     document.getElementById("okBtn").disabled = false;
+
+    // ★ ここから：前回表示日時の表示 → 今回時刻の保存
+    const prevIso = lastShownMap[en];
+    if (prevIso) {
+      lastShownDiv.textContent = `前回の表示: ${formatJp(prevIso)}（${humanElapsed(prevIso)}）`;
+    } else {
+      lastShownDiv.textContent = "この文章は初めて表示されました";
+    }
+    lastShownMap[en] = new Date().toISOString();
+    localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
+    // ★ ここまで
   }
 
   // ✅ YESボタン押下
@@ -205,6 +257,7 @@
     } else {
       document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
       document.getElementById("sentence-en").innerText = "";
+      document.getElementById("last-shown").textContent = "";
       document.getElementById("showBtn").disabled = true;
       document.getElementById("okBtn").disabled = true;
     }
@@ -216,14 +269,17 @@
     localStorage.removeItem(keyPrefix + "shownCounts");
     localStorage.removeItem(keyPrefix + "remaining");
     localStorage.removeItem(keyPrefix + "yesMarks");
+    localStorage.removeItem(keyPrefix + "lastShown"); // 追加: 前回表示時刻も消す
 
     shownCounts = {};
     yesMarks = {};
+    lastShownMap = {};
     remaining = allSentences.map(s => s.en);
     currentSentence = null;
 
     document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
     document.getElementById("sentence-en").innerText = "";
+    document.getElementById("last-shown").textContent = "";
     document.getElementById("showBtn").disabled = false;
     document.getElementById("statsArea").style.display = "none";
   }
@@ -273,4 +329,3 @@
 </script>
 </body>
 </html>
-
