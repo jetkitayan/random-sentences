@@ -49,7 +49,6 @@
       z-index: 999; /* 重なり順 */
     }
 
-    /* 各段のボタンを横に並べる */
     .button-row {
       display: flex;
       justify-content: center;
@@ -81,7 +80,6 @@
       text-align: left;
     }
 
-    /* 表示回数などの上部メタ情報 */
     .top-meta {
       margin-bottom: 50px;
     }
@@ -104,13 +102,12 @@
 </head>
 <body>
 
-  <!-- 追加：上配置時だけ高さを持たせるスペーサー -->
+  <!-- 上配置時だけ高さを持たせるスペーサー -->
   <div id="button-spacer"></div>
 
   <div id="content">
     <div id="sentence-jp">Press "Show Random" to start</div>
     <div id="sentence-en"></div>
-    <!-- 前回表示日時 -->
     <div id="last-shown"></div>
   </div>
 
@@ -126,7 +123,6 @@
     </div>
   </div>
 
-  <!-- 表示履歴一覧 -->
   <div id="statsArea">
     <h3>📊 表示履歴一覧</h3>
     <table>
@@ -142,7 +138,6 @@
     </table>
   </div>
 
-  <!-- ボタン群の上下切替 -->
   <button id="moveToggleBtn">⬆ Move Buttons Up</button>
 
   <script>
@@ -152,68 +147,31 @@
   const fileParam = params.get("file") || "default";
   const jsonFile = `${fileParam}.json`;
 
-  // ファイル別のキーを作成
   const keyPrefix = `randomApp_${fileParam}_`;
 
   let shownCounts   = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
   let yesMarks      = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
   let remaining     = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
-  // 前回表示時刻（ISO文字列）を英文明文キーで保持
   let lastShownMap  = JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
 
   let currentSentence = null;
   let toggleMode = true; // true: ランダム / false: 最少回数
 
-  console.log("📄 読み込むJSONファイル:", jsonFile);
-
-  // JSONデータ読み込み
   fetch(jsonFile)
-    .then(response => {
-      if (!response.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`);
-      return response.json();
-    })
-    .then(data => {
-      allSentences = data;
-      if (remaining.length === 0) remaining = allSentences.map(s => s.en);
-    })
+    .then(r => { if (!r.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`); return r.json(); })
+    .then(data => { allSentences = data; if (remaining.length === 0) remaining = allSentences.map(s => s.en); })
     .catch(err => {
       document.getElementById("sentence-jp").innerText = "❌ JSONファイルの読み込みに失敗しました。";
       document.getElementById("sentence-en").innerText = err.message;
     });
 
   // ====== ユーティリティ ======
-  function formatJp(dtIso) {
-    try {
-      const d = new Date(dtIso);
-      return d.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
-    } catch {
-      return dtIso || "";
-    }
-  }
+  const formatJp = iso => { try { return new Date(iso).toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }); } catch { return iso||""; } };
+  function humanElapsed(iso){ try{const d=new Date(iso).getTime(),n=Date.now(),s=Math.floor((n-d)/1000); if(s<60)return`${s}秒前`; const m=Math.floor(s/60); if(m<60)return`${m}分前`; const h=Math.floor(m/60); if(h<24)return`${h}時間前`; const day=Math.floor(h/24); return`${day}日前`;}catch{return"";} }
 
-  function humanElapsed(fromIso) {
-    try {
-      const from = new Date(fromIso).getTime();
-      const now = Date.now();
-      const diffSec = Math.floor((now - from) / 1000);
-      if (diffSec < 60) return `${diffSec}秒前`;
-      const diffMin = Math.floor(diffSec / 60);
-      if (diffMin < 60) return `${diffMin}分前`;
-      const diffHr = Math.floor(diffMin / 60);
-      if (diffHr < 24) return `${diffHr}時間前`;
-      const diffDay = Math.floor(diffHr / 24);
-      return `${diffDay}日前`;
-    } catch {
-      return "";
-    }
-  }
-
-  // ====== 関数定義 ======
-
-  // ✅ ランダム／最少回数表示を交互に実行
+  // ====== 表示処理 ======
   function showRandom() {
     const lastShownDiv = document.getElementById("last-shown");
-
     if (remaining.length === 0) {
       document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
       document.getElementById("sentence-en").innerText = "";
@@ -227,59 +185,42 @@
     if (toggleMode) {
       en = remaining[Math.floor(Math.random() * remaining.length)];
     } else {
-      let minCount = Infinity;
-      let leastShownList = [];
+      let min = Infinity, least = [];
       remaining.forEach(s => {
-        const count = shownCounts[s] || 0;
-        if (count < minCount) {
-          minCount = count;
-          leastShownList = [s];
-        } else if (count === minCount) {
-          leastShownList.push(s);
-        }
+        const c = shownCounts[s] || 0;
+        if (c < min) { min = c; least = [s]; }
+        else if (c === min) { least.push(s); }
       });
-      en = leastShownList[Math.floor(Math.random() * leastShownList.length)];
+      en = least[Math.floor(Math.random() * least.length)];
     }
     toggleMode = !toggleMode;
 
     currentSentence = allSentences.find(s => s.en === en);
-
     shownCounts[en] = (shownCounts[en] || 0) + 1;
     localStorage.setItem(keyPrefix + "shownCounts", JSON.stringify(shownCounts));
-
-    const totalShown = Object.values(shownCounts).reduce((a, b) => a + b, 0);
+    const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
 
     document.getElementById("sentence-jp").innerHTML = `
       <div class="top-meta">${shownCounts[en]}回目 （総回数: ${totalShown}）</div>
-      <div>${currentSentence.jp}</div>
-    `;
+      <div>${currentSentence.jp}</div>`;
     document.getElementById("sentence-en").innerText = currentSentence.en;
     document.getElementById("okBtn").disabled = false;
 
-    // ★ 前回表示を先頭に（括弧内）表示 → 今回時刻を保存
     const prevIso = lastShownMap[en];
-    if (prevIso) {
-      lastShownDiv.textContent = `（${humanElapsed(prevIso)}）${formatJp(prevIso)}`;
-    } else {
-      lastShownDiv.textContent = "（初回表示）";
-    }
+    document.getElementById("last-shown").textContent =
+      prevIso ? `（${humanElapsed(prevIso)}）${formatJp(prevIso)}` : "（初回表示）";
     lastShownMap[en] = new Date().toISOString();
     localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
   }
 
-  // ✅ YESボタン押下
   function confirmSentence() {
     if (!currentSentence) return;
     yesMarks[currentSentence.en] = true;
     localStorage.setItem(keyPrefix + "yesMarks", JSON.stringify(yesMarks));
-
-    // （※ YESしても remaining を減らさないようにしたい場合はここをコメントアウト）
     remaining = remaining.filter(s => s !== currentSentence.en);
     localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remaining));
-
-    if (remaining.length > 0) {
-      showRandom();
-    } else {
+    if (remaining.length > 0) showRandom();
+    else {
       document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
       document.getElementById("sentence-en").innerText = "";
       document.getElementById("last-shown").textContent = "";
@@ -288,20 +229,14 @@
     }
   }
 
-  // ✅ リセット処理
   function resetData() {
     if (!confirm("Reset all data?")) return;
     localStorage.removeItem(keyPrefix + "shownCounts");
     localStorage.removeItem(keyPrefix + "remaining");
     localStorage.removeItem(keyPrefix + "yesMarks");
-    localStorage.removeItem(keyPrefix + "lastShown"); // 前回表示時刻も消す
-
-    shownCounts = {};
-    yesMarks = {};
-    lastShownMap = {};
-    remaining = allSentences.map(s => s.en);
-    currentSentence = null;
-
+    localStorage.removeItem(keyPrefix + "lastShown");
+    shownCounts = {}; yesMarks = {}; lastShownMap = {};
+    remaining = allSentences.map(s => s.en); currentSentence = null;
     document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
     document.getElementById("sentence-en").innerText = "";
     document.getElementById("last-shown").textContent = "";
@@ -309,72 +244,81 @@
     document.getElementById("statsArea").style.display = "none";
   }
 
-  // ✅ 統計表示
   function showStats() {
     const tbody = document.getElementById("statsBody");
     tbody.innerHTML = "";
     allSentences.forEach(s => {
-      const count = shownCounts[s.en] || 0;
+      const c = shownCounts[s.en] || 0;
       const yes = yesMarks[s.en] ? "●" : "○";
-      const row = `
+      tbody.innerHTML += `
         <tr>
           <td>${s.en}</td>
           <td>${s.jp}</td>
           <td style="text-align:center;">${yes}</td>
-          <td style="text-align:center;">${count}</td>
+          <td style="text-align:center;">${c}</td>
         </tr>`;
-      tbody.innerHTML += row;
     });
     document.getElementById("statsArea").style.display = "block";
   }
 
-  // ✅ ボタン群を上下に移動するトグル機能（スペーサー方式）
+  function copyStats() {
+    const table = document.querySelector("#statsArea table");
+    if (!table) return alert("一覧が表示されていません。");
+    let text = "";
+    table.querySelectorAll("tr").forEach(tr => {
+      const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
+      text += cols.join("@") + "\n";
+    });
+    navigator.clipboard.writeText(text)
+      .then(()=>alert("一覧をコピーしました！"))
+      .catch(()=>alert("コピーに失敗しました。"));
+  }
+
+  // ====== ボタン群トグル（スペーサー＋スクロール補正） ======
   let isButtonTop = false;
   const moveBtn    = document.getElementById("moveToggleBtn");
   const buttonArea = document.getElementById("button-area");
   const spacer     = document.getElementById("button-spacer");
+  let spacerHeight = 0; // 現在のスペーサー高さを保持
 
-  function updateSpacerHeight() {
-    const h = buttonArea.getBoundingClientRect().height;
-    spacer.style.height = (h + 40) + "px"; // ボタン高さ + 余白
+  function setSpacerHeightWithScroll(newHeight) {
+    const diff = newHeight - spacerHeight;   // 変化量
+    spacer.style.height = newHeight + "px";  // 高さ反映
+    if (diff !== 0) window.scrollBy(0, diff); // ★スクロール補正
+    spacerHeight = newHeight;
   }
 
   function moveButtonsTop() {
-    // 位置を上に
     buttonArea.style.top = "0";
     buttonArea.style.bottom = "";
     isButtonTop = true;
     moveBtn.textContent = "⬇ Move Buttons Down";
-
-    // レイアウト反映後にスペーサーの高さを更新
-    requestAnimationFrame(updateSpacerHeight);
-
-    // 下側の余白は不要
     document.body.style.paddingBottom = "0";
+    // レイアウト反映後に高さ計測 → スペーサー設定 & スクロール補正
+    requestAnimationFrame(() => {
+      const h = buttonArea.getBoundingClientRect().height;
+      setSpacerHeightWithScroll(h + 40);
+    });
   }
 
   function moveButtonsBottom() {
-    // スペーサーを0に戻す
-    spacer.style.height = "0";
-
-    // 位置を下に
+    // スペーサーを先に0にしてスクロール補正（戻す）
+    setSpacerHeightWithScroll(0);
     buttonArea.style.bottom = "30px";
     buttonArea.style.top = "";
     isButtonTop = false;
     moveBtn.textContent = "⬆ Move Buttons Up";
-
-    // 下側余白を元通り
     document.body.style.paddingBottom = "160px";
   }
 
-  moveBtn.onclick = () => {
-    if (isButtonTop) moveButtonsBottom();
-    else moveButtonsTop();
-  };
+  moveBtn.onclick = () => (isButtonTop ? moveButtonsBottom() : moveButtonsTop());
 
-  // リサイズ時：上配置ならスペーサー再計算
+  // リサイズ時：上配置なら高さ再計算＋補正
   window.addEventListener("resize", () => {
-    if (isButtonTop) updateSpacerHeight();
+    if (isButtonTop) {
+      const h = buttonArea.getBoundingClientRect().height;
+      setSpacerHeightWithScroll(h + 40);
+    }
   });
 
   // 初期は下配置
