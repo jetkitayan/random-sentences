@@ -294,7 +294,7 @@ function setSpacerHeightAndScroll(newHeight) {
   // レイアウト確定後に #content の先頭を安全な位置まで調整
   requestAnimationFrame(() => {
     const rect = content.getBoundingClientRect();
-    const targetTop = 60; // 画面上から60pxの位置に来るように（好みで調整OK）
+    const targetTop = 80; // 画面上から60pxの位置に来るように（好みで調整OK）
     const delta = rect.top - targetTop;
     if (Math.abs(delta) > 1) {
       window.scrollBy(0, delta);
@@ -351,5 +351,6 @@ moveButtonsBottom();
 </script>
 </body>
 </html>
+
 
 
