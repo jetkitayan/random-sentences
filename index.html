@@ -7,7 +7,7 @@
     body {
       font-family: sans-serif;
       margin: 0;
-      padding: 0 0 160px 0;  /* 下固定用の余白 */
+      padding: 0 0 160px 0; /* 下配置時の余白 */
       background-color: #fafafa;
     }
 
@@ -26,7 +26,7 @@
       color: #000;
     }
 
-    /* 前回表示の見た目（サイズを同じに） */
+    /* 前回表示日時 */
     #last-shown {
       margin-top: 16px;
       font-size: 48px;
@@ -151,11 +151,11 @@
   let shownCounts   = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
   let yesMarks      = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
   let remaining     = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
-  // 追加: 前回表示時刻（ISO文字列）を英文明文キーで保持
+  // 前回表示時刻（ISO文字列）を英文明文キーで保持
   let lastShownMap  = JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
 
   let currentSentence = null;
-  let toggleMode = true; // trueならランダム表示、falseなら最少回数表示
+  let toggleMode = true; // true: ランダム / false: 最少回数
 
   console.log("📄 読み込むJSONファイル:", jsonFile);
 
@@ -338,39 +338,55 @@
       .catch(() => alert("コピーに失敗しました。"));
   }
 
-  // ✅ ボタン群を上下に移動するトグル機能（余白調整付き）
+  // ✅ ボタン群を上下に移動するトグル機能（重なり防止＆リサイズ再計算付き）
   let isButtonTop = false;
   const moveBtn = document.getElementById("moveToggleBtn");
   const buttonArea = document.getElementById("button-area");
   const contentArea = document.getElementById("content");
 
-  moveBtn.onclick = () => {
-    isButtonTop = !isButtonTop;
-
+  // 位置に応じて余白を設定
+  function applyLayoutForPosition() {
     if (isButtonTop) {
-      // 上に固定
-      buttonArea.style.top = "0";
-      buttonArea.style.bottom = "";
-      moveBtn.textContent = "⬇ Move Buttons Down";
-
-      // 文章が重ならないように上余白をボタン高さに応じて追加
-      // レイアウト反映後の高さを取得するため、一度計算を遅延
-      requestAnimationFrame(() => {
-        const buttonHeight = buttonArea.offsetHeight;
-        contentArea.style.marginTop = (buttonHeight + 40) + "px"; // ボタン高さ + 余裕
-        contentArea.style.marginBottom = "0";
-      });
+      const buttonHeight = buttonArea.getBoundingClientRect().height;
+      contentArea.style.marginTop = (buttonHeight + 40) + "px"; // 被らない余白
+      contentArea.style.marginBottom = "0";
+      document.body.style.paddingBottom = "0";
     } else {
-      // 下に戻す
-      buttonArea.style.bottom = "30px";
-      buttonArea.style.top = "";
-      moveBtn.textContent = "⬆ Move Buttons Up";
-
-      // 元の余白に戻す（上は20pxに、下はbodyのpadding-bottomに任せる）
       contentArea.style.marginTop = "20px";
       contentArea.style.marginBottom = "0";
+      document.body.style.paddingBottom = "160px"; // 初期値に合わせる
     }
+  }
+
+  function moveButtonsTop() {
+    // 余白を先に確保 → 位置切替
+    isButtonTop = true;
+    applyLayoutForPosition();
+    buttonArea.style.top = "0";
+    buttonArea.style.bottom = "";
+    moveBtn.textContent = "⬇ Move Buttons Down";
+  }
+
+  function moveButtonsBottom() {
+    isButtonTop = false;
+    applyLayoutForPosition();
+    buttonArea.style.bottom = "30px";
+    buttonArea.style.top = "";
+    moveBtn.textContent = "⬆ Move Buttons Up";
+  }
+
+  document.getElementById("moveToggleBtn").onclick = () => {
+    if (isButtonTop) moveButtonsBottom();
+    else moveButtonsTop();
   };
+
+  // リサイズ時に再計算（行の折返し等で高さが変わるため）
+  window.addEventListener("resize", () => {
+    if (isButtonTop) applyLayoutForPosition();
+  });
+
+  // 初期適用
+  applyLayoutForPosition();
 
   // ====== イベント登録 ======
   document.getElementById("showBtn").onclick = showRandom;
