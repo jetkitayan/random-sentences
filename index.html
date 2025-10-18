@@ -7,13 +7,40 @@
     body {
       font-family: sans-serif;
       margin: 0;
-      /* 下固定をやめたので下余白は不要。上余白はJSで自動調整 */
-      padding: 0;
+      padding: 0; /* 上余白はJSで自動調整 */
       background-color: #fafafa;
     }
 
+    /* 上に固定するボタン群 */
+    #button-area {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 60px 13px;           /* 必要なら小さくしてOK */
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      text-align: center;
+      z-index: 999;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    button {
+      padding: 60px 60px;           /* 必要なら 14px 22px などに */
+      font-size: 32px;              /* 必要なら 22px などに */
+      margin: 25px 5px;
+      border-radius: 16px;
+      cursor: pointer;
+    }
+
     #content {
-      margin-top: 20px;         /* ベースの余白。上部はJSでさらに加算される */
+      margin-top: 20px;             /* ベース余白（上はJSで加算） */
       padding-left: 40px;
       max-width: 900px;
     }
@@ -27,40 +54,10 @@
       color: #000;
     }
 
-    /* 前回表示日時 */
     #last-shown {
       margin-top: 16px;
       font-size: 48px;
       color: #555;
-    }
-
-    /* ボタン群を常に上固定 */
-    #button-area {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #fff;
-      border-bottom: 1px solid #ddd;   /* 上固定なので枠線は下側に */
-      padding: 60px 13px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      z-index: 999;
-    }
-
-    /* 各段のボタンを横に並べる */
-    .button-row {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-    }
-
-    button {
-      padding: 60px 60px;
-      font-size: 32px;
-      margin: 25px 5px;
-      border-radius: 16px;
-      cursor: pointer;
     }
 
     #statsArea {
@@ -73,21 +70,18 @@
       width: 100%;
     }
 
-    #statsArea th,
-    #statsArea td {
+    #statsArea th, #statsArea td {
       border: 1px solid #ccc;
       padding: 8px;
       text-align: left;
     }
 
-    /* 表示回数などの上部メタ情報 */
-    .top-meta {
-      margin-bottom: 50px;
-    }
+    .top-meta { margin-bottom: 50px; }
   </style>
 </head>
 <body>
 
+  <!-- 常に上固定のボタン群 -->
   <div id="button-area">
     <div class="button-row">
       <button id="showBtn">Show Random</button>
@@ -131,38 +125,32 @@
 
   const keyPrefix = `randomApp_${fileParam}_`;
 
-  let shownCounts   = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
-  let yesMarks      = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
-  let remaining     = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
-  let lastShownMap  = JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
+  let shownCounts = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
+  let yesMarks    = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
+  let remaining   = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
+  let lastShownMap= JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
 
   let currentSentence = null;
   let toggleMode = true; // true: ランダム / false: 最少回数
 
   // ====== 上固定のための自動余白調整 ======
-  function applyTopPadding() {
+  function applyTopPadding(extra = 40) { // 余裕を少し足す
     const buttonArea = document.getElementById('button-area');
-    // レイアウト確定後に高さ取得（フォント・改行の影響を考慮）
     requestAnimationFrame(() => {
       const h = buttonArea.getBoundingClientRect().height;
-      // ボタンの影/余裕ぶんを少し足す。大きすぎる場合は 16 にしてOK
-      document.body.style.paddingTop = (h + 40) + 'px';
+      document.body.style.paddingTop = (h + extra) + 'px';
     });
   }
-  // 初期&リサイズ時に適用
   window.addEventListener('load', applyTopPadding);
-  window.addEventListener('resize', applyTopPadding);
+  window.addEventListener('resize', () => applyTopPadding());
 
   // ====== データ読み込み ======
   fetch(jsonFile)
-    .then(response => {
-      if (!response.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`);
-      return response.json();
-    })
+    .then(r => { if (!r.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`); return r.json(); })
     .then(data => {
       allSentences = data;
       if (remaining.length === 0) remaining = allSentences.map(s => s.en);
-      applyTopPadding(); // ボタン行が折り返される場合に備えて再適用
+      applyTopPadding(); // 折り返しで高さが変わる場合に備えて
     })
     .catch(err => {
       document.getElementById("sentence-jp").innerText = "❌ JSONファイルの読み込みに失敗しました。";
@@ -170,32 +158,12 @@
     });
 
   // ====== ユーティリティ ======
-  function formatJp(dtIso) {
-    try {
-      const d = new Date(dtIso);
-      return d.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
-    } catch { return dtIso || ""; }
-  }
-
-  function humanElapsed(fromIso) {
-    try {
-      const from = new Date(fromIso).getTime();
-      const now = Date.now();
-      const diffSec = Math.floor((now - from) / 1000);
-      if (diffSec < 60) return `${diffSec}秒前`;
-      const diffMin = Math.floor(diffSec / 60);
-      if (diffMin < 60) return `${diffMin}分前`;
-      const diffHr = Math.floor(diffMin / 60);
-      if (diffHr < 24) return `${diffHr}時間前`;
-      const diffDay = Math.floor(diffHr / 24);
-      return `${diffDay}日前`;
-    } catch { return ""; }
-  }
+  const formatJp = iso => { try { return new Date(iso).toLocaleString("ja-JP",{ timeZone:"Asia/Tokyo" }); } catch { return iso||""; } };
+  function humanElapsed(iso){ try{const t=new Date(iso).getTime(),s=Math.floor((Date.now()-t)/1000); if(s<60)return`${s}秒前`; const m=Math.floor(s/60); if(m<60)return`${m}分前`; const h=Math.floor(m/60); if(h<24)return`${h}時間前`; const d=Math.floor(h/24); return`${d}日前`;}catch{return"";} }
 
   // ====== 表示処理 ======
   function showRandom() {
     const lastShownDiv = document.getElementById("last-shown");
-
     if (remaining.length === 0) {
       document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
       document.getElementById("sentence-en").innerText = "";
@@ -209,37 +177,30 @@
     if (toggleMode) {
       en = remaining[Math.floor(Math.random() * remaining.length)];
     } else {
-      let minCount = Infinity;
-      let leastShownList = [];
+      let min = Infinity, least = [];
       remaining.forEach(s => {
-        const count = shownCounts[s] || 0;
-        if (count < minCount) { minCount = count; leastShownList = [s]; }
-        else if (count === minCount) { leastShownList.push(s); }
+        const c = shownCounts[s] || 0;
+        if (c < min) { min = c; least = [s]; }
+        else if (c === min) { least.push(s); }
       });
-      en = leastShownList[Math.floor(Math.random() * leastShownList.length)];
+      en = least[Math.floor(Math.random() * least.length)];
     }
     toggleMode = !toggleMode;
 
     currentSentence = allSentences.find(s => s.en === en);
-
     shownCounts[en] = (shownCounts[en] || 0) + 1;
     localStorage.setItem(keyPrefix + "shownCounts", JSON.stringify(shownCounts));
-
-    const totalShown = Object.values(shownCounts).reduce((a, b) => a + b, 0);
+    const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
 
     document.getElementById("sentence-jp").innerHTML = `
       <div class="top-meta">${shownCounts[en]}回目 （総回数: ${totalShown}）</div>
-      <div>${currentSentence.jp}</div>
-    `;
+      <div>${currentSentence.jp}</div>`;
     document.getElementById("sentence-en").innerText = currentSentence.en;
     document.getElementById("okBtn").disabled = false;
 
     const prevIso = lastShownMap[en];
-    if (prevIso) {
-      lastShownDiv.textContent = `（${humanElapsed(prevIso)}）${formatJp(prevIso)}`;
-    } else {
-      lastShownDiv.textContent = "（初回表示）";
-    }
+    document.getElementById("last-shown").textContent =
+      prevIso ? `（${humanElapsed(prevIso)}）${formatJp(prevIso)}` : "（初回表示）";
     lastShownMap[en] = new Date().toISOString();
     localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
   }
@@ -248,13 +209,10 @@
     if (!currentSentence) return;
     yesMarks[currentSentence.en] = true;
     localStorage.setItem(keyPrefix + "yesMarks", JSON.stringify(yesMarks));
-
     remaining = remaining.filter(s => s !== currentSentence.en);
     localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remaining));
-
-    if (remaining.length > 0) {
-      showRandom();
-    } else {
+    if (remaining.length > 0) showRandom();
+    else {
       document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
       document.getElementById("sentence-en").innerText = "";
       document.getElementById("last-shown").textContent = "";
@@ -269,20 +227,13 @@
     localStorage.removeItem(keyPrefix + "remaining");
     localStorage.removeItem(keyPrefix + "yesMarks");
     localStorage.removeItem(keyPrefix + "lastShown");
-
-    shownCounts = {};
-    yesMarks = {};
-    lastShownMap = {};
-    remaining = allSentences.map(s => s.en);
-    currentSentence = null;
-
+    shownCounts = {}; yesMarks = {}; lastShownMap = {};
+    remaining = allSentences.map(s => s.en); currentSentence = null;
     document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
     document.getElementById("sentence-en").innerText = "";
     document.getElementById("last-shown").textContent = "";
     document.getElementById("showBtn").disabled = false;
     document.getElementById("statsArea").style.display = "none";
-
-    // 念のため余白再計算
     applyTopPadding();
   }
 
@@ -290,14 +241,14 @@
     const tbody = document.getElementById("statsBody");
     tbody.innerHTML = "";
     allSentences.forEach(s => {
-      const count = shownCounts[s.en] || 0;
+      const c = shownCounts[s.en] || 0;
       const yes = yesMarks[s.en] ? "●" : "○";
       tbody.innerHTML += `
         <tr>
           <td>${s.en}</td>
           <td>${s.jp}</td>
           <td style="text-align:center;">${yes}</td>
-          <td style="text-align:center;">${count}</td>
+          <td style="text-align:center;">${c}</td>
         </tr>`;
     });
     document.getElementById("statsArea").style.display = "block";
@@ -305,7 +256,7 @@
 
   function copyStats() {
     const table = document.querySelector("#statsArea table");
-    if (!table) { alert("一覧が表示されていません。"); return; }
+    if (!table) return alert("一覧が表示されていません。");
     let text = "";
     table.querySelectorAll("tr").forEach(tr => {
       const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
@@ -316,7 +267,7 @@
       .catch(()=>alert("コピーに失敗しました。"));
   }
 
-  // ====== イベント登録 ======
+  // イベント登録
   document.getElementById("showBtn").onclick = showRandom;
   document.getElementById("okBtn").onclick = confirmSentence;
   document.getElementById("resetBtn").onclick = resetData;
