@@ -274,56 +274,66 @@
       .catch(()=>alert("コピーに失敗しました。"));
   }
 
-  // ====== ボタン群トグル（スペーサー＋スクロール補正） ======
-  let isButtonTop = false;
-  const moveBtn    = document.getElementById("moveToggleBtn");
-  const buttonArea = document.getElementById("button-area");
-  const spacer     = document.getElementById("button-spacer");
-  let spacerHeight = 0; // 現在のスペーサー高さを保持
+  // ====== ボタン群トグル（スペーサー＋スクロール補正＋scrollIntoView保険） ======
+let isButtonTop = false;
+const moveBtn    = document.getElementById("moveToggleBtn");
+const buttonArea = document.getElementById("button-area");
+const spacer     = document.getElementById("button-spacer");
+const content    = document.getElementById("content");
+let spacerHeight = 0; // 現在のスペーサー高さ
 
-  function setSpacerHeightWithScroll(newHeight) {
-    const diff = newHeight - spacerHeight;   // 変化量
-    spacer.style.height = newHeight + "px";  // 高さ反映
-    if (diff !== 0) window.scrollBy(0, diff); // ★スクロール補正
-    spacerHeight = newHeight;
-  }
+function setSpacerHeightWithScroll(newHeight) {
+  const diff = newHeight - spacerHeight;
+  spacer.style.height = newHeight + "px";
+  // まず差分スクロール（対応ブラウザではこれで十分）
+  if (diff !== 0) window.scrollBy(0, diff);
+  spacerHeight = newHeight;
 
-  function moveButtonsTop() {
-    buttonArea.style.top = "0";
-    buttonArea.style.bottom = "";
-    isButtonTop = true;
-    moveBtn.textContent = "⬇ Move Buttons Down";
-    document.body.style.paddingBottom = "0";
-    // レイアウト反映後に高さ計測 → スペーサー設定 & スクロール補正
-    requestAnimationFrame(() => {
-      const h = buttonArea.getBoundingClientRect().height;
-      setSpacerHeightWithScroll(h + 40);
-    });
-  }
+  // 念のため、本文の先頭が見えていなければ見える位置までスクロール
+  // block:'nearest' なので、すでに見えている場合は動きません。
+  content.scrollIntoView({ block: "nearest" });
+}
 
-  function moveButtonsBottom() {
-    // スペーサーを先に0にしてスクロール補正（戻す）
-    setSpacerHeightWithScroll(0);
-    buttonArea.style.bottom = "30px";
-    buttonArea.style.top = "";
-    isButtonTop = false;
-    moveBtn.textContent = "⬆ Move Buttons Up";
-    document.body.style.paddingBottom = "160px";
-  }
+function moveButtonsTop() {
+  // 先に位置を上に
+  buttonArea.style.top = "0";
+  buttonArea.style.bottom = "";
+  isButtonTop = true;
+  moveBtn.textContent = "⬇ Move Buttons Down";
+  document.body.style.paddingBottom = "0";
 
-  moveBtn.onclick = () => (isButtonTop ? moveButtonsBottom() : moveButtonsTop());
-
-  // リサイズ時：上配置なら高さ再計算＋補正
-  window.addEventListener("resize", () => {
-    if (isButtonTop) {
-      const h = buttonArea.getBoundingClientRect().height;
-      setSpacerHeightWithScroll(h + 40);
-    }
+  // レイアウト反映後に高さ計測 → スペーサー設定 & スクロール補正
+  requestAnimationFrame(() => {
+    const h = buttonArea.getBoundingClientRect().height;
+    setSpacerHeightWithScroll(h + 40);
   });
+}
 
-  // 初期は下配置
-  moveButtonsBottom();
+function moveButtonsBottom() {
+  // スペーサーを先に0にして補正
+  setSpacerHeightWithScroll(0);
 
+  // 位置を下に
+  buttonArea.style.bottom = "30px";
+  buttonArea.style.top = "";
+  isButtonTop = false;
+  moveBtn.textContent = "⬆ Move Buttons Up";
+  document.body.style.paddingBottom = "160px";
+}
+
+moveBtn.onclick = () => (isButtonTop ? moveButtonsBottom() : moveButtonsTop());
+
+// リサイズ時：上配置なら高さ再計算＋補正
+window.addEventListener("resize", () => {
+  if (isButtonTop) {
+    const h = buttonArea.getBoundingClientRect().height;
+    setSpacerHeightWithScroll(h + 40);
+  }
+});
+
+// 初期は下配置
+moveButtonsBottom();
+    
   // ====== イベント登録 ======
   document.getElementById("showBtn").onclick = showRandom;
   document.getElementById("okBtn").onclick = confirmSentence;
@@ -333,3 +343,4 @@
 </script>
 </body>
 </html>
+
