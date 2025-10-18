@@ -233,9 +233,9 @@
     // ★ ここから：前回表示日時の表示 → 今回時刻の保存
     const prevIso = lastShownMap[en];
     if (prevIso) {
-      lastShownDiv.textContent = `前回の表示: ${formatJp(prevIso)}（${humanElapsed(prevIso)}）`;
+      lastShownDiv.textContent = `（${humanElapsed(prevIso)}）${formatJp(prevIso)}`;
     } else {
-      lastShownDiv.textContent = "この文章は初めて表示されました";
+      lastShownDiv.textContent = "（初回表示）";
     }
     lastShownMap[en] = new Date().toISOString();
     localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
@@ -329,4 +329,5 @@
 </script>
 </body>
 </html>
+
 
