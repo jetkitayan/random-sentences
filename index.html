@@ -288,9 +288,6 @@ text-align: left;
     // 前回時刻を更新
     lastShownMap[en] = new Date().toISOString();
     localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
-  
-    // 下段「前回～前」表記も併記（サブ表示）
-    lastShownDiv.textContent = prevIso ? `${humanElapsed(prevIso)}` : "初回表示";
   }
   
   function confirmSentence() {
@@ -400,6 +397,7 @@ text-align: left;
 </script>
 </body>
 </html>
+
 
 
 
