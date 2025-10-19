@@ -206,7 +206,7 @@ button {
   }
 
   // ====== 上固定のための自動余白調整 ======
-  function applyTopPadding(extra = 25) { // 余裕を少し足す
+  function applyTopPadding(extra = 40) { // 余裕を少し足す
     const buttonArea = document.getElementById('button-area');
     requestAnimationFrame(() => {
       const h = buttonArea.getBoundingClientRect().height;
@@ -401,6 +401,7 @@ button {
 </script>
 </body>
 </html>
+
 
 
 
