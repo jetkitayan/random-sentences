@@ -38,14 +38,19 @@
       margin: 0 25px; /* 左右に余白追加 */
     }
     
-    /* 2段目＝4ボタンを1段目と同じ幅に揃える */
+    /* 2段目＝4ボタンを1段目と同じ幅に揃えて、ボタンを少し広げる */
     #button-area .row2 {
       display: flex;
-      justify-content: space-between; /* 均等配置 */
-      margin: 0 25px;                 /* ← ★左右余白を1段目と合わせる */
+      justify-content: space-between;
+      margin: 0 25px;       /* 1段目と同じ左右余白 */
       gap: 25px;
-      flex-wrap: nowrap;              /* 折り返し禁止 */
+      flex-wrap: nowrap;    /* 折り返し禁止 */
       flex-shrink: 1;
+    }
+    
+    #button-area .row2 button {
+      flex: 1 1 200px;      /* ★ボタン幅をやや広めに確保 */
+      min-width: 180px;     /* ★最小幅を指定して安定感アップ */
     }
 
     /* 既存ボタンの見た目 */
@@ -317,6 +322,7 @@
   </script>
 </body>
 </html>
+
 
 
 
