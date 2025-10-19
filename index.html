@@ -239,7 +239,7 @@ text-align: left;
       document.getElementById("okBtn").disabled = true;
       return;
     }
-
+  
     let en;
     if (toggleMode) {
       en = remaining[Math.floor(Math.random() * remaining.length)];
@@ -253,40 +253,46 @@ text-align: left;
       en = least[Math.floor(Math.random() * least.length)];
     }
     toggleMode = !toggleMode;
-
+  
     currentSentence = allSentences.find(s => s.en === en);
-
+  
     // ---- 累計・本日カウントを更新 ----
     shownCounts[en] = (shownCounts[en] || 0) + 1;
     localStorage.setItem(keyPrefix + "shownCounts", JSON.stringify(shownCounts));
-
+  
     todayCounts[en] = (todayCounts[en] || 0) + 1;
     localStorage.setItem(todayCountsKey, JSON.stringify(todayCounts));
-
+  
     // ---- NEW: 直近1時間集計用タイムスタンプを追加 ----
     addNowTs();
-
-    // 総表示回数（累計）と、その内「今日」の回数、「直近1時間」の回数
+  
+    // 総表示回数（累計）と、その内「今日」「直近1時間」
     const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
     const totalShownToday = sumCounts(todayCounts);
     const totalShownLastHour = getLast1HourCount();
-
+  
+    // ---- NEW: 前回表示時間の取得 ----
+    const prevIso = lastShownMap[en];
+    const prevText = prevIso ? humanElapsed(prevIso) : "なし";
+  
+    // ---- 表示更新 ----
     document.getElementById("sentence-jp").innerHTML = `
       <div class="top-meta">
-        ${shownCounts[en]}回目
-        ［ ${totalShownLastHour} / ${totalShownToday} / ${totalShown} ］
+        ${shownCounts[en]}回目（前回: ${prevText}）
+        ［ 直近1時間：${totalShownLastHour} / 今日：${totalShownToday} / 総計：${totalShown} ］
       </div>
       <div>${currentSentence.jp}</div>`;
     document.getElementById("sentence-en").innerText = currentSentence.en;
     document.getElementById("okBtn").disabled = false;
-
-    const prevIso = lastShownMap[en];
-    document.getElementById("last-shown").textContent =
-      prevIso ? `${humanElapsed(prevIso)}` : "初回表示";
+  
+    // 前回時刻を更新
     lastShownMap[en] = new Date().toISOString();
     localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
+  
+    // 下段「前回～前」表記も併記（サブ表示）
+    lastShownDiv.textContent = prevIso ? `${humanElapsed(prevIso)}` : "初回表示";
   }
-
+  
   function confirmSentence() {
     if (!currentSentence) return;
     yesMarks[currentSentence.en] = true;
@@ -394,5 +400,6 @@ text-align: left;
 </script>
 </body>
 </html>
+
 
 
