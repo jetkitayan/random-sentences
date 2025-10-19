@@ -25,23 +25,25 @@
       z-index: 999;
     }
 
-    /* 1段目＝Show Random を横幅いっぱい */
+    /* 1段目＝Show Random を横幅いっぱい＋左右余白 */
     #button-area .row1 {
       display: flex;
       margin-bottom: 16px;
     }
     #button-area .row1 button {
-      flex: 1 1 auto;         /* 横いっぱい */
+      flex: 1 1 auto;
       width: 100%;
-      margin: 0 25px;         /* ← 左右に25pxの余白を追加 */
+      margin: 0 25px; /* 左右に余白追加 */
     }
-
-    /* 2段目＝4ボタンを横並び（中央寄せ） */
+    
+    /* 2段目＝4ボタンを横並び（1行固定） */
     #button-area .row2 {
       display: flex;
       justify-content: center;
       gap: 25px;
-      flex-wrap: wrap; /* 画面が狭いと自動で折り返し */
+      flex-wrap: nowrap;      /* 折り返し禁止 */
+      flex-shrink: 1;         /* 幅が狭い場合はボタンが少し縮む */
+      overflow-x: auto;       /* それでも入りきらない場合は横スクロール */
     }
 
     /* 既存ボタンの見た目 */
@@ -312,6 +314,7 @@
   </script>
 </body>
 </html>
+
 
 
 
