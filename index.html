@@ -74,7 +74,7 @@ max-width: 900px;
 #sentence-en {
 margin: 50px 0;
 line-height: 1.6;
-font-size: 48px;
+font-size: 40px;
 color: #000;
 }
 
@@ -278,7 +278,7 @@ text-align: left;
     // ---- 表示更新 ----
     document.getElementById("sentence-jp").innerHTML = `
       <div class="top-meta">
-        ${shownCounts[en]}回目(${prevText})
+        ${shownCounts[en]}回目（${prevText}）
         ［ ${totalShownLastHour} / ${totalShownToday} / ${totalShown} ］
       </div>
       <div>${currentSentence.jp}</div>`;
@@ -397,6 +397,7 @@ text-align: left;
 </script>
 </body>
 </html>
+
 
 
 
