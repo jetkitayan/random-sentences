@@ -19,28 +19,41 @@
       width: 100%;
       background: #fff;
       border-bottom: 1px solid #ddd;
-      padding: 60px 13px;           /* 必要なら小さくしてOK */
+      padding: 60px 13px; /* 必要なら調整OK */
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
       text-align: center;
       z-index: 999;
     }
 
-    .button-row {
+    /* 1段目＝Show Random を横幅いっぱい */
+    #button-area .row1 {
+      display: flex;
+      margin-bottom: 16px;
+    }
+    #button-area .row1 button {
+      flex: 1 1 auto; /* 横いっぱい */
+      width: 100%;
+    }
+
+    /* 2段目＝4ボタンを横並び（中央寄せ） */
+    #button-area .row2 {
       display: flex;
       justify-content: center;
       gap: 25px;
+      flex-wrap: wrap; /* 画面が狭いと自動で折り返し */
     }
 
+    /* 既存ボタンの見た目 */
     button {
-      padding: 60px 60px;           /* 必要なら 14px 22px などに */
-      font-size: 32px;              /* 必要なら 22px などに */
+      padding: 60px 60px;     /* 必要なら 14px 22px などに */
+      font-size: 32px;        /* 必要なら 22px などに */
       margin: 25px 5px;
       border-radius: 16px;
       cursor: pointer;
     }
 
     #content {
-      margin-top: 20px;             /* ベース余白（上はJSで加算） */
+      margin-top: 20px;       /* ベース余白（上はJSで加算） */
       padding-left: 40px;
       max-width: 900px;
     }
@@ -83,12 +96,14 @@
 
   <!-- 常に上固定のボタン群 -->
   <div id="button-area">
-    <div class="button-row">
+    <!-- 1段目：横幅いっぱいの Show Random -->
+    <div class="row1">
       <button id="showBtn">Show Random</button>
+    </div>
+    <!-- 2段目：他4ボタンを横並び -->
+    <div class="row2">
       <button id="okBtn" disabled>OK (YES)</button>
       <button id="resetBtn">Reset</button>
-    </div>
-    <div class="button-row">
       <button id="statsBtn">Show Stats</button>
       <button id="copyBtn">Copy Stats</button>
     </div>
@@ -255,37 +270,36 @@
   }
 
   function copyStats() {
-  const table = document.querySelector("#statsArea table");
-  if (!table) {
-    alert("一覧が表示されていません。");
-    return;
-  }
+    const table = document.querySelector("#statsArea table");
+    if (!table) {
+      alert("一覧が表示されていません。");
+      return;
+    }
 
-  // テーブルをテキスト化
-  let text = "";
-  table.querySelectorAll("tr").forEach(tr => {
-    const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
-    text += cols.join("@") + "\n";
-  });
+    // テーブルをテキスト化
+    let text = "";
+    table.querySelectorAll("tr").forEach(tr => {
+      const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
+      text += cols.join("@") + "\n";
+    });
 
-// クリップボードへコピー
-navigator.clipboard.writeText(text)
-  .then(() => {
-    alert("一覧をコピーしました！ これからメール作成画面を開きます。");
+    // クリップボードへコピー
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        alert("一覧をコピーしました！ これからメール作成画面を開きます。");
 
-    // 件名・本文を作成
-    const to = "jetkitayan@gmail.com"; // 必要なら gmail.com に直してください
-    const subject = "Random English Sentences - Stats";
-    // 本文は空欄にする
-    const body = "";
+        // 件名・本文を作成（本文は空欄）
+        const to = "jetkitayan@gmail.com";
+        const subject = "Random English Sentences - Stats";
+        const body = "";
 
-    // mailto でメール作成画面を開く
-    const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(mailtoUrl, "_blank"); // ページ遷移を避けて別タブで開く
-  })
-  .catch(() => {
-    alert("コピーに失敗しました。もう一度お試しください。");
-  });
+        // mailto でメール作成画面を開く
+        const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.open(mailtoUrl, "_blank");
+      })
+      .catch(() => {
+        alert("コピーに失敗しました。もう一度お試しください。");
+      });
   }
 
   // イベント登録
@@ -297,5 +311,3 @@ navigator.clipboard.writeText(text)
   </script>
 </body>
 </html>
-
-
