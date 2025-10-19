@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <title>Random English Sentences</title>
   <style>
+    * , *::before, *::after { box-sizing: border-box; } /* 幅計算の誤差防止 */
+
     body {
       font-family: sans-serif;
       margin: 0;
@@ -11,7 +13,7 @@
       background-color: #fafafa;
     }
 
-    /* 上に固定するボタン群 */
+    /* 上に固定するボタン群（左右25pxに統一） */
     #button-area {
       position: fixed;
       top: 0;
@@ -19,55 +21,51 @@
       width: 100%;
       background: #fff;
       border-bottom: 1px solid #ddd;
-      padding-top: 60px;
-      padding-bottom: 60px;
-      /* padding: 60px 13px; ← 削除 */
+      padding: 60px 25px;         /* ← 左右25pxに統一（ズレ解消） */
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
       text-align: center;
       z-index: 999;
     }
 
-    /* 1段目＝Show Random を横幅いっぱい＋左右余白 */
+    /* 1段目＝Show Random を横幅いっぱい（横マージンは使わない） */
     #button-area .row1 {
       display: flex;
       margin-bottom: 16px;
-      box-sizing: border-box;
     }
     #button-area .row1 button {
       flex: 1 1 auto;
       width: 100%;
-      margin: 0 25px; /* 左右に25px余白 */
+      margin: 0;                  /* ← 横方向のマージンを排除 */
     }
-    
-    /* 2段目＝1段目と左右幅を完全に一致させる */
+
+    /* 2段目＝1段目と左右幅を完全一致＋1行固定 */
     #button-area .row2 {
       display: flex;
       justify-content: space-between;
-      margin-left: 25px;   /* ← 左右の余白を同じに統一 */
-      margin-right: 25px;
       gap: 25px;
-      flex-wrap: nowrap;
+      flex-wrap: nowrap;          /* ← 折り返し禁止 */
       flex-shrink: 1;
-      box-sizing: border-box; /* ← ★ピクセルずれ防止 */
-    }
-    
-    #button-area .row2 button {
-      flex: 1 1 200px;
-      min-width: 180px;
-      box-sizing: border-box; /* ← ★誤差防止 */
+      margin: 0;                  /* ← 外側マージンを持たせない */
     }
 
-    /* 既存ボタンの見た目 */
+    /* 2段目の各ボタンを少し広めに */
+    #button-area .row2 button {
+      flex: 1 1 200px;            /* 目安：やや広め */
+      min-width: 180px;
+    }
+
+    /* ボタン共通（高さはここで調整） */
     button {
-      padding: 60px 50px;      /* 必要なら調整OK */
+      padding: 60px 50px;         /* 必要なら 80px 60px などに */
       font-size: 32px;
-      margin: 25px 5px;
+      font-weight: bold;          /* 太字指定（不要なら削除） */
+      margin: 25px 0;             /* ← 横方向は0に固定（ズレ要因を排除） */
       border-radius: 16px;
       cursor: pointer;
     }
 
     #content {
-      margin-top: 20px;       /* ベース余白（上はJSで加算） */
+      margin-top: 20px;           /* ベース余白（上はJSで加算） */
       padding-left: 40px;
       max-width: 900px;
     }
@@ -114,7 +112,7 @@
     <div class="row1">
       <button id="showBtn">Show Random</button>
     </div>
-    <!-- 2段目：他4ボタンを横並び -->
+    <!-- 2段目：他4ボタンを横並び（1行固定） -->
     <div class="row2">
       <button id="okBtn" disabled>OK</button>
       <button id="resetBtn">Reset</button>
@@ -325,18 +323,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
