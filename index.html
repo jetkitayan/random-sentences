@@ -244,7 +244,7 @@
     document.getElementById("sentence-jp").innerHTML = `
       <div class="top-meta">
         ${shownCounts[en]}回目
-        （本日: ${totalShownToday}／総回数: ${totalShown}）
+        （${totalShownToday}／${totalShown}）
       </div>
       <div>${currentSentence.jp}</div>`;
     document.getElementById("sentence-en").innerText = currentSentence.en;
@@ -363,3 +363,4 @@
   </script>
 </body>
 </html>
+
