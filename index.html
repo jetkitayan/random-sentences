@@ -278,7 +278,7 @@ text-align: left;
     // ---- 表示更新 ----
     document.getElementById("sentence-jp").innerHTML = `
       <div class="top-meta">
-        ${shownCounts[en]}回目［（${prevText}）${totalShownLastHour} / ${totalShownToday} / ${totalShown} ］
+        ${shownCounts[en]}回目（${prevText}）［ ${totalShownLastHour} / ${totalShownToday} / ${totalShown} ］
       </div>
       <div>${currentSentence.jp}</div>`;
     document.getElementById("sentence-en").innerText = currentSentence.en;
@@ -396,6 +396,7 @@ text-align: left;
 </script>
 </body>
 </html>
+
 
 
 
