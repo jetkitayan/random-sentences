@@ -31,26 +31,30 @@
     #button-area .row1 {
       display: flex;
       margin-bottom: 16px;
+      box-sizing: border-box;
     }
     #button-area .row1 button {
       flex: 1 1 auto;
       width: 100%;
-      margin: 0 25px; /* 左右に余白追加 */
+      margin: 0 25px; /* 左右に25px余白 */
     }
     
-    /* 2段目＝4ボタンを1段目と同じ幅に揃えて、ボタンを少し広げる */
+    /* 2段目＝1段目と左右幅を完全に一致させる */
     #button-area .row2 {
       display: flex;
       justify-content: space-between;
-      margin: 0 25px;       /* 1段目と同じ左右余白 */
+      margin-left: 25px;   /* ← 左右の余白を同じに統一 */
+      margin-right: 25px;
       gap: 25px;
-      flex-wrap: nowrap;    /* 折り返し禁止 */
+      flex-wrap: nowrap;
       flex-shrink: 1;
+      box-sizing: border-box; /* ← ★ピクセルずれ防止 */
     }
     
     #button-area .row2 button {
-      flex: 1 1 200px;      /* ★ボタン幅をやや広めに確保 */
-      min-width: 180px;     /* ★最小幅を指定して安定感アップ */
+      flex: 1 1 200px;
+      min-width: 180px;
+      box-sizing: border-box; /* ← ★誤差防止 */
     }
 
     /* 既存ボタンの見た目 */
@@ -321,6 +325,7 @@
   </script>
 </body>
 </html>
+
 
 
 
