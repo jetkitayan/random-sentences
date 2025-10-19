@@ -7,139 +7,151 @@
 * , *::before, *::after { box-sizing: border-box; } /* 幅計算の誤差防止 */
 
 body {
-font-family: sans-serif;
-margin: 0;
-padding: 0; /* 上余白はJSで自動調整 */
-background-color: #fafafa;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0; /* 上余白はJSで自動調整 */
+  background-color: #fafafa;
 }
 
 /* 上に固定するボタン群（左右25pxに統一） */
 #button-area {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-background: #fff;
-border-bottom: 1px solid #ddd;
-padding: 55px 25px;         /* ← 左右25pxに統一（ズレ解消） */
-box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-text-align: center;
-z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 55px 25px;         /* ← 左右25pxに統一（ズレ解消） */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  text-align: center;
+  z-index: 999;
 }
 
 /* 1段目＝Show Random を横幅いっぱい（横マージンは使わない） */
 #button-area .row1 {
-display: flex;
-margin-bottom: 16px;
+  display: flex;
+  margin-bottom: 16px;
 }
 #button-area .row1 button {
-flex: 1 1 auto;
-width: 100%;
-margin: 0;                  /* ← 横方向のマージンを排除 */
+  flex: 1 1 auto;
+  width: 100%;
+  margin: 0;                  /* ← 横方向のマージンを排除 */
 }
 
 /* 2段目＝1段目と左右幅を完全一致＋1行固定 */
 #button-area .row2 {
-display: flex;
-justify-content: space-between;
-gap: 25px;
-flex-wrap: nowrap;          /* ← 折り返し禁止 */
-flex-shrink: 1;
-margin: 0;                  /* ← 外側マージンを持たせない */
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: nowrap;          /* ← 折り返し禁止 */
+  flex-shrink: 1;
+  margin: 0;                  /* ← 外側マージンを持たせない */
 }
 
 /* 2段目の各ボタンを少し広めに */
 #button-area .row2 button {
-flex: 1 1 200px;            /* 目安：やや広め */
-min-width: 180px;
+  flex: 1 1 200px;            /* 目安：やや広め */
+  min-width: 180px;
 }
 
 /* ボタン共通（高さはここで調整） */
 button {
-padding: 60px 50px;         /* 必要なら 80px 60px などに */
-font-size: 38px;
-margin: 25px 0;             /* ← 横方向は0に固定（ズレ要因を排除） */
-border-radius: 16px;
-cursor: pointer;
+  padding: 60px 50px;         /* 必要なら 80px 60px などに */
+  font-size: 38px;
+  margin: 25px 0;             /* ← 横方向は0に固定（ズレ要因を排除） */
+  border-radius: 16px;
+  cursor: pointer;
 }
 
 #content {
-margin-top: 0px;           /* ベース余白（上はJSで加算） */
-padding-left: 40px;
-max-width: 900px;
+  margin-top: 0px;           /* ベース余白（上はJSで加算） */
+  padding-left: 40px;
+  max-width: 900px;
 }
 
+/* —— 3行の上下マージンを統一 —— */
+#sentence-jp,
+#sentence-en,
+#last-shown {
+  margin: 40px 0;
+}
+
+/* 文字サイズなどは従来通り（jp/enのみ共通指定） */
 .count-label,
 #sentence-jp,
 #sentence-en {
-margin: 40px 0;
-line-height: 1.6;
-font-size: 45px;
-color: #000;
+  line-height: 1.6;
+  font-size: 45px;
+  color: #000;
 }
 
+/* last-shown は大きめ表示のまま */
 #last-shown {
-margin-top: 16px;
-font-size: 48px;
-color: #000;
+  /* margin-top は削除して上の統一ルールに任せる */
+  font-size: 48px;
+  color: #000;
+}
+
+/* 一行目内の補足メタは外側マージンを持たせない（見た目の隙間はパディングで） */
+.top-meta {
+  margin: 0;          /* ← もとの 50px を撤回 */
+  padding-bottom: 8px;
 }
 
 #statsArea {
-display: none;
-padding: 20px 40px;
+  display: none;
+  padding: 20px 40px;
 }
 
 #statsArea table {
-border-collapse: collapse;
-width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 #statsArea th, #statsArea td {
-border: 1px solid #ccc;
-padding: 8px;
-text-align: left;
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
 }
-
-.top-meta { margin-bottom: 50px; }
 </style>
 </head>
 <body>
 
 <!-- 常に上固定のボタン群 -->
 <div id="button-area">
-<!-- 1段目：横幅いっぱいの Show Random -->
-<div class="row1">
-<button id="showBtn">Show Random</button>
-</div>
-<!-- 2段目：他4ボタンを横並び（1行固定） -->
-<div class="row2">
-<button id="okBtn" disabled>OK</button>
-<button id="resetBtn">Reset</button>
-<button id="statsBtn">Stats</button>
-<button id="copyBtn">Mail</button>
-</div>
+  <!-- 1段目：横幅いっぱいの Show Random -->
+  <div class="row1">
+    <button id="showBtn">Show Random</button>
+  </div>
+  <!-- 2段目：他4ボタンを横並び（1行固定） -->
+  <div class="row2">
+    <button id="okBtn" disabled>OK</button>
+    <button id="resetBtn">Reset</button>
+    <button id="statsBtn">Stats</button>
+    <button id="copyBtn">Mail</button>
+  </div>
 </div>
 
 <div id="content">
-<div id="sentence-jp">Press "Show Random" to start</div>
-<div id="sentence-en"></div>
-<div id="last-shown"></div>
+  <div id="sentence-jp">Press "Show Random" to start</div>
+  <div id="sentence-en"></div>
+  <div id="last-shown"></div>
 </div>
 
 <!-- 表示履歴一覧 -->
 <div id="statsArea">
-<h3>📊 表示履歴一覧</h3>
-<table>
-<thead>
-<tr>
-<th>日本語</th>
-<th>英語</th>
-<th>YES押下</th>
-<th>表示回数</th>
-</tr>
-</thead>
-<tbody id="statsBody"></tbody>
-</table>
+  <h3>📊 表示履歴一覧</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>日本語</th>
+        <th>英語</th>
+        <th>YES押下</th>
+        <th>表示回数</th>
+      </tr>
+    </thead>
+    <tbody id="statsBody"></tbody>
+  </table>
 </div>
 
 <script>
@@ -396,29 +408,3 @@ text-align: left;
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
