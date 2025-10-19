@@ -156,6 +156,21 @@
   let remaining   = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
   let lastShownMap= JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
 
+  // --- 今日(Asia/Tokyo)の日付キーと当日カウント（総数算出用） ---
+  function getTodayYMD() {
+    const now = new Date();
+    const tz = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+    const y = tz.getFullYear();
+    const m = String(tz.getMonth() + 1).padStart(2, '0');
+    const d = String(tz.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+  }
+  const todayKey = getTodayYMD();
+  const todayCountsKey = keyPrefix + "shownCounts_" + todayKey; // 例: randomApp_default_shownCounts_2025-10-19
+  let todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
+
+  const sumCounts = (obj) => Object.values(obj).reduce((a,b)=>a + (b||0), 0);
+
   let currentSentence = null;
   let toggleMode = true; // true: ランダム / false: 最少回数
 
@@ -214,12 +229,23 @@
     toggleMode = !toggleMode;
 
     currentSentence = allSentences.find(s => s.en === en);
+
+    // ---- 累計・本日カウント（総表示数のための日別合算）を更新 ----
     shownCounts[en] = (shownCounts[en] || 0) + 1;
     localStorage.setItem(keyPrefix + "shownCounts", JSON.stringify(shownCounts));
+
+    todayCounts[en] = (todayCounts[en] || 0) + 1;
+    localStorage.setItem(todayCountsKey, JSON.stringify(todayCounts));
+
+    // 総表示回数（累計）と、その内「今日」の回数
     const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
+    const totalShownToday = sumCounts(todayCounts);
 
     document.getElementById("sentence-jp").innerHTML = `
-      <div class="top-meta">${shownCounts[en]}回目 （総回数: ${totalShown}）</div>
+      <div class="top-meta">
+        ${shownCounts[en]}回目
+        （本日: ${totalShownToday}／総回数: ${totalShown}）
+      </div>
       <div>${currentSentence.jp}</div>`;
     document.getElementById("sentence-en").innerText = currentSentence.en;
     document.getElementById("okBtn").disabled = false;
@@ -247,13 +273,28 @@
     }
   }
 
+  // --- 当日カウント用キーも含めて全削除 ---
+  function clearDailyCounts() {
+    const prefix = keyPrefix + "shownCounts_";
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(prefix)) {
+        localStorage.removeItem(k);
+      }
+    }
+  }
+
   function resetData() {
     if (!confirm("Reset all data?")) return;
     localStorage.removeItem(keyPrefix + "shownCounts");
     localStorage.removeItem(keyPrefix + "remaining");
     localStorage.removeItem(keyPrefix + "yesMarks");
     localStorage.removeItem(keyPrefix + "lastShown");
+    clearDailyCounts(); // ★日別カウント全削除
+
     shownCounts = {}; yesMarks = {}; lastShownMap = {};
+    todayCounts = {}; localStorage.removeItem(todayCountsKey);
+
     remaining = allSentences.map(s => s.en); currentSentence = null;
     document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
     document.getElementById("sentence-en").innerText = "";
@@ -322,6 +363,3 @@
   </script>
 </body>
 </html>
-
-
-
