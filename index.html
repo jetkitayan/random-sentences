@@ -33,24 +33,6 @@ body {
   z-index: 999;
 }
 
-/* 擬似要素で二重線を描く（完全カスタム） */
-#button-area::before,
-#button-area::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: var(--double-line-thickness);
-  background: var(--double-line-color);
-  pointer-events: none; /* クリックを邪魔しない */
-}
-#button-area::before {
-  bottom: calc(var(--double-line-thickness) + var(--double-line-gap)); /* 上の線 */
-}
-#button-area::after {
-  bottom: 0; /* 下の線 */
-}
-
 /* 1段目＝Show Random を横幅いっぱい（横マージンは使わない） */
 #button-area .row1 {
   display: flex;
@@ -428,6 +410,7 @@ button {
 </script>
 </body>
 </html>
+
 
 
 
