@@ -334,7 +334,7 @@ button {
   }
 
   function resetData() {
-    if (!confirm("Reset all data?")) return;
+    if (!confirm("Reset?")) return;
     localStorage.removeItem(keyPrefix + "shownCounts");
     localStorage.removeItem(keyPrefix + "remaining");
     localStorage.removeItem(keyPrefix + "yesMarks");
@@ -415,6 +415,7 @@ button {
 </script>
 </body>
 </html>
+
 
 
 
