@@ -334,7 +334,7 @@ button {
   }
 
   function resetData() {
-    if (!confirm("Reset?")) return;
+    if (!confirm("Reset？")) return;
     localStorage.removeItem(keyPrefix + "shownCounts");
     localStorage.removeItem(keyPrefix + "remaining");
     localStorage.removeItem(keyPrefix + "yesMarks");
@@ -405,7 +405,7 @@ button {
   document.getElementById("showBtn").onclick = showRandom;
   document.getElementById("okBtn").onclick = () => {
     if (!currentSentence) return;
-    if (confirm("OK?")) {
+    if (confirm("OK？")) {
       confirmSentence();
     }
   };
@@ -415,6 +415,7 @@ button {
 </script>
 </body>
 </html>
+
 
 
 
