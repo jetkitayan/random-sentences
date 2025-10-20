@@ -403,13 +403,19 @@ button {
 
   // イベント登録
   document.getElementById("showBtn").onclick = showRandom;
-  document.getElementById("okBtn").onclick = confirmSentence;
+  document.getElementById("okBtn").onclick = () => {
+    if (!currentSentence) return;
+    if (confirm("OK処理して良いですか？")) {
+      confirmSentence();
+    }
+  };
   document.getElementById("resetBtn").onclick = resetData;
   document.getElementById("statsBtn").onclick = showStats;
   document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
