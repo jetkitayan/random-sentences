@@ -211,10 +211,18 @@ button {
     arr = arr.filter(t => typeof t === "number" && t >= keepAfter);
     saveTs(arr);
   }
-  function getLast1HourCount() {
+
+  // ====== 直近1時間/5分 集計 ======
+  function getLastMinutesCount(min) {
     const now = Date.now();
-    const after = now - 60 * 60 * 1000;
+    const after = now - min * 60 * 1000;
     return loadTs().filter(t => t >= after).length;
+  }
+  function getLast1HourCount() {           // 既存互換
+    return getLastMinutesCount(60);
+  }
+  function getLast5MinCount() {            // ★ 新規
+    return getLastMinutesCount(5);
   }
 
   // ====== 上固定のための自動余白調整 ======
@@ -415,6 +423,7 @@ button {
 </script>
 </body>
 </html>
+
 
 
 
