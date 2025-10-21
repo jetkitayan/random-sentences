@@ -291,10 +291,11 @@ button {
     // ---- 直近1時間集計用タイムスタンプを追加 ----
     addNowTs();
 
-    // 総表示回数（累計）と、その内「今日」「直近1時間」
+    // 総表示回数（累計）と、その内「今日」「直近1時間」「直近5分」
     const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
     const totalShownToday = sumCounts(todayCounts);
     const totalShownLastHour = getLast1HourCount();
+    const totalShownLast5Min = getLast5MinCount();   // ★ 追加
 
     // 前回表示時間の取得
     const prevIso = lastShownMap[en];
@@ -423,6 +424,7 @@ button {
 </script>
 </body>
 </html>
+
 
 
 
