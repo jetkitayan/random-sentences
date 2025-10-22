@@ -32,20 +32,32 @@ body {
   margin-right: auto;
 }
 
-/* row2を常にコンテナ幅いっぱいにする */
+/* === 上段：Show Random / ☆Only === */
 #button-area .row2 {
   display: flex;
-  width: 100%;         /* ★これが重要：縮小せず全幅を使う */
-  max-width: 900px;    /* 既に親で付けているなら不要。ここでもOK */
-  margin-left: auto;   /* 念のため中央寄せを明示 */
-  margin-right: auto;
-  gap: 0;
+  justify-content: center;
+  gap: 40px;              /* ★ 隙間を追加（好みで10〜60pxくらい調整可） */
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-/* ボタンは厳密に1/2ずつ等分 */
 #button-area .row2 button {
-  flex: 1 0 0;         /* ★等分に最適。basis=0で残り幅を均等配分 */
-  min-width: 0;        /* はみ出し防止（長い文言でも折り返し優先） */
+  flex: 0 0 48%;          /* ★ 両方とも幅を固定（gapを考慮して48%程度） */
+  min-width: 0;
+  text-align: center;
+}
+
+/* 左右の角丸を維持 */
+#showBtn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#showStarBtn {
+  border-left-width: 3px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
   
 /* === 下段：1段目（OK/☆/Reset/Stats/Mail）=== */
@@ -523,4 +535,5 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
