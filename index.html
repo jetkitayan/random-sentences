@@ -321,13 +321,13 @@ function updateStarUi(){
   const starBtn = document.getElementById("starBtn");
   if (!currentSentence) {
     starBtn.disabled = true;
-    starBtn.textContent = "☆ Star";
+    starBtn.textContent = "☆";
     return;
   }
   const en = currentSentence.en;
   const starred = !!starMarks[en];
   starBtn.disabled = false;
-  starBtn.textContent = starred ? "★ Unstar" : "☆ Star";
+  starBtn.textContent = starred ? "★" : "☆";
 }
 
 /* ========= 表示の共通処理（☆バッジ非表示版） ========= */
@@ -522,6 +522,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
