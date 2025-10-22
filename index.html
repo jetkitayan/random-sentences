@@ -20,52 +20,41 @@ body {
   left: 0;
   width: 100%;
   padding: 65px 25px 13px 25px;  /* 上 右 下 左 */
-  text-align: center;
   z-index: 999;
 }
 
-/* 両段で幅をそろえる */
-#button-area .row2,
-#button-area .row1 {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+/* ★ 1段目/2段目 共通の中央寄せコンテナ（左右パディングを考慮して幅を揃える） */
+#button-area .button-wrap {
+  width: min(900px, calc(100% - 50px)); /* 900px か 画面幅-左右25px×2 の小さい方 */
+  margin: 0 auto;                        /* 完全中央寄せ */
 }
 
 /* === 上段：2段目（Show / ☆Only）=== */
 #button-area .row2 {
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-  gap: 0;                 /* 継ぎ目なし */
-  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 左右半分 */
+  gap: 0;                         /* 継ぎ目なし */
+  width: 100%;
 }
-#button-area .row2 button {
-  flex: 1 1 50%;
-  min-width: 0;
+
+/* 継ぎ目を自然に */
+#showStarBtn {                 /* 右半分（☆ Only） */
+  border-left-width: 1px;      /* 真ん中の線が太くなりすぎないように */
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+#showBtn {                     /* 左半分（Show Random） */
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 /* === 下段：1段目（OK/☆/Reset/Stats/Mail）=== */
 #button-area .row1 {
-  display: flex;
-  justify-content: center;     /* 中央寄せ */
-  align-items: center;
-  flex-wrap: nowrap;           /* 1行固定 */
-  gap: 25px;
   margin-top: 17px;
-
-  /* ★ 中央寄せのために幅を明示し、左右autoで固定 */
-  width: fit-content;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* 各ボタンを固定幅にして整列 */
-#button-area .row1 button {
-  flex: 0 0 160px;   /* 固定幅 */
-  width: 160px;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5等分できっちり中央 */
+  gap: 25px;
+  width: 100%;
 }
 
 /* 共通ボタン（文字を水平＆垂直センター） */
@@ -85,21 +74,16 @@ button {
   text-align: center;
 }
 
-/* 上段の継ぎ目を自然に */
-#showStarBtn {                 /* 右半分（☆ Only） */
-  border-left-width: 1px;      /* 真ん中の線が太くなりすぎないように */
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-#showBtn {                     /* 左半分（Show Random） */
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
+/* 旧シングル時代の高さ指定はそのまま利用 */
+#showBtn { padding: 80px; }
 
+/* コンテンツ幅もボタンと合わせておくと見た目が揃う（任意） */
 #content {
   margin-top: -15px;  /* ベース余白（上はJSで加算） */
-  padding-left: 40px;
-  max-width: 900px;
+  max-width: min(900px, calc(100% - 50px));
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;    /* 左余白は不要になるため0に */
 }
 
 /* —— 3行の上下マージンを統一 —— */
@@ -126,7 +110,7 @@ button {
 
 #statsArea {
   display: none;
-  padding: 20px 40px;
+  padding: 20px 0;  /* contentと同じ左右幅に合わせるので左右paddingは0 */
 }
 
 #statsArea table {
@@ -140,32 +124,33 @@ button {
   text-align: left;
 }
 
-/* 旧シングル時代の高さ指定はそのまま利用 */
-#showBtn { padding: 80px; }
-
-/* スマホ対応：折返し時も中央寄せ */
-@media (max-width: 920px) {
-  #button-area .row1 { flex-wrap: wrap; }
-  #button-area .row1 button { flex: 0 0 48%; min-width: 0; max-width: none; }
+/* スマホ対応：幅が狭いときは1段目を折り返しつつ中央 */
+@media (max-width: 720px) {
+  #button-area .row1 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>
 </head>
 <body>
 
 <div id="button-area">
-  <!-- 表示順：上段＝Show/☆Only、下段＝OKほか -->
-  <div class="row2">
-    <button id="showBtn">Show Random</button>
-    <button id="showStarBtn">☆ Only</button>
-  </div>
+  <div class="button-wrap">
+    <!-- 上段：2段目（Show / ☆Only） -->
+    <div class="row2">
+      <button id="showBtn">Show Random</button>
+      <button id="showStarBtn">☆ Only</button>
+    </div>
 
-  <div class="row1">
-    <button id="okBtn" disabled>OK</button>
-    <!-- ☆ボタンは見た目を常に「☆」固定 -->
-    <button id="starBtn" disabled>☆</button>
-    <button id="resetBtn">Reset</button>
-    <button id="statsBtn">Stats</button>
-    <button id="copyBtn">Mail</button>
+    <!-- 下段：1段目（OK/☆/Reset/Stats/Mail） -->
+    <div class="row1">
+      <button id="okBtn" disabled>OK</button>
+      <!-- ☆ボタンは見た目を常に「☆」固定 -->
+      <button id="starBtn" disabled>☆</button>
+      <button id="resetBtn">Reset</button>
+      <button id="statsBtn">Stats</button>
+      <button id="copyBtn">Mail</button>
+    </div>
   </div>
 </div>
 
@@ -349,7 +334,7 @@ function presentSentenceByEn(en){
   const totalShownLastHour = getLast1HourCount();
   const totalShownLast5Min = getLast5MinCount();
 
-  /* ☆バッジは表示しない（ご要望） */
+  /* ☆バッジは表示しない */
   document.getElementById("sentence-jp").innerHTML =
     `<div class="top-meta">
        ${newShown}回目<br>${prevText}（ ${totalShownLast5Min} / ${totalShownLastHour} / ${todayShownCached} / ${totalShownCached} ）
@@ -511,9 +496,4 @@ document.getElementById("showStarBtn").onclick = showRandomStarred;
 document.getElementById("okBtn").onclick = () => { if (!currentSentence) return; if (confirm("OK？")) confirmSentence(); };
 document.getElementById("resetBtn").onclick = resetData;
 document.getElementById("statsBtn").onclick = showStats;
-document.getElementById("copyBtn").onclick = copyStats;
-document.getElementById("starBtn").onclick = toggleStar;
-</script>
-</body>
-</html>
-
+document.get
