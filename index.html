@@ -9,68 +9,66 @@
 body {
   font-family: sans-serif;
   margin: 0;
-  padding: 0; /* 上余白はJSで自動調整 */
+  padding: 0;
   background-color: #fafafa;
 }
 
-/* 上に固定するボタン群（左右25pxに統一） */
+/* 上に固定するボタン群 */
 #button-area {
-  --double-line-color: #000;
-  --double-line-thickness: 3px;
-  --double-line-gap: 6px;
-
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  border-bottom: none;
-  padding: 65px 25px 13px 25px;  /* 上 右 下 左 */
+  padding: 65px 25px 13px 25px;
   text-align: center;
   z-index: 999;
 }
 
-/* 1段目ボタン群 */
+/* === 1段目 === */
 #button-area .row1 {
   display: flex;
-  gap: 30px;
+  justify-content: center;   /* 中央寄せ */
+  flex-wrap: nowrap;
+  gap: 25px;
   margin-bottom: 17px;
+  max-width: 900px;          /* 2段目と同じ幅に制限 */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #button-area .row1 button {
-  flex: 1 1 auto;
-  width: 100%;
-  margin: 0;
+  flex: 1 1 0;
+  min-width: 140px;
+  max-width: 170px;          /* 幅が広がりすぎない */
 }
 
-/* 2段目＝ワイドを左右1/2で分割（右が☆ Only） */
-#button-area .row2 {                 /* ★ 変更 */
+/* === 2段目 === */
+#button-area .row2 {
   display: flex;
-  justify-content: stretch;
+  justify-content: center;
   flex-wrap: nowrap;
-  gap: 0;                            /* 継ぎ目なし */
-  margin: 0;
+  margin: 0 auto;
+  max-width: 900px;          /* 1段目と同幅 */
 }
-#button-area .row2 button {          /* ★ 変更：左右1/2 */
+#button-area .row2 button {
   flex: 1 1 50%;
   min-width: 0;
 }
 
-/* ボタン共通（高さはここで調整） */
+/* 共通ボタン */
 button {
   padding: 45px 50px;
   font-size: 40px;
   color: #000;
-  margin: 13px 0;
   border-radius: 16px;
-  cursor: pointer;
   border: 3px solid #000;
-  background: #fff;
   background-color: #d9d9d9;
+  cursor: pointer;
 }
 
-/* 継ぎ目が太く見えないように右側だけ左ボーダーを共有風に */
-#showStarBtn {                       /* ★ 追加：右半分の境界調整 */
-  border-left-width: 1px;            /* 真ん中の線が太くなりすぎないように */
+/* 2段目の継ぎ目を自然に */
+#showStarBtn {
+  border-left-width: 1px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -85,14 +83,10 @@ button {
   max-width: 900px;
 }
 
-/* —— 3行の上下マージンを統一 —— */
-#sentence-jp,
-#sentence-en,
-#last-shown {
+#sentence-jp, #sentence-en, #last-shown {
   margin: 40px 0;
 }
 
-/* 文字サイズなどは従来通り（jp/enのみ共通指定） */
 .count-label,
 #sentence-jp,
 #sentence-en {
@@ -101,7 +95,6 @@ button {
   color: #000;
 }
 
-/* 1行目内の補足メタの下余白で1行目と2行目の間隔を作る */
 .top-meta {
   margin: 0;
   padding-bottom: 46px;
@@ -111,27 +104,20 @@ button {
   display: none;
   padding: 20px 40px;
 }
-
 #statsArea table {
   border-collapse: collapse;
   width: 100%;
 }
-
 #statsArea th, #statsArea td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
 }
-
-/* シングル時代の余剰指定は残してOK（高さだけ使われる） */
-#showBtn { padding: 80px; }
 </style>
 </head>
 <body>
 
-<!-- 常に上固定のボタン群 -->
 <div id="button-area">
-  <!-- 1段目：5ボタンを横並び（☆追加） -->
   <div class="row1">
     <button id="okBtn" disabled>OK</button>
     <button id="starBtn" disabled>☆ Star</button>
@@ -139,10 +125,10 @@ button {
     <button id="statsBtn">Stats</button>
     <button id="copyBtn">Mail</button>
   </div>
-  <!-- 2段目：横幅いっぱいの Show Random を左右1/2に分割 -->
+
   <div class="row2">
     <button id="showBtn">Show Random</button>
-    <button id="showStarBtn">☆ Only</button> <!-- ★ 追加：右半分 -->
+    <button id="showStarBtn">☆ Only</button>
   </div>
 </div>
 
@@ -152,17 +138,12 @@ button {
   <div id="last-shown"></div>
 </div>
 
-<!-- 表示履歴一覧 -->
 <div id="statsArea">
   <h3>📊 表示履歴一覧</h3>
   <table>
     <thead>
       <tr>
-        <th>日本語</th>
-        <th>英語</th>
-        <th>YES押下</th>
-        <th>☆</th>
-        <th>表示回数</th>
+        <th>日本語</th><th>英語</th><th>YES押下</th><th>☆</th><th>表示回数</th>
       </tr>
     </thead>
     <tbody id="statsBody"></tbody>
@@ -170,306 +151,50 @@ button {
 </div>
 
 <script>
-  // ====== 初期化 ======
-  let allSentences = [];
-  const params = new URLSearchParams(window.location.search);
-  const fileParam = params.get("file") || "default";
-  const jsonFile = `${fileParam}.json`;
-
-  const keyPrefix = `randomApp_${fileParam}_`;
-
-  let shownCounts = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
-  let yesMarks    = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
-  let starMarks   = JSON.parse(localStorage.getItem(keyPrefix + "starMarks")) || {}; // ☆状態
-  let remaining   = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
-  let lastShownMap= JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
-
-  // --- 今日(Asia/Tokyo) の日付キーと当日カウント（総数算出用） ---
-  function getTodayYMD() {
-    const now = new Date();
-    const tz = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
-    const y = tz.getFullYear();
-    const m = String(tz.getMonth() + 1).padStart(2, '0');
-    const d = String(tz.getDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
-  }
-  const todayKey = getTodayYMD();
-  const todayCountsKey = keyPrefix + "shownCounts_" + todayKey;
-  let todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
-
-  const sumCounts = (obj) => Object.values(obj).reduce((a,b)=>a + (b||0), 0);
-
-  let currentSentence = null;
-  let toggleMode = true; // true: ランダム / false: 最少回数
-
-  // ====== 直近1時間集計用タイムスタンプ配列 ======
-  const hourTsKey = keyPrefix + "shownTimestamps";
-  function loadTs() {
-    try { const arr = JSON.parse(localStorage.getItem(hourTsKey)); return Array.isArray(arr) ? arr : []; }
-    catch { return []; }
-  }
-  function saveTs(arr) { localStorage.setItem(hourTsKey, JSON.stringify(arr)); }
-  function addNowTs() {
-    const now = Date.now();
-    let arr = loadTs();
-    arr.push(now);
-    const keepAfter = now - 24 * 60 * 60 * 1000;
-    arr = arr.filter(t => typeof t === "number" && t >= keepAfter);
-    saveTs(arr);
-  }
-
-  // ====== 直近1時間/5分 集計 ======
-  function getLastMinutesCount(min) {
-    const now = Date.now();
-    const after = now - min * 60 * 1000;
-    return loadTs().filter(t => t >= after).length;
-  }
-  function getLast1HourCount() { return getLastMinutesCount(60); }
-  function getLast5MinCount() { return getLastMinutesCount(5); }
-
-  // ====== 上固定のための自動余白調整 ======
-  function applyTopPadding(extra = 35) {
-    const buttonArea = document.getElementById('button-area');
-    requestAnimationFrame(() => {
-      const h = buttonArea.getBoundingClientRect().height;
-      document.body.style.paddingTop = (h + extra) + 'px';
-    });
-  }
-  window.addEventListener('load', applyTopPadding);
-  window.addEventListener('resize', () => applyTopPadding());
-
-  // ====== データ読み込み ======
-  fetch(jsonFile)
-    .then(r => { if (!r.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`); return r.json(); })
-    .then(data => {
-      allSentences = data;
-      if (remaining.length === 0) remaining = allSentences.map(s => s.en);
-      applyTopPadding();
-    })
-    .catch(err => {
-      document.getElementById("sentence-jp").innerText = "❌ JSONファイルの読み込みに失敗しました。";
-      document.getElementById("sentence-en").innerText = err.message;
-    });
-
-  // ====== ユーティリティ ======
-  function humanElapsed(iso){
-    try{
-      const t=new Date(iso).getTime(),s=Math.floor((Date.now()-t)/1000);
-      if(s<60)return`${s}秒前`;
-      const m=Math.floor(s/60); if(m<60)return`${m}分前`;
-      const h=Math.floor(m/60); if(h<24)return`${h}時間前`;
-      const d=Math.floor(h/24); return`${d}日前`;
-    }catch{return"";}
-  }
-
-  // ====== スターUI反映 ======
-  function updateStarUi() {
-    const starBtn = document.getElementById("starBtn");
-    if (!currentSentence) {
-      starBtn.disabled = true;
-      starBtn.textContent = "☆ Star";
-      return;
-    }
-    const en = currentSentence.en;
-    const starred = !!starMarks[en];
-    starBtn.disabled = false;
-    starBtn.textContent = starred ? "★ Unstar" : "☆ Star";
-  }
-
-  // ====== 共通：実際に表示する処理 ======
-  function presentSentenceByEn(en) {                              // ★ 追加：共通化
-    const lastShownDiv = document.getElementById("last-shown");
-    currentSentence = allSentences.find(s => s.en === en);
-    if (!currentSentence) return;
-
-    // ---- カウント更新 ----
-    shownCounts[en] = (shownCounts[en] || 0) + 1;
-    localStorage.setItem(keyPrefix + "shownCounts", JSON.stringify(shownCounts));
-    todayCounts[en] = (todayCounts[en] || 0) + 1;
-    localStorage.setItem(todayCountsKey, JSON.stringify(todayCounts));
-    addNowTs();
-
-    const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
-    const totalShownToday = sumCounts(todayCounts);
-    const totalShownLastHour = getLast1HourCount();
-    const totalShownLast5Min = getLast5MinCount();
-
-    const prevIso = lastShownMap[en];
-    const prevText = prevIso ? humanElapsed(prevIso) : "なし";
-
-    const starred = !!starMarks[en];
-    const starBadge = starred ? "★" : "☆";
-
-    document.getElementById("sentence-jp").innerHTML = `
-      <div class="top-meta">
-        ${starBadge}　${shownCounts[en]}回目<br>${prevText}（ ${totalShownLast5Min} / ${totalShownLastHour} / ${totalShownToday} / ${totalShown} ）
-      </div>
-      <div>${currentSentence.jp}</div>`;
-    document.getElementById("sentence-en").innerText = currentSentence.en;
-
-    document.getElementById("okBtn").disabled = false;
-    lastShownMap[en] = new Date().toISOString();
-    localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
-    updateStarUi();
-  }
-
-  // ====== 従来：全体から表示 ======
-  function showRandom() {
-    const lastShownDiv = document.getElementById("last-shown");
-    if (remaining.length === 0) {
-      document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
-      document.getElementById("sentence-en").innerText = "";
-      lastShownDiv.textContent = "";
-      document.getElementById("showBtn").disabled = true;
-      document.getElementById("okBtn").disabled = true;
-      document.getElementById("starBtn").disabled = true;
-      return;
-    }
-
-    let en;
-    if (toggleMode) {
-      en = remaining[Math.floor(Math.random() * remaining.length)];
-    } else {
-      let min = Infinity, least = [];
-      remaining.forEach(s => {
-        const c = shownCounts[s] || 0;
-        if (c < min) { min = c; least = [s]; }
-        else if (c === min) { least.push(s); }
-      });
-      en = least[Math.floor(Math.random() * least.length)];
-    }
-    toggleMode = !toggleMode;
-
-    presentSentenceByEn(en);
-  }
-
-  // ====== ★ 新規：☆のみからランダム表示 ======
-  function showRandomStarred() {
-    // 優先：remaining ∩ starred
-    const starredRemaining = remaining.filter(en => !!starMarks[en]);
-    let pool = starredRemaining;
-    if (pool.length === 0) {
-      // 代替：全☆（OK済みでも学び直ししたいケースに対応）
-      pool = Object.keys(starMarks).filter(en => starMarks[en]);
-    }
-    if (pool.length === 0) {
-      alert("☆が付いた英文がありません。先に『☆ Star』でお気に入り登録してください。");
-      return;
-    }
-    const en = pool[Math.floor(Math.random() * pool.length)];
-    presentSentenceByEn(en);
-  }
-
-  function confirmSentence() {
-    if (!currentSentence) return;
-    yesMarks[currentSentence.en] = true;
-    localStorage.setItem(keyPrefix + "yesMarks", JSON.stringify(yesMarks));
-    remaining = remaining.filter(s => s !== currentSentence.en);
-    localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remaining));
-    if (remaining.length > 0) showRandom();
-    else {
-      document.getElementById("sentence-jp").innerText = "すべての英文を表示しました！";
-      document.getElementById("sentence-en").innerText = "";
-      document.getElementById("last-shown").textContent = "";
-      document.getElementById("showBtn").disabled = true;
-      document.getElementById("okBtn").disabled = true;
-      document.getElementById("starBtn").disabled = true;
-    }
-  }
-
-  // ☆のトグル
-  function toggleStar() {
-    if (!currentSentence) return;
-    const en = currentSentence.en;
-    const now = !starMarks[en];
-    starMarks[en] = now;
-    localStorage.setItem(keyPrefix + "starMarks", JSON.stringify(starMarks));
-    updateStarUi();
-    // 上部バッジも差し替え
-    const jpDiv = document.getElementById("sentence-jp");
-    jpDiv.innerHTML = jpDiv.innerHTML.replace(/(<div class="top-meta">\s*)([★☆])/, (_, a) => a + (now ? "★" : "☆"));
-  }
-
-  // 当日カウント全削除
-  function clearDailyCounts() {
-    const prefix = keyPrefix + "shownCounts_";
-    for (let i = localStorage.length - 1; i >= 0; i--) {
-      const k = localStorage.key(i);
-      if (k && k.startsWith(prefix)) localStorage.removeItem(k);
-    }
-  }
-
-  function resetData() {
-    if (!confirm("Reset？")) return;
-    localStorage.removeItem(keyPrefix + "shownCounts");
-    localStorage.removeItem(keyPrefix + "remaining");
-    localStorage.removeItem(keyPrefix + "yesMarks");
-    localStorage.removeItem(keyPrefix + "lastShown");
-    localStorage.removeItem(keyPrefix + "starMarks");
-    clearDailyCounts();
-    localStorage.removeItem(hourTsKey);
-
-    shownCounts = {}; yesMarks = {}; lastShownMap = {}; starMarks = {};
-    todayCounts = {}; localStorage.removeItem(todayCountsKey);
-
-    remaining = allSentences.map(s => s.en); currentSentence = null;
-    document.getElementById("sentence-jp").innerText = "Press 'Show Random' to start";
-    document.getElementById("sentence-en").innerText = "";
-    document.getElementById("last-shown").textContent = "";
-    document.getElementById("showBtn").disabled = false;
-    document.getElementById("okBtn").disabled = true;
-    document.getElementById("starBtn").disabled = true;
-    document.getElementById("statsArea").style.display = "none";
-    applyTopPadding();
-  }
-
-  function showStats() {
-    const tbody = document.getElementById("statsBody");
-    tbody.innerHTML = "";
-    allSentences.forEach(s => {
-      const c = shownCounts[s.en] || 0;
-      const yes = yesMarks[s.en] ? "●" : "○";
-      const star = starMarks[s.en] ? "★" : "☆";
-      tbody.innerHTML += `
-        <tr>
-          <td>${s.en}</td>
-          <td>${s.jp}</td>
-          <td style="text-align:center;">${yes}</td>
-          <td style="text-align:center;">${star}</td>
-          <td style="text-align:center;">${c}</td>
-        </tr>`;
-    });
-    document.getElementById("statsArea").style.display = "block";
-  }
-
-  function copyStats() {
-    const table = document.querySelector("#statsArea table");
-    if (!table) { alert("一覧が表示されていません。"); return; }
-    let text = "";
-    table.querySelectorAll("tr").forEach(tr => {
-      const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
-      text += cols.join("@") + "\n";
-    });
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        alert("一覧をコピーしました！ これからメール作成画面を開きます。");
-        const to = "jetkitayan@gmail.com";
-        const subject = "Random English Sentences - Stats";
-        const body = "";
-        const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.open(mailtoUrl, "_blank");
-      })
-      .catch(() => alert("コピーに失敗しました。もう一度お試しください。"));
-  }
-
-  // イベント登録
-  document.getElementById("showBtn").onclick = showRandom;
-  document.getElementById("showStarBtn").onclick = showRandomStarred; // ★ 追加：右半分
-  document.getElementById("okBtn").onclick = () => { if (!currentSentence) return; if (confirm("OK？")) { confirmSentence(); } };
-  document.getElementById("resetBtn").onclick = resetData;
-  document.getElementById("statsBtn").onclick = showStats;
-  document.getElementById("copyBtn").onclick = copyStats;
-  document.getElementById("starBtn").onclick = toggleStar;
+// ====== 既存JS（前回版の機能含む） ======
+let allSentences=[],shownCounts={},yesMarks={},starMarks={},remaining=[],lastShownMap={};
+const params=new URLSearchParams(window.location.search);
+const fileParam=params.get("file")||"default";
+const jsonFile=`${fileParam}.json`;
+const keyPrefix=`randomApp_${fileParam}_`;
+shownCounts=JSON.parse(localStorage.getItem(keyPrefix+"shownCounts"))||{};
+yesMarks=JSON.parse(localStorage.getItem(keyPrefix+"yesMarks"))||{};
+starMarks=JSON.parse(localStorage.getItem(keyPrefix+"starMarks"))||{};
+remaining=JSON.parse(localStorage.getItem(keyPrefix+"remaining"))||[];
+lastShownMap=JSON.parse(localStorage.getItem(keyPrefix+"lastShown"))||{};
+let lastShowMode="all";
+const todayKey=(new Date()).toISOString().slice(0,10);
+const todayCountsKey=keyPrefix+"shownCounts_"+todayKey;
+let todayCounts=JSON.parse(localStorage.getItem(todayCountsKey))||{};
+const sumCounts=o=>Object.values(o).reduce((a,b)=>a+(b||0),0);
+let currentSentence=null,toggleMode=true;
+const hourTsKey=keyPrefix+"shownTimestamps";
+function loadTs(){try{return JSON.parse(localStorage.getItem(hourTsKey))||[]}catch{return[]}}
+function saveTs(a){localStorage.setItem(hourTsKey,JSON.stringify(a))}
+function addNowTs(){const n=Date.now();let a=loadTs();a.push(n);a=a.filter(t=>t>=n-86400000);saveTs(a)}
+function getLastMinutesCount(m){const n=Date.now(),a=n-m*60000;return loadTs().filter(t=>t>=a).length}
+function getLast1HourCount(){return getLastMinutesCount(60)};function getLast5MinCount(){return getLastMinutesCount(5)}
+function applyTopPadding(extra=35){const b=document.getElementById('button-area');requestAnimationFrame(()=>{const h=b.getBoundingClientRect().height;document.body.style.paddingTop=(h+extra)+'px';});}
+window.addEventListener('load',applyTopPadding);window.addEventListener('resize',()=>applyTopPadding());
+fetch(jsonFile).then(r=>{if(!r.ok)throw new Error("ファイルが見つかりません: "+jsonFile);return r.json()}).then(d=>{allSentences=d;if(remaining.length===0)remaining=allSentences.map(s=>s.en);applyTopPadding();}).catch(e=>{document.getElementById("sentence-jp").innerText="❌ JSON読み込み失敗";document.getElementById("sentence-en").innerText=e.message;});
+function humanElapsed(i){try{const t=new Date(i).getTime(),s=Math.floor((Date.now()-t)/1000);if(s<60)return`${s}秒前`;const m=Math.floor(s/60);if(m<60)return`${m}分前`;const h=Math.floor(m/60);if(h<24)return`${h}時間前`;return`${Math.floor(h/24)}日前`}catch{return""}}
+function pickRandom(p,e){if(!p.length)return null;if(p.length===1)return p[0];let n;do{n=p[Math.floor(Math.random()*p.length)]}while(n===e);return n}
+function updateStarUi(){const b=document.getElementById("starBtn");if(!currentSentence){b.disabled=true;b.textContent="☆ Star";return}const e=currentSentence.en,s=!!starMarks[e];b.disabled=false;b.textContent=s?"★ Unstar":"☆ Star";}
+function presentSentenceByEn(en){currentSentence=allSentences.find(s=>s.en===en);if(!currentSentence)return;shownCounts[en]=(shownCounts[en]||0)+1;localStorage.setItem(keyPrefix+"shownCounts",JSON.stringify(shownCounts));todayCounts[en]=(todayCounts[en]||0)+1;localStorage.setItem(todayCountsKey,JSON.stringify(todayCounts));addNowTs();const totalShown=sumCounts(shownCounts),today=sumCounts(todayCounts),h1=getLast1HourCount(),h5=getLast5MinCount(),p=lastShownMap[en],pt=p?humanElapsed(p):"なし",star=starMarks[en]?"★":"☆";document.getElementById("sentence-jp").innerHTML=`<div class="top-meta">${star}　${shownCounts[en]}回目<br>${pt}（ ${h5} / ${h1} / ${today} / ${totalShown} ）</div><div>${currentSentence.jp}</div>`;document.getElementById("sentence-en").innerText=currentSentence.en;document.getElementById("okBtn").disabled=false;lastShownMap[en]=new Date().toISOString();localStorage.setItem(keyPrefix+"lastShown",JSON.stringify(lastShownMap));updateStarUi();}
+function showRandom(){if(remaining.length===0)return;let en;if(toggleMode){en=pickRandom(remaining,currentSentence?.en)}else{let min=Infinity,least=[];remaining.forEach(s=>{const c=shownCounts[s]||0;if(c<min){min=c;least=[s]}else if(c===min){least.push(s)}});en=pickRandom(least,currentSentence?.en)}toggleMode=!toggleMode;lastShowMode="all";presentSentenceByEn(en);}
+function showRandomStarred(){let pool=remaining.filter(e=>!!starMarks[e]);if(pool.length===0)pool=Object.keys(starMarks).filter(e=>starMarks[e]);if(pool.length===0){alert("☆が付いた英文がありません。");return}const en=pickRandom(pool,currentSentence?.en);lastShowMode="star";presentSentenceByEn(en);}
+function confirmSentence(){if(!currentSentence)return;yesMarks[currentSentence.en]=true;localStorage.setItem(keyPrefix+"yesMarks",JSON.stringify(yesMarks));remaining=remaining.filter(s=>s!==currentSentence.en);localStorage.setItem(keyPrefix+"remaining",JSON.stringify(remaining));remaining.length>0?showRandom():alert("完了！");}
+function toggleStar(){if(!currentSentence)return;const e=currentSentence.en,n=!starMarks[e];starMarks[e]=n;localStorage.setItem(keyPrefix+"starMarks",JSON.stringify(starMarks));updateStarUi();lastShowMode==="star"?showRandomStarred():showRandom();}
+function resetData(){if(!confirm("Reset？"))return;localStorage.clear();location.reload();}
+function showStats(){const tb=document.getElementById("statsBody");tb.innerHTML="";allSentences.forEach(s=>{const c=shownCounts[s.en]||0,yes=yesMarks[s.en]?"●":"○",star=starMarks[s.en]?"★":"☆";tb.innerHTML+=`<tr><td>${s.en}</td><td>${s.jp}</td><td style='text-align:center;'>${yes}</td><td style='text-align:center;'>${star}</td><td style='text-align:center;'>${c}</td></tr>`});document.getElementById("statsArea").style.display="block";}
+function copyStats(){navigator.clipboard.writeText(document.getElementById("statsBody").innerText).then(()=>alert("コピーしました！"));}
+document.getElementById("showBtn").onclick=showRandom;
+document.getElementById("showStarBtn").onclick=showRandomStarred;
+document.getElementById("okBtn").onclick=()=>{if(confirm("OK？"))confirmSentence()};
+document.getElementById("resetBtn").onclick=resetData;
+document.getElementById("statsBtn").onclick=showStats;
+document.getElementById("copyBtn").onclick=copyStats;
+document.getElementById("starBtn").onclick=toggleStar;
 </script>
 </body>
 </html>
