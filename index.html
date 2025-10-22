@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Random English Sentences</title>
 <style>
 * , *::before, *::after { box-sizing: border-box; }
@@ -21,20 +22,25 @@ body {
   width: 100%;
   padding: 65px 25px 13px 25px;  /* 上 右 下 左 */
   z-index: 999;
+  background: #fafafa;          /* 背景を敷いて重なり時の誤クリックを防止 */
 }
 
-/* ★ 1段目/2段目 共通の中央寄せコンテナ（左右パディングを考慮して幅を揃える） */
-#button-area .button-wrap {
-  width: min(900px, calc(100% - 50px)); /* 900px か 画面幅-左右25px×2 の小さい方 */
-  margin: 0 auto;                        /* 完全中央寄せ */
+/* 中央寄せの共通ラッパー（幅=100%でmax 900px） */
+#button-area .wrap {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 /* === 上段：2段目（Show / ☆Only）=== */
 #button-area .row2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 左右半分 */
-  gap: 0;                         /* 継ぎ目なし */
+  display: flex;
+  gap: 0;                 /* 継ぎ目なし */
   width: 100%;
+}
+#button-area .row2 button {
+  flex: 1 1 0;            /* 左右1/2ずつ均等 */
+  min-width: 0;           /* はみ出し防止（長いテキストでも折り返し優先） */
 }
 
 /* 継ぎ目を自然に */
@@ -51,16 +57,23 @@ body {
 /* === 下段：1段目（OK/☆/Reset/Stats/Mail）=== */
 #button-area .row1 {
   margin-top: 17px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5等分できっちり中央 */
+  display: flex;
+  justify-content: center; /* 中央寄せ */
+  align-items: stretch;
   gap: 25px;
   width: 100%;
+}
+#button-area .row1 button {
+  flex: 0 1 160px;        /* 基本160px、狭い時は少し縮む */
+  max-width: 160px;
+  min-width: 120px;       /* ちょい縮んでも崩れにくくする */
+  text-align: center;
 }
 
 /* 共通ボタン（文字を水平＆垂直センター） */
 button {
   padding: 45px 50px;
-  font-size: 40px;
+  font-size: clamp(24px, 5vw, 40px);  /* 画面に合わせて自動縮小 */
   color: #000;
   border-radius: 16px;
   cursor: pointer;
@@ -74,16 +87,17 @@ button {
   text-align: center;
 }
 
-/* 旧シングル時代の高さ指定はそのまま利用 */
+/* 旧シングル時代の高さ指定はそのまま利用（縦だけ） */
 #showBtn { padding: 80px; }
 
-/* コンテンツ幅もボタンと合わせておくと見た目が揃う（任意） */
+/* コンテンツ幅もボタンと合わせると見た目が揃う */
 #content {
   margin-top: -15px;  /* ベース余白（上はJSで加算） */
-  max-width: min(900px, calc(100% - 50px));
+  width: 100%;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 0;    /* 左余白は不要になるため0に */
+  padding: 0 0;       /* 左右はwrap側で中央寄せ */
 }
 
 /* —— 3行の上下マージンを統一 —— */
@@ -110,7 +124,10 @@ button {
 
 #statsArea {
   display: none;
-  padding: 20px 0;  /* contentと同じ左右幅に合わせるので左右paddingは0 */
+  padding: 20px 0;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 #statsArea table {
@@ -124,10 +141,16 @@ button {
   text-align: left;
 }
 
-/* スマホ対応：幅が狭いときは1段目を折り返しつつ中央 */
+/* スマホ対応：極端に狭い時は1段目を折り返し */
 @media (max-width: 720px) {
   #button-area .row1 {
-    grid-template-columns: repeat(2, 1fr);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #button-area .row1 button {
+    flex: 1 1 45%;
+    min-width: 0;
+    max-width: none;
   }
 }
 </style>
@@ -135,7 +158,7 @@ button {
 <body>
 
 <div id="button-area">
-  <div class="button-wrap">
+  <div class="wrap">
     <!-- 上段：2段目（Show / ☆Only） -->
     <div class="row2">
       <button id="showBtn">Show Random</button>
@@ -364,7 +387,7 @@ function showRandom(){
   } else {
     let min = Infinity, least = [];
     for (const s of remaining) {
-      const c = shownCounts[s] || 0;
+      const c = (shownCounts[s] || 0);
       if (c < min) { min = c; least.length = 0; least.push(s); }
       else if (c === min) { least.push(s); }
     }
@@ -496,4 +519,8 @@ document.getElementById("showStarBtn").onclick = showRandomStarred;
 document.getElementById("okBtn").onclick = () => { if (!currentSentence) return; if (confirm("OK？")) confirmSentence(); };
 document.getElementById("resetBtn").onclick = resetData;
 document.getElementById("statsBtn").onclick = showStats;
-document.get
+document.getElementById("copyBtn").onclick = copyStats;
+document.getElementById("starBtn").onclick = toggleStar;
+</script>
+</body>
+</html>
