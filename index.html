@@ -53,12 +53,18 @@ body {
   flex-wrap: nowrap;           /* 1行固定 */
   gap: 25px;
   margin-top: 17px;
+
+  /* ★ 中央寄せのために幅を明示し、左右autoで固定 */
+  width: fit-content;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+/* 各ボタンを固定幅にして整列 */
 #button-area .row1 button {
-  /* 固定幅で中央に揃える（合計900pxぴったり：160px×5 + 25px×4） */
-  flex: 0 0 160px;
-  min-width: 160px;
-  max-width: 160px;
+  flex: 0 0 160px;   /* 固定幅 */
+  width: 160px;
   text-align: center;
 }
 
@@ -510,3 +516,4 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
