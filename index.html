@@ -32,19 +32,22 @@ body {
   margin-right: auto;
 }
 
-/* === 上段：2段目（Show / ☆Only）=== */
+/* row2を常にコンテナ幅いっぱいにする */
 #button-area .row2 {
   display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-  gap: 0;                 /* 継ぎ目なし */
-  margin: 0;
-}
-#button-area .row2 button {
-  flex: 1 1 50%;
-  min-width: 0;
+  width: 100%;         /* ★これが重要：縮小せず全幅を使う */
+  max-width: 900px;    /* 既に親で付けているなら不要。ここでもOK */
+  margin-left: auto;   /* 念のため中央寄せを明示 */
+  margin-right: auto;
+  gap: 0;
 }
 
+/* ボタンは厳密に1/2ずつ等分 */
+#button-area .row2 button {
+  flex: 1 0 0;         /* ★等分に最適。basis=0で残り幅を均等配分 */
+  min-width: 0;        /* はみ出し防止（長い文言でも折り返し優先） */
+}
+  
 /* === 下段：1段目（OK/☆/Reset/Stats/Mail）=== */
 #button-area .row1 {
   display: flex;
@@ -520,3 +523,4 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
