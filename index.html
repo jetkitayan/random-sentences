@@ -9,7 +9,7 @@
 body {
   font-family: sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 0; /* 上余白はJSで自動調整 */
   background-color: #fafafa;
 }
 
@@ -19,74 +19,89 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 65px 25px 13px 25px;
+  padding: 65px 25px 13px 25px;  /* 上 右 下 左 */
   text-align: center;
   z-index: 999;
 }
 
-/* === 1段目 === */
-#button-area .row1 {
-  display: flex;
-  justify-content: center;   /* 中央寄せ */
-  flex-wrap: nowrap;
-  gap: 25px;
-  margin-bottom: 17px;
-  max-width: 900px;          /* 2段目と同じ幅に制限 */
+/* === （順序入替）先に 2段目（Show / ☆Only）を表示 === */
+#button-area .row2,            /* 2段目：ワイドを左右1/2で分割（右が☆ Only） */
+#button-area .row1 {           /* 1段目：OK/Star/Reset/Stats/Mail */
+  max-width: 900px;            /* 両段で幅をそろえる */
   margin-left: auto;
   margin-right: auto;
 }
 
-#button-area .row1 button {
-  flex: 1 1 0;
-  min-width: 140px;
-  max-width: 170px;          /* 幅が広がりすぎない */
-}
-
-/* === 2段目 === */
+/* 2段目（上段） */
 #button-area .row2 {
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
-  margin: 0 auto;
-  max-width: 900px;          /* 1段目と同幅 */
+  gap: 0;                 /* 継ぎ目なし */
+  margin: 0;
 }
 #button-area .row2 button {
   flex: 1 1 50%;
   min-width: 0;
 }
 
-/* 共通ボタン */
+/* 1段目（下段） */
+#button-area .row1 {
+  display: flex;
+  justify-content: center;   /* 中央寄せ */
+  flex-wrap: nowrap;
+  gap: 25px;
+  margin-top: 17px;          /* 上の段との間隔 */
+}
+#button-area .row1 button {
+  flex: 1 1 0;
+  min-width: 140px;
+  max-width: 170px;          /* 2段目の幅を超えないように広がり抑制 */
+}
+
+/* ボタン共通（テキスト中央寄せ：水平＆垂直） */
 button {
   padding: 45px 50px;
   font-size: 40px;
   color: #000;
   border-radius: 16px;
-  border: 3px solid #000;
-  background-color: #d9d9d9;
   cursor: pointer;
+  border: 3px solid #000;
+  background: #fff;
+  background-color: #d9d9d9;
+
+  /* ★ テキスト中央表示（水平＆垂直） */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* 2段目の継ぎ目を自然に */
-#showStarBtn {
-  border-left-width: 1px;
+#showStarBtn {                 /* 右半分（☆ Only） */
+  border-left-width: 1px;      /* 真ん中の線が太くなりすぎないように */
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-#showBtn {
+#showBtn {                     /* 左半分（Show Random） */
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
 #content {
-  margin-top: -15px;
+  margin-top: -15px;  /* ベース余白（上はJSで加算） */
   padding-left: 40px;
   max-width: 900px;
 }
 
-#sentence-jp, #sentence-en, #last-shown {
+/* —— 3行の上下マージンを統一 —— */
+#sentence-jp,
+#sentence-en,
+#last-shown {
   margin: 40px 0;
 }
 
+/* 文字サイズなどは従来通り（jp/enのみ共通指定） */
 .count-label,
 #sentence-jp,
 #sentence-en {
@@ -95,6 +110,7 @@ button {
   color: #000;
 }
 
+/* 1行目内の補足メタの下余白で1行目と2行目の間隔を作る */
 .top-meta {
   margin: 0;
   padding-bottom: 46px;
@@ -104,31 +120,38 @@ button {
   display: none;
   padding: 20px 40px;
 }
+
 #statsArea table {
   border-collapse: collapse;
   width: 100%;
 }
+
 #statsArea th, #statsArea td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
 }
+
+/* シングル時代の余剰指定は残してOK（高さだけ使われる） */
+#showBtn { padding: 80px; }
 </style>
 </head>
 <body>
 
 <div id="button-area">
+  <!-- ★ 表示順を入れ替え：先に「2段目（上段）」 -->
+  <div class="row2">
+    <button id="showBtn">Show Random</button>
+    <button id="showStarBtn">☆ Only</button>
+  </div>
+
+  <!-- ★ 次に「1段目（下段）」 -->
   <div class="row1">
     <button id="okBtn" disabled>OK</button>
     <button id="starBtn" disabled>☆ Star</button>
     <button id="resetBtn">Reset</button>
     <button id="statsBtn">Stats</button>
     <button id="copyBtn">Mail</button>
-  </div>
-
-  <div class="row2">
-    <button id="showBtn">Show Random</button>
-    <button id="showStarBtn">☆ Only</button>
   </div>
 </div>
 
@@ -138,12 +161,17 @@ button {
   <div id="last-shown"></div>
 </div>
 
+<!-- 表示履歴一覧 -->
 <div id="statsArea">
   <h3>📊 表示履歴一覧</h3>
   <table>
     <thead>
       <tr>
-        <th>日本語</th><th>英語</th><th>YES押下</th><th>☆</th><th>表示回数</th>
+        <th>日本語</th>
+        <th>英語</th>
+        <th>YES押下</th>
+        <th>☆</th>
+        <th>表示回数</th>
       </tr>
     </thead>
     <tbody id="statsBody"></tbody>
@@ -151,22 +179,21 @@ button {
 </div>
 
 <script>
-/* ========= 変数・状態 ========= */
+/* ========= 状態 ========= */
 let allSentences = [];
 const params = new URLSearchParams(window.location.search);
 const fileParam = params.get("file") || "default";
 const jsonFile = `${fileParam}.json`;
 const keyPrefix = `randomApp_${fileParam}_`;
 
-/* 永続データのロード（なければ空オブジェクト） */
+/* 永続データのロード */
 let shownCounts = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
 let yesMarks    = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
 let starMarks   = JSON.parse(localStorage.getItem(keyPrefix + "starMarks")) || {};
 let remaining   = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
 let lastShownMap= JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
 
-/* 直前の表示モード："all" | "star"（☆トグル後の自動遷移用） */
-let lastShowMode = "all";
+let lastShowMode = "all"; // "all" | "star"
 
 /* 今日カウント */
 function getTodayYMD() {
@@ -181,7 +208,7 @@ const todayKey = getTodayYMD();
 const todayCountsKey = keyPrefix + "shownCounts_" + todayKey;
 let todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
 
-/* ---- ② 集計のキャッシュ（初期化は一度だけreduce） ---- */
+/* キャッシュ集計 */
 let totalShownCached = Object.values(shownCounts).reduce((a,b)=>a+(b||0),0);
 let todayShownCached = Object.values(todayCounts).reduce((a,b)=>a+(b||0),0);
 
@@ -200,7 +227,6 @@ function addNowTs(){
   let a = loadTs();
   a.push(now);
   const keepAfter = now - 24*60*60*1000;
-  // 古いのを間引き
   if (a.length > 1200) a = a.filter(t => t >= keepAfter);
   saveTs(a);
 }
@@ -239,7 +265,7 @@ function pickRandom(pool, excludeEn){
   return en;
 }
 
-/* ---- ③ localStorageのスロットリング：同一ティックでまとめ書き ---- */
+/* localStorage スロットリング */
 const pendingSaves = new Map(); // key -> stringified value
 let saveScheduled = false;
 function scheduleSave(key, obj) {
@@ -254,7 +280,7 @@ function scheduleSave(key, obj) {
   }
 }
 
-/* ========= ① インデックス化（en → sentence） ========= */
+/* en → sentence のマップ */
 const byEn = Object.create(null);
 
 /* ========= データ読み込み ========= */
@@ -262,7 +288,7 @@ fetch(jsonFile)
   .then(r => { if(!r.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`); return r.json(); })
   .then(data => {
     allSentences = data;
-    for (const s of allSentences) byEn[s.en] = s;           // ★ マップ作成
+    for (const s of allSentences) byEn[s.en] = s;
     if (remaining.length === 0) remaining = allSentences.map(s=>s.en);
     applyTopPadding();
   })
@@ -285,21 +311,21 @@ function updateStarUi(){
   starBtn.textContent = starred ? "★ Unstar" : "☆ Star";
 }
 
-/* ========= 表示の共通処理（高速化版） ========= */
+/* ========= 表示の共通処理（☆バッジ非表示版） ========= */
 function presentSentenceByEn(en){
-  const s = byEn[en];                 // ★ O(1) 参照
+  const s = byEn[en];
   if (!s) return;
   currentSentence = s;
 
-  // ---- カウント更新（キャッシュを増分更新） ----
+  // カウント更新
   const newShown = (shownCounts[en]||0) + 1;
   shownCounts[en] = newShown;
   scheduleSave(keyPrefix+"shownCounts", shownCounts);
-  totalShownCached++;                 // ★ reduce不要
+  totalShownCached++;
 
   todayCounts[en] = (todayCounts[en]||0) + 1;
   scheduleSave(todayCountsKey, todayCounts);
-  todayShownCached++;                 // ★ reduce不要
+  todayShownCached++;
 
   addNowTs();
 
@@ -310,12 +336,11 @@ function presentSentenceByEn(en){
 
   const totalShownLastHour = getLast1HourCount();
   const totalShownLast5Min = getLast5MinCount();
-  const starBadge = starMarks[en] ? "★" : "☆";
 
-  // まとめて最小限更新
+  // ★ ☆バッジは表示しない（ご要望）
   document.getElementById("sentence-jp").innerHTML =
     `<div class="top-meta">
-       ${starBadge}　${newShown}回目<br>${prevText}（ ${totalShownLast5Min} / ${totalShownLastHour} / ${todayShownCached} / ${totalShownCached} ）
+       ${newShown}回目<br>${prevText}（ ${totalShownLast5Min} / ${totalShownLastHour} / ${todayShownCached} / ${totalShownCached} ）
      </div>
      <div>${s.jp}</div>`;
   document.getElementById("sentence-en").textContent = s.en;
@@ -340,9 +365,7 @@ function showRandom(){
   if (toggleMode) {
     en = pickRandom(remaining, currentSentence?.en);
   } else {
-    // ★ ④ 1パスで最小カウント＆候補収集
-    let min = Infinity;
-    let least = [];
+    let min = Infinity, least = [];
     for (const s of remaining) {
       const c = shownCounts[s] || 0;
       if (c < min) { min = c; least.length = 0; least.push(s); }
@@ -391,7 +414,7 @@ function confirmSentence(){
   }
 }
 
-/* ========= ☆トグル（後続自動遷移） ========= */
+/* ========= ☆トグル（押したら次へ） ========= */
 function toggleStar(){
   if (!currentSentence) return;
   const en = currentSentence.en;
@@ -480,4 +503,3 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
-
