@@ -33,12 +33,10 @@ body {
   z-index: 999;
 }
 
-/* 1段目＝Show Random を横幅いっぱい（横マージンは使わない） */
+/* 1段目ボタン群 */
 #button-area .row1 {
   display: flex;
   gap: 30px;
-  /*margin-bottom: 12px;*/
-  /*margin-bottom: 50px;*/
   margin-bottom: 17px;
 }
 #button-area .row2 button {
@@ -46,7 +44,7 @@ body {
   min-width: 180px;
 }
 
-/* 2段目＝1段目と左右幅を完全一致＋1行固定 */
+/* 2段目＝横幅いっぱいの Show Random */
 #button-area .row2 {
   display: flex;
   justify-content: space-between;
@@ -54,8 +52,6 @@ body {
   flex-shrink: 1;
   margin: 0;
 }
-
-/* 2段目の各ボタンを少し広めに */
 #button-area .row1 button {
   flex: 1 1 auto;
   width: 100%;
@@ -128,9 +124,11 @@ button {
 
 <!-- 常に上固定のボタン群 -->
 <div id="button-area">
-  <!-- 1段目：他4ボタンを横並び（1行固定） -->
+  <!-- 1段目：5ボタンを横並び（☆追加） -->
   <div class="row1">
     <button id="okBtn" disabled>OK</button>
+    <!-- ★ 追加：スター用ボタン -->
+    <button id="starBtn" disabled>☆ Star</button>
     <button id="resetBtn">Reset</button>
     <button id="statsBtn">Stats</button>
     <button id="copyBtn">Mail</button>
@@ -156,6 +154,8 @@ button {
         <th>日本語</th>
         <th>英語</th>
         <th>YES押下</th>
+        <!-- ★ 追加：スター列 -->
+        <th>☆</th>
         <th>表示回数</th>
       </tr>
     </thead>
@@ -174,6 +174,8 @@ button {
 
   let shownCounts = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
   let yesMarks    = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
+  // ★ 追加：スター状態
+  let starMarks   = JSON.parse(localStorage.getItem(keyPrefix + "starMarks")) || {};
   let remaining   = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
   let lastShownMap= JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
 
@@ -198,19 +200,14 @@ button {
   // ====== 直近1時間集計用タイムスタンプ配列 ======
   const hourTsKey = keyPrefix + "shownTimestamps"; // 数値(ミリ秒)の配列
   function loadTs() {
-    try {
-      const arr = JSON.parse(localStorage.getItem(hourTsKey));
-      return Array.isArray(arr) ? arr : [];
-    } catch { return []; }
+    try { const arr = JSON.parse(localStorage.getItem(hourTsKey)); return Array.isArray(arr) ? arr : []; }
+    catch { return []; }
   }
-  function saveTs(arr) {
-    localStorage.setItem(hourTsKey, JSON.stringify(arr));
-  }
+  function saveTs(arr) { localStorage.setItem(hourTsKey, JSON.stringify(arr)); }
   function addNowTs() {
     const now = Date.now();
     let arr = loadTs();
     arr.push(now);
-    // メモリ節約：24時間より古いものは間引き
     const keepAfter = now - 24 * 60 * 60 * 1000;
     arr = arr.filter(t => typeof t === "number" && t >= keepAfter);
     saveTs(arr);
@@ -222,12 +219,8 @@ button {
     const after = now - min * 60 * 1000;
     return loadTs().filter(t => t >= after).length;
   }
-  function getLast1HourCount() {           // 既存互換
-    return getLastMinutesCount(60);
-  }
-  function getLast5MinCount() {            // ★ 新規
-    return getLastMinutesCount(5);
-  }
+  function getLast1HourCount() { return getLastMinutesCount(60); }
+  function getLast5MinCount() { return getLastMinutesCount(5); }
 
   // ====== 上固定のための自動余白調整 ======
   function applyTopPadding(extra = 35) {
@@ -257,6 +250,20 @@ button {
   const formatJp = iso => { try { return new Date(iso).toLocaleString("ja-JP",{ timeZone:"Asia/Tokyo" }); } catch { return iso||""; } };
   function humanElapsed(iso){ try{const t=new Date(iso).getTime(),s=Math.floor((Date.now()-t)/1000); if(s<60)return`${s}秒前`; const m=Math.floor(s/60); if(m<60)return`${m}分前`; const h=Math.floor(m/60); if(h<24)return`${h}時間前`; const d=Math.floor(h/24); return`${d}日前`;}catch{return"";} }
 
+  // ====== ★ スターUI反映 ======
+  function updateStarUi() {
+    const starBtn = document.getElementById("starBtn");
+    if (!currentSentence) {
+      starBtn.disabled = true;
+      starBtn.textContent = "☆ Star";
+      return;
+    }
+    const en = currentSentence.en;
+    const starred = !!starMarks[en];
+    starBtn.disabled = false;
+    starBtn.textContent = starred ? "★ Unstar" : "☆ Star";
+  }
+
   // ====== 表示処理 ======
   function showRandom() {
     const lastShownDiv = document.getElementById("last-shown");
@@ -266,6 +273,7 @@ button {
       lastShownDiv.textContent = "";
       document.getElementById("showBtn").disabled = true;
       document.getElementById("okBtn").disabled = true;
+      document.getElementById("starBtn").disabled = true; // ★ 追加
       return;
     }
 
@@ -299,16 +307,20 @@ button {
     const totalShown = Object.values(shownCounts).reduce((a,b)=>a+b,0);
     const totalShownToday = sumCounts(todayCounts);
     const totalShownLastHour = getLast1HourCount();
-    const totalShownLast5Min = getLast5MinCount();   // ★ 追加
+    const totalShownLast5Min = getLast5MinCount();
 
     // 前回表示時間の取得
     const prevIso = lastShownMap[en];
     const prevText = prevIso ? humanElapsed(prevIso) : "なし";
 
-    // 表示更新
+    // ★ 現在のスター状態
+    const starred = !!starMarks[en];
+    const starBadge = starred ? "★" : "☆";
+
+    // 表示更新（上部メタに★/☆を表示）
     document.getElementById("sentence-jp").innerHTML = `
       <div class="top-meta">
-        ${shownCounts[en]}回目<br>${prevText}（ ${totalShownLast5Min} / ${totalShownLastHour} / ${totalShownToday} / ${totalShown} ）
+        ${starBadge}　${shownCounts[en]}回目<br>${prevText}（ ${totalShownLast5Min} / ${totalShownLastHour} / ${totalShownToday} / ${totalShown} ）
       </div>
       <div>${currentSentence.jp}</div>`;
     document.getElementById("sentence-en").innerText = currentSentence.en;
@@ -317,6 +329,9 @@ button {
     // 前回時刻を更新
     lastShownMap[en] = new Date().toISOString();
     localStorage.setItem(keyPrefix + "lastShown", JSON.stringify(lastShownMap));
+
+    // ★ スターUI更新
+    updateStarUi();
   }
 
   function confirmSentence() {
@@ -332,7 +347,27 @@ button {
       document.getElementById("last-shown").textContent = "";
       document.getElementById("showBtn").disabled = true;
       document.getElementById("okBtn").disabled = true;
+      document.getElementById("starBtn").disabled = true; // ★ 追加
     }
+  }
+
+  // ★ スター付与/解除（トグル）
+  function toggleStar() {
+    if (!currentSentence) return;
+    const en = currentSentence.en;
+    const now = !starMarks[en];
+    starMarks[en] = now;
+    localStorage.setItem(keyPrefix + "starMarks", JSON.stringify(starMarks));
+    // 上部表示の★/☆を即時反映するため再描画（軽いのでOK）
+    const wasCurrent = currentSentence.en;
+    updateStarUi();
+    // 上部のstarBadgeだけ差し替え（フル再表示しない簡易更新）
+    const jpDiv = document.getElementById("sentence-jp");
+    jpDiv.innerHTML = jpDiv.innerHTML.replace(/^[\s\S]*?<div class="top-meta">([\s\S]*?)<\/div>/, (m, inner) => {
+      // innerの先頭にある★/☆だけを付け直す
+      const newStar = now ? "★" : "☆";
+      return m.replace(/^[\s\S]*?<div class="top-meta">/, '<div class="top-meta">').replace(/^[★☆]/, newStar);
+    });
   }
 
   // --- 当日カウント用キーも含めて全削除 ---
@@ -352,10 +387,11 @@ button {
     localStorage.removeItem(keyPrefix + "remaining");
     localStorage.removeItem(keyPrefix + "yesMarks");
     localStorage.removeItem(keyPrefix + "lastShown");
+    localStorage.removeItem(keyPrefix + "starMarks"); // ★ 追加
     clearDailyCounts();
     localStorage.removeItem(hourTsKey);
 
-    shownCounts = {}; yesMarks = {}; lastShownMap = {};
+    shownCounts = {}; yesMarks = {}; lastShownMap = {}; starMarks = {}; // ★
     todayCounts = {}; localStorage.removeItem(todayCountsKey);
 
     remaining = allSentences.map(s => s.en); currentSentence = null;
@@ -363,6 +399,8 @@ button {
     document.getElementById("sentence-en").innerText = "";
     document.getElementById("last-shown").textContent = "";
     document.getElementById("showBtn").disabled = false;
+    document.getElementById("okBtn").disabled = true;
+    document.getElementById("starBtn").disabled = true; // ★
     document.getElementById("statsArea").style.display = "none";
     applyTopPadding();
   }
@@ -373,11 +411,13 @@ button {
     allSentences.forEach(s => {
       const c = shownCounts[s.en] || 0;
       const yes = yesMarks[s.en] ? "●" : "○";
+      const star = starMarks[s.en] ? "★" : "☆"; // ★ 追加
       tbody.innerHTML += `
         <tr>
           <td>${s.en}</td>
           <td>${s.jp}</td>
           <td style="text-align:center;">${yes}</td>
+          <td style="text-align:center;">${star}</td>
           <td style="text-align:center;">${c}</td>
         </tr>`;
     });
@@ -390,19 +430,14 @@ button {
       alert("一覧が表示されていません。");
       return;
     }
-
-    // テーブルをテキスト化
     let text = "";
     table.querySelectorAll("tr").forEach(tr => {
       const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
       text += cols.join("@") + "\n";
     });
-
-    // クリップボードへコピー
     navigator.clipboard.writeText(text)
       .then(() => {
         alert("一覧をコピーしました！ これからメール作成画面を開きます。");
-
         const to = "jetkitayan@gmail.com";
         const subject = "Random English Sentences - Stats";
         const body = "";
@@ -416,65 +451,12 @@ button {
 
   // イベント登録
   document.getElementById("showBtn").onclick = showRandom;
-  document.getElementById("okBtn").onclick = () => {
-    if (!currentSentence) return;
-    if (confirm("OK？")) {
-      confirmSentence();
-    }
-  };
+  document.getElementById("okBtn").onclick = () => { if (!currentSentence) return; if (confirm("OK？")) { confirmSentence(); } };
   document.getElementById("resetBtn").onclick = resetData;
   document.getElementById("statsBtn").onclick = showStats;
   document.getElementById("copyBtn").onclick = copyStats;
+  // ★ 追加：スターのトグル
+  document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
