@@ -24,15 +24,15 @@ body {
   z-index: 999;
 }
 
-/* === （順序入替）先に 2段目（Show / ☆Only）を表示 === */
-#button-area .row2,            /* 2段目：ワイドを左右1/2で分割（右が☆ Only） */
-#button-area .row1 {           /* 1段目：OK/Star/Reset/Stats/Mail */
-  max-width: 900px;            /* 両段で幅をそろえる */
+/* 両段で幅をそろえる */
+#button-area .row2,
+#button-area .row1 {
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* 2段目（上段） */
+/* === 上段：2段目（Show / ☆Only）=== */
 #button-area .row2 {
   display: flex;
   justify-content: center;
@@ -45,7 +45,7 @@ body {
   min-width: 0;
 }
 
-/* === 1段目（下段）=== */
+/* === 下段：1段目（OK/☆/Reset/Stats/Mail）=== */
 #button-area .row1 {
   display: flex;
   justify-content: center;     /* 中央寄せ */
@@ -53,32 +53,16 @@ body {
   flex-wrap: nowrap;           /* 1行固定 */
   gap: 25px;
   margin-top: 17px;
-  max-width: 900px;            /* 2段目と同幅 */
-  margin-left: auto;
-  margin-right: auto;
 }
-
 #button-area .row1 button {
-  /* ★ 固定幅で中央に揃える（合計900pxにピッタリ） */
-  flex: 0 0 160px;             /* grow=0, shrink=0, basis=160px */
+  /* 固定幅で中央に揃える（合計900pxぴったり：160px×5 + 25px×4） */
+  flex: 0 0 160px;
   min-width: 160px;
   max-width: 160px;
-  text-align: center;          /* 念のため */
+  text-align: center;
 }
 
-/* 任意：スマホで折り返しても中央寄せを維持したい場合 */
-@media (max-width: 920px) {
-  #button-area .row1 {
-    flex-wrap: wrap;           /* 画面が狭い時は折り返し */
-  }
-  #button-area .row1 button {
-    flex: 0 0 48%;
-    min-width: 0;
-    max-width: none;
-  }
-}
-
-/* ボタン共通（テキスト中央寄せ：水平＆垂直） */
+/* 共通ボタン（文字を水平＆垂直センター） */
 button {
   padding: 45px 50px;
   font-size: 40px;
@@ -89,14 +73,13 @@ button {
   background: #fff;
   background-color: #d9d9d9;
 
-  /* ★ テキスト中央表示（水平＆垂直） */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-/* 2段目の継ぎ目を自然に */
+/* 上段の継ぎ目を自然に */
 #showStarBtn {                 /* 右半分（☆ Only） */
   border-left-width: 1px;      /* 真ん中の線が太くなりすぎないように */
   border-top-left-radius: 0;
@@ -151,22 +134,28 @@ button {
   text-align: left;
 }
 
-/* シングル時代の余剰指定は残してOK（高さだけ使われる） */
+/* 旧シングル時代の高さ指定はそのまま利用 */
 #showBtn { padding: 80px; }
+
+/* スマホ対応：折返し時も中央寄せ */
+@media (max-width: 920px) {
+  #button-area .row1 { flex-wrap: wrap; }
+  #button-area .row1 button { flex: 0 0 48%; min-width: 0; max-width: none; }
+}
 </style>
 </head>
 <body>
 
 <div id="button-area">
-  <!-- ★ 表示順を入れ替え：先に「2段目（上段）」 -->
+  <!-- 表示順：上段＝Show/☆Only、下段＝OKほか -->
   <div class="row2">
     <button id="showBtn">Show Random</button>
     <button id="showStarBtn">☆ Only</button>
   </div>
 
-  <!-- ★ 次に「1段目（下段）」 -->
   <div class="row1">
-    <button id="okBtn" disabled>〇</button>
+    <button id="okBtn" disabled>OK</button>
+    <!-- ☆ボタンは見た目を常に「☆」固定 -->
     <button id="starBtn" disabled>☆</button>
     <button id="resetBtn">Reset</button>
     <button id="statsBtn">Stats</button>
@@ -316,18 +305,16 @@ fetch(jsonFile)
     document.getElementById("sentence-en").textContent = err.message;
   });
 
-/* ========= スターUI ========= */
+/* ========= スターUI（☆固定表示） ========= */
 function updateStarUi(){
   const starBtn = document.getElementById("starBtn");
   if (!currentSentence) {
     starBtn.disabled = true;
-    starBtn.textContent = "☆";
-    return;
+  } else {
+    starBtn.disabled = false;
   }
-  const en = currentSentence.en;
-  const starred = !!starMarks[en];
-  starBtn.disabled = false;
-  starBtn.textContent = starred ? "★" : "☆";
+  // 見た目は常に☆固定
+  starBtn.textContent = "☆";
 }
 
 /* ========= 表示の共通処理（☆バッジ非表示版） ========= */
@@ -356,7 +343,7 @@ function presentSentenceByEn(en){
   const totalShownLastHour = getLast1HourCount();
   const totalShownLast5Min = getLast5MinCount();
 
-  // ★ ☆バッジは表示しない（ご要望）
+  /* ☆バッジは表示しない（ご要望） */
   document.getElementById("sentence-jp").innerHTML =
     `<div class="top-meta">
        ${newShown}回目<br>${prevText}（ ${totalShownLast5Min} / ${totalShownLastHour} / ${todayShownCached} / ${totalShownCached} ）
@@ -405,7 +392,7 @@ function showRandomStarred(){
     pool = Object.keys(starMarks).filter(en => starMarks[en]);
   }
   if (pool.length === 0) {
-    alert("☆が付いた英文がありません。先に『☆ Star』でお気に入り登録してください。");
+    alert("☆が付いた英文がありません。先に『☆』でお気に入り登録してください。");
     return;
   }
   const en = pickRandom(pool, currentSentence?.en);
@@ -433,14 +420,15 @@ function confirmSentence(){
   }
 }
 
-/* ========= ☆トグル（押したら次へ） ========= */
+/* ========= ☆トグル（押したら次へ／見た目は☆固定） ========= */
 function toggleStar(){
   if (!currentSentence) return;
   const en = currentSentence.en;
   const now = !starMarks[en];
   starMarks[en] = now;
   scheduleSave(keyPrefix + "starMarks", starMarks);
-  updateStarUi();
+
+  updateStarUi();  // ラベルは常に「☆」
 
   if (lastShowMode === "star") showRandomStarred();
   else showRandom();
@@ -522,7 +510,3 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
-
-
-
-
