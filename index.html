@@ -45,18 +45,37 @@ body {
   min-width: 0;
 }
 
-/* 1段目（下段） */
+/* === 1段目（下段）=== */
 #button-area .row1 {
   display: flex;
-  justify-content: center;   /* 中央寄せ */
-  flex-wrap: nowrap;
+  justify-content: center;     /* 中央寄せ */
+  align-items: center;
+  flex-wrap: nowrap;           /* 1行固定 */
   gap: 25px;
-  margin-top: 17px;          /* 上の段との間隔 */
+  margin-top: 17px;
+  max-width: 900px;            /* 2段目と同幅 */
+  margin-left: auto;
+  margin-right: auto;
 }
+
 #button-area .row1 button {
-  flex: 1 1 0;
-  min-width: 140px;
-  max-width: 170px;          /* 2段目の幅を超えないように広がり抑制 */
+  /* ★ 固定幅で中央に揃える（合計900pxにピッタリ） */
+  flex: 0 0 160px;             /* grow=0, shrink=0, basis=160px */
+  min-width: 160px;
+  max-width: 160px;
+  text-align: center;          /* 念のため */
+}
+
+/* 任意：スマホで折り返しても中央寄せを維持したい場合 */
+@media (max-width: 920px) {
+  #button-area .row1 {
+    flex-wrap: wrap;           /* 画面が狭い時は折り返し */
+  }
+  #button-area .row1 button {
+    flex: 0 0 48%;
+    min-width: 0;
+    max-width: none;
+  }
 }
 
 /* ボタン共通（テキスト中央寄せ：水平＆垂直） */
@@ -503,3 +522,4 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
