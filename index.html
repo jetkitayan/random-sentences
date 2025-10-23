@@ -370,7 +370,7 @@ function presentSentenceByEn(en){
   const totalShownLast5Min = getLast5MinCount();
 
   // ☆付きならマークを追加
-  const starMark = starMarks[en] ? "☆" : "";
+  const starMark = starMarks[en] ? "★" : "";
 
   document.getElementById("sentence-jp").innerHTML =
     `<div class="top-meta">
@@ -538,6 +538,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
