@@ -34,17 +34,17 @@ body {
 
 /* === 上段：Show Random / ☆Only === */
 #button-area .row2 {
-  display: flex;
-  justify-content: center;
-  gap: 26px;              /* 間の隙間 */
+  display: grid;
+  grid-template-columns: 4fr 1fr;  /* ← ここで4:1を厳密指定 */
+  gap: 26px;
   max-width: 900px;
   margin: 0 auto;
   width: 100%;
 }
 
-/* 変更後 */
+/* ボタンは幅100%で受けるだけ（余計なwidth/flexは付けない） */
 #button-area .row2 button {
-  flex: 1 1 0;          /* ← まずは同じ土台（比率は後で個別に付与） */
+  width: 100%;
   min-width: 0;
   text-align: center;
   border-radius: 16px;
@@ -542,6 +542,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
