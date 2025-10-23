@@ -42,10 +42,18 @@ body {
   width: 100%;
 }
 
-#button-area .row2 button { flex: 0 0 auto; } /* 固定幅運用に切り替え */
-#showBtn     { width: 70%; }
-#showStarBtn { width: 30%; }
+/* 変更後 */
+#button-area .row2 button {
+  flex: 1 1 0;          /* ← まずは同じ土台（比率は後で個別に付与） */
+  min-width: 0;
+  text-align: center;
+  border-radius: 16px;
+}
 
+/* 配分：Show : Star = 3 : 2（お好みで3:1などに変更OK） */
+#showBtn     { flex: 7 1 0; }
+#showStarBtn { flex: 3 1 0; }
+  
 /* 左右ボタンそれぞれの角丸調整 */
 #showBtn {
   border-top-right-radius: 8px;     /* 内側：少し丸く */
@@ -532,6 +540,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
