@@ -42,12 +42,9 @@ body {
   width: 100%;
 }
 
-#button-area .row2 button {
-  flex: 0 0 48.5%;          /* 幅をそろえる */
-  min-width: 0;
-  text-align: center;
-  border-radius: 16px;    /* 外側も内側もデフォルト丸み */
-}
+#button-area .row2 button { flex: 0 0 auto; } /* 固定幅運用に切り替え */
+#showBtn     { width: 70%; }
+#showStarBtn { width: 30%; }
 
 /* 左右ボタンそれぞれの角丸調整 */
 #showBtn {
@@ -535,6 +532,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
