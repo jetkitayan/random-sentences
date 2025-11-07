@@ -384,7 +384,6 @@ function presentSentenceByEn(en){
 }
 
 /* ========= 通常ランダム表示 ========= */
-/* ========= 通常ランダム表示（3回に1回は☆から） ========= */
 function showRandom(){
   if (remaining.length === 0) {
     document.getElementById("sentence-jp").textContent = "すべての英文を表示しました！";
@@ -396,25 +395,6 @@ function showRandom(){
     return;
   }
 
-  // ★ 3回に1回は☆付きから表示（remaining優先、なければ全☆から）
-  // 3回に1回を判定するカウンタ
-  let showCounter = 0;
-  showCounter++;
-  if (showCounter % 3 === 0) {
-    let pool = remaining.filter(en => !!starMarks[en]);
-    if (pool.length === 0) {
-      pool = Object.keys(starMarks).filter(en => starMarks[en]);
-    }
-    if (pool.length > 0) {
-      const enStar = pickRandom(pool, currentSentence?.en);
-      lastShowMode = "star";
-      presentSentenceByEn(enStar);
-      return; // ← ここで終わり（通常ロジックへは行かない）
-    }
-    // ☆が無い場合は通常ロジックにフォールバック
-  }
-
-  // ===== 通常ロジック（現状どおり） =====
   let en;
   if (toggleMode) {
     en = pickRandom(remaining, currentSentence?.en);
@@ -558,6 +538,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
