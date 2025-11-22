@@ -164,12 +164,6 @@ button {
 /* 旧シングル時代の高さ指定はそのまま利用 */
 #showBtn { padding: 80px; }
 
-/* スマホ対応：折返し時も中央寄せ */
-@media (max-width: 920px) {
-  #button-area .row1 { flex-wrap: wrap; }
-  #button-area .row1 button { flex: 0 0 48%; min-width: 0; max-width: none; }
-}
-
 #sentence-jp,
 #sentence-en {
   -webkit-text-size-adjust: none;
@@ -546,6 +540,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
