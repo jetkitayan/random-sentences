@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8" />
 <title>Random English Sentences</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
 * , *::before, *::after { box-sizing: border-box; }
 
@@ -135,7 +134,7 @@ button {
 #sentence-jp,
 #sentence-en {
   line-height: 1.6;
-  font-size: 18px;
+  font-size: 43px;
   color: #000;
 }
 
@@ -164,12 +163,11 @@ button {
 /* 旧シングル時代の高さ指定はそのまま利用 */
 #showBtn { padding: 80px; }
 
-#sentence-jp,
-#sentence-en {
-  -webkit-text-size-adjust: none;
-  text-size-adjust: none;
+/* スマホ対応：折返し時も中央寄せ */
+@media (max-width: 920px) {
+  #button-area .row1 { flex-wrap: wrap; }
+  #button-area .row1 button { flex: 0 0 48%; min-width: 0; max-width: none; }
 }
-
 </style>
 </head>
 <body>
@@ -540,11 +538,6 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
-
-
-
-
-
 
 
 
