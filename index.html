@@ -79,12 +79,12 @@ body {
 
 /* 各ボタンを固定幅にして整列 */
 #button-area .row1 button {
-  /* 固定幅で中央に揃える（合計900pxぴったり：160px×5 + 25px×5） */
-  flex: 0 0 120px;
-  min-width: 120px;
-  max-width: 120px;
-  flex: 0 0 120px;   /* 固定幅 */
-  width: 120px;
+  /* 固定幅で中央に揃える（合計900pxぴったり：160px×5 + 25px×4） */
+  flex: 0 0 160px;
+  min-width: 160px;
+  max-width: 160px;
+  flex: 0 0 160px;   /* 固定幅 */
+  width: 160px;
   text-align: center;
 }
 
@@ -188,7 +188,6 @@ button {
     <button id="resetBtn">Reset</button>
     <button id="statsBtn">Stats</button>
     <button id="copyBtn">Copy</button>
-    <button id="jmpBtn">Copy</button>
   </div>
 </div>
 
@@ -522,6 +521,7 @@ function showStats(){
   }
   document.getElementById("statsArea").style.display = "block";
 }
+  
 function copyStats(){
   const table = document.querySelector("#statsArea table");
   if (!table) { alert("一覧が表示されていません。"); return; }
@@ -530,8 +530,12 @@ function copyStats(){
     const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
     text += cols.join("@") + "\n";
   });
+
   navigator.clipboard.writeText(text)
-    .then(()=>alert("一覧をコピーしました！ これからメール作成画面を開きます。"))
+    .then(()=>{
+      // コピー成功後に遷移
+      window.location.href = "https://jetkitayan.github.io/memo-save/";
+    })
     .catch(()=>alert("コピーに失敗しました。もう一度お試しください。"));
 }
 
@@ -546,6 +550,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
