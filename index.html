@@ -336,23 +336,48 @@ function pickRandom(pool, excludeEn){
   return en;
 }
 
-/* localStorage スロットリング */
-const pendingSaves = new Map();
-let saveTimer = null;
+// ===== 保存を「まとめて」やる（超重要）=====
+const dirtyKeys = new Set();
+let flushTimer = null;
 
-function scheduleSave(key, obj) {
-  pendingSaves.set(key, JSON.stringify(obj));
-  if (saveTimer) return;
+function markDirty(key) {
+  dirtyKeys.add(key);
+  if (flushTimer) return;
 
-  // 描画優先：ちょい遅らせてまとめて保存
-  saveTimer = setTimeout(() => {
-    pendingSaves.forEach((val, k) => {
-      try { localStorage.setItem(k, val); } catch {}
-    });
-    pendingSaves.clear();
-    saveTimer = null;
-  }, 120);
+  // まずはすぐ描画させるため、少し遅らせてからまとめて保存
+  flushTimer = setTimeout(flushSaves, 800);
 }
+
+function flushSaves() {
+  flushTimer = null;
+
+  // アイドル時に回す（対応ブラウザは多い）
+  const run = () => {
+    try {
+      for (const key of dirtyKeys) {
+        // keyごとに「今の最新オブジェクト」を保存
+        if (key === keyPrefix+"shownCounts") localStorage.setItem(key, JSON.stringify(shownCounts));
+        else if (key === todayCountsKey)     localStorage.setItem(key, JSON.stringify(todayCounts));
+        else if (key === keyPrefix+"lastShown") localStorage.setItem(key, JSON.stringify(lastShownMap));
+        else if (key === keyPrefix+"yesMarks")  localStorage.setItem(key, JSON.stringify(yesMarks));
+        else if (key === keyPrefix+"starMarks") localStorage.setItem(key, JSON.stringify(starMarks));
+        else if (key === keyPrefix+"remaining") localStorage.setItem(key, JSON.stringify(remaining));
+      }
+    } catch {}
+    dirtyKeys.clear();
+  };
+
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(run, { timeout: 1000 });
+  } else {
+    setTimeout(run, 0);
+  }
+}
+
+// ページを閉じる/裏に回る直前に強制保存
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") flushSaves();
+});
 
 /* en → sentence のマップ */
 const byEn = Object.create(null);
@@ -587,6 +612,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
