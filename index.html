@@ -381,49 +381,40 @@ function updateStarUi(){
   starBtn.textContent = "☆";
 }
 
-/* ========= 表示の共通処理（☆バッジ非表示版） ========= */
 function presentSentenceByEn(en){
   const s = byEn[en];
   if (!s) return;
   currentSentence = s;
 
-  // カウント更新
-  const newShown = (shownCounts[en]||0) + 1;
-  shownCounts[en] = newShown;
-  scheduleSave(keyPrefix+"shownCounts", shownCounts);
-  totalShownCached++;
-
-  todayCounts[en] = (todayCounts[en]||0) + 1;
-  scheduleSave(todayCountsKey, todayCounts);
-  todayShownCached++;
-
-  addNowTsFast();
-
-  const prevIso = lastShownMap[en];
-  const prevText = prevIso ? humanElapsed(prevIso) : "なし";
-  lastShownMap[en] = new Date().toISOString();
-  scheduleSave(keyPrefix+"lastShown", lastShownMap);
-
-  const totalShownLastHour = getLast1HourCount();
-  const totalShownLast5Min = getLast5MinCount();
-
-  // ☆付きならマークを追加
-  const starMark = starMarks[en] ? "★" : "";
-
+  // === ① 表示を最優先 ===
   document.getElementById("sentence-jp").innerHTML =
-    `<div class="top-meta">
-       ${newShown}回目${starMark}<br>${prevText}（ ${totalShownLast5Min} / ${totalShownLastHour} / ${todayShownCached} / ${totalShownCached} ）
-     </div>
-     <div>${s.jp}</div>`;
+    `<div class="top-meta">読み込み中…</div><div>${s.jp}</div>`;
   document.getElementById("sentence-en").textContent = s.en;
   document.getElementById("okBtn").disabled = false;
-
   updateStarUi();
 
+  // === ② 重い処理は後回し ===
   requestAnimationFrame(() => {
-    const copyText =
-      `${s.en}\n\n上記の英文の文法について教えて。品詞について特徴があればそれも教えて。`;
-    navigator.clipboard.writeText(copyText).catch(()=>{});
+    const newShown = (shownCounts[en]||0) + 1;
+    shownCounts[en] = newShown;
+    scheduleSave(keyPrefix+"shownCounts", shownCounts);
+    totalShownCached++;
+
+    todayCounts[en] = (todayCounts[en]||0) + 1;
+    scheduleSave(todayCountsKey, todayCounts);
+    todayShownCached++;
+
+    addNowTsFast();
+
+    const prevIso = lastShownMap[en];
+    const prevText = prevIso ? humanElapsed(prevIso) : "なし";
+    lastShownMap[en] = new Date().toISOString();
+    scheduleSave(keyPrefix+"lastShown", lastShownMap);
+
+    const starMark = starMarks[en] ? "★" : "";
+
+    document.querySelector(".top-meta").innerHTML =
+      `${newShown}回目${starMark}<br>${prevText}`;
   });
 }
 
@@ -587,5 +578,6 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
