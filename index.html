@@ -386,14 +386,17 @@ function presentSentenceByEn(en){
   if (!s) return;
   currentSentence = s;
 
-  // === ① 表示を最優先 ===
-  document.getElementById("sentence-jp").innerHTML =
-    `<div class="top-meta">読み込み中…</div><div>${s.jp}</div>`;
+  // ① 表示を最優先
+  const jpEl = document.getElementById("sentence-jp");
+  jpEl.innerHTML = `<div class="top-meta">読み込み中…</div><div>${s.jp}</div>`;
   document.getElementById("sentence-en").textContent = s.en;
   document.getElementById("okBtn").disabled = false;
   updateStarUi();
 
-  // === ② 重い処理は後回し ===
+  // ★ ここで参照を固定（querySelectorを毎回しない）
+  const topMetaEl = jpEl.querySelector(".top-meta");
+
+  // ② 重い処理は後回し
   requestAnimationFrame(() => {
     const newShown = (shownCounts[en]||0) + 1;
     shownCounts[en] = newShown;
@@ -413,8 +416,9 @@ function presentSentenceByEn(en){
 
     const starMark = starMarks[en] ? "★" : "";
 
-    document.querySelector(".top-meta").innerHTML =
-      `${newShown}回目${starMark}<br>${prevText}`;
+    if (topMetaEl) {
+      topMetaEl.innerHTML = `${newShown}回目${starMark}<br>${prevText}`;
+    }
   });
 }
 
@@ -578,6 +582,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
