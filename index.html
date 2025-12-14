@@ -309,14 +309,9 @@ const getLast5MinCount  = () => countLastMinutesFast(5);
 
 function applyTopPadding(extra=35){
   const buttonArea = document.getElementById('button-area');
-
-  updateStarUi();
-
-  // 表示後にコピー（体感軽くなることがある）
   requestAnimationFrame(() => {
-    const copyText =
-      `${s.en}\n\n上記の英文の文法について教えて。品詞について特徴があればそれも教えて。`;
-    navigator.clipboard.writeText(copyText).catch(()=>{});
+    const h = buttonArea.getBoundingClientRect().height;
+    document.body.style.paddingTop = (h + extra) + 'px';
   });
 }
 window.addEventListener('load', applyTopPadding);
@@ -425,10 +420,12 @@ function presentSentenceByEn(en){
 
   updateStarUi();
 
-  /* ★表示された英文を瞬間コピー */
-  const copyText =
-  `${s.en}\n\n上記の英文の文法について教えて。品詞について特徴があればそれも教えて。`;
-  navigator.clipboard.writeText(copyText).catch(()=>{});
+  // 表示が反映された後にコピー
+  requestAnimationFrame(() => {
+    const copyText =
+      `${s.en}\n\n上記の英文の文法について教えて。品詞について特徴があればそれも教えて。`;
+    navigator.clipboard.writeText(copyText).catch(()=>{});
+  });
 }
 
 /* ========= 通常ランダム表示 ========= */
@@ -591,6 +588,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
