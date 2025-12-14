@@ -194,7 +194,10 @@ button {
 </div>
 
 <div id="content">
-  <div id="sentence-jp">Press "Show Random" to start</div>
+  <div id="sentence-jp">
+    <div class="top-meta" id="topMeta">Press "Show Random" to start</div>
+    <div id="jpText"></div>
+  </div>
   <div id="sentence-en"></div>
   <div id="last-shown"></div>
 </div>
@@ -408,19 +411,19 @@ function updateStarUi(){
   starBtn.textContent = "☆";
 }
 
+const topMetaEl = document.getElementById("topMeta");
+const jpTextEl  = document.getElementById("jpText");
+const enEl      = document.getElementById("sentence-en");
+
 function presentSentenceByEn(en){
   const s = byEn[en];
   if (!s) return;
   currentSentence = s;
 
   // === ① 表示を最優先 ===
-  const jpEl = document.getElementById("sentence-jp");         // ★追加
-  jpEl.innerHTML = `<div class="top-meta">読み込み中…</div><div>${s.jp}</div>`;
-  const topMetaEl = jpEl.querySelector(".top-meta");           // ★追加
-
-  document.getElementById("sentence-en").textContent = s.en;
-  document.getElementById("okBtn").disabled = false;
-  updateStarUi();
+  topMetaEl.textContent = "読み込み中…";
+  jpTextEl.textContent = s.jp;
+  enEl.textContent = s.en;
 
   // === ② 重い処理は後回し ===
   requestAnimationFrame(() => {
@@ -612,6 +615,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
