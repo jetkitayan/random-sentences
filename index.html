@@ -420,7 +420,6 @@ function presentSentenceByEn(en){
 
   updateStarUi();
 
-  // 表示が反映された後にコピー
   requestAnimationFrame(() => {
     const copyText =
       `${s.en}\n\n上記の英文の文法について教えて。品詞について特徴があればそれも教えて。`;
@@ -588,6 +587,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
