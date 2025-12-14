@@ -260,57 +260,74 @@ const hourTsKey = keyPrefix + "shownTimestamps";
 let currentSentence = null;
 let toggleMode = true; // true: ランダム / false: 最少回数
 
-/* ===== タイムスタンプ高速化（localStorage頻繁アクセスをやめる） ===== */
-let tsArr = (() => {
+/* ===== 直近カウントを「分リングバッファ」にする（最終形・超高速） ===== */
+const minuteKey = keyPrefix + "minuteRing_v1";
+
+// { baseMin:number, ring:number[60] }
+// baseMin = ring[0] が指す Unix 分
+let minuteRing = (() => {
   try {
-    const a = JSON.parse(localStorage.getItem(hourTsKey));
-    return Array.isArray(a) ? a : [];
-  } catch { return []; }
+    const o = JSON.parse(localStorage.getItem(minuteKey));
+    if (!o || !Number.isFinite(o.baseMin) || !Array.isArray(o.ring) || o.ring.length !== 60) {
+      throw 0;
+    }
+    return o;
+  } catch {
+    return {
+      baseMin: Math.floor(Date.now() / 60000),
+      ring: Array(60).fill(0),
+    };
+  }
 })();
 
-let tsSaveScheduled = false;
-function scheduleSaveTs() {
-  if (tsSaveScheduled) return;
-  tsSaveScheduled = true;
-  // まとめて保存（presentSentenceのDOM更新を邪魔しにくい）
+let ringSaveScheduled = false;
+function scheduleSaveMinuteRing() {
+  if (ringSaveScheduled) return;
+  ringSaveScheduled = true;
   setTimeout(() => {
-    try { localStorage.setItem(hourTsKey, JSON.stringify(tsArr)); } catch {}
-    tsSaveScheduled = false;
-  }, 200);
+    try {
+      localStorage.setItem(minuteKey, JSON.stringify(minuteRing));
+    } catch {}
+    ringSaveScheduled = false;
+  }, 300);
 }
 
-// 単調増加配列なので二分探索で「after以上の最初の位置」を探せる
-function lowerBound(arr, x) {
-  let lo = 0, hi = arr.length;
-  while (lo < hi) {
-    const mid = (lo + hi) >> 1;
-    if (arr[mid] < x) lo = mid + 1;
-    else hi = mid;
+function advanceRingTo(nowMin) {
+  let diff = nowMin - minuteRing.baseMin;
+  if (diff <= 0) return;
+
+  if (diff >= 60) {
+    minuteRing.ring.fill(0);
+    minuteRing.baseMin = nowMin;
+    return;
   }
-  return lo;
+
+  for (let i = 0; i < diff; i++) {
+    minuteRing.ring.shift();
+    minuteRing.ring.push(0);
+  }
+  minuteRing.baseMin = nowMin;
 }
 
-function addNowTsFast() {
-  const now = Date.now();
-  tsArr.push(now);
-
-  // 24hより古いのは先頭から捨てる（filter全走査しない）
-  const keepAfter = now - 24 * 60 * 60 * 1000;
-  const cut = lowerBound(tsArr, keepAfter);
-  if (cut > 0) tsArr = tsArr.slice(cut);
-
-  // 保存はまとめて
-  scheduleSaveTs();
+function addNowCountFast() {
+  const nowMin = Math.floor(Date.now() / 60000);
+  advanceRingTo(nowMin);
+  minuteRing.ring[59]++;
+  scheduleSaveMinuteRing();
 }
 
-function countLastMinutesFast(min) {
-  const after = Date.now() - min * 60 * 1000;
-  const idx = lowerBound(tsArr, after);
-  return tsArr.length - idx;
+function getLastMinutesCount(min) {
+  const nowMin = Math.floor(Date.now() / 60000);
+  advanceRingTo(nowMin);
+
+  const n = Math.min(60, Math.max(1, min));
+  let sum = 0;
+  for (let i = 60 - n; i < 60; i++) sum += minuteRing.ring[i];
+  return sum;
 }
 
-const getLast1HourCount = () => countLastMinutesFast(60);
-const getLast5MinCount  = () => countLastMinutesFast(5);
+const getLast1HourCount = () => getLastMinutesCount(60);
+const getLast5MinCount  = () => getLastMinutesCount(5);
 
 function applyTopPadding(extra=35){
   const buttonArea = document.getElementById('button-area');
@@ -436,7 +453,7 @@ function presentSentenceByEn(en){
     markDirty(todayCountsKey);
     todayShownCached++;
 
-    addNowTsFast();
+    addNowCountFast();
 
     const prevIso = lastShownMap[en];
     const prevText = prevIso ? humanElapsed(prevIso) : "なし";
@@ -550,6 +567,8 @@ function resetData(){
   localStorage.removeItem(keyPrefix+"lastShown");
   localStorage.removeItem(keyPrefix+"starMarks");
   localStorage.removeItem(hourTsKey);
+  localStorage.removeItem(minuteKey);
+  minuteRing = { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
   clearDailyCounts();
 
   shownCounts = {}; yesMarks = {}; lastShownMap = {}; starMarks = {};
@@ -615,6 +634,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
