@@ -255,24 +255,57 @@ const hourTsKey = keyPrefix + "shownTimestamps";
 let currentSentence = null;
 let toggleMode = true; // true: ランダム / false: 最少回数
 
-/* ========= ユーティリティ ========= */
-function loadTs(){ try{ const a=JSON.parse(localStorage.getItem(hourTsKey)); return Array.isArray(a)?a:[] } catch { return [] } }
-function saveTs(a){ localStorage.setItem(hourTsKey, JSON.stringify(a)) }
-function addNowTs(){
-  const now = Date.now();
-  let a = loadTs();
-  a.push(now);
-  const keepAfter = now - 24*60*60*1000;
-  if (a.length > 1200) a = a.filter(t => t >= keepAfter);
-  saveTs(a);
+/* ===== タイムスタンプ高速化（localStorage頻繁アクセスをやめる） ===== */
+let tsArr = (() => {
+  try {
+    const a = JSON.parse(localStorage.getItem(hourTsKey));
+    return Array.isArray(a) ? a : [];
+  } catch { return []; }
+})();
+
+let tsSaveScheduled = false;
+function scheduleSaveTs() {
+  if (tsSaveScheduled) return;
+  tsSaveScheduled = true;
+  // まとめて保存（presentSentenceのDOM更新を邪魔しにくい）
+  setTimeout(() => {
+    try { localStorage.setItem(hourTsKey, JSON.stringify(tsArr)); } catch {}
+    tsSaveScheduled = false;
+  }, 200);
 }
-function getLastMinutesCount(min){
-  const now = Date.now();
-  const after = now - min*60*1000;
-  return loadTs().filter(t => t >= after).length;
+
+// 単調増加配列なので二分探索で「after以上の最初の位置」を探せる
+function lowerBound(arr, x) {
+  let lo = 0, hi = arr.length;
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1;
+    if (arr[mid] < x) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
 }
-const getLast1HourCount = ()=>getLastMinutesCount(60);
-const getLast5MinCount  = ()=>getLastMinutesCount(5);
+
+function addNowTsFast() {
+  const now = Date.now();
+  tsArr.push(now);
+
+  // 24hより古いのは先頭から捨てる（filter全走査しない）
+  const keepAfter = now - 24 * 60 * 60 * 1000;
+  const cut = lowerBound(tsArr, keepAfter);
+  if (cut > 0) tsArr = tsArr.slice(cut);
+
+  // 保存はまとめて
+  scheduleSaveTs();
+}
+
+function countLastMinutesFast(min) {
+  const after = Date.now() - min * 60 * 1000;
+  const idx = lowerBound(tsArr, after);
+  return tsArr.length - idx;
+}
+
+const getLast1HourCount = () => countLastMinutesFast(60);
+const getLast5MinCount  = () => countLastMinutesFast(5);
 
 function applyTopPadding(extra=35){
   const buttonArea = document.getElementById('button-area');
@@ -361,7 +394,7 @@ function presentSentenceByEn(en){
   scheduleSave(todayCountsKey, todayCounts);
   todayShownCached++;
 
-  addNowTs();
+  addNowTsFast();
 
   const prevIso = lastShownMap[en];
   const prevText = prevIso ? humanElapsed(prevIso) : "なし";
@@ -550,6 +583,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
