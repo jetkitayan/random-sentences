@@ -415,9 +415,15 @@ function presentSentenceByEn(en){
     lastShownMap[en] = new Date().toISOString();
     scheduleSave(keyPrefix+"lastShown", lastShownMap);
 
+    const totalShownLastHour = getLast1HourCount();
+    const totalShownLast5Min = getLast5MinCount();
     const starMark = starMarks[en] ? "★" : "";
-
-    if (topMetaEl) topMetaEl.textContent = `${newShown}回目${starMark}\n${prevText}`;
+    
+    if (topMetaEl) {
+      topMetaEl.innerHTML =
+        `${newShown}回目${starMark}<br>` +
+        `${prevText}（ ${totalShownLast5Min} / ${totalShownLastHour} / ${todayShownCached} / ${totalShownCached} ）`;
+    }
   });
 }
 
@@ -581,6 +587,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
