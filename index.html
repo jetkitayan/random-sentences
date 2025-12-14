@@ -302,10 +302,11 @@ function advanceRingTo(nowMin) {
     return;
   }
 
-  for (let i = 0; i < diff; i++) {
-    minuteRing.ring.shift();
-    minuteRing.ring.push(0);
-  }
+  // shift() をやめて、手動で左詰め（60固定なので速い）
+  const r = minuteRing.ring;
+  for (let i = 0; i < 60 - diff; i++) r[i] = r[i + diff];
+  for (let i = 60 - diff; i < 60; i++) r[i] = 0;
+
   minuteRing.baseMin = nowMin;
 }
 
@@ -634,6 +635,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
