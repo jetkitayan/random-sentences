@@ -253,9 +253,6 @@ let todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
 let totalShownCached = Object.values(shownCounts).reduce((a,b)=>a+(b||0),0);
 let todayShownCached = Object.values(todayCounts).reduce((a,b)=>a+(b||0),0);
 
-/* 直近タイムスタンプ */
-const hourTsKey = keyPrefix + "shownTimestamps";
-
 /* 画面状態 */
 let currentSentence = null;
 let toggleMode = true; // true: ランダム / false: 最少回数
@@ -635,6 +632,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
