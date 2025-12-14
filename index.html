@@ -426,11 +426,11 @@ function presentSentenceByEn(en){
   requestAnimationFrame(() => {
     const newShown = (shownCounts[en]||0) + 1;
     shownCounts[en] = newShown;
-    scheduleSave(keyPrefix+"shownCounts", shownCounts);
+    markDirty(keyPrefix+"shownCounts");
     totalShownCached++;
 
     todayCounts[en] = (todayCounts[en]||0) + 1;
-    scheduleSave(todayCountsKey, todayCounts);
+    markDirty(keyPrefix+"shownCounts");
     todayShownCached++;
 
     addNowTsFast();
@@ -438,7 +438,7 @@ function presentSentenceByEn(en){
     const prevIso = lastShownMap[en];
     const prevText = prevIso ? humanElapsed(prevIso) : "なし";
     lastShownMap[en] = new Date().toISOString();
-    scheduleSave(keyPrefix+"lastShown", lastShownMap);
+    markDirty(keyPrefix+"shownCounts");
 
     const totalShownLastHour = getLast1HourCount();
     const totalShownLast5Min = getLast5MinCount();
@@ -501,10 +501,10 @@ function showRandomStarred(){
 function confirmSentence(){
   if (!currentSentence) return;
   yesMarks[currentSentence.en] = true;
-  scheduleSave(keyPrefix + "yesMarks", yesMarks);
+  markDirty(keyPrefix+"shownCounts");
 
   remaining = remaining.filter(s => s !== currentSentence.en);
-  scheduleSave(keyPrefix + "remaining", remaining);
+  markDirty(keyPrefix+"shownCounts");
 
   if (remaining.length > 0) showRandom();
   else {
@@ -523,7 +523,7 @@ function toggleStar(){
   const en = currentSentence.en;
   const now = !starMarks[en];
   starMarks[en] = now;
-  scheduleSave(keyPrefix + "starMarks", starMarks);
+  markDirty(keyPrefix+"shownCounts");
 
   updateStarUi();  // ラベルは常に「☆」
 
@@ -612,6 +612,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
