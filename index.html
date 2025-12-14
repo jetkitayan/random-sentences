@@ -386,17 +386,18 @@ function presentSentenceByEn(en){
   if (!s) return;
   currentSentence = s;
 
-  // ① 表示を最優先
+  // === ① 表示を最優先 ===
   const jpEl = document.getElementById("sentence-jp");
   jpEl.innerHTML = `<div class="top-meta">読み込み中…</div><div>${s.jp}</div>`;
+
   document.getElementById("sentence-en").textContent = s.en;
   document.getElementById("okBtn").disabled = false;
   updateStarUi();
 
-  // ★ ここで参照を固定（querySelectorを毎回しない）
+  // ★ ここで「この表示のtop-meta」を固定して掴む
   const topMetaEl = jpEl.querySelector(".top-meta");
 
-  // ② 重い処理は後回し
+  // === ② 重い処理は後回し ===
   requestAnimationFrame(() => {
     const newShown = (shownCounts[en]||0) + 1;
     shownCounts[en] = newShown;
@@ -582,6 +583,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
