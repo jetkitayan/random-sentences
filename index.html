@@ -72,19 +72,14 @@ body {
   position: relative;
 }
 
-/* 日本語（上に固定） */
+/* 日本語（通常フローに戻す） */
 #sentence-jp {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: static;   /* ← absolute をやめる */
 }
 
-/* 英文（通常フロー） */
+/* 英文（日本語の下に来る） */
 #sentence-en {
-  display: block;
   margin-top: 1.2em;
-  min-height: 3.2em;
 }
 
 /* 回数表示 */
@@ -633,6 +628,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
