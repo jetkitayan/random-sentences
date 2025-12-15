@@ -486,7 +486,7 @@ function showRandom(){
   if (toggleMode) {
     en = pickRandom(remaining, currentSentence?.en);
   } else {
-    en = pickLeastShown(remaining, currentSentence?.en);
+    en = pickRandomFast(remaining, currentSentence?.en);
   }
 
   toggleMode = !toggleMode;
@@ -648,6 +648,20 @@ function pickLeastShown(remainingArr, excludeEn){
   return chosen ?? remainingArr[0];
 }
 
+function pickRandomFast(arr, excludeEn){
+  const n = arr.length;
+  if (n === 0) return null;
+  if (n === 1) return arr[0];
+
+  let idx = (Math.random() * n) | 0;
+  if (arr[idx] !== excludeEn) return arr[idx];
+
+  // excludeに当たったら、残り(n-1)のどこかへ必ずずらす
+  const offset = 1 + ((Math.random() * (n - 1)) | 0);
+  idx = (idx + offset) % n;
+  return arr[idx];
+}
+
 /* ========= イベント ========= */
 document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("showStarBtn").onclick = showRandomStarred;
@@ -659,6 +673,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
