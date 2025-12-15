@@ -238,7 +238,6 @@ const keyPrefix = `randomApp_${fileParam}_`;
 
 const sentenceJpEl = document.getElementById("sentence-jp");
 const sentenceEnEl = document.getElementById("sentence-en");
-const lastShownEl  = document.getElementById("last-shown");
 const showBtnEl    = document.getElementById("showBtn");
 const okBtnEl      = document.getElementById("okBtn");
 const starBtnEl    = document.getElementById("starBtn");
@@ -360,13 +359,6 @@ function humanElapsed(iso){
     const h=Math.floor(m/60); if(h<24) return `${h}時間前`;
     return `${Math.floor(h/24)}日前`;
   }catch{return""}
-}
-function pickRandom(pool, excludeEn){
-  if (!Array.isArray(pool) || pool.length===0) return null;
-  if (pool.length===1) return pool[0];
-  let en;
-  do { en = pool[Math.floor(Math.random()*pool.length)] } while (en===excludeEn);
-  return en;
 }
 
 // ===== 保存を「まとめて」やる（超重要）=====
@@ -525,7 +517,7 @@ function showRandomStarred(){
     alert("☆が付いた英文がありません。先に『☆』でお気に入り登録してください。");
     return;
   }
-  const en = pickRandom(pool, currentSentence?.en);
+  const en = pickRandomFast(pool, currentSentence?.en);
   lastShowMode = "star";
   presentSentenceByEn(en);
 }
@@ -723,6 +715,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
