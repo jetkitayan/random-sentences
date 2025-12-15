@@ -118,6 +118,24 @@ body {
   justify-content: center;
 }
 
+/* 表示履歴一覧：初期は非表示 */
+#statsArea {
+  display: none;
+  padding: 20px 40px;
+}
+
+#statsArea table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#statsArea th,
+#statsArea td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
 </style>
 </head>
 <body>
@@ -635,6 +653,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
