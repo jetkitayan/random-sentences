@@ -4,217 +4,122 @@
 <meta charset="UTF-8" />
 <title>Random English Sentences</title>
 <style>
-* , *::before, *::after { box-sizing: border-box; }
+/* ==================================================
+   1. Reset / Base
+================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
-  font-family: sans-serif;
   margin: 0;
-  padding: 0; /* 上余白はJSで自動調整 */
+  font-family: sans-serif;
   background-color: #fafafa;
 }
 
-/* 上に固定するボタン群 */
+
+/* ==================================================
+   2. Button Area (fixed)
+================================================== */
 #button-area {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 65px 25px 13px 25px;  /* 上 右 下 左 */
+  padding: 65px 25px 13px;
   text-align: center;
   z-index: 999;
 }
 
-/* 両段で幅をそろえる */
-#button-area .row2,
-#button-area .row1 {
+/* 共通幅 */
+#button-area .row1,
+#button-area .row2 {
   max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
-/* === 上段：Show Random / ☆Only === */
+/* 上段ボタン */
 #button-area .row2 {
   display: grid;
-  grid-template-columns: 605fr 395fr;  /* ← ここで4:1を厳密指定 */
+  grid-template-columns: 605fr 395fr;
   gap: 23px;
   max-width: 900px;
-  margin: 0 auto;
-  width: 100%;
 }
 
-/* ボタンは幅100%で受けるだけ（余計なwidth/flexは付けない） */
-#button-area .row2 button {
-  width: 100%;
-  min-width: 0;
-  text-align: center;
-  border-radius: 16px;
-}
-  
-/* 左右ボタンそれぞれの角丸調整 */
-#showBtn {
-  border-top-right-radius: 8px;     /* 内側：少し丸く */
-  border-bottom-right-radius: 8px;  /* 内側：少し丸く */
-}
-
-#showStarBtn {
-  border-top-left-radius: 8px;      /* 内側：少し丸く */
-  border-bottom-left-radius: 8px;   /* 内側：少し丸く */
-}
-  
-/* === 下段：1段目（OK/☆/Reset/Stats/Mail）=== */
+/* 下段ボタン */
 #button-area .row1 {
   display: flex;
-  justify-content: center;     /* 中央寄せ */
-  align-items: center;
-  flex-wrap: nowrap;           /* 1行固定 */
   gap: 25px;
   margin-top: 25px;
-
-  /* ★ 中央寄せのために幅を明示し、左右autoで固定 */
-  width: fit-content;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* 各ボタンを固定幅にして整列 */
-#button-area .row1 button {
-  /* 固定幅で中央に揃える（合計900pxぴったり：160px×5 + 25px×4） */
-  flex: 0 0 160px;
-  min-width: 160px;
-  max-width: 160px;
-  flex: 0 0 160px;   /* 固定幅 */
-  width: 160px;
-  text-align: center;
-}
-
-/* 共通ボタン（文字を水平＆垂直センター） */
-button {
-  padding: 45px 50px;
-  font-size: 40px;
-  color: #000;
-  border-radius: 16px;
-  cursor: pointer;
-  border: 3px solid #000;
-  background: #fff;
-  background-color: #d9d9d9;
-
-  display: flex;
-  align-items: center;
   justify-content: center;
-  text-align: center;
 }
 
-/* 上段の継ぎ目を自然に */
-#showStarBtn {                 /* 右半分（☆ Only） */
-  border-left-width: 3px;      /* 真ん中の線が太くなりすぎないように */
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
 
-#showBtn {                     /* 左半分（Show Random） */
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
+/* ==================================================
+   3. Content Layout
+================================================== */
 #content {
   position: relative;
   max-width: 1100px;
   padding-left: 40px;
-  margin-top: 580px;
+  margin-top: 580px; /* button-area 分 */
 }
 
-/* —— 3行の上下マージンを統一 —— */
-#sentence-jp,
-#sentence-en,
-#last-shown {
-  margin: 40px 0;
+/* 文章ブロック */
+#sentence-frame {
+  position: relative;
 }
 
-/* 文字サイズなどは従来通り（jp/enのみ共通指定） */
-.count-label,
-#sentence-jp,
-#sentence-en {
-  line-height: 1.6;
-  font-size: 52px;
-  color: #000;
-  -webkit-text-size-adjust: none !important;
-  text-size-adjust: none !important;
-}
-
-.top-meta { white-space: pre-line; }
-
-/* 1行目内の補足メタの下余白で1行目と2行目の間隔を作る */
-.top-meta {
-  margin: 0;
-  padding-bottom: 46px;
-}
-
-#statsArea {
-  display: none;
-  padding: 20px 40px;
-}
-
-#statsArea table {
-  border-collapse: collapse;
-  width: 100%;
-}
-  
-#statsArea th, #statsArea td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: left;
-}
-
-#sentence-en {
-  transition: opacity 0.12s linear;
-}
-  
-.hidden {
-  opacity: 0;
-}
-
-/* ボタン分の空白（完全固定） */
-#top-spacer {
-  height: 260px; /* ← 実測して一度だけ決める */
-}
-
-/* 日本語・英語を重ねる */
-#sentence-jp,
-#sentence-en {
+/* 日本語（上に固定） */
+#sentence-jp {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  min-height: 5.5em; /* ← 高さ固定 */
 }
 
-/* 文章フレーム（高さを保証） */
-#sentence-frame {
-  position: relative;
-  min-height: 12em;
-}
-
-/* 日本語・英語はフレーム内で重ねる */
-#sentence-jp {
-  position: absolute;
-  top: 0;
-}
-
+/* 英文（通常フロー） */
 #sentence-en {
   display: block;
   margin-top: 1.2em;
   min-height: 3.2em;
 }
-  
-/* 旧シングル時代の高さ指定はそのまま利用 */
-#showBtn { padding: 80px; }
 
-/* スマホ対応：折返し時も中央寄せ */
-@media (max-width: 920px) {
-  #button-area .row1 { flex-wrap: wrap; }
-  #button-area .row1 button { flex: 0 0 48%; min-width: 0; max-width: none; }
+/* 回数表示 */
+#last-shown {
+  margin-top: 40px;
 }
+
+
+/* ==================================================
+   4. Typography
+================================================== */
+#sentence-jp,
+#sentence-en {
+  font-size: 52px;
+  line-height: 1.6;
+  color: #000;
+}
+
+.top-meta {
+  white-space: pre-line;
+  padding-bottom: 46px;
+}
+
+
+/* ==================================================
+   5. Effects / Utilities
+================================================== */
+.hidden {
+  opacity: 0;
+}
+
+#sentence-en {
+  transition: opacity 0.12s linear;
+}
+
 </style>
 </head>
 <body>
@@ -728,6 +633,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
