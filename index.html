@@ -486,14 +486,9 @@ function showRandom(){
   if (toggleMode) {
     en = pickRandom(remaining, currentSentence?.en);
   } else {
-    let min = Infinity, least = [];
-    for (const s of remaining) {
-      const c = shownCounts[s] || 0;
-      if (c < min) { min = c; least.length = 0; least.push(s); }
-      else if (c === min) { least.push(s); }
-    }
-    en = pickRandom(least, currentSentence?.en);
+    en = pickLeastShown(remaining, currentSentence?.en);
   }
+
   toggleMode = !toggleMode;
 
   lastShowMode = "all";
@@ -664,6 +659,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
