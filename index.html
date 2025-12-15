@@ -454,20 +454,28 @@ function presentSentenceByEn(en){
   if (!s) return;
   currentSentence = s;
 
-  // === ① 表示を最優先 ===
-  jpTextEl.textContent = s.jp;
-  enEl.textContent = s.en;
+  // フェードアウト
+  sentenceJpEl.classList.add("hidden");
+  sentenceEnEl.classList.add("hidden");
 
-  // === ② 重い処理は後回し ===
   requestAnimationFrame(() => {
-    const newShown = (shownCounts[en]||0) + 1;
+    // テキスト差し替え
+    jpTextEl.textContent = s.jp;
+    enEl.textContent     = s.en;
+
+    // フェードイン
+    sentenceJpEl.classList.remove("hidden");
+    sentenceEnEl.classList.remove("hidden");
+  });
+
+  // 重い処理はさらに後ろ
+  setTimeout(() => {
+    const newShown = (shownCounts[en] || 0) + 1;
     shownCounts[en] = newShown;
     markDirty(keyPrefix+"shownCounts");
-    totalShownCached++;
 
-    todayCounts[en] = (todayCounts[en]||0) + 1;
+    todayCounts[en] = (todayCounts[en] || 0) + 1;
     markDirty(todayCountsKey);
-    todayShownCached++;
 
     addNowCountFast();
 
@@ -476,16 +484,11 @@ function presentSentenceByEn(en){
     lastShownMap[en] = new Date().toISOString();
     markDirty(keyPrefix+"lastShown");
 
-    const totalShownLastHour = getLast1HourCount();
-    const totalShownLast5Min = getLast5MinCount();
     const starMark = starMarks[en] ? "★" : "";
-    
-    if (topMetaEl) {
-      setTimeout(() => {
-        topMetaEl.textContent = ...
-      }, 0);
-    }
-  });
+    topMetaEl.textContent =
+      `${newShown}回目${starMark}\n` +
+      `${prevText}`;
+  }, 0);
 }
 
 /* ========= 通常ランダム表示 ========= */
@@ -692,19 +695,6 @@ function applyTopPadding(extra=35){
   document.body.style.paddingTop = (h + extra) + 'px';
 }
 
-function presentSentenceByEn(en){
-  sentenceJpEl.classList.add("hidden");
-  sentenceEnEl.classList.add("hidden");
-
-  requestAnimationFrame(() => {
-    jpTextEl.textContent = byEn[en].jp;
-    enEl.textContent     = byEn[en].en;
-
-    sentenceJpEl.classList.remove("hidden");
-    sentenceEnEl.classList.remove("hidden");
-  });
-}
-
 function prepareNext() {
   if (remainingArr.length === 0) {
     nextEn = null;
@@ -741,6 +731,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
