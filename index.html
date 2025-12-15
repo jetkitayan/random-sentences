@@ -592,7 +592,7 @@ function resetData(){
   todayCounts = {}; localStorage.removeItem(todayCountsKey);
 
   remainingArr = allSentences.map(s => s.en);
-　remainingSet = new Set(remainingArr);
+  remainingSet = new Set(remainingArr);
   currentSentence = null;
   document.getElementById("sentence-jp").textContent = "Press 'Show Random' to start";
   document.getElementById("sentence-en").textContent = "";
@@ -723,6 +723,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
