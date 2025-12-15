@@ -484,13 +484,12 @@ function showRandom(){
 
   let en;
   if (toggleMode) {
-    en = pickRandom(remaining, currentSentence?.en);
+    en = pickRandomFast(remaining, currentSentence?.en);   // ランダム側を高速化
   } else {
-    en = pickRandomFast(remaining, currentSentence?.en);
+    en = pickLeastShown(remaining, currentSentence?.en);   // 最少回数側を高速化
   }
-
   toggleMode = !toggleMode;
-
+  
   lastShowMode = "all";
   presentSentenceByEn(en);
 }
@@ -673,6 +672,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
