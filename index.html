@@ -171,6 +171,23 @@ button {
 .hidden {
   opacity: 0;
 }
+
+/* ボタン分の空白（完全固定） */
+#top-spacer {
+  height: 260px; /* ← 実測して一度だけ決める */
+}
+
+/* 文章表示フレーム */
+#content {
+  max-width: 1100px;
+  padding-left: 40px;
+}
+
+/* 高さを固定する箱 */
+#sentence-jp,
+#sentence-en {
+  min-height: 5.5em;   /* ← 最大行数を想定して固定 */
+}
   
 /* 旧シングル時代の高さ指定はそのまま利用 */
 #showBtn { padding: 80px; }
@@ -199,7 +216,7 @@ button {
     <button id="copyBtn">Copy</button>
   </div>
 </div>
-
+<div id="top-spacer"></div>
 <div id="content">
   <div id="sentence-jp">
     <div class="top-meta" id="topMeta">Press "Show Random" to start</div>
@@ -342,14 +359,6 @@ function getLastMinutesCount(min) {
 
 const getLast1HourCount = () => getLastMinutesCount(60);
 const getLast5MinCount  = () => getLastMinutesCount(5);
-
-function applyTopPadding(extra=35){
-  const h = document.getElementById('button-area')
-    .getBoundingClientRect().height;
-  document.body.style.paddingTop = (h + extra) + 'px';
-}
-window.addEventListener('load', applyTopPadding);
-window.addEventListener('resize', ()=>applyTopPadding());
 
 function humanElapsed(iso){
   try{
@@ -715,6 +724,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
