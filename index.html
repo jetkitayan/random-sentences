@@ -675,6 +675,26 @@ function pickRandomFast(arr, excludeEn){
   return arr[idx];
 }
 
+function applyTopPadding(extra=35){
+  const buttonArea = document.getElementById('button-area');
+  const h = buttonArea.getBoundingClientRect().height;
+  document.body.style.paddingTop = (h + extra) + 'px';
+}
+
+// 初期
+window.addEventListener('load', () => applyTopPadding());
+window.addEventListener('resize', () => applyTopPadding());
+
+// ★ 追加：ボタンエリアの高さが変わったら自動追従
+const buttonArea = document.getElementById('button-area');
+if ('ResizeObserver' in window) {
+  const ro = new ResizeObserver(() => applyTopPadding());
+  ro.observe(buttonArea);
+} else {
+  // 古い環境向け保険
+  setInterval(() => applyTopPadding(), 500);
+}
+  
 /* ========= イベント ========= */
 document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("showStarBtn").onclick = showRandomStarred;
@@ -686,6 +706,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
