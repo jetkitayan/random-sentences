@@ -345,11 +345,9 @@ const getLast1HourCount = () => getLastMinutesCount(60);
 const getLast5MinCount  = () => getLastMinutesCount(5);
 
 function applyTopPadding(extra=35){
-  const buttonArea = document.getElementById('button-area');
-  requestAnimationFrame(() => {
-    const h = buttonArea.getBoundingClientRect().height;
-    document.body.style.paddingTop = (h + extra) + 'px';
-  });
+  const h = document.getElementById('button-area')
+    .getBoundingClientRect().height;
+  document.body.style.paddingTop = (h + extra) + 'px';
 }
 window.addEventListener('load', applyTopPadding);
 window.addEventListener('resize', ()=>applyTopPadding());
@@ -689,12 +687,6 @@ function pickRandomFast(arr, excludeEn){
   return arr[idx];
 }
 
-function applyTopPadding(extra=35){
-  const buttonArea = document.getElementById('button-area');
-  const h = buttonArea.getBoundingClientRect().height;
-  document.body.style.paddingTop = (h + extra) + 'px';
-}
-
 function prepareNext() {
   if (remainingArr.length === 0) {
     nextEn = null;
@@ -731,6 +723,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
