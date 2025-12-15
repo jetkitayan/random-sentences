@@ -196,12 +196,13 @@ button {
 }
 
 /* 日本語・英語はフレーム内で重ねる */
-#sentence-jp,
-#sentence-en {
+#sentence-jp {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+}
+
+#sentence-en {
+  position: static; /* ← もしくは削除 */
 }
   
 /* 旧シングル時代の高さ指定はそのまま利用 */
@@ -725,6 +726,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
