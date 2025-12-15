@@ -238,7 +238,8 @@ const starBtnEl    = document.getElementById("starBtn");
 let shownCounts = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
 let yesMarks    = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
 let starMarks   = JSON.parse(localStorage.getItem(keyPrefix + "starMarks")) || {};
-let remaining   = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
+let remainingArr = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
+let remainingSet = new Set(remainingArr);
 let lastShownMap= JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
 
 let lastShowMode = "all"; // "all" | "star"
@@ -409,16 +410,16 @@ const byEn = Object.create(null);
 
 /* ========= データ読み込み ========= */
 fetch(jsonFile)
-  .then(r => { if(!r.ok) throw new Error(`ファイルが見つかりません: ${jsonFile}`); return r.json(); })
+  .then(r => r.json())
   .then(data => {
     allSentences = data;
     for (const s of allSentences) byEn[s.en] = s;
-    if (remaining.length === 0) remaining = allSentences.map(s=>s.en);
-    applyTopPadding();
-  })
-  .catch(err => {
-    document.getElementById("sentence-jp").textContent = "❌ JSONファイルの読み込みに失敗しました。";
-    document.getElementById("sentence-en").textContent = err.message;
+
+    if (remainingArr.length === 0) {
+      remainingArr = allSentences.map(s => s.en);
+      remainingSet = new Set(remainingArr);
+      localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remainingArr));
+    }
   });
 
 /* ========= スターUI（☆固定表示） ========= */
@@ -478,24 +479,19 @@ function presentSentenceByEn(en){
 
 /* ========= 通常ランダム表示 ========= */
 function showRandom(){
-  if (remaining.length === 0) {
-    sentenceJpEl.textContent = "すべての英文を表示しました！";
-    sentenceEnEl.textContent = "";
-    lastShownEl.textContent  = "";
-    showBtnEl.disabled = true;
-    okBtnEl.disabled   = true;
-    starBtnEl.disabled = true;
+  if (remainingArr.length === 0) {
+    // 完了処理
     return;
   }
 
   let en;
   if (toggleMode) {
-    en = pickRandomFast(remaining, currentSentence?.en);   // ランダム側を高速化
+    en = pickRandomFast(remainingArr, currentSentence?.en);
   } else {
-    en = pickLeastShown(remaining, currentSentence?.en);   // 最少回数側を高速化
+    en = pickLeastShown(remainingArr, currentSentence?.en);
   }
+
   toggleMode = !toggleMode;
-  
   lastShowMode = "all";
   presentSentenceByEn(en);
 }
@@ -677,6 +673,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
