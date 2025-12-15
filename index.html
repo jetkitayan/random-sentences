@@ -375,6 +375,10 @@ function presentSentenceByEn(en){
   if (!s) return;
   currentSentence = s;
 
+  okBtnEl.disabled = false;
+  starBtnEl.disabled = false;
+  updateStarUi();
+   
   // フェードアウト
   sentenceJpEl.classList.add("hidden");
   sentenceEnEl.classList.add("hidden");
@@ -631,6 +635,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
