@@ -30,8 +30,14 @@ body {
   padding: 65px 25px 13px;
   text-align: center;
   z-index: 999;
+  touch-action: manipulation;
 }
 
+#button-area button:active {
+  transform: translateY(1px);
+  filter: brightness(0.95);
+}
+   
 /* 共通幅 */
 #button-area .row1,
 #button-area .row2 {
@@ -69,6 +75,11 @@ body {
 #sentence-frame{ position: relative; }
 #sentence-jp{ position: static; }
 #sentence-en{ display:block; margin-top: 1.2em; min-height: 3.2em; }
+
+#sentence-jp,
+#sentence-en {
+  will-change: opacity;
+}
 
 /* 回数表示 */
 #last-shown {
@@ -653,6 +664,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
