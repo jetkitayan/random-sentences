@@ -482,7 +482,12 @@ function presentSentenceByEn(en){
 /* ========= 通常ランダム表示 ========= */
 function showRandom(){
   if (remainingArr.length === 0) {
-    // 完了処理
+    sentenceJpEl.textContent = "すべての英文を表示しました！";
+    sentenceEnEl.textContent = "";
+    lastShownEl.textContent  = "";
+    showBtnEl.disabled = true;
+    okBtnEl.disabled   = true;
+    starBtnEl.disabled = true;
     return;
   }
 
@@ -500,7 +505,7 @@ function showRandom(){
 
 /* ========= ☆のみランダム表示 ========= */
 function showRandomStarred(){
-  let pool = remaining.filter(en => !!starMarks[en]);
+  let pool = remainingArr.filter(en => !!starMarks[en]);
   if (pool.length === 0) {
     pool = Object.keys(starMarks).filter(en => starMarks[en]);
   }
@@ -526,7 +531,7 @@ function confirmSentence(){
   
   markDirty(keyPrefix + "remaining");
 
-  if (remaining.length > 0) showRandom();
+  if (remainingArr.length > 0) showRandom();
   else {
     document.getElementById("sentence-jp").textContent = "すべての英文を表示しました！";
     document.getElementById("sentence-en").textContent = "";
@@ -574,7 +579,9 @@ function resetData(){
   totalShownCached = 0; todayShownCached = 0;
   todayCounts = {}; localStorage.removeItem(todayCountsKey);
 
-  remaining = allSentences.map(s=>s.en); currentSentence = null;
+  remainingArr = allSentences.map(s => s.en);
+　remainingSet = new Set(remainingArr);
+  currentSentence = null;
   document.getElementById("sentence-jp").textContent = "Press 'Show Random' to start";
   document.getElementById("sentence-en").textContent = "";
   document.getElementById("last-shown").textContent = "";
@@ -679,6 +686,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
