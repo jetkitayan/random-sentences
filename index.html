@@ -165,6 +165,13 @@ button {
   text-align: left;
 }
 
+#sentence-jp, #sentence-en {
+  transition: opacity 0.12s linear;
+}
+.hidden {
+  opacity: 0;
+}
+  
 /* 旧シングル時代の高さ指定はそのまま利用 */
 #showBtn { padding: 80px; }
 
@@ -474,9 +481,9 @@ function presentSentenceByEn(en){
     const starMark = starMarks[en] ? "★" : "";
     
     if (topMetaEl) {
-      topMetaEl.textContent =
-        `${newShown}回目${starMark}\n` +
-        `${prevText}（ ${totalShownLast5Min} / ${totalShownLastHour} / ${todayShownCached} / ${totalShownCached} ）`;
+      setTimeout(() => {
+        topMetaEl.textContent = ...
+      }, 0);
     }
   });
 }
@@ -685,6 +692,19 @@ function applyTopPadding(extra=35){
   document.body.style.paddingTop = (h + extra) + 'px';
 }
 
+function presentSentenceByEn(en){
+  sentenceJpEl.classList.add("hidden");
+  sentenceEnEl.classList.add("hidden");
+
+  requestAnimationFrame(() => {
+    jpTextEl.textContent = byEn[en].jp;
+    enEl.textContent     = byEn[en].en;
+
+    sentenceJpEl.classList.remove("hidden");
+    sentenceEnEl.classList.remove("hidden");
+  });
+}
+
 function prepareNext() {
   if (remainingArr.length === 0) {
     nextEn = null;
@@ -721,6 +741,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
