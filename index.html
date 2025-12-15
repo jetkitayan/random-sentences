@@ -227,6 +227,13 @@ const fileParam = params.get("file") || "default";
 const jsonFile = `${fileParam}.json`;
 const keyPrefix = `randomApp_${fileParam}_`;
 
+const sentenceJpEl = document.getElementById("sentence-jp");
+const sentenceEnEl = document.getElementById("sentence-en");
+const lastShownEl  = document.getElementById("last-shown");
+const showBtnEl    = document.getElementById("showBtn");
+const okBtnEl      = document.getElementById("okBtn");
+const starBtnEl    = document.getElementById("starBtn");
+  
 /* 永続データのロード */
 let shownCounts = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
 let yesMarks    = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
@@ -472,12 +479,12 @@ function presentSentenceByEn(en){
 /* ========= 通常ランダム表示 ========= */
 function showRandom(){
   if (remaining.length === 0) {
-    document.getElementById("sentence-jp").textContent = "すべての英文を表示しました！";
-    document.getElementById("sentence-en").textContent = "";
-    document.getElementById("last-shown").textContent = "";
-    document.getElementById("showBtn").disabled = true;
-    document.getElementById("okBtn").disabled = true;
-    document.getElementById("starBtn").disabled = true;
+    sentenceJpEl.textContent = "すべての英文を表示しました！";
+    sentenceEnEl.textContent = "";
+    lastShownEl.textContent  = "";
+    showBtnEl.disabled = true;
+    okBtnEl.disabled   = true;
+    starBtnEl.disabled = true;
     return;
   }
 
@@ -670,6 +677,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
