@@ -558,7 +558,6 @@ function resetData(){
   localStorage.removeItem(keyPrefix+"yesMarks");
   localStorage.removeItem(keyPrefix+"lastShown");
   localStorage.removeItem(keyPrefix+"starMarks");
-  localStorage.removeItem(hourTsKey);
   localStorage.removeItem(minuteKey);
   minuteRing = { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
   clearDailyCounts();
@@ -672,6 +671,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
