@@ -165,9 +165,10 @@ button {
   text-align: left;
 }
 
-#sentence-jp, #sentence-en {
+#sentence-en {
   transition: opacity 0.12s linear;
 }
+  
 .hidden {
   opacity: 0;
 }
@@ -183,10 +184,28 @@ button {
   padding-left: 40px;
 }
 
-/* 高さを固定する箱 */
+/* 文章全体を固定フレームにする */
+#content {
+  position: relative;
+  max-width: 1100px;
+  padding-left: 40px;
+}
+
+/* 日本語・英語を重ねる */
 #sentence-jp,
 #sentence-en {
-  min-height: 5.5em;   /* ← 最大行数を想定して固定 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 5.5em; /* ← 高さ固定 */
+}
+
+/* フレーム自体の高さを確保 */
+#content::before {
+  content: "";
+  display: block;
+  height: 5.5em;
 }
   
 /* 旧シングル時代の高さ指定はそのまま利用 */
@@ -698,21 +717,7 @@ function prepareNext() {
     ? pickRandomFast(remainingArr, currentSentence?.en)
     : pickLeastShown(remainingArr, currentSentence?.en);
 }
-  
-// 初期
-window.addEventListener('load', () => applyTopPadding());
-window.addEventListener('resize', () => applyTopPadding());
-
-// ★ 追加：ボタンエリアの高さが変わったら自動追従
-const buttonArea = document.getElementById('button-area');
-if ('ResizeObserver' in window) {
-  const ro = new ResizeObserver(() => applyTopPadding());
-  ro.observe(buttonArea);
-} else {
-  // 古い環境向け保険
-  setInterval(() => applyTopPadding(), 500);
-}
-  
+    
 /* ========= イベント ========= */
 document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("showStarBtn").onclick = showRandomStarred;
@@ -724,6 +729,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
