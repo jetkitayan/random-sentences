@@ -654,16 +654,20 @@ function prepareNext() {
 }
     
 /* ========= イベント ========= */
-document.getElementById("showBtn").onclick = showRandom;
-document.getElementById("showStarBtn").onclick = showRandomStarred;
-document.getElementById("okBtn").onclick = () => { if (!currentSentence) return; if (confirm("OK？")) confirmSentence(); };
+document.getElementById("showBtn").onpointerdown = showRandom;
+document.getElementById("showStarBtn").onpointerdown = showRandomStarred;
+document.getElementById("okBtn").onpointerdown = () => {
+  if (!currentSentence) return;
+  if (confirm("OK？")) confirmSentence();
+};
+document.getElementById("starBtn").onpointerdown = toggleStar;
 document.getElementById("resetBtn").onclick = resetData;
 document.getElementById("statsBtn").onclick = showStats;
 document.getElementById("copyBtn").onclick = copyStats;
-document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
