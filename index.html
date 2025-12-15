@@ -189,11 +189,19 @@ button {
   min-height: 5.5em; /* ← 高さ固定 */
 }
 
-/* フレーム自体の高さを確保 */
-#content::before {
-  content: "";
-  display: block;
-  height: 5.5em;
+/* 文章フレーム（高さを保証） */
+#sentence-frame {
+  position: relative;
+  min-height: 5.5em;   /* ← 今まで ::before でやってた役割 */
+}
+
+/* 日本語・英語はフレーム内で重ねる */
+#sentence-jp,
+#sentence-en {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
   
 /* 旧シングル時代の高さ指定はそのまま利用 */
@@ -224,11 +232,13 @@ button {
   </div>
 </div>
 <div id="content">
-  <div id="sentence-jp">
-    <div class="top-meta" id="topMeta">Press "Show Random" to start</div>
-    <div id="jpText"></div>
+  <div id="sentence-frame">
+    <div id="sentence-jp">
+      <div class="top-meta" id="topMeta">Press "Show Random" to start</div>
+      <div id="jpText"></div>
+    </div>
+    <div id="sentence-en"></div>
   </div>
-  <div id="sentence-en"></div>
   <div id="last-shown"></div>
 </div>
 
@@ -715,5 +725,6 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
