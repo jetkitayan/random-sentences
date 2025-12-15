@@ -387,7 +387,9 @@ function flushSaves() {
         else if (key === keyPrefix+"lastShown") localStorage.setItem(key, JSON.stringify(lastShownMap));
         else if (key === keyPrefix+"yesMarks")  localStorage.setItem(key, JSON.stringify(yesMarks));
         else if (key === keyPrefix+"starMarks") localStorage.setItem(key, JSON.stringify(starMarks));
-        else if (key === keyPrefix+"remaining") localStorage.setItem(key, JSON.stringify(remaining));
+        else if (key === keyPrefix+"remaining") {
+          localStorage.setItem(key, JSON.stringify(remainingArr));
+        }
       }
     } catch {}
     dirtyKeys.clear();
@@ -517,8 +519,12 @@ function confirmSentence(){
   yesMarks[currentSentence.en] = true;
   markDirty(keyPrefix+"yesMarks");
 
-  remaining = remaining.filter(s => s !== currentSentence.en);
-  markDirty(keyPrefix+"remaining");
+  remainingSet.delete(currentSentence.en);  // O(1)
+
+  // 配列は次の ShowRandom の前にまとめて再生成
+  remainingArr = Array.from(remainingSet);
+  
+  markDirty(keyPrefix + "remaining");
 
   if (remaining.length > 0) showRandom();
   else {
@@ -673,6 +679,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
