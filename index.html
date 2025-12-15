@@ -621,6 +621,38 @@ function copyStats(){
     .catch(()=>alert("コピーに失敗しました。もう一度お試しください。"));
 }
 
+function pickLeastShown(remainingArr, excludeEn){
+  const n = remainingArr.length;
+  if (n === 0) return null;
+  if (n === 1) return remainingArr[0];
+
+  let min = Infinity;
+  let chosen = null;
+  let seen = 0; // min と同値の候補を何個見たか
+
+  for (let i = 0; i < n; i++) {
+    const en = remainingArr[i];
+
+    // 直前と同じのを避けたい（ただし残り1なら避けようがない）
+    if (en === excludeEn && n > 1) continue;
+
+    const c = shownCounts[en] || 0;
+
+    if (c < min) {
+      min = c;
+      chosen = en;
+      seen = 1;
+    } else if (c === min) {
+      seen++;
+      // 1/seen の確率で置き換える → min同率から一様ランダム
+      if ((Math.random() * seen) < 1) chosen = en;
+    }
+  }
+
+  // excludeで全部飛んだ等の保険
+  return chosen ?? remainingArr[0];
+}
+
 /* ========= イベント ========= */
 document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("showStarBtn").onclick = showRandomStarred;
@@ -632,6 +664,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
