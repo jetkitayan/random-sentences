@@ -118,9 +118,9 @@ button {
 }
 
 #content {
-  margin-top: -15px;  /* ベース余白（上はJSで加算） */
-  padding-left: 40px;
+  position: relative;
   max-width: 1100px;
+  padding-left: 40px;
 }
 
 /* —— 3行の上下マージンを統一 —— */
@@ -176,19 +176,6 @@ button {
 /* ボタン分の空白（完全固定） */
 #top-spacer {
   height: 260px; /* ← 実測して一度だけ決める */
-}
-
-/* 文章表示フレーム */
-#content {
-  max-width: 1100px;
-  padding-left: 40px;
-}
-
-/* 文章全体を固定フレームにする */
-#content {
-  position: relative;
-  max-width: 1100px;
-  padding-left: 40px;
 }
 
 /* 日本語・英語を重ねる */
@@ -621,7 +608,6 @@ function resetData(){
   document.getElementById("okBtn").disabled = true;
   document.getElementById("starBtn").disabled = true;
   document.getElementById("statsArea").style.display = "none";
-  applyTopPadding();
 }
 
 /* ========= Stats & Copy ========= */
@@ -729,6 +715,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
