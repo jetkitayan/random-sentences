@@ -221,6 +221,8 @@ button {
 
 <script>
 /* ========= 状態 ========= */
+let nextEn = null;
+
 let allSentences = [];
 const params = new URLSearchParams(window.location.search);
 const fileParam = params.get("file") || "default";
@@ -481,26 +483,28 @@ function presentSentenceByEn(en){
 
 /* ========= 通常ランダム表示 ========= */
 function showRandom(){
+  // 完了チェック
   if (remainingArr.length === 0) {
     sentenceJpEl.textContent = "すべての英文を表示しました！";
     sentenceEnEl.textContent = "";
-    lastShownEl.textContent  = "";
-    showBtnEl.disabled = true;
-    okBtnEl.disabled   = true;
-    starBtnEl.disabled = true;
     return;
   }
 
-  let en;
-  if (toggleMode) {
-    en = pickRandomFast(remainingArr, currentSentence?.en);
-  } else {
-    en = pickLeastShown(remainingArr, currentSentence?.en);
+  // ★ 先読みがあれば即それを使う
+  if (!nextEn) {
+    prepareNext(); // 初回だけ
   }
+
+  const en = nextEn;
+  nextEn = null;   // 消費
+
+  presentSentenceByEn(en);
+
+  // ★ 表示後、裏で次を仕込む
+  requestAnimationFrame(prepareNext);
 
   toggleMode = !toggleMode;
   lastShowMode = "all";
-  presentSentenceByEn(en);
 }
 
 /* ========= ☆のみランダム表示 ========= */
@@ -681,6 +685,17 @@ function applyTopPadding(extra=35){
   document.body.style.paddingTop = (h + extra) + 'px';
 }
 
+function prepareNext() {
+  if (remainingArr.length === 0) {
+    nextEn = null;
+    return;
+  }
+
+  nextEn = toggleMode
+    ? pickRandomFast(remainingArr, currentSentence?.en)
+    : pickLeastShown(remainingArr, currentSentence?.en);
+}
+  
 // 初期
 window.addEventListener('load', () => applyTopPadding());
 window.addEventListener('resize', () => applyTopPadding());
@@ -706,6 +721,7 @@ document.getElementById("starBtn").onclick = toggleStar;
 </script>
 </body>
 </html>
+
 
 
 
