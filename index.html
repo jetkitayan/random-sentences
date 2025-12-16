@@ -674,6 +674,10 @@ function updateCountsBar(){
     `1日以内: ${todayShownCached}回\n` +
     `総回数: ${totalShownCached}回`;
 }
+
+function buildCountsInlineText(){
+  return `（${getLast5MinCount()} / ${getLast1HourCount()} / ${todayShownCached} / ${totalShownCached}）`;
+}
    
 /* ========= イベント ========= */
 document.getElementById("showBtn").onclick = showRandom;
@@ -691,6 +695,7 @@ updateCountsBar();
 </script>
 </body>
 </html>
+
 
 
 
