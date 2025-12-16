@@ -448,9 +448,6 @@ function presentSentenceByEn(en){
      topMetaEl.textContent =
         `${newShown}回目${starMark}${buildCountsInlineText()}\n` +
         `${prevText}`;
-   
-     // ★ ここで「5分/1時間/1日/総回数」表示を更新
-     updateCountsBar();
    }, 0);
 }
 
@@ -566,8 +563,6 @@ function resetData(){
   document.getElementById("okBtn").disabled = true;
   document.getElementById("starBtn").disabled = true;
   document.getElementById("statsArea").style.display = "none";
-
-   updateCountsBar();
 }
 
 /* ========= Stats & Copy ========= */
@@ -664,17 +659,6 @@ function prepareNext() {
     : pickLeastShown(remainingArr, currentSentence?.en);
 }
 
-const lastShownEl = document.getElementById("last-shown");
-function updateCountsBar(){
-  if (!lastShownEl) return;
-
-  lastShownEl.textContent =
-    `5分以内: ${getLast5MinCount()}回\n` +
-    `1時間以内: ${getLast1HourCount()}回\n` +
-    `1日以内: ${todayShownCached}回\n` +
-    `総回数: ${totalShownCached}回`;
-}
-
 function buildCountsInlineText(){
   return `（${getLast5MinCount()} / ${getLast1HourCount()} / ${todayShownCached} / ${totalShownCached}）`;
 }
@@ -695,6 +679,7 @@ updateCountsBar();
 </script>
 </body>
 </html>
+
 
 
 
