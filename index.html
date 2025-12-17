@@ -80,11 +80,6 @@ body {
 #sentence-jp{ position: static; }
 #sentence-en{ display:block; margin-top: 1.2em; min-height: 3.2em; }
 
-#sentence-jp,
-#sentence-en {
-  will-change: opacity;
-}
-
 /* 回数表示 */
 #last-shown {
   margin-top: 0px;
@@ -690,11 +685,10 @@ document.getElementById("starBtn").onclick = toggleStar;
 document.getElementById("resetBtn").onclick = resetData;
 document.getElementById("statsBtn").onclick = showStats;
 document.getElementById("copyBtn").onclick = copyStats;
-
-updateCountsBar();
 </script>
 </body>
 </html>
+
 
 
 
