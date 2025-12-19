@@ -1,402 +1,803 @@
 [
   {
-    "jp": "日々のリズムに大きな変化をもたらしました。",
-    "en": "It's made a huge difference to my daily rhythm."
+    "jp": "決め手になるのは、若者がSNSで話題にするかどうかだ。",
+    "en": "The deciding factor will be whether young people talk about it on social media."
   },
   {
     "jp": "通い始めたいんだけど、ちょっと運動不足で…。",
     "en": "I wanted to start going, but I'm a bit out of practice."
   },
   {
-    "jp": "ママが、黄ばみを防ぐためにクリーニングした方がいいって言ってたの。",
-    "en": "Mom told me I should get it cleaned to stop it going yellow."
+    "jp": "健康を改善するためにどんな変化を加えましたか？",
+    "en": "What changes have you made to improve your health?"
   },
   {
     "jp": "すぐに慣れるよ。あそこのトレーナーはしっかり指導してくれるし。",
     "en": "You'll soon get back into it, and the trainers there really keep you on your toes."
   },
   {
-    "jp": "今こんなに忙しい状況なので、本社に全員いてもらう必要があるんです。",
-    "en": "With things being so busy, I need everyone here in head office."
+    "jp": "少しお話ししてもいいですか？",
+    "en": "Could I talk to you for a minute?"
   },
   {
     "jp": "はい。",
     "en": "Yes."
-  },
-  {
-    "jp": "影響の程度を表すこと",
-    "en": "Expressing the extent of an influence"
-  },
-  {
-    "jp": "今の状況なので、数時間落ち着かせた方がいいと思ったんです。",
-    "en": "With things the way they are, I thought I'd let him calm down for a few hours."
-  },
-  {
-    "jp": "大丈夫ですよ。",
-    "en": "That's okay."
   },
   {
     "jp": "いいですよ。",
     "en": "That's okay."
   },
   {
-    "jp": "友人のルイの店に持っていくといいですよ。",
-    "en": "You should take it to my friend Louie's place."
+    "jp": "今の状況なので、数時間落ち着かせた方がいいと思ったんです。",
+    "en": "With things the way they are, I thought I'd let him calm down for a few hours."
   },
   {
-    "jp": "すみません。",
-    "en": "Sorry."
-  },
-  {
-    "jp": "長い散歩が必要そうですね。",
-    "en": "He must need long walks."
+    "jp": "これは正しくやるのが相当難しいことだと思う。",
+    "en": "I think it's a pretty difficult thing to get right."
   },
   {
     "jp": "それに、こんなに慌ただしいので、今は鍵を探す時間がありません。",
     "en": "And with things being so hectic, I don't have time to track the key down right now."
   },
   {
-    "jp": "彼は急な依頼でも対応してくれることが多いです。",
-    "en": "He can usually fit people in at short notice."
+    "jp": "あまり変わらないだろうと思っていましたが、授業の模擬テストを受けたときの記憶量にものすごい効果がありました。",
+    "en": "I didn't think it would make much difference, but it's had a massive effect on how much I can recall when I do the mock tests in class."
   },
   {
-    "jp": "人に特性を割り当てる",
-    "en": "Assigning qualities to people"
-  },
-  {
-    "jp": "じゃあ電話帳を渡してくれたら、専門店を探すよ。",
-    "en": "Well, pass me the phone book and I'll find a specialist."
-  },
-  {
-    "jp": "who/that という関係代名詞は、人に特性を割り当てる際によく使われます。",
-    "en": "who/that relative clauses are often used to assign qualities to people."
-  },
-  {
-    "jp": "最近では午後の集中力が格段に上がり、夜もずっとよく眠れます。",
-    "en": "Well, nowadays I focus much better in the afternoons and sleep much better at night."
-  },
-  {
-    "jp": "くだけた英語では、可能な場合 who/that は省略されることが多いです。",
-    "en": "In casual English, who/that is usually omitted when it is possible to do so."
-  },
-  {
-    "jp": "このパズルアプリは、私の記憶力に何の影響もありません。",
-    "en": "This puzzle app hasn't had any effect on my memory."
-  },
-  {
-    "jp": "プールの世話をしてくれる人を探しています。",
-    "en": "I'm trying to find someone who can look after my pool."
-  },
-  {
-    "jp": "昼食後、誰かスタッフエリアを片付けましたか？",
-    "en": "Has anyone cleaned up the staff area since lunch time?"
-  },
-  {
-    "jp": "どんな人が近所をコミュニティのように感じさせるのでしょうか？",
-    "en": "What kinds of people make a neighborhood feel like a community?"
-  },
-  {
-    "jp": "朝からずっと忙しさで走り回っています。",
-    "en": "I've been rushed off my feet all morning."
-  },
-  {
-    "jp": "こんにちは。",
-    "en": "Hi."
-  },
-  {
-    "jp": "それは残念です。",
-    "en": "That's too bad."
-  },
-  {
-    "jp": "ジムです。",
-    "en": "My name's Jim."
-  },
-  {
-    "jp": "このテストに合格しないと、スタンブリッジの修士課程に入れる可能性がほとんどないと言っていましたよね。",
-    "en": "I remember you saying you had to pass this test to stand any chance of getting into the MA program at Stanbridge."
-  },
-  {
-    "jp": "ご近所さんだと思います。",
-    "en": "I think we're neighbors."
-  },
-  {
-    "jp": "私はロンダです。",
-    "en": "I'm Rhonda."
-  },
-  {
-    "jp": "この子はアルバートです。",
-    "en": "This guy is Albert."
-  },
-  {
-    "jp": "心配しないで。",
-    "en": "Don't worry."
-  },
-  {
-    "jp": "わあ。",
-    "en": "Wow."
-  },
-  {
-    "jp": "さあ、今行こう。紹介するよ。",
-    "en": "Let's go now and I'll introduce you."
-  },
-  {
-    "jp": "とても元気ですね。",
-    "en": "He's pretty energetic."
-  },
-  {
-    "jp": "どれが効果があり、どれがなかったのか説明しなさい。",
-    "en": "Explain what had an effect and what didn't."
-  },
-  {
-    "jp": "ええ、そうなんです。",
-    "en": "Yes, he does."
-  },
-  {
-    "jp": "会社の帰りに週2回通っています。",
-    "en": "I've been going twice a week on the way home from the office."
-  },
-  {
-    "jp": "ところで、平日に犬の散歩をしてくれる人をこの辺で知っていますか？",
-    "en": "Actually, do you know anyone around here who's available to walk dogs on weekdays?"
-  },
-  {
-    "jp": "健康を改善するためにどんな変化を加えましたか？",
-    "en": "What changes have you made to improve your health?"
-  },
-  {
-    "jp": "運がいいですね。",
-    "en": "You're in luck."
-  },
-  {
-    "jp": "図書館に行っています。",
-    "en": "I'm going to the library."
-  },
-  {
-    "jp": "12a号室のアリスに話してみてください。",
-    "en": "Talk to Alice in 12a."
-  },
-  {
-    "jp": "どうかな…。",
+    "jp": "そうかなぁ。",
     "en": "I don't know."
   },
   {
-    "jp": "彼女は犬の散歩サービスをしています。",
-    "en": "She has her own dog walking service."
+    "jp": "それはいい考えですね。",
+    "en": "That sounds like a good idea."
   },
   {
-    "jp": "ハイストリートのあのお店はどう？",
-    "en": "What about that place on High Street?"
+    "jp": "そうなの？",
+    "en": "Yeah?"
   },
   {
-    "jp": "扱いが難しいティーンに慣れている家庭教師を探しています。",
-    "en": "I'm looking for a tutor who's good with difficult teenagers."
+    "jp": "現在の状況が与える影響を示すこと",
+    "en": "Showing the effect of a current situation"
   },
   {
-    "jp": "すみません。",
-    "en": "I'm sorry."
+    "jp": "そうなんだ。",
+    "en": "That's right."
   },
   {
     "jp": "留守中に家を見てくれる人が本当に必要です。",
     "en": "I really need someone that can look after the place while I'm away."
   },
   {
-    "jp": "車の排気系を交換したいのですが、いつも行っている修理工場が予約でいっぱいです。",
-    "en": "My car exhaust needs replacing and the auto shop I usually go to is booked up."
+    "jp": "もしそれが実現すれば大丈夫だと思う。",
+    "en": "If that goes ahead, I think they'll be fine."
   },
   {
-    "jp": "監督しなくてもいいケータリング業者が欲しいです。",
-    "en": "I need a caterer I don't have to supervise."
+    "jp": "残念ですが、今回は承認できません。",
+    "en": "I'm going to have to deny it, I'm afraid."
   },
   {
-    "jp": "シルバーズジムのパーソナルトレーナーサービス使ってるよね？",
-    "en": "You use the personal trainer service at Silver's Gym, right?"
+    "jp": "でもダメなら、生き残れないだろうね。",
+    "en": "If not, I can't see them surviving."
   },
   {
-    "jp": "これを直してくれる人、誰か知っていますか？",
-    "en": "Do you know anyone I can get to fix this?"
+    "jp": "メイソンズは新しいサンドイッチチェーンの開店準備をしている。",
+    "en": "Mason's are getting ready to open their new sandwich bar chain."
   },
   {
-    "jp": "それでは、何があったかパートナーに伝えなさい。",
-    "en": "Then, tell your partner what happened."
+    "jp": "人に特性を割り当てる",
+    "en": "Assigning qualities to people"
   },
   {
-    "jp": "左側のプロンプトを使って、どんな人が必要かパートナーに伝えてください。",
-    "en": "Tell your partner about the kind of person you need using the prompt on the left."
+    "jp": "大丈夫ですよ。",
+    "en": "That's okay."
   },
   {
-    "jp": "実は、1969年製のコルビーロードスターなんです。",
-    "en": "Actually, it's a 1969 Colby Roadster."
+    "jp": "who/that という関係代名詞は、人に特性を割り当てる際によく使われます。",
+    "en": "who/that relative clauses are often used to assign qualities to people."
   },
   {
-    "jp": "右側のプロンプトを使って、適切な人やサービスを推薦してください。",
-    "en": "Respond by recommending the appropriate person or service using a prompt on the right."
+    "jp": "友人のルイの店に持っていくといいですよ。",
+    "en": "You should take it to my friend Louie's place."
   },
   {
-    "jp": "今、何をしているの？",
-    "en": "What are you doing now?"
+    "jp": "くだけた英語では、可能な場合 who/that は省略されることが多いです。",
+    "en": "In casual English, who/that is usually omitted when it is possible to do so."
   },
   {
-    "jp": "あなたは助けてくれる人やサービスを探しています。",
-    "en": "You are looking for someone to help you out or provide a service."
+    "jp": "どうなるんだろうね。",
+    "en": "I wonder how they'll do."
   },
   {
-    "jp": "でも、検討してくれてありがとうございます。",
-    "en": "Thank you for considering it, though."
+    "jp": "プールの世話をしてくれる人を探しています。",
+    "en": "I'm trying to find someone who can look after my pool."
   },
   {
-    "jp": "どんな人が欲しいか、どんな特性が必要かをパートナーに説明してください。",
-    "en": "Explain to your partner what kind of person you want and what kind of qualities you think they should have."
+    "jp": "大手スーパーの中には、日本の消費者に合ったイメージづくりができずに失敗したところもある。",
+    "en": "Some big supermarket chains have failed in Japan because they didn't present the right kind of image for Japanese consumers."
   },
   {
-    "jp": "ドレスも扱ってるよ。",
-    "en": "They do dresses."
+    "jp": "どんな人が近所をコミュニティのように感じさせるのでしょうか？",
+    "en": "What kinds of people make a neighborhood feel like a community?"
   },
   {
-    "jp": "パートナーは知っている人を推薦してくれます。",
-    "en": "Your partner will recommend someone they know."
+    "jp": "心配しないで。",
+    "en": "Don't worry."
   },
   {
-    "jp": "あなたが挑戦したことについてパートナーに話しなさい。",
-    "en": "Tell your partner about something you tried to do."
-  },
-  {
-    "jp": "関係節の最初の語が動詞の場合、関係代名詞は省略できません。",
-    "en": "The relative pronoun cannot be omitted if the first word in the relative clause is a verb."
-  },
-  {
-    "jp": "今のような状況では、トニーにメールする時間すらなく、まして電話する時間なんてありません。",
-    "en": "With things being the way they are, I don't have time to email Tony, much less get him on the phone."
-  },
-  {
-    "jp": "週末に使える人を知っていますか？",
-    "en": "Do you know anyone who I can use on weekends?"
-  },
-  {
-    "jp": "右側の指示を使って答えてください。",
-    "en": "Respond using the prompt from the right."
-  },
-  {
-    "jp": "週末に使える人を知っていますか？（省略形）",
-    "en": "Do you know anyone I can use on weekends?"
-  },
-  {
-    "jp": "いいえ。",
-    "en": "No."
-  },
-  {
-    "jp": "時間通りに来てくれる人が本当に必要です。",
-    "en": "I really need someone who turns up on time."
-  },
-  {
-    "jp": "機材キャビネットは開けられましたか？",
-    "en": "Were you able to get the equipment cabinet open?"
-  },
-  {
-    "jp": "クラシックカーに詳しい人が本当に必要なんです。",
-    "en": "I really need someone who knows their way around a vintage car."
-  },
-  {
-    "jp": "あまりに慌ただしくて、メールを確認するのをすっかり忘れていました。",
-    "en": "With things being so hectic, I completely forgot to check the emails."
+    "jp": "こんにちは。",
+    "en": "Hi."
   },
   {
     "jp": "安心してください。",
     "en": "Trust me."
   },
   {
-    "jp": "行くのをやめました。",
-    "en": "I stopped going."
+    "jp": "ジムです。",
+    "en": "My name's Jim."
   },
   {
-    "jp": "彼は車のことなら何でも知っています。",
-    "en": "He knows everything there is to know about cars."
+    "jp": "家庭教師のおかげで、子どもたちのテストの点数に大きな影響が出ています。",
+    "en": "The home tutoring has had a huge effect on the kids' test scores."
   },
   {
-    "jp": "朝もっと勉強するようになってから、テストの点数に大きな影響が出ています。",
-    "en": "Studying more in the morning has had a huge effect on my test scores."
+    "jp": "ご近所さんだと思います。",
+    "en": "I think we're neighbors."
   },
   {
-    "jp": "どうしてウェディングドレスを出したの？",
-    "en": "Why did you get your wedding dress out?"
+    "jp": "すみません。",
+    "en": "Sorry."
   },
   {
-    "jp": "私がやるつもりだったんですが、あまりにバタバタしていてすっかり忘れていました。",
-    "en": "I was going to do it, but with things being so frantic, I completely forgot."
+    "jp": "私はロンダです。",
+    "en": "I'm Rhonda."
   },
   {
-    "jp": "何年も見てなかったのに。",
-    "en": "I haven't seen that for years."
+    "jp": "ちゃんとリサーチしたといいけど。",
+    "en": "Well, I hope they've done their research."
   },
   {
-    "jp": "ジムの会員更新をしないといけません。",
-    "en": "I need to renew my gym membership."
+    "jp": "この子はアルバートです。",
+    "en": "This guy is Albert."
   },
   {
-    "jp": "無事に返してくれる人じゃないと不安なの。",
-    "en": "I need someone I can trust to get it back to me in one piece."
+    "jp": "ウォルター、おはよう。",
+    "en": "Good morning, Walter."
   },
   {
-    "jp": "見つかったら教えてください。",
-    "en": "Well, let me know when it turns up."
+    "jp": "わあ。",
+    "en": "Wow."
   },
   {
-    "jp": "わかった。",
-    "en": "Okay."
+    "jp": "朝からずっと忙しさで走り回っています。",
+    "en": "I've been rushed off my feet all morning."
   },
   {
-    "jp": "こんなに忙しい状況では、会議を手配する時間がありません。",
-    "en": "With things being this busy, I don't have the time to arrange a meeting."
+    "jp": "とても元気ですね。",
+    "en": "He's pretty energetic."
   },
   {
-    "jp": "うん、使ってるよ。",
-    "en": "Yes, I do."
+    "jp": "可能性はあるかもね。",
+    "en": "They might."
   },
   {
-    "jp": "これは私のオハイオへの異動の件ですか？",
-    "en": "Is this about my transfer to Ohio?"
+    "jp": "長い散歩が必要そうですね。",
+    "en": "He must need long walks."
+  },
+  {
+    "jp": "ドレスも扱ってるよ。",
+    "en": "They do dresses."
+  },
+  {
+    "jp": "ええ、そうなんです。",
+    "en": "Yes, he does."
+  },
+  {
+    "jp": "クラシックカーに詳しい人が本当に必要なんです。",
+    "en": "I really need someone who knows their way around a vintage car."
+  },
+  {
+    "jp": "ところで、平日に犬の散歩をしてくれる人をこの辺で知っていますか？",
+    "en": "Actually, do you know anyone around here who's available to walk dogs on weekdays?"
+  },
+  {
+    "jp": "配属（異動）希望を承認または拒否する理由にはどんなものがありますか？",
+    "en": "What are some reasons for approving or denying a transfer request?"
+  },
+  {
+    "jp": "運がいいですね。",
+    "en": "You're in luck."
+  },
+  {
+    "jp": "こんなに忙しい状況では、自分のスケジュールを見る時間すらなく、まして他の人のスケジュールなど見ていません。",
+    "en": "With things being this busy, I haven't had time to look at my own schedule, let alone anyone else's."
+  },
+  {
+    "jp": "12a号室のアリスに話してみてください。",
+    "en": "Talk to Alice in 12a."
+  },
+  {
+    "jp": "正直に言うと、飛距離には全く影響がありません。",
+    "en": "To be frank, it hasn't had the slightest effect on how far I can hit the ball."
+  },
+  {
+    "jp": "彼女は犬の散歩サービスをしています。",
+    "en": "She has her own dog walking service."
+  },
+  {
+    "jp": "今日帰る前に誰かに手伝ってもらってくださいね。",
+    "en": "Just ask someone to give you a hand before you go home tonight."
+  },
+  {
+    "jp": "扱いが難しいティーンに慣れている家庭教師を探しています。",
+    "en": "I'm looking for a tutor who's good with difficult teenagers."
   },
   {
     "jp": "どうして？",
     "en": "Why?"
   },
   {
-    "jp": "はい。",
-    "en": "Yes."
+    "jp": "監督しなくてもいいケータリング業者が欲しいです。",
+    "en": "I need a caterer I don't have to supervise."
   },
   {
-    "jp": "それはいいね。でも最初は自分のペースでやらせてくれる人がいいな。",
-    "en": "That sounds great, but I want someone who'll let me go at my pace in the beginning."
+    "jp": "完全に忘れていました。",
+    "en": "I completely forgot."
   },
   {
-    "jp": "最近は週に3回通っていて、自転車で往復しています。",
-    "en": "I've been going three times a week recently, and cycling there and back."
+    "jp": "これを直してくれる人、誰か知っていますか？",
+    "en": "Do you know anyone I can get to fix this?"
   },
   {
-    "jp": "大丈夫だよ。",
-    "en": "They will."
+    "jp": "ごめんなさい。",
+    "en": "Sorry."
   },
   {
-    "jp": "あなたは個人指導の先生に習っていると言っていましたよね。",
-    "en": "You said you were seeing a private tutor."
+    "jp": "左側のプロンプトを使って、どんな人が必要かパートナーに伝えてください。",
+    "en": "Tell your partner about the kind of person you need using the prompt on the left."
   },
   {
-    "jp": "さあ、行こうよ。",
-    "en": "Come on."
+    "jp": "NFG が個人向けの小口ローンサービスを始めたって聞いた？",
+    "en": "Did you hear that NFG have just started a small personal loan service?"
   },
   {
-    "jp": "それで？",
-    "en": "And?"
+    "jp": "右側のプロンプトを使って、適切な人やサービスを推薦してください。",
+    "en": "Respond by recommending the appropriate person or service using a prompt on the right."
   },
   {
-    "jp": "来週、大きな物理のテストがあります。",
-    "en": "I have a big physics test next week."
+    "jp": "ママが、黄ばみを防ぐためにクリーニングした方がいいって言ってたの。",
+    "en": "Mom told me I should get it cleaned to stop it going yellow."
+  },
+  {
+    "jp": "あなたは助けてくれる人やサービスを探しています。",
+    "en": "You are looking for someone to help you out or provide a service."
+  },
+  {
+    "jp": "週末に使える人を知っていますか？",
+    "en": "Do you know anyone who I can use on weekends?"
+  },
+  {
+    "jp": "どんな人が欲しいか、どんな特性が必要かをパートナーに説明してください。",
+    "en": "Explain to your partner what kind of person you want and what kind of qualities you think they should have."
+  },
+  {
+    "jp": "この工具セットを片付けないといけないので。",
+    "en": "I need to put this tool kit away."
+  },
+  {
+    "jp": "パートナーは知っている人を推薦してくれます。",
+    "en": "Your partner will recommend someone they know."
+  },
+  {
+    "jp": "彼は急な依頼でも対応してくれることが多いです。",
+    "en": "He can usually fit people in at short notice."
+  },
+  {
+    "jp": "関係節の最初の語が動詞の場合、関係代名詞は省略できません。",
+    "en": "The relative pronoun cannot be omitted if the first word in the relative clause is a verb."
+  },
+  {
+    "jp": "そうなの？",
+    "en": "Yeah?"
+  },
+  {
+    "jp": "週末に使える人を知っていますか？（省略形）",
+    "en": "Do you know anyone I can use on weekends?"
+  },
+  {
+    "jp": "倒産する可能性があるって聞いたよ。",
+    "en": "I heard there's a chance they'll go under."
+  },
+  {
+    "jp": "時間通りに来てくれる人が本当に必要です。",
+    "en": "I really need someone who turns up on time."
+  },
+  {
+    "jp": "それは残念です。",
+    "en": "That's too bad."
+  },
+  {
+    "jp": "車の排気系を交換したいのですが、いつも行っている修理工場が予約でいっぱいです。",
+    "en": "My car exhaust needs replacing and the auto shop I usually go to is booked up."
+  },
+  {
+    "jp": "朝もっと勉強するようになってから、テストの点数に大きな影響が出ています。",
+    "en": "Studying more in the morning has had a huge effect on my test scores."
+  },
+  {
+    "jp": "実は、1969年製のコルビーロードスターなんです。",
+    "en": "Actually, it's a 1969 Colby Roadster."
+  },
+  {
+    "jp": "昼食後、誰かスタッフエリアを片付けましたか？",
+    "en": "Has anyone cleaned up the staff area since lunch time?"
+  },
+  {
+    "jp": "彼は車のことなら何でも知っています。",
+    "en": "He knows everything there is to know about cars."
+  },
+  {
+    "jp": "寮ではなく図書館で勉強するようにしました。",
+    "en": "I've started studying at the library rather than in my dorm."
+  },
+  {
+    "jp": "どうしてウェディングドレスを出したの？",
+    "en": "Why did you get your wedding dress out?"
+  },
+  {
+    "jp": "うまくいっていますか？",
+    "en": "How's that going?"
+  },
+  {
+    "jp": "何年も見てなかったのに。",
+    "en": "I haven't seen that for years."
+  },
+  {
+    "jp": "最も重要な基準を特定する",
+    "en": "Identifying the most important criterion"
+  },
+  {
+    "jp": "ハイストリートのあのお店はどう？",
+    "en": "What about that place on High Street?"
+  },
+  {
+    "jp": "これは私のオハイオへの異動の件ですか？",
+    "en": "Is this about my transfer to Ohio?"
+  },
+  {
+    "jp": "無事に返してくれる人じゃないと不安なの。",
+    "en": "I need someone I can trust to get it back to me in one piece."
+  },
+  {
+    "jp": "こちらでのレッスンはどうですか？",
+    "en": "How are you doing with your lessons here?"
+  },
+  {
+    "jp": "わかった。",
+    "en": "Okay."
+  },
+  {
+    "jp": "影響の程度を表すこと",
+    "en": "Expressing the extent of an influence"
+  },
+  {
+    "jp": "じゃあ電話帳を渡してくれたら、専門店を探すよ。",
+    "en": "Well, pass me the phone book and I'll find a specialist."
   },
   {
     "jp": "もう一度挑戦することにしました。",
     "en": "I decided to give it another go."
   },
   {
-    "jp": "もう行くのをやめたと思っていました。",
-    "en": "I thought you'd stopped going."
+    "jp": "シルバーズジムのパーソナルトレーナーサービス使ってるよね？",
+    "en": "You use the personal trainer service at Silver's Gym, right?"
+  },
+  {
+    "jp": "重要なのは、主要な競合より売り上げで上回れるかどうかだ。",
+    "en": "The key issue is going to be whether they can outsell their main competitor."
+  },
+  {
+    "jp": "うん、使ってるよ。",
+    "en": "Yes, I do."
+  }
+][
+  {
+    "jp": "決め手になるのは、若者がSNSで話題にするかどうかだ。",
+    "en": "The deciding factor will be whether young people talk about it on social media."
+  },
+  {
+    "jp": "通い始めたいんだけど、ちょっと運動不足で…。",
+    "en": "I wanted to start going, but I'm a bit out of practice."
+  },
+  {
+    "jp": "健康を改善するためにどんな変化を加えましたか？",
+    "en": "What changes have you made to improve your health?"
+  },
+  {
+    "jp": "すぐに慣れるよ。あそこのトレーナーはしっかり指導してくれるし。",
+    "en": "You'll soon get back into it, and the trainers there really keep you on your toes."
+  },
+  {
+    "jp": "少しお話ししてもいいですか？",
+    "en": "Could I talk to you for a minute?"
+  },
+  {
+    "jp": "はい。",
+    "en": "Yes."
+  },
+  {
+    "jp": "いいですよ。",
+    "en": "That's okay."
+  },
+  {
+    "jp": "今の状況なので、数時間落ち着かせた方がいいと思ったんです。",
+    "en": "With things the way they are, I thought I'd let him calm down for a few hours."
+  },
+  {
+    "jp": "これは正しくやるのが相当難しいことだと思う。",
+    "en": "I think it's a pretty difficult thing to get right."
+  },
+  {
+    "jp": "それに、こんなに慌ただしいので、今は鍵を探す時間がありません。",
+    "en": "And with things being so hectic, I don't have time to track the key down right now."
+  },
+  {
+    "jp": "あまり変わらないだろうと思っていましたが、授業の模擬テストを受けたときの記憶量にものすごい効果がありました。",
+    "en": "I didn't think it would make much difference, but it's had a massive effect on how much I can recall when I do the mock tests in class."
+  },
+  {
+    "jp": "そうかなぁ。",
+    "en": "I don't know."
+  },
+  {
+    "jp": "それはいい考えですね。",
+    "en": "That sounds like a good idea."
+  },
+  {
+    "jp": "そうなの？",
+    "en": "Yeah?"
+  },
+  {
+    "jp": "現在の状況が与える影響を示すこと",
+    "en": "Showing the effect of a current situation"
+  },
+  {
+    "jp": "そうなんだ。",
+    "en": "That's right."
+  },
+  {
+    "jp": "留守中に家を見てくれる人が本当に必要です。",
+    "en": "I really need someone that can look after the place while I'm away."
+  },
+  {
+    "jp": "もしそれが実現すれば大丈夫だと思う。",
+    "en": "If that goes ahead, I think they'll be fine."
+  },
+  {
+    "jp": "残念ですが、今回は承認できません。",
+    "en": "I'm going to have to deny it, I'm afraid."
+  },
+  {
+    "jp": "でもダメなら、生き残れないだろうね。",
+    "en": "If not, I can't see them surviving."
+  },
+  {
+    "jp": "メイソンズは新しいサンドイッチチェーンの開店準備をしている。",
+    "en": "Mason's are getting ready to open their new sandwich bar chain."
+  },
+  {
+    "jp": "人に特性を割り当てる",
+    "en": "Assigning qualities to people"
+  },
+  {
+    "jp": "大丈夫ですよ。",
+    "en": "That's okay."
+  },
+  {
+    "jp": "who/that という関係代名詞は、人に特性を割り当てる際によく使われます。",
+    "en": "who/that relative clauses are often used to assign qualities to people."
+  },
+  {
+    "jp": "友人のルイの店に持っていくといいですよ。",
+    "en": "You should take it to my friend Louie's place."
+  },
+  {
+    "jp": "くだけた英語では、可能な場合 who/that は省略されることが多いです。",
+    "en": "In casual English, who/that is usually omitted when it is possible to do so."
+  },
+  {
+    "jp": "どうなるんだろうね。",
+    "en": "I wonder how they'll do."
+  },
+  {
+    "jp": "プールの世話をしてくれる人を探しています。",
+    "en": "I'm trying to find someone who can look after my pool."
+  },
+  {
+    "jp": "大手スーパーの中には、日本の消費者に合ったイメージづくりができずに失敗したところもある。",
+    "en": "Some big supermarket chains have failed in Japan because they didn't present the right kind of image for Japanese consumers."
+  },
+  {
+    "jp": "どんな人が近所をコミュニティのように感じさせるのでしょうか？",
+    "en": "What kinds of people make a neighborhood feel like a community?"
+  },
+  {
+    "jp": "心配しないで。",
+    "en": "Don't worry."
+  },
+  {
+    "jp": "こんにちは。",
+    "en": "Hi."
+  },
+  {
+    "jp": "安心してください。",
+    "en": "Trust me."
+  },
+  {
+    "jp": "ジムです。",
+    "en": "My name's Jim."
+  },
+  {
+    "jp": "家庭教師のおかげで、子どもたちのテストの点数に大きな影響が出ています。",
+    "en": "The home tutoring has had a huge effect on the kids' test scores."
+  },
+  {
+    "jp": "ご近所さんだと思います。",
+    "en": "I think we're neighbors."
+  },
+  {
+    "jp": "すみません。",
+    "en": "Sorry."
+  },
+  {
+    "jp": "私はロンダです。",
+    "en": "I'm Rhonda."
+  },
+  {
+    "jp": "ちゃんとリサーチしたといいけど。",
+    "en": "Well, I hope they've done their research."
+  },
+  {
+    "jp": "この子はアルバートです。",
+    "en": "This guy is Albert."
+  },
+  {
+    "jp": "ウォルター、おはよう。",
+    "en": "Good morning, Walter."
+  },
+  {
+    "jp": "わあ。",
+    "en": "Wow."
+  },
+  {
+    "jp": "朝からずっと忙しさで走り回っています。",
+    "en": "I've been rushed off my feet all morning."
+  },
+  {
+    "jp": "とても元気ですね。",
+    "en": "He's pretty energetic."
+  },
+  {
+    "jp": "可能性はあるかもね。",
+    "en": "They might."
+  },
+  {
+    "jp": "長い散歩が必要そうですね。",
+    "en": "He must need long walks."
+  },
+  {
+    "jp": "ドレスも扱ってるよ。",
+    "en": "They do dresses."
+  },
+  {
+    "jp": "ええ、そうなんです。",
+    "en": "Yes, he does."
+  },
+  {
+    "jp": "クラシックカーに詳しい人が本当に必要なんです。",
+    "en": "I really need someone who knows their way around a vintage car."
+  },
+  {
+    "jp": "ところで、平日に犬の散歩をしてくれる人をこの辺で知っていますか？",
+    "en": "Actually, do you know anyone around here who's available to walk dogs on weekdays?"
+  },
+  {
+    "jp": "配属（異動）希望を承認または拒否する理由にはどんなものがありますか？",
+    "en": "What are some reasons for approving or denying a transfer request?"
+  },
+  {
+    "jp": "運がいいですね。",
+    "en": "You're in luck."
+  },
+  {
+    "jp": "こんなに忙しい状況では、自分のスケジュールを見る時間すらなく、まして他の人のスケジュールなど見ていません。",
+    "en": "With things being this busy, I haven't had time to look at my own schedule, let alone anyone else's."
+  },
+  {
+    "jp": "12a号室のアリスに話してみてください。",
+    "en": "Talk to Alice in 12a."
+  },
+  {
+    "jp": "正直に言うと、飛距離には全く影響がありません。",
+    "en": "To be frank, it hasn't had the slightest effect on how far I can hit the ball."
+  },
+  {
+    "jp": "彼女は犬の散歩サービスをしています。",
+    "en": "She has her own dog walking service."
+  },
+  {
+    "jp": "今日帰る前に誰かに手伝ってもらってくださいね。",
+    "en": "Just ask someone to give you a hand before you go home tonight."
+  },
+  {
+    "jp": "扱いが難しいティーンに慣れている家庭教師を探しています。",
+    "en": "I'm looking for a tutor who's good with difficult teenagers."
+  },
+  {
+    "jp": "どうして？",
+    "en": "Why?"
+  },
+  {
+    "jp": "監督しなくてもいいケータリング業者が欲しいです。",
+    "en": "I need a caterer I don't have to supervise."
+  },
+  {
+    "jp": "完全に忘れていました。",
+    "en": "I completely forgot."
+  },
+  {
+    "jp": "これを直してくれる人、誰か知っていますか？",
+    "en": "Do you know anyone I can get to fix this?"
+  },
+  {
+    "jp": "ごめんなさい。",
+    "en": "Sorry."
+  },
+  {
+    "jp": "左側のプロンプトを使って、どんな人が必要かパートナーに伝えてください。",
+    "en": "Tell your partner about the kind of person you need using the prompt on the left."
+  },
+  {
+    "jp": "NFG が個人向けの小口ローンサービスを始めたって聞いた？",
+    "en": "Did you hear that NFG have just started a small personal loan service?"
+  },
+  {
+    "jp": "右側のプロンプトを使って、適切な人やサービスを推薦してください。",
+    "en": "Respond by recommending the appropriate person or service using a prompt on the right."
+  },
+  {
+    "jp": "ママが、黄ばみを防ぐためにクリーニングした方がいいって言ってたの。",
+    "en": "Mom told me I should get it cleaned to stop it going yellow."
+  },
+  {
+    "jp": "あなたは助けてくれる人やサービスを探しています。",
+    "en": "You are looking for someone to help you out or provide a service."
+  },
+  {
+    "jp": "週末に使える人を知っていますか？",
+    "en": "Do you know anyone who I can use on weekends?"
+  },
+  {
+    "jp": "どんな人が欲しいか、どんな特性が必要かをパートナーに説明してください。",
+    "en": "Explain to your partner what kind of person you want and what kind of qualities you think they should have."
+  },
+  {
+    "jp": "この工具セットを片付けないといけないので。",
+    "en": "I need to put this tool kit away."
+  },
+  {
+    "jp": "パートナーは知っている人を推薦してくれます。",
+    "en": "Your partner will recommend someone they know."
+  },
+  {
+    "jp": "彼は急な依頼でも対応してくれることが多いです。",
+    "en": "He can usually fit people in at short notice."
+  },
+  {
+    "jp": "関係節の最初の語が動詞の場合、関係代名詞は省略できません。",
+    "en": "The relative pronoun cannot be omitted if the first word in the relative clause is a verb."
+  },
+  {
+    "jp": "そうなの？",
+    "en": "Yeah?"
+  },
+  {
+    "jp": "週末に使える人を知っていますか？（省略形）",
+    "en": "Do you know anyone I can use on weekends?"
+  },
+  {
+    "jp": "倒産する可能性があるって聞いたよ。",
+    "en": "I heard there's a chance they'll go under."
+  },
+  {
+    "jp": "時間通りに来てくれる人が本当に必要です。",
+    "en": "I really need someone who turns up on time."
+  },
+  {
+    "jp": "それは残念です。",
+    "en": "That's too bad."
+  },
+  {
+    "jp": "車の排気系を交換したいのですが、いつも行っている修理工場が予約でいっぱいです。",
+    "en": "My car exhaust needs replacing and the auto shop I usually go to is booked up."
+  },
+  {
+    "jp": "朝もっと勉強するようになってから、テストの点数に大きな影響が出ています。",
+    "en": "Studying more in the morning has had a huge effect on my test scores."
+  },
+  {
+    "jp": "実は、1969年製のコルビーロードスターなんです。",
+    "en": "Actually, it's a 1969 Colby Roadster."
+  },
+  {
+    "jp": "昼食後、誰かスタッフエリアを片付けましたか？",
+    "en": "Has anyone cleaned up the staff area since lunch time?"
+  },
+  {
+    "jp": "彼は車のことなら何でも知っています。",
+    "en": "He knows everything there is to know about cars."
+  },
+  {
+    "jp": "寮ではなく図書館で勉強するようにしました。",
+    "en": "I've started studying at the library rather than in my dorm."
+  },
+  {
+    "jp": "どうしてウェディングドレスを出したの？",
+    "en": "Why did you get your wedding dress out?"
+  },
+  {
+    "jp": "うまくいっていますか？",
+    "en": "How's that going?"
+  },
+  {
+    "jp": "何年も見てなかったのに。",
+    "en": "I haven't seen that for years."
+  },
+  {
+    "jp": "最も重要な基準を特定する",
+    "en": "Identifying the most important criterion"
+  },
+  {
+    "jp": "ハイストリートのあのお店はどう？",
+    "en": "What about that place on High Street?"
+  },
+  {
+    "jp": "これは私のオハイオへの異動の件ですか？",
+    "en": "Is this about my transfer to Ohio?"
+  },
+  {
+    "jp": "無事に返してくれる人じゃないと不安なの。",
+    "en": "I need someone I can trust to get it back to me in one piece."
+  },
+  {
+    "jp": "こちらでのレッスンはどうですか？",
+    "en": "How are you doing with your lessons here?"
+  },
+  {
+    "jp": "わかった。",
+    "en": "Okay."
+  },
+  {
+    "jp": "影響の程度を表すこと",
+    "en": "Expressing the extent of an influence"
+  },
+  {
+    "jp": "じゃあ電話帳を渡してくれたら、専門店を探すよ。",
+    "en": "Well, pass me the phone book and I'll find a specialist."
+  },
+  {
+    "jp": "もう一度挑戦することにしました。",
+    "en": "I decided to give it another go."
+  },
+  {
+    "jp": "シルバーズジムのパーソナルトレーナーサービス使ってるよね？",
+    "en": "You use the personal trainer service at Silver's Gym, right?"
+  },
+  {
+    "jp": "重要なのは、主要な競合より売り上げで上回れるかどうかだ。",
+    "en": "The key issue is going to be whether they can outsell their main competitor."
+  },
+  {
+    "jp": "うん、使ってるよ。",
+    "en": "Yes, I do."
   }
 ]
