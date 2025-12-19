@@ -207,6 +207,7 @@ body {
 
 <script>
 /* ========= 状態 ========= */
+let dataReady = false;
 let nextEn = null;
 
 let allSentences = [];
@@ -218,6 +219,8 @@ const keyPrefix = `randomApp_${fileParam}_`;
 const sentenceJpEl = document.getElementById("sentence-jp");
 const sentenceEnEl = document.getElementById("sentence-en");
 const showBtnEl    = document.getElementById("showBtn");
+showBtnEl.disabled = true;
+document.getElementById("showStarBtn").disabled = true;
 const okBtnEl      = document.getElementById("okBtn");
 const starBtnEl    = document.getElementById("starBtn");
   
@@ -391,7 +394,20 @@ fetch(jsonFile)
       remainingArr = allSentences.map(s => s.en);
       remainingSet = new Set(remainingArr);
       localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remainingArr));
+    } else {
+      remainingSet = new Set(remainingArr);
     }
+
+    // ★ ここで「データ準備完了」
+    dataReady = true;
+
+    // ★ ボタン解放
+    showBtnEl.disabled = false;
+    document.getElementById("showStarBtn").disabled = false;
+  })
+  .catch(err => {
+    topMetaEl.textContent = `JSON読み込み失敗: ${jsonFile}`;
+    console.error(err);
   });
 
 /* ========= スターUI（☆固定表示） ========= */
@@ -464,6 +480,12 @@ function presentSentenceByEn(en){
 
 /* ========= 通常ランダム表示 ========= */
 function showRandom(){
+
+  if (!dataReady) {
+    topMetaEl.textContent = "Loading...";
+    return;
+  }
+   
   // 完了チェック
   if (remainingArr.length === 0) {
     topMetaEl.textContent = "すべての英文を表示しました！";
@@ -691,6 +713,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
