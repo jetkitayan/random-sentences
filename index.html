@@ -466,7 +466,8 @@ function presentSentenceByEn(en){
 function showRandom(){
   // 完了チェック
   if (remainingArr.length === 0) {
-    sentenceJpEl.textContent = "すべての英文を表示しました！";
+    topMetaEl.textContent = "すべての英文を表示しました！";
+    jpTextEl.textContent = "";
     sentenceEnEl.textContent = "";
     return;
   }
@@ -518,7 +519,8 @@ function confirmSentence(){
 
   if (remainingArr.length > 0) showRandom();
   else {
-    document.getElementById("sentence-jp").textContent = "すべての英文を表示しました！";
+    topMetaEl.textContent = "すべての英文を表示しました！";
+    jpTextEl.textContent = "";
     document.getElementById("sentence-en").textContent = "";
     document.getElementById("last-shown").textContent = "";
     document.getElementById("showBtn").disabled = true;
@@ -689,6 +691,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
