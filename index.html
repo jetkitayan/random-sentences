@@ -567,7 +567,8 @@ function resetData(){
   remainingArr = allSentences.map(s => s.en);
   remainingSet = new Set(remainingArr);
   currentSentence = null;
-  document.getElementById("sentence-jp").textContent = "Press 'Show Random' to start";
+  topMetaEl.textContent = 'Press "Show Random" to start';
+  jpTextEl.textContent = "";
   document.getElementById("sentence-en").textContent = "";
   document.getElementById("last-shown").textContent = "";
   document.getElementById("showBtn").disabled = false;
@@ -688,6 +689,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
