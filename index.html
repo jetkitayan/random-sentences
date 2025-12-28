@@ -218,8 +218,13 @@ document.addEventListener("touchstart", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
 
+  document
+    .querySelectorAll("button.is-locked")
+    .forEach(b => b.classList.remove("is-locked"));
+
   lockedButton = btn;
-  btn.focus(); // フォーカスも当てておく
+  btn.classList.add("is-locked");
+  btn.focus();
 }, { passive: true });
 
 /* ② 以降：マウスクリックで同じボタンを押す */
@@ -743,6 +748,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
