@@ -206,6 +206,31 @@ body {
 </div>
 
 <script>
+let lockedButton = null;
+
+/* ① 最初の1回：画面タップでボタンを記憶 */
+document.addEventListener("touchstart", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+
+  lockedButton = btn;
+  btn.focus(); // フォーカスも当てておく
+}, { passive: true });
+
+/* ② 以降：マウスクリックで同じボタンを押す */
+document.addEventListener("pointerdown", (e) => {
+  // マウス以外は無視
+  if (e.pointerType !== "mouse") return;
+
+  // 左クリック以外は無視（不要なら消してOK）
+  if (typeof e.button === "number" && e.button !== 0) return;
+
+  if (lockedButton) {
+    lockedButton.click();
+    e.preventDefault();
+  }
+}, { capture: true });
+   
 /* ========= 状態 ========= */
 let dataReady = false;
 let nextEn = null;
@@ -713,6 +738,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
