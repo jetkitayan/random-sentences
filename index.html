@@ -212,19 +212,16 @@ button.is-locked {
 
 <script>
 let lockedButton = null;
-
-// 「最後に押した時刻」を覚えて二重発火を止める
+let lastFireAt = 0;
 let lastMouseDownAt = 0;
-let lastFiredAt = 0;
 
 function nowMs() {
   return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
 }
 
-/* ① 最初の1回だけロック（disabledはロック禁止） */
+// 1回だけロック（disabledはロック不可）
 document.addEventListener("touchstart", (e) => {
   if (lockedButton) return;
-
   const btn = e.target.closest("button");
   if (!btn || btn.disabled) return;
 
@@ -233,46 +230,44 @@ document.addEventListener("touchstart", (e) => {
   btn.focus();
 }, { passive: true });
 
-/* ロックされたボタンを1回だけ実行 */
 function fireLocked(e) {
   if (!lockedButton || lockedButton.disabled) return;
 
+  // ★ ここが「clickedBtn判定」：他のボタンを押したいときは邪魔しない
+  const clickedBtn = e.target.closest("button");
+  if (clickedBtn && clickedBtn !== lockedButton) return;
+
+  // ★ 2回問題対策：短時間に2回は発火させない
   const t = nowMs();
-  // 直前に実行してたら無視（保険）
-  if (t - lastFiredAt < 400) return;
-  lastFiredAt = t;
+  if (t - lastFireAt < 450) return;
+  lastFireAt = t;
 
   lockedButton.click();
-
-  // 元のクリック動作を殺す（他ボタンが押されるのを防ぐ）
   e.preventDefault();
   e.stopPropagation();
 }
 
-/* ② 主役：mousedown で1回だけ押す */
+// 主役：mousedown
 document.addEventListener("mousedown", (e) => {
   if (typeof e.button === "number" && e.button !== 0) return;
   if (!lockedButton) return;
-
   lastMouseDownAt = nowMs();
   fireLocked(e);
 }, { capture: true });
 
-/* ③ click は基本「飲み込む」：mousedownで既に押してるから */
+// 保険：click（clickしか来ない環境用）
+// ただし mousedown 直後の click は二重なので飲み込む
 document.addEventListener("click", (e) => {
   if (!lockedButton) return;
-  if (!e.isTrusted) return; // プログラムclickは無視
+  if (!e.isTrusted) return;
 
   const t = nowMs();
-
-  // 直近で mousedown が来てたら、click は二重なので“飲み込むだけ”
   if (t - lastMouseDownAt < 800) {
+    // mousedown後のclickは二重発火なので“押さずに捨てる”
     e.preventDefault();
     e.stopPropagation();
     return;
   }
-
-  // mousedown が来ない環境（clickしか来ない）では click で押す
   fireLocked(e);
 }, { capture: true });
    
@@ -783,6 +778,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
