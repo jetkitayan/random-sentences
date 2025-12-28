@@ -213,14 +213,21 @@ button.is-locked {
 <script>
 let lockedButton = null;
 
-/* ① 最初の1回：画面タップでボタンを記憶 */
+function isLockable(btn) {
+  // disabled はロック禁止
+  if (!btn || btn.disabled) return false;
+
+  // 必要なら「ロック可能ボタン」を限定（安全）
+  const lockableIds = new Set(["showBtn", "showStarBtn", "resetBtn", "statsBtn", "copyBtn", "okBtn", "starBtn"]);
+  return lockableIds.has(btn.id);
+}
+
+/* ① 最初の1回：画面タップで「有効なボタン」だけ記憶 */
 document.addEventListener("touchstart", (e) => {
   const btn = e.target.closest("button");
-  if (!btn) return;
+  if (!isLockable(btn)) return;
 
-  document
-    .querySelectorAll("button.is-locked")
-    .forEach(b => b.classList.remove("is-locked"));
+  document.querySelectorAll("button.is-locked").forEach(b => b.classList.remove("is-locked"));
 
   lockedButton = btn;
   btn.classList.add("is-locked");
@@ -229,16 +236,15 @@ document.addEventListener("touchstart", (e) => {
 
 /* ② 以降：マウスクリックで同じボタンを押す */
 document.addEventListener("pointerdown", (e) => {
-  // マウス以外は無視
   if (e.pointerType !== "mouse") return;
-
-  // 左クリック以外は無視（不要なら消してOK）
   if (typeof e.button === "number" && e.button !== 0) return;
 
-  if (lockedButton) {
-    lockedButton.click();
-    e.preventDefault();
-  }
+  // ロックが無い/無効なら何もしない（通常クリックを邪魔しない）
+  if (!isLockable(lockedButton)) return;
+
+  // どこをクリックしてもロック先を実行
+  lockedButton.click();
+  e.preventDefault();
 }, { capture: true });
    
 /* ========= 状態 ========= */
@@ -748,6 +754,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
