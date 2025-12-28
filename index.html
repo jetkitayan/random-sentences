@@ -212,9 +212,16 @@ button.is-locked {
 
 <script>
 let lockedButton = null;
-let firing = false; // ← これが肝
 
-/* ① 最初の1回だけロック */
+// 「最後に押した時刻」を覚えて二重発火を止める
+let lastMouseDownAt = 0;
+let lastFiredAt = 0;
+
+function nowMs() {
+  return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
+}
+
+/* ① 最初の1回だけロック（disabledはロック禁止） */
 document.addEventListener("touchstart", (e) => {
   if (lockedButton) return;
 
@@ -226,37 +233,47 @@ document.addEventListener("touchstart", (e) => {
   btn.focus();
 }, { passive: true });
 
-/* 共通の発火処理（1回だけ） */
-function fireLockedOnce(e) {
+/* ロックされたボタンを1回だけ実行 */
+function fireLocked(e) {
   if (!lockedButton || lockedButton.disabled) return;
-  if (firing) return;          // ← 二重発火防止
 
-  firing = true;
+  const t = nowMs();
+  // 直前に実行してたら無視（保険）
+  if (t - lastFiredAt < 400) return;
+  lastFiredAt = t;
+
   lockedButton.click();
 
+  // 元のクリック動作を殺す（他ボタンが押されるのを防ぐ）
   e.preventDefault();
   e.stopPropagation();
-
-  // 同一操作内のイベント連鎖が終わった後で解除
-  setTimeout(() => { firing = false; }, 0);
 }
 
-/* mousedown（多くのiOSマウスで来る） */
+/* ② 主役：mousedown で1回だけ押す */
 document.addEventListener("mousedown", (e) => {
   if (typeof e.button === "number" && e.button !== 0) return;
-  fireLockedOnce(e);
+  if (!lockedButton) return;
+
+  lastMouseDownAt = nowMs();
+  fireLocked(e);
 }, { capture: true });
 
-/* pointerdown（来る環境用の保険） */
-document.addEventListener("pointerdown", (e) => {
-  if (typeof e.button === "number" && e.button !== 0) return;
-  fireLockedOnce(e);
-}, { capture: true });
-
-/* click（clickしか来ない環境の最終保険） */
+/* ③ click は基本「飲み込む」：mousedownで既に押してるから */
 document.addEventListener("click", (e) => {
-  if (!e.isTrusted) return; // 自動clickは無視
-  fireLockedOnce(e);
+  if (!lockedButton) return;
+  if (!e.isTrusted) return; // プログラムclickは無視
+
+  const t = nowMs();
+
+  // 直近で mousedown が来てたら、click は二重なので“飲み込むだけ”
+  if (t - lastMouseDownAt < 800) {
+    e.preventDefault();
+    e.stopPropagation();
+    return;
+  }
+
+  // mousedown が来ない環境（clickしか来ない）では click で押す
+  fireLocked(e);
 }, { capture: true });
    
 /* ========= 状態 ========= */
@@ -766,6 +783,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
