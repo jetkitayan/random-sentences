@@ -212,10 +212,11 @@ button.is-locked {
 
 <script>
 let lockedButton = null;
+let firing = false; // ← これが肝
 
-// 1回だけロック（disabledは除外）
+/* ① 最初の1回だけロック */
 document.addEventListener("touchstart", (e) => {
-  if (lockedButton) return; // ← 一度ロックしたら固定
+  if (lockedButton) return;
 
   const btn = e.target.closest("button");
   if (!btn || btn.disabled) return;
@@ -225,41 +226,37 @@ document.addEventListener("touchstart", (e) => {
   btn.focus();
 }, { passive: true });
 
-// 「本物のユーザー操作」でロックボタンを発火させる
-function fireLocked(e) {
+/* 共通の発火処理（1回だけ） */
+function fireLockedOnce(e) {
   if (!lockedButton || lockedButton.disabled) return;
+  if (firing) return;          // ← 二重発火防止
 
-  // ロックされてない間は通常操作を邪魔しない
-  // （ここに来る時点で lockedButton はある）
-
-  // クリック元がロックボタン自身でもOK（そのまま通す）でもいいが、
-  // 「どこを押してもロック先」にしたいなら強制実行でOK
+  firing = true;
   lockedButton.click();
 
-  // 余計なクリックを抑止（ページの他のボタン誤爆を防ぐ）
   e.preventDefault();
   e.stopPropagation();
+
+  // 同一操作内のイベント連鎖が終わった後で解除
+  setTimeout(() => { firing = false; }, 0);
 }
 
-// ✅ まずはマウス左押し（多くの環境で取れる）
+/* mousedown（多くのiOSマウスで来る） */
 document.addEventListener("mousedown", (e) => {
-  // 左クリック以外を除外
   if (typeof e.button === "number" && e.button !== 0) return;
-  fireLocked(e);
+  fireLockedOnce(e);
 }, { capture: true });
 
-// ✅ pointerdown でも来る環境があるので拾う（保険）
+/* pointerdown（来る環境用の保険） */
 document.addEventListener("pointerdown", (e) => {
-  // 左クリック以外を除外（取れない環境もあるので条件ゆるめ）
   if (typeof e.button === "number" && e.button !== 0) return;
-  fireLocked(e);
+  fireLockedOnce(e);
 }, { capture: true });
 
-// ✅ 最後の保険：iOSで「clickだけ来る」場合がある
-// ※ programmatic click(= isTrusted=false) では動かさないので無限ループしない
+/* click（clickしか来ない環境の最終保険） */
 document.addEventListener("click", (e) => {
-  if (!e.isTrusted) return; // ← 自動clickは無視
-  fireLocked(e);
+  if (!e.isTrusted) return; // 自動clickは無視
+  fireLockedOnce(e);
 }, { capture: true });
    
 /* ========= 状態 ========= */
@@ -769,6 +766,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
