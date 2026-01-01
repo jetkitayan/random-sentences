@@ -221,13 +221,10 @@ function nowMs() {
 
 // 1回だけロック（disabledはロック不可）
 document.addEventListener("touchstart", (e) => {
-  if (lockedButton) return;
   const btn = e.target.closest("button");
   if (!btn || btn.disabled) return;
 
-  lockedButton = btn;
-  btn.classList.add("is-locked");
-  btn.focus();
+  switchLockTo(btn);
 }, { passive: true });
 
 function switchLockTo(btn) {
@@ -261,7 +258,11 @@ function fireLocked(e) {
 // 主役：mousedown
 document.addEventListener("mousedown", (e) => {
   if (typeof e.button === "number" && e.button !== 0) return;
-  if (!lockedButton) return;
+
+  const btn = e.target.closest("button");
+  if (!btn || btn.disabled) return;
+
+  switchLockTo(btn);
   lastMouseDownAt = nowMs();
   fireLocked(e);
 }, { capture: true });
@@ -272,9 +273,12 @@ document.addEventListener("click", (e) => {
   if (!lockedButton) return;
   if (!e.isTrusted) return;
 
-  // ★追加：ロック対象以外のボタンを押したなら何もしない（通す）
   const clickedBtn = e.target.closest("button");
-  if (clickedBtn && clickedBtn !== lockedButton) return;
+  if (clickedBtn && clickedBtn !== lockedButton) {
+    // ★ 押されたボタンにロックを切り替える
+    switchLockTo(clickedBtn);
+    return;
+  }
 
   const t = nowMs();
   if (t - lastMouseDownAt < 800) {
@@ -792,6 +796,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
