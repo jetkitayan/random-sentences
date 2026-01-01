@@ -261,9 +261,12 @@ document.addEventListener("click", (e) => {
   if (!lockedButton) return;
   if (!e.isTrusted) return;
 
+  // ★追加：ロック対象以外のボタンを押したなら何もしない（通す）
+  const clickedBtn = e.target.closest("button");
+  if (clickedBtn && clickedBtn !== lockedButton) return;
+
   const t = nowMs();
   if (t - lastMouseDownAt < 800) {
-    // mousedown後のclickは二重発火なので“押さずに捨てる”
     e.preventDefault();
     e.stopPropagation();
     return;
@@ -778,6 +781,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
