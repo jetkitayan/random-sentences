@@ -230,6 +230,17 @@ document.addEventListener("touchstart", (e) => {
   btn.focus();
 }, { passive: true });
 
+function switchLockTo(btn) {
+  if (lockedButton === btn) return;
+
+  if (lockedButton) {
+    lockedButton.classList.remove("is-locked");
+  }
+  lockedButton = btn;
+  btn.classList.add("is-locked");
+  btn.focus();
+}
+   
 function fireLocked(e) {
   if (!lockedButton || lockedButton.disabled) return;
 
@@ -781,6 +792,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
