@@ -211,84 +211,6 @@ button.is-locked {
 </div>
 
 <script>
-let lockedButton = null;
-let lastFireAt = 0;
-let lastMouseDownAt = 0;
-
-function nowMs() {
-  return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
-}
-
-// 1回だけロック（disabledはロック不可）
-document.addEventListener("touchstart", (e) => {
-  const btn = e.target.closest("button");
-  if (!btn || btn.disabled) return;
-
-  switchLockTo(btn);
-}, { passive: true });
-
-function switchLockTo(btn) {
-  if (lockedButton === btn) return;
-
-  if (lockedButton) {
-    lockedButton.classList.remove("is-locked");
-  }
-  lockedButton = btn;
-  btn.classList.add("is-locked");
-  btn.focus();
-}
-   
-function fireLocked(e) {
-  if (!lockedButton || lockedButton.disabled) return;
-
-  // ★ ここが「clickedBtn判定」：他のボタンを押したいときは邪魔しない
-  const clickedBtn = e.target.closest("button");
-  if (clickedBtn && clickedBtn !== lockedButton) return;
-
-  // ★ 2回問題対策：短時間に2回は発火させない
-  const t = nowMs();
-  if (t - lastFireAt < 450) return;
-  lastFireAt = t;
-
-  lockedButton.click();
-  e.preventDefault();
-  e.stopPropagation();
-}
-
-// 主役：mousedown
-document.addEventListener("mousedown", (e) => {
-  if (typeof e.button === "number" && e.button !== 0) return;
-
-  const btn = e.target.closest("button");
-  if (!btn || btn.disabled) return;
-
-  switchLockTo(btn);
-  lastMouseDownAt = nowMs();
-  fireLocked(e);
-}, { capture: true });
-
-// 保険：click（clickしか来ない環境用）
-// ただし mousedown 直後の click は二重なので飲み込む
-document.addEventListener("click", (e) => {
-  if (!lockedButton) return;
-  if (!e.isTrusted) return;
-
-  const clickedBtn = e.target.closest("button");
-  if (clickedBtn && clickedBtn !== lockedButton) {
-    // ★ 押されたボタンにロックを切り替える
-    switchLockTo(clickedBtn);
-    return;
-  }
-
-  const t = nowMs();
-  if (t - lastMouseDownAt < 800) {
-    e.preventDefault();
-    e.stopPropagation();
-    return;
-  }
-  fireLocked(e);
-}, { capture: true });
-   
 /* ========= 状態 ========= */
 let dataReady = false;
 let nextEn = null;
@@ -796,6 +718,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
