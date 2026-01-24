@@ -340,6 +340,55 @@ function humanElapsed(iso){
   }catch{return""}
 }
 
+function pad2(n){ return String(n).padStart(2, "0"); }
+
+function formatTokyoYmdHm(date){
+  // date: Date
+  // Asia/Tokyo の “各要素” を取り出す（ブラウザのローカルTZに影響されにくい）
+  const parts = new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+
+  const get = (type) => parts.find(p => p.type === type)?.value ?? "";
+  const y = get("year");
+  const m = get("month");
+  const d = get("day");
+  const hh = get("hour");
+  const mm = get("minute");
+  return `${y}/${m}/${d} ${hh}:${mm}`;
+}
+
+// 「5日前（yyyy/mm/dd hh:mm）」を返す
+function humanElapsedWithDate(iso){
+  try{
+    if (!iso) return "なし";
+    const t = new Date(iso);
+    const diffSec = Math.floor((Date.now() - t.getTime()) / 1000);
+
+    let rel;
+    if (diffSec < 60) rel = `${diffSec}秒前`;
+    else {
+      const diffMin = Math.floor(diffSec / 60);
+      if (diffMin < 60) rel = `${diffMin}分前`;
+      else {
+        const diffHour = Math.floor(diffMin / 60);
+        if (diffHour < 24) rel = `${diffHour}時間前`;
+        else rel = `${Math.floor(diffHour / 24)}日前`;
+      }
+    }
+
+    return `${rel}（${formatTokyoYmdHm(t)}）`;
+  }catch{
+    return "なし";
+  }
+}
+   
 // ===== 保存を「まとめて」やる（超重要）=====
 const dirtyKeys = new Set();
 let flushTimer = null;
@@ -718,3 +767,4 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
