@@ -341,8 +341,6 @@ function humanElapsed(iso){
   }catch{return""}
 }
 
-function pad2(n){ return String(n).padStart(2, "0"); }
-
 function formatTokyoYmdHm(date){
   // date: Date
   // Asia/Tokyo の “各要素” を取り出す（ブラウザのローカルTZに影響されにくい）
@@ -799,6 +797,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
