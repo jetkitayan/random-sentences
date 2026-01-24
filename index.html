@@ -521,7 +521,7 @@ function presentSentenceByEn(en){
      addNowCountFast();
    
      const prevIso = lastShownMap[en];
-     const prevText = prevIso ? humanElapsed(prevIso) : "なし";
+     const prevText = humanElapsedWithDate(prevIso);
      lastShownMap[en] = new Date().toISOString();
      markDirty(keyPrefix+"lastShown");
    
@@ -767,4 +767,5 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
