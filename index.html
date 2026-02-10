@@ -239,6 +239,10 @@ let lastShownMap= JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {
 
 let lastShowMode = "all"; // "all" | "star"
 
+function getOkCount() {
+  return Object.values(yesMarks).filter(v => v === true).length;
+}
+
 function buildOkCountText() {
   const okCount = getOkCount();
   const total = allSentences.length;
@@ -804,6 +808,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
