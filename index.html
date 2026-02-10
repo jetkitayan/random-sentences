@@ -537,8 +537,8 @@ function presentSentenceByEn(en){
      const starMark = starMarks[en] ? "★" : "";
      topMetaEl.textContent =
         `${newShown}回目${starMark}${buildCountsInlineText()}\n` +
-        `${buildOkCountText()}\n` +
-        `${prevText}`;
+        `${prevText}\n` +
+        `${buildOkCountText()}`;
    }, 0);
 }
 
@@ -808,6 +808,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
