@@ -246,7 +246,7 @@ function getOkCount() {
 function buildOkCountText() {
   const okCount = getOkCount();
   const total = allSentences.length;
-  return `OK: ${okCount} / ${total}`;
+  return `OK (${okCount} / ${total})`;
 }
    
 /* 今日カウント */
@@ -808,6 +808,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
