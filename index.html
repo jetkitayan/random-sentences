@@ -235,18 +235,14 @@ button.is-locked {
     </div>
     <div id="sentence-en"></div>
   </div>
-　<!-- 追加：自作文章の登録 -->
-  <div id="add-area">
-    <div class="add-row">
-      <textarea id="customJp" placeholder="日本語（任意）"></textarea>
-      <textarea id="customEn" placeholder="英語（必須）"></textarea>
-    </div>
-    <div class="add-row2">
-      <button id="addBtn">Add</button>
+  <div id="simpleAddArea">
+    <textarea id="customText" placeholder="1文を入力"></textarea>
+    <div class="simpleButtons">
+      <button id="addSimpleBtn">Add</button>
       <button id="customOnlyBtn">Custom Only</button>
-      <button id="clearCustomBtn">Clear Custom</button>
+      <button id="clearCustomBtn">Clear</button>
     </div>
-    <div class="add-help" id="addHelp"></div>
+    <div id="addMsg"></div>
   </div>
   <div id="last-shown"></div>
 </div>
@@ -1014,6 +1010,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
