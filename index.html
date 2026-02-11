@@ -198,6 +198,43 @@ button.is-locked {
   margin-top: 10px;
   font-size: 20px;
 }
+
+/* content系は中央寄せ（元の見た目に寄せる） */
+#content,
+#simpleAddArea{
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Customエリアは「下にちょい足し」感。元の画面を壊さない */
+#simpleAddArea{
+  padding: 30px 40px;
+}
+
+/* 3つ並んでも崩れないようにする（折り返しOK） */
+.simpleButtons{
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* Customボタンは上と“同系統”だけど、小さめ（レイアウト崩壊防止） */
+#simpleAddArea .simpleButtons button{
+  border: 3px solid #000;
+  border-radius: 16px;
+  background-color: #d9d9d9;
+  color: #000;
+  cursor: pointer;
+
+  padding: 20px 25px;   /* ← 元のあなたのCustomのサイズに戻す */
+  font-size: 24px;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>
 </head>
 <body>
@@ -960,6 +997,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
