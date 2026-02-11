@@ -254,21 +254,6 @@ button.is-locked {
 </div>
 
 <script>
-// ===== 追加：自作文章 =====
-const customKey = keyPrefix + "customSentences"; // [{jp,en}]
-let customSentences = JSON.parse(localStorage.getItem(customKey)) || [];
-
-function normalizeEn(en){
-  return (en ?? "").trim().replace(/\s+/g, " ");
-}
-function isDuplicateEn(en){
-  const k = normalizeEn(en);
-  return !!byEn[k]; // 既存(all+custom)に同じenがある
-}
-function saveCustom(){
-  try { localStorage.setItem(customKey, JSON.stringify(customSentences)); } catch {}
-}
-
 /* ========= 状態 ========= */
 let dataReady = false;
 let nextEn = null;
@@ -942,6 +927,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
