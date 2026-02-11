@@ -934,6 +934,9 @@ function showRandomCustomOnly(){
   const pool = simpleCustomList; // enキーとして使う
   const en = pickRandomFast(pool, currentSentence?.en);
   lastShowMode = "all";
+
+  // 日本語を空にする
+  jpTextEl.textContent = "";
   presentSentenceByEn(en, false, false); // カウントしない・アニメしない（最速）
 }
 
@@ -999,6 +1002,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
