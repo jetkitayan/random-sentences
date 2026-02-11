@@ -934,9 +934,16 @@ function clearSimple(){
   flushSaves();
 }
 
-addSimpleBtn.onclick = addSimpleSentence;
-customOnlyBtn.onclick = showRandomCustomOnly;
-clearCustomBtn.onclick = clearSimple;
+function bindFastTap(el, fn) {
+  el.addEventListener("pointerup", (e) => {
+    e.preventDefault();
+    fn();
+  }, { passive: false });
+}
+
+bindFastTap(addSimpleBtn, addSimpleSentence);
+bindFastTap(customOnlyBtn, showRandomCustomOnly);
+bindFastTap(clearCustomBtn, clearSimple);
 
 /* ========= イベント ========= */
 document.getElementById("showBtn").onclick = showRandom;
@@ -952,4 +959,5 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
