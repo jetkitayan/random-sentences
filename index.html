@@ -932,10 +932,12 @@ function showRandomCustomOnly(){
     return;
   }
 
-  const text = simpleCustomList[simpleCustomList.length - 1];
+  const en = pickRandomFast(simpleCustomList, currentSentence?.en);
 
-  presentSentenceByEn(text, false, false, true); 
-  //                         ↑countしない ↑アニメなし ↑日本語非表示
+  topMetaEl.textContent = "";   // ←追加（メタ表示を消す）
+  document.getElementById("last-shown").textContent = ""; // ←必要なら
+
+  presentSentenceByEn(en, false, false, true);
 }
 
 function clearSimple(){
@@ -1000,6 +1002,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
