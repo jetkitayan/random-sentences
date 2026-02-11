@@ -522,14 +522,7 @@ fetch(jsonFile)
 
 /* ========= スターUI（☆固定表示） ========= */
 function updateStarUi(){
-  const starBtn = document.getElementById("starBtn");
-  if (!currentSentence) {
-    starBtn.disabled = true;
-  } else {
-    starBtn.disabled = false;
-  }
-  // 見た目は常に☆固定
-  starBtn.textContent = "★";
+  document.getElementById("starBtn").textContent = "★";
 }
 
 const topMetaEl = document.getElementById("topMeta");
@@ -957,6 +950,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
