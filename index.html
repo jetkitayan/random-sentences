@@ -568,6 +568,7 @@ function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true){
   setTimeout(() => {
 
      if (!shouldCount) {
+       topMetaEl.textContent = "";
        return;
      }
    
@@ -956,6 +957,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
