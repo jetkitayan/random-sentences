@@ -560,18 +560,22 @@ function presentSentenceByEn(en, shouldCount = true){
   });
 
   // 重い処理はさらに後ろ
-   setTimeout(() => {
+  setTimeout(() => {
+
+     if (!shouldCount) {
+       topMetaEl.textContent = `Custom表示`;
+       return;
+     }
+   
      const newShown = (shownCounts[en] || 0) + 1;
      shownCounts[en] = newShown;
      markDirty(keyPrefix+"shownCounts");
    
-     // ★ 総回数キャッシュも増やす
      totalShownCached++;
    
      todayCounts[en] = (todayCounts[en] || 0) + 1;
      markDirty(todayCountsKey);
    
-     // ★ 今日回数キャッシュも増やす
      todayShownCached++;
    
      addNowCountFast();
@@ -586,6 +590,7 @@ function presentSentenceByEn(en, shouldCount = true){
         `${newShown}回目${starMark}${buildCountsInlineText()}\n` +
         `${prevText}\n` +
         `${buildOkCountText()}`;
+   
    }, 0);
 }
 
@@ -947,6 +952,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
