@@ -882,7 +882,124 @@ function prepareNext() {
 function buildCountsInlineText(){
   return `（${getLast5MinCount()} / ${getLast1HourCount()} / ${todayShownCached} / ${totalShownCached}）`;
 }
-   
+
+// ===== 追加：UI参照 =====
+const customJpEl = document.getElementById("customJp");
+const customEnEl = document.getElementById("customEn");
+const addBtnEl = document.getElementById("addBtn");
+const customOnlyBtnEl = document.getElementById("customOnlyBtn");
+const clearCustomBtnEl = document.getElementById("clearCustomBtn");
+const addHelpEl = document.getElementById("addHelp");
+
+function addHelp(msg){ addHelpEl.textContent = msg; }
+
+// ===== 追加：文章追加 =====
+function addCustomSentence(){
+  const jp = (customJpEl.value ?? "").trim();
+  const enRaw = customEnEl.value ?? "";
+  const en = normalizeEn(enRaw);
+
+  if (!en) { addHelp("英語（必須）が空です"); return; }
+  if (isDuplicateEn(en)) { addHelp("同じ英語(en)が既に存在します"); return; }
+
+  const obj = { jp, en };
+  customSentences.push(obj);
+  saveCustom();
+
+  // 画面上のデータにも即反映
+  allSentences.push(obj);
+  byEn[en] = obj;
+
+  // 未消化リストにも入れる（OK済みじゃない前提）
+  remainingSet.add(en);
+  remainingArr = Array.from(remainingSet);
+  markDirty(keyPrefix + "remaining");
+
+  addHelp("追加しました。次回以降のRandom対象に入ります。");
+  customJpEl.value = "";
+  customEnEl.value = "";
+}
+
+// ===== 追加：custom only 表示 =====
+function showRandomCustomOnly(){
+  const pool = customSentences.map(s => normalizeEn(s.en)).filter(Boolean);
+
+  if (pool.length === 0) {
+    alert("Custom がありません。先に Add してください。");
+    return;
+  }
+
+  const en = pickRandomFast(pool, currentSentence?.en);
+  lastShowMode = "all";
+  presentSentenceByEn(en);
+}
+
+// ===== 追加：custom 全削除 =====
+function clearCustom(){
+  if (!confirm("Custom を全削除します。OK？")) return;
+
+  // custom一覧を消す
+  customSentences = [];
+  saveCustom();
+
+  // allSentences から custom を除去（JSON由来だけに戻す）
+  // ※ byEn を作り直すため、JSONを再fetchするのは重いので、今ある data 側を判別できないなら簡易に「customKeyにないen」を残す方式でやる
+  // ここでは「customが全部消えた」ので、byEnから custom を消すだけにする（表示・次回ロードで整合は取れる）
+  // remaining/marks 側に残っていても問題になりにくいが、気持ち悪いなら併せて掃除する
+
+  // byEn/remaining から custom en を掃除
+  const customEns = new Set(Object.keys(byEn).filter(en => {
+    // customSentencesが空なので判別不能。ここは「customKeyに入っていたen」を覚えておけば完璧。
+    return false;
+  }));
+
+  // より確実にするなら、clear前に customEns を作ってから消す：
+  // （なのでここは上の方法ではなく、先に pool を作ってから消します）
+}
+
+// ちゃんとした clear（customのenを覚えてから掃除）
+function clearCustomSafe(){
+  if (!confirm("Custom を全削除します。OK？")) return;
+
+  const pool = customSentences.map(s => normalizeEn(s.en)).filter(Boolean);
+  const poolSet = new Set(pool);
+
+  customSentences = [];
+  saveCustom();
+
+  // allSentences から除去
+  allSentences = allSentences.filter(s => !poolSet.has(normalizeEn(s.en)));
+
+  // byEn を作り直し
+  for (const k in byEn) delete byEn[k];
+  for (const s of allSentences) byEn[normalizeEn(s.en)] = { jp: s.jp ?? "", en: normalizeEn(s.en) };
+
+  // remaining からも除去
+  remainingSet = new Set(Array.from(remainingSet).filter(en => !poolSet.has(normalizeEn(en))));
+  remainingArr = Array.from(remainingSet);
+  markDirty(keyPrefix + "remaining");
+
+  // 各種カウントも掃除（任意だがスッキリ）
+  for (const en of pool) {
+    delete shownCounts[en];
+    delete todayCounts[en];
+    delete yesMarks[en];
+    delete starMarks[en];
+    delete lastShownMap[en];
+  }
+  markDirty(keyPrefix+"shownCounts");
+  markDirty(todayCountsKey);
+  markDirty(keyPrefix+"yesMarks");
+  markDirty(keyPrefix+"starMarks");
+  markDirty(keyPrefix+"lastShown");
+
+  addHelp("Custom を全削除しました。");
+}
+
+addBtnEl.onclick = addCustomSentence;
+customOnlyBtnEl.onclick = showRandomCustomOnly;
+clearCustomBtnEl.onclick = clearCustomSafe;
+
 /* ========= イベント ========= */
 document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("showStarBtn").onclick = showRandomStarred;
@@ -897,6 +1014,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
