@@ -501,7 +501,7 @@ fetch(jsonFile)
    
      // 2) Custom を allSentences に「追加」して統合
      //    ※ en をキーにする都合上、en と jp を同じ文字列にする
-     for (const t of list) {
+     for (const t of simpleCustomList) {
        const text = (t || "").trim();
        if (!text) continue;
    
@@ -968,6 +968,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
