@@ -695,6 +695,9 @@ function resetData(){
   document.getElementById("okBtn").disabled = true;
   document.getElementById("starBtn").disabled = true;
   document.getElementById("statsArea").style.display = "none";
+
+  localStorage.removeItem(simpleKey);
+  simpleCustomList = [];
 }
 
 /* ========= Stats & Copy ========= */
@@ -898,6 +901,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
