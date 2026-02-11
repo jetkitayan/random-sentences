@@ -536,7 +536,7 @@ const topMetaEl = document.getElementById("topMeta");
 const jpTextEl  = document.getElementById("jpText");
 const enEl      = document.getElementById("sentence-en");
 
-function presentSentenceByEn(en, shouldCount = true){
+function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true){
   const s = byEn[en];
   if (!s) return;
   currentSentence = s;
@@ -545,18 +545,24 @@ function presentSentenceByEn(en, shouldCount = true){
   starBtnEl.disabled = false;
   updateStarUi();
    
-  // フェードアウト
-  sentenceJpEl.classList.add("hidden");
-  sentenceEnEl.classList.add("hidden");
+  if (shouldAnimate) {
+    sentenceJpEl.classList.add("hidden");
+    sentenceEnEl.classList.add("hidden");
 
-  requestAnimationFrame(() => {
-    // テキスト差し替え
-    jpTextEl.textContent = s.jp;
-    enEl.textContent     = s.en;
+    requestAnimationFrame(() => {
+      jpTextEl.textContent = s.jp;
+      enEl.textContent     = s.en;
 
-    // フェードイン
-    sentenceJpEl.classList.remove("hidden");
-    sentenceEnEl.classList.remove("hidden");
+      sentenceJpEl.classList.remove("hidden");
+      sentenceEnEl.classList.remove("hidden");
+    });
+     } else {
+       // ★ 高速：待たずに即表示
+       sentenceJpEl.classList.remove("hidden");
+       sentenceEnEl.classList.remove("hidden");
+       jpTextEl.textContent = s.jp;
+       enEl.textContent     = s.en;
+     }
   });
 
   // 重い処理はさらに後ろ
@@ -895,7 +901,7 @@ function showRandomCustomOnly(){
   const pool = simpleCustomList; // enキーとして使う
   const en = pickRandomFast(pool, currentSentence?.en);
   lastShowMode = "all";
-  presentSentenceByEn(en, false);
+  presentSentenceByEn(en, false, false); // カウントしない・アニメしない（最速）
 }
 
 function clearSimple(){
@@ -952,6 +958,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
