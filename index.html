@@ -494,32 +494,6 @@ fetch(jsonFile)
   .then(r => r.json())
   .then(data => {
 
-    // ===== 追加：custom を allSentences に合流 =====
-    // 既存JSONと衝突しないものだけ足す（enで判定）
-    const merged = [...data];
-    const seen = new Set(merged.map(s => normalizeEn(s.en)));
-
-    for (const cs of customSentences) {
-      const en = normalizeEn(cs.en);
-      if (!en) continue;
-      if (seen.has(en)) continue;
-      merged.push({ jp: cs.jp ?? "", en });
-      seen.add(en);
-    }
-     
-    allSentences = merged;
-
-    // byEn を作り直し
-    for (const s of allSentences) byEn[normalizeEn(s.en)] = { jp: s.jp ?? "", en: normalizeEn(s.en) };
-
-    if (remainingArr.length === 0) {
-      remainingArr = allSentences.map(s => s.en);
-      remainingSet = new Set(remainingArr);
-      localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remainingArr));
-    } else {
-      remainingSet = new Set(remainingArr);
-    }
-
     // ★ ここで「データ準備完了」
     dataReady = true;
 
@@ -927,6 +901,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
