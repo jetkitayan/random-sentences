@@ -501,7 +501,8 @@ fetch(jsonFile)
    
      // 2) Custom を allSentences に「追加」して統合
      //    ※ en をキーにする都合上、en と jp を同じ文字列にする
-     for (const t of simpleCustomList) {
+     const list = JSON.parse(localStorage.getItem(simpleKey)) || [];
+     for (const t of list) {
        const text = (t || "").trim();
        if (!text) continue;
    
@@ -917,8 +918,22 @@ function showRandomCustomOnly(){
 
 function clearSimple(){
   if (!confirm("全部削除する？")) return;
+
+  const toRemove = new Set(simpleCustomList.map(t => (t || "").trim()).filter(Boolean));
+
+  // list消す
   simpleCustomList = [];
   saveSimple();
+
+  // 表示データからも除去
+  allSentences = allSentences.filter(s => !toRemove.has(s.en));
+  for (const t of toRemove) delete byEn[t];
+
+  // remainingからも除去
+  remainingSet = new Set(Array.from(remainingSet).filter(en => !toRemove.has(en)));
+  remainingArr = Array.from(remainingSet);
+  markDirty(keyPrefix + "remaining");
+
   addMsg.textContent = "削除しました";
 }
 
@@ -940,6 +955,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
