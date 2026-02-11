@@ -488,6 +488,9 @@ document.addEventListener("visibilitychange", () => {
 /* en → sentence のマップ */
 const byEn = Object.create(null);
 
+const simpleKey = keyPrefix + "simpleCustom";
+let simpleCustomList = JSON.parse(localStorage.getItem(simpleKey)) || [];
+
 /* ========= データ読み込み ========= */
 fetch(jsonFile)
   .then(r => r.json())
@@ -858,9 +861,6 @@ function buildCountsInlineText(){
 
 // ===== 追加：UI参照 =====
 /* ===== シンプル Custom 保存 ===== */
-const simpleKey = keyPrefix + "simpleCustom";
-let simpleCustomList = JSON.parse(localStorage.getItem(simpleKey)) || [];
-
 const customTextEl = document.getElementById("customText");
 const addSimpleBtn = document.getElementById("addSimpleBtn");
 const customOnlyBtn = document.getElementById("customOnlyBtn");
@@ -940,6 +940,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
