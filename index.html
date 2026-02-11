@@ -895,7 +895,7 @@ function showRandomCustomOnly(){
   const pool = simpleCustomList; // enキーとして使う
   const en = pickRandomFast(pool, currentSentence?.en);
   lastShowMode = "all";
-  presentSentenceByEn(en);
+  presentSentenceByEn(en, false);
 }
 
 function clearSimple(){
@@ -952,6 +952,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
