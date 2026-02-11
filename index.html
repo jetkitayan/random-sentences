@@ -867,13 +867,10 @@ function showRandomCustomOnly(){
     return;
   }
 
-  const idx = Math.floor(Math.random() * simpleCustomList.length);
-  const text = simpleCustomList[idx];
-
-  currentSentence = null; // 既存管理から切り離す
-  jpTextEl.textContent = text;
-  enEl.textContent = "";
-  topMetaEl.textContent = "Custom Only";
+  const pool = simpleCustomList; // enキーとして使う
+  const en = pickRandomFast(pool, currentSentence?.en);
+  lastShowMode = "all";
+  presentSentenceByEn(en);
 }
 
 function clearSimple(){
@@ -901,6 +898,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
