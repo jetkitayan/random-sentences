@@ -536,7 +536,7 @@ const topMetaEl = document.getElementById("topMeta");
 const jpTextEl  = document.getElementById("jpText");
 const enEl      = document.getElementById("sentence-en");
 
-function presentSentenceByEn(en){
+function presentSentenceByEn(en, shouldCount = true){
   const s = byEn[en];
   if (!s) return;
   currentSentence = s;
@@ -947,6 +947,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
