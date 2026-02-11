@@ -873,17 +873,10 @@ function addSimpleSentence(){
 
   customTextEl.value = "";
 
-  // 画面側にも即反映（リロード不要にする）
-  if (!byEn[text]) {
-    const obj = { jp: text, en: text };
-    allSentences.push(obj);
-    byEn[text] = obj;
-
-    // remaining にも入れる（OK対象にしたいなら）
-    remainingSet.add(text);
-    remainingArr = Array.from(remainingSet);
-    markDirty(keyPrefix + "remaining");
-  }
+   // 画面側にも即反映（リロード不要）
+   if (!byEn[text]) {
+     byEn[text] = { jp: text, en: text };
+   }
 
   addMsg.textContent = "追加しました";
 }
@@ -955,6 +948,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
