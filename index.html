@@ -910,7 +910,17 @@ function addSimpleSentence(){
    }
 
   addMsg.textContent = "追加しました";
+  
+  // iPhone: キーボード閉じ＆ズーム解除を促す
   customTextEl.blur();
+
+  // iOS Safariは拡大が残ることがあるので、微スクロールで戻す
+  setTimeout(() => {
+    const y = window.scrollY;
+    window.scrollTo(0, y + 1);
+    window.scrollTo(0, y);
+  }, 0);
+
 }
 
 function showRandomCustomOnly(){
@@ -987,6 +997,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
