@@ -950,8 +950,9 @@ function clearSimple(){
 }
 
 function bindFastTap(el, fn) {
-  el.addEventListener("pointerdown", (e) => {
+  el.addEventListener("pointerup", (e) => {
     e.preventDefault();
+    e.stopPropagation();
     fn();
   }, { passive: false });
 }
@@ -974,6 +975,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
