@@ -541,8 +541,8 @@ function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true){
   if (!s) return;
   currentSentence = s;
 
-  okBtnEl.disabled = false;
-  starBtnEl.disabled = false;
+  okBtnEl.disabled   = !shouldCount;
+  starBtnEl.disabled = !shouldCount;
   updateStarUi();
    
   if (shouldAnimate) {
@@ -957,6 +957,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
