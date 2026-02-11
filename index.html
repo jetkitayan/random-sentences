@@ -556,14 +556,13 @@ function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true){
       sentenceJpEl.classList.remove("hidden");
       sentenceEnEl.classList.remove("hidden");
     });
-     } else {
-       // ★ 高速：待たずに即表示
-       sentenceJpEl.classList.remove("hidden");
-       sentenceEnEl.classList.remove("hidden");
-       jpTextEl.textContent = s.jp;
-       enEl.textContent     = s.en;
-     }
-  });
+  } else {
+    // ★ 高速：待たずに即表示
+    sentenceJpEl.classList.remove("hidden");
+    sentenceEnEl.classList.remove("hidden");
+    jpTextEl.textContent = s.jp;
+    enEl.textContent     = s.en;
+  }
 
   // 重い処理はさらに後ろ
   setTimeout(() => {
@@ -958,6 +957,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
