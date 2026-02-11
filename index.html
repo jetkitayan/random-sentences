@@ -526,7 +526,16 @@ fetch(jsonFile)
    
       // 1) JSONを読み込む（Random/Stats の母集団）
       allSentences = data;
-      
+
+      // ★ remaining が空なら初期化（超重要）
+      if (remainingArr.length === 0) {
+        remainingArr = allSentences.map(s => s.en);
+        remainingSet = new Set(remainingArr);
+        localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remainingArr));
+      } else {
+        remainingSet = new Set(remainingArr);
+      }
+
       // 2) byEn を作り直す（JSON分）
       for (const k in byEn) delete byEn[k];
       for (const s of allSentences) byEn[s.en] = s;
@@ -541,7 +550,7 @@ fetch(jsonFile)
       
         byEn[text] = { jp: text, en: text };
       }
-   
+
      // 4) 準備完了
      dataReady = true;
      showBtnEl.disabled = false;
@@ -1004,6 +1013,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
