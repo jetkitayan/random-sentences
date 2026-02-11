@@ -220,20 +220,22 @@ button.is-locked {
 }
 
 /* Customボタンは上と“同系統”だけど、小さめ（レイアウト崩壊防止） */
+#simpleAddArea { max-width:1100px; margin:0 auto; } /* 中央寄せ */
+
+.simpleButtons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;   /* 崩れ防止 */
+}
+
 #simpleAddArea .simpleButtons button{
-  border: 3px solid #000;
-  border-radius: 16px;
-  background-color: #d9d9d9;
-  color: #000;
-  cursor: pointer;
+  border:3px solid #000;
+  border-radius:16px;
+  background:#d9d9d9;
+  color:#000;
 
-  padding: 20px 25px;   /* ← 元のあなたのCustomのサイズに戻す */
-  font-size: 24px;
-  min-height: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding:20px 25px;  /* 小さめ */
+  font-size:24px;
 }
 </style>
 </head>
@@ -997,6 +999,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
