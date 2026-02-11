@@ -19,7 +19,6 @@ body {
   background-color: #fafafa;
 }
 
-
 /* ==================================================
    2. Button Area (fixed)
 ================================================== */
@@ -492,19 +491,46 @@ const byEn = Object.create(null);
 /* ========= データ読み込み ========= */
 fetch(jsonFile)
   .then(r => r.json())
-  .then(data => {
-
-    // ★ ここで「データ準備完了」
-    dataReady = true;
-
-    // ★ ボタン解放
-    showBtnEl.disabled = false;
-    document.getElementById("showStarBtn").disabled = false;
-  })
+   .then(data => {
+   
+     // 1) JSONを読み込む
+     allSentences = data;
+   
+     // 2) Custom を allSentences に「追加」して統合
+     //    ※ en をキーにする都合上、en と jp を同じ文字列にする
+     for (const t of simpleCustomList) {
+       const text = (t || "").trim();
+       if (!text) continue;
+   
+       // JSON側と被ったら入れない（任意）
+       // 既に同じenがあると byEn が上書きされるので回避
+       if (allSentences.some(s => s.en === text)) continue;
+   
+       allSentences.push({ jp: text, en: text });
+     }
+   
+     // 3) byEn を作り直す（必須）
+     for (const k in byEn) delete byEn[k];
+     for (const s of allSentences) byEn[s.en] = s;
+   
+     // 4) remaining 初期化（初回だけ）
+     if (remainingArr.length === 0) {
+       remainingArr = allSentences.map(s => s.en);
+       remainingSet = new Set(remainingArr);
+       localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remainingArr));
+     } else {
+       remainingSet = new Set(remainingArr);
+     }
+   
+     // 5) 準備完了
+     dataReady = true;
+     showBtnEl.disabled = false;
+     document.getElementById("showStarBtn").disabled = false;
+   })
   .catch(err => {
     topMetaEl.textContent = `JSON読み込み失敗: ${jsonFile}`;
     console.error(err);
-  });
+});
 
 /* ========= スターUI（☆固定表示） ========= */
 function updateStarUi(){
@@ -901,6 +927,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
