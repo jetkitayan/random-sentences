@@ -933,7 +933,7 @@ function clearSimple(){
   remainingArr = Array.from(remainingSet);
   markDirty(keyPrefix + "remaining");
 
-　// 各種カウント/フラグからも除去（ズレ防止）
+  // 各種カウント/フラグからも除去（ズレ防止）
   for (const t of toRemove) {
     delete shownCounts[t];
     delete todayCounts[t];
@@ -968,6 +968,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
