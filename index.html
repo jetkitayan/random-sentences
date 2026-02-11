@@ -934,6 +934,20 @@ function clearSimple(){
   remainingArr = Array.from(remainingSet);
   markDirty(keyPrefix + "remaining");
 
+　// 各種カウント/フラグからも除去（ズレ防止）
+  for (const t of toRemove) {
+    delete shownCounts[t];
+    delete todayCounts[t];
+    delete lastShownMap[t];
+    delete yesMarks[t];
+    delete starMarks[t];
+  }
+  markDirty(keyPrefix + "shownCounts");
+  markDirty(todayCountsKey);
+  markDirty(keyPrefix + "lastShown");
+  markDirty(keyPrefix + "yesMarks");
+  markDirty(keyPrefix + "starMarks");
+
   addMsg.textContent = "削除しました";
 }
 
@@ -955,6 +969,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
