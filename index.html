@@ -455,29 +455,25 @@ function markDirty(key) {
 function flushSaves() {
   flushTimer = null;
 
-  // アイドル時に回す（対応ブラウザは多い）
+  // ★ ここで確定スナップショット
+  const keysToFlush = Array.from(dirtyKeys);
+  dirtyKeys.clear();
+
   const run = () => {
     try {
-      for (const key of dirtyKeys) {
-        // keyごとに「今の最新オブジェクト」を保存
+      for (const key of keysToFlush) {
         if (key === keyPrefix+"shownCounts") localStorage.setItem(key, JSON.stringify(shownCounts));
         else if (key === todayCountsKey)     localStorage.setItem(key, JSON.stringify(todayCounts));
         else if (key === keyPrefix+"lastShown") localStorage.setItem(key, JSON.stringify(lastShownMap));
         else if (key === keyPrefix+"yesMarks")  localStorage.setItem(key, JSON.stringify(yesMarks));
         else if (key === keyPrefix+"starMarks") localStorage.setItem(key, JSON.stringify(starMarks));
-        else if (key === keyPrefix+"remaining") {
-          localStorage.setItem(key, JSON.stringify(remainingArr));
-        }
+        else if (key === keyPrefix+"remaining") localStorage.setItem(key, JSON.stringify(remainingArr));
       }
     } catch {}
-    dirtyKeys.clear();
   };
 
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(run, { timeout: 1000 });
-  } else {
-    setTimeout(run, 0);
-  }
+  if ("requestIdleCallback" in window) requestIdleCallback(run, { timeout: 1000 });
+  else setTimeout(run, 0);
 }
 
 // ページを閉じる/裏に回る直前に強制保存
@@ -970,6 +966,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
