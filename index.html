@@ -559,7 +559,7 @@ const topMetaEl = document.getElementById("topMeta");
 const jpTextEl  = document.getElementById("jpText");
 const enEl      = document.getElementById("sentence-en");
 
-function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true){
+function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true, hideJp = false){
   const s = byEn[en];
   if (!s) return;
   currentSentence = s;
@@ -567,25 +567,26 @@ function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true){
   okBtnEl.disabled   = !shouldCount;
   starBtnEl.disabled = !shouldCount;
   updateStarUi();
-   
+
   if (shouldAnimate) {
     sentenceJpEl.classList.add("hidden");
     sentenceEnEl.classList.add("hidden");
 
     requestAnimationFrame(() => {
-      jpTextEl.textContent = s.jp;
+      jpTextEl.textContent = hideJp ? "" : s.jp;
       enEl.textContent     = s.en;
 
       sentenceJpEl.classList.remove("hidden");
       sentenceEnEl.classList.remove("hidden");
     });
   } else {
-    // ★ 高速：待たずに即表示
     sentenceJpEl.classList.remove("hidden");
     sentenceEnEl.classList.remove("hidden");
-    jpTextEl.textContent = s.jp;
+    jpTextEl.textContent = hideJp ? "" : s.jp;
     enEl.textContent     = s.en;
   }
+
+  if (!shouldCount) return;
 
   // 重い処理はさらに後ろ
   setTimeout(() => {
@@ -931,13 +932,10 @@ function showRandomCustomOnly(){
     return;
   }
 
-  const pool = simpleCustomList; // enキーとして使う
-  const en = pickRandomFast(pool, currentSentence?.en);
-  lastShowMode = "all";
+  const text = simpleCustomList[simpleCustomList.length - 1];
 
-  // 日本語を空にする
-  jpTextEl.textContent = "";
-  presentSentenceByEn(en, false, false); // カウントしない・アニメしない（最速）
+  presentSentenceByEn(text, false, false, true); 
+  //                         ↑countしない ↑アニメなし ↑日本語非表示
 }
 
 function clearSimple(){
@@ -1002,6 +1000,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
