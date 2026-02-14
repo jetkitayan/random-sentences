@@ -964,13 +964,21 @@ function addSimpleSentence(){
 
 }
 
+let customShowMode = 0; // 0:ランダム 1:最少
+
+function pickCustom(enList, excludeEn){
+  if (customShowMode === 1) return pickLeastShownCustom(enList, excludeEn);
+  return pickRandomFast(enList, excludeEn);
+}
+  
 function showRandomCustomOnly(){
   if (simpleCustomList.length === 0){
     alert("Customがありません");
     return;
   }
 
-  const en = pickLeastShownCustom(simpleCustomList, currentSentence?.en);
+  const en = pickCustom(simpleCustomList, currentSentence?.en);
+  customShowMode = (customShowMode + 1) % 2;
 
   const perTotal = newCustomShown;                 // その文のCustom合計
   const perToday = customTodayCounts[en] || 0;     // その文のCustom今日
@@ -1047,6 +1055,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
