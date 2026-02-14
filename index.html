@@ -980,17 +980,29 @@ function showRandomCustomOnly(){
   const en = pickCustom(simpleCustomList, currentSentence?.en);
   customShowMode = (customShowMode + 1) % 2;
 
-  const perTotal = newCustomShown;                 // その文のCustom合計
-  const perToday = customTodayCounts[en] || 0;     // その文のCustom今日
+  // 先に表示（JP隠す / アニメ無し）
+  presentSentenceByEn(en, false, false, true);
+
+  // --- Customのカウント（文ごと・今日・分リング）---
+  const newCustomShown = (customShownCounts[en] || 0) + 1;
+  customShownCounts[en] = newCustomShown;
+  markDirty(keyPrefix + "customShownCounts");
+
+  customTodayCounts[en] = (customTodayCounts[en] || 0) + 1;
+  customTodayShownCached++;
+  markDirty(customTodayCountsKey);
+
+  addCustomNowCountFast();
+
+  const totalCustom = getCustomTotalShown();
+  const perTotal = newCustomShown;
+  const perToday = customTodayCounts[en] || 0;
 
   topMetaEl.textContent =
-    `Custom：この文 ${perTotal}回（今日 ${perToday}） / ` +
-    `直近 ${getCustomLast5MinCount()} / ${getCustomLast1HourCount()} / ` +
-    `Custom今日合計 ${customTodayShownCached} / Custom合計 ${totalCustom}`;
-  
-  document.getElementById("last-shown").textContent = ""; // ←必要なら
+    `Custom：この文 ${perTotal}回（今日 ${perToday}）\n` +
+    `（${getCustomLast5MinCount()} / ${getCustomLast1HourCount()} / 今日 ${customTodayShownCached} / 合計 ${totalCustom}）`;
 
-  presentSentenceByEn(en, false, false, true);
+  document.getElementById("last-shown").textContent = "";
 }
 
 function clearSimple(){
@@ -1055,6 +1067,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
