@@ -320,78 +320,6 @@ function getCustomTotalShown() {
   return Object.values(customShownCounts).reduce((a,b)=>a+(b||0),0);
 }
 
-/* ===== Custom Only 今日カウント ===== */
-let customTodayCounts = JSON.parse(localStorage.getItem(customTodayCountsKey)) || {};
-let customTodayShownCached = Object.values(customTodayCounts).reduce((a,b)=>a+(b||0),0);
-
-/* ===== Custom Only 直近カウント（分リング）===== */
-const customMinuteKey = keyPrefix + "customMinuteRing_v1";
-
-let customMinuteRing = (() => {
-  try {
-    const o = JSON.parse(localStorage.getItem(customMinuteKey));
-    if (!o || !Number.isFinite(o.baseMin) || !Array.isArray(o.ring) || o.ring.length !== 60) throw 0;
-    return o;
-  } catch {
-    return { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
-  }
-})();
-
-let customRingSaveScheduled = false;
-function scheduleSaveCustomMinuteRing() {
-  if (customRingSaveScheduled) return;
-  customRingSaveScheduled = true;
-  setTimeout(() => {
-    try { localStorage.setItem(customMinuteKey, JSON.stringify(customMinuteRing)); } catch {}
-    customRingSaveScheduled = false;
-  }, 300);
-}
-
-function advanceCustomRingTo(nowMin) {
-  const diff = nowMin - customMinuteRing.baseMin;
-  if (diff <= 0) return;
-
-  if (diff >= 60) {
-    customMinuteRing.ring.fill(0);
-    customMinuteRing.baseMin = nowMin;
-    return;
-  }
-
-  const r = customMinuteRing.ring;
-  for (let i = 0; i < 60 - diff; i++) r[i] = r[i + diff];
-  for (let i = 60 - diff; i < 60; i++) r[i] = 0;
-  customMinuteRing.baseMin = nowMin;
-}
-
-function addCustomNowCountFast() {
-  const nowMin = Math.floor(Date.now() / 60000);
-  advanceCustomRingTo(nowMin);
-  customMinuteRing.ring[59]++;
-  scheduleSaveCustomMinuteRing();
-}
-
-function getCustomLastMinutesCount(min) {
-  const nowMin = Math.floor(Date.now() / 60000);
-  advanceCustomRingTo(nowMin);
-
-  const n = Math.min(60, Math.max(1, min));
-  let sum = 0;
-  for (let i = 60 - n; i < 60; i++) sum += customMinuteRing.ring[i];
-  return sum;
-}
-const getCustomLast1HourCount = () => getCustomLastMinutesCount(60);
-const getCustomLast5MinCount  = () => getCustomLastMinutesCount(5);
-  
-function getOkCount() {
-  return Object.values(yesMarks).filter(v => v === true).length;
-}
-
-function buildOkCountText() {
-  const okCount = getOkCount();
-  const total = allSentences.length;
-  return `OK（${okCount} / ${total}）`;
-}
-   
 /* 今日カウント */
 function getTodayYMD() {
   const now = new Date();
@@ -402,7 +330,17 @@ function getTodayYMD() {
   return `${y}-${m}-${d}`;
 }
 const todayKey = getTodayYMD();
+
+/* Custom Only 今日キー（先に） */
+const customTodayCountsKey = keyPrefix + "customShownCounts_" + todayKey;
+
+/* ===== Custom Only 今日カウント（後で読む）===== */
+let customTodayCounts = JSON.parse(localStorage.getItem(customTodayCountsKey)) || {};
+let customTodayShownCached = Object.values(customTodayCounts).reduce((a,b)=>a+(b||0),0);
+
+/* Random 今日キー */
 const todayCountsKey = keyPrefix + "shownCounts_" + todayKey;
+let todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
 let todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
 
 const customTodayCountsKey = keyPrefix + "customShownCounts_" + todayKey;
@@ -1153,6 +1091,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
