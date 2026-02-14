@@ -880,6 +880,56 @@ function copyStats(){
     .catch(()=>alert("コピーに失敗しました。もう一度お試しください。"));
 }
 
+function escapeCsvCell(v){
+  const s = String(v ?? "");
+  // ダブルクォートを含む / カンマ / 改行があるなら "..." で囲う
+  if (/[",\n\r]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+  return s;
+}
+
+function exportCustomOnlyCsv(){
+  if (!simpleCustomList || simpleCustomList.length === 0){
+    alert("Customがありません");
+    return;
+  }
+
+  // 重複や空を除去して、見やすく整形（順序は維持）
+  const seen = new Set();
+  const cleaned = [];
+  for (const t of simpleCustomList){
+    const text = (t || "").trim();
+    if (!text) continue;
+    if (seen.has(text)) continue;
+    seen.add(text);
+    cleaned.push(text);
+  }
+
+  // CSV内容（1列だけ：text）
+  const lines = [];
+  lines.push("text"); // ヘッダー
+  for (const text of cleaned){
+    lines.push(escapeCsvCell(text));
+  }
+  const csv = lines.join("\r\n");
+
+  // ファイル名（fileParam入れておくと便利）
+  const ymd = getTodayYMD(); // 既存関数を流用
+  const filename = `custom_only_${fileParam}_${ymd}.csv`;
+
+  // ダウンロード
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+  
 function pickLeastShownCustom(arr, excludeEn){
   const n = arr.length;
   if (n === 0) return null;
@@ -1007,6 +1057,7 @@ const addSimpleBtn = document.getElementById("addSimpleBtn");
 const customOnlyBtn = document.getElementById("customOnlyBtn");
 const clearCustomBtn = document.getElementById("clearCustomBtn");
 const addMsg = document.getElementById("addMsg");
+const exportCustomCsvBtn = document.getElementById("exportCustomCsvBtn");
 
 function saveSimple(){
   localStorage.setItem(simpleKey, JSON.stringify(simpleCustomList));
@@ -1156,6 +1207,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
