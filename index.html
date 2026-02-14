@@ -1108,12 +1108,17 @@ function clearSimple(){
     delete lastShownMap[t];
     delete yesMarks[t];
     delete starMarks[t];
+    delete customShownCounts[t];
+    delete customTodayCounts[t];
   }
   markDirty(keyPrefix + "shownCounts");
   markDirty(todayCountsKey);
   markDirty(keyPrefix + "lastShown");
   markDirty(keyPrefix + "yesMarks");
   markDirty(keyPrefix + "starMarks");
+  markDirty(keyPrefix + "customShownCounts");
+  markDirty(customTodayCountsKey);
+  customTodayShownCached = Object.values(customTodayCounts).reduce((a,b)=>a+(b||0),0);
 
   addMsg.textContent = "削除しました";
 
@@ -1146,6 +1151,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
