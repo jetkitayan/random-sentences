@@ -331,19 +331,14 @@ function getTodayYMD() {
 }
 const todayKey = getTodayYMD();
 
-/* Custom Only 今日キー（先に） */
-const customTodayCountsKey = keyPrefix + "customShownCounts_" + todayKey;
-
-/* ===== Custom Only 今日カウント（後で読む）===== */
-let customTodayCounts = JSON.parse(localStorage.getItem(customTodayCountsKey)) || {};
-let customTodayShownCached = Object.values(customTodayCounts).reduce((a,b)=>a+(b||0),0);
-
 /* Random 今日キー */
 const todayCountsKey = keyPrefix + "shownCounts_" + todayKey;
 let todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
-let todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
 
+/* Custom Only 今日キー */
 const customTodayCountsKey = keyPrefix + "customShownCounts_" + todayKey;
+let customTodayCounts = JSON.parse(localStorage.getItem(customTodayCountsKey)) || {};
+let customTodayShownCached = Object.values(customTodayCounts).reduce((a,b)=>a+(b||0),0);
   
 /* キャッシュ集計 */
 let totalShownCached = Object.values(shownCounts).reduce((a,b)=>a+(b||0),0);
@@ -1091,6 +1086,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
