@@ -250,7 +250,7 @@ button.is-locked {
 <div id="content">
   <div id="sentence-frame">
     <div id="sentence-jp">
-      <div class="top-meta" id="topMeta">Press "Show Random" to start</div>
+      <div class="top-meta" id="topMeta">Press "Random" to start</div>
       <div id="jpText"></div>
     </div>
     <div id="sentence-en"></div>
@@ -721,7 +721,7 @@ function showRandom(){
   if (remainingArr.length === 0) {
     topMetaEl.textContent = "すべての英文を表示しました！";
     jpTextEl.textContent = "";
-    sentenceEnEl.textContent = "";
+    enEl.textContent = "";
     return;
   }
 
@@ -852,8 +852,8 @@ function showStats(){
     const star = starMarks[s.en] ? "★" : "☆";
     tbody.innerHTML += `
       <tr>
-        <td>${s.en}</td>
         <td>${s.jp}</td>
+        <td>${s.en}</td>
         <td style="text-align:center;">${yes}</td>
         <td style="text-align:center;">${star}</td>
         <td style="text-align:center;">${c}</td>
@@ -1155,6 +1155,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
