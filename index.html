@@ -970,7 +970,7 @@ function showRandomCustomOnly(){
     return;
   }
 
-  const en = pickRandomFast(simpleCustomList, currentSentence?.en);
+  const en = pickLeastShownCustom(simpleCustomList, currentSentence?.en);
 
   const perTotal = newCustomShown;                 // その文のCustom合計
   const perToday = customTodayCounts[en] || 0;     // その文のCustom今日
@@ -1047,5 +1047,6 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
