@@ -583,6 +583,8 @@ const byEn = Object.create(null);
 const simpleKey = keyPrefix + "simpleCustom";
 let simpleCustomList = JSON.parse(localStorage.getItem(simpleKey)) || [];
 
+const topMetaEl = document.getElementById("topMeta");
+
 /* ========= データ読み込み ========= */
 fetch(jsonFile)
   .then(r => r.json())
@@ -630,7 +632,16 @@ function updateStarUi(){
   document.getElementById("starBtn").textContent = "★";
 }
 
-const topMetaEl = document.getElementById("topMeta");
+function getOkCount() {
+  return Object.values(yesMarks).filter(v => v === true).length;
+}
+
+function buildOkCountText() {
+  const okCount = getOkCount();
+  const total = allSentences.length;
+  return `OK（${okCount} / ${total}）`;
+}
+  
 const jpTextEl  = document.getElementById("jpText");
 const enEl      = document.getElementById("sentence-en");
 
@@ -1144,6 +1155,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
