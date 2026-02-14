@@ -796,6 +796,33 @@ function copyStats(){
     .catch(()=>alert("コピーに失敗しました。もう一度お試しください。"));
 }
 
+function pickLeastShownCustom(arr, excludeEn){
+  const n = arr.length;
+  if (n === 0) return null;
+  if (n === 1) return arr[0];
+
+  let min = Infinity;
+  let chosen = null;
+  let seen = 0;
+
+  for (let i = 0; i < n; i++){
+    const en = arr[i];
+    if (en === excludeEn && n > 1) continue;
+
+    const c = customShownCounts[en] || 0; // ← Customの回数で比較
+
+    if (c < min) {
+      min = c;
+      chosen = en;
+      seen = 1;
+    } else if (c === min) {
+      seen++;
+      if ((Math.random() * seen) < 1) chosen = en; // 同率はランダム
+    }
+  }
+  return chosen ?? arr[0];
+}
+  
 function pickLeastShown(remainingArr, excludeEn){
   const n = remainingArr.length;
   if (n === 0) return null;
@@ -1020,4 +1047,5 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
