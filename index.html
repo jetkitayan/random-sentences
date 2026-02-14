@@ -813,6 +813,7 @@ function resetData(){
   localStorage.removeItem(customTodayCountsKey);
   localStorage.removeItem(customMinuteKey);
   minuteRing = { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
+  customMinuteRing = { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
   clearDailyCounts();
 
   shownCounts = {}; yesMarks = {}; lastShownMap = {}; starMarks = {};
@@ -1152,6 +1153,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
