@@ -500,6 +500,8 @@ function flushSaves() {
         else if (key === keyPrefix+"yesMarks")  localStorage.setItem(key, JSON.stringify(yesMarks));
         else if (key === keyPrefix+"starMarks") localStorage.setItem(key, JSON.stringify(starMarks));
         else if (key === keyPrefix+"remaining") localStorage.setItem(key, JSON.stringify(remainingArr));
+        else if (key === keyPrefix+"customShownCounts") localStorage.setItem(key, JSON.stringify(customShownCounts));
+        else if (key === customTodayCountsKey)          localStorage.setItem(key, JSON.stringify(customTodayCounts));
       }
     } catch {}
   };
@@ -1067,6 +1069,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
