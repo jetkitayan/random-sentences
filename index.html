@@ -419,6 +419,64 @@ function getLastMinutesCount(min) {
 const getLast1HourCount = () => getLastMinutesCount(60);
 const getLast5MinCount  = () => getLastMinutesCount(5);
 
+/* ===== Custom Only 直近カウント（分リング）===== */
+const customMinuteKey = keyPrefix + "customMinuteRing_v1";
+
+let customMinuteRing = (() => {
+  try {
+    const o = JSON.parse(localStorage.getItem(customMinuteKey));
+    if (!o || !Number.isFinite(o.baseMin) || !Array.isArray(o.ring) || o.ring.length !== 60) throw 0;
+    return o;
+  } catch {
+    return { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
+  }
+})();
+
+let customRingSaveScheduled = false;
+function scheduleSaveCustomMinuteRing() {
+  if (customRingSaveScheduled) return;
+  customRingSaveScheduled = true;
+  setTimeout(() => {
+    try { localStorage.setItem(customMinuteKey, JSON.stringify(customMinuteRing)); } catch {}
+    customRingSaveScheduled = false;
+  }, 300);
+}
+
+function advanceCustomRingTo(nowMin) {
+  const diff = nowMin - customMinuteRing.baseMin;
+  if (diff <= 0) return;
+
+  if (diff >= 60) {
+    customMinuteRing.ring.fill(0);
+    customMinuteRing.baseMin = nowMin;
+    return;
+  }
+
+  const r = customMinuteRing.ring;
+  for (let i = 0; i < 60 - diff; i++) r[i] = r[i + diff];
+  for (let i = 60 - diff; i < 60; i++) r[i] = 0;
+  customMinuteRing.baseMin = nowMin;
+}
+
+function addCustomNowCountFast() {
+  const nowMin = Math.floor(Date.now() / 60000);
+  advanceCustomRingTo(nowMin);
+  customMinuteRing.ring[59]++;
+  scheduleSaveCustomMinuteRing();
+}
+
+function getCustomLastMinutesCount(min) {
+  const nowMin = Math.floor(Date.now() / 60000);
+  advanceCustomRingTo(nowMin);
+
+  const n = Math.min(60, Math.max(1, min));
+  let sum = 0;
+  for (let i = 60 - n; i < 60; i++) sum += customMinuteRing.ring[i];
+  return sum;
+}
+const getCustomLast1HourCount = () => getCustomLastMinutesCount(60);
+const getCustomLast5MinCount  = () => getCustomLastMinutesCount(5);
+  
 function humanElapsed(iso){
   try{
     const t=new Date(iso).getTime(), s=Math.floor((Date.now()-t)/1000);
@@ -1086,6 +1144,7 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
 
