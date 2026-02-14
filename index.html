@@ -945,7 +945,14 @@ function showRandomCustomOnly(){
 
   const en = pickRandomFast(simpleCustomList, currentSentence?.en);
 
-  topMetaEl.textContent = "";   // ←追加（メタ表示を消す）
+  const perTotal = newCustomShown;                 // その文のCustom合計
+  const perToday = customTodayCounts[en] || 0;     // その文のCustom今日
+
+  topMetaEl.textContent =
+    `Custom：この文 ${perTotal}回（今日 ${perToday}） / ` +
+    `直近 ${getCustomLast5MinCount()} / ${getCustomLast1HourCount()} / ` +
+    `Custom今日合計 ${customTodayShownCached} / Custom合計 ${totalCustom}`;
+  
   document.getElementById("last-shown").textContent = ""; // ←必要なら
 
   presentSentenceByEn(en, false, false, true);
@@ -1013,3 +1020,4 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
