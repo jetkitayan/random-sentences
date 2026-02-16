@@ -1070,11 +1070,6 @@ function addSimpleSentence(){
     return;
   }
 
-  if (simpleCustomList.includes(text)){
-    addMsg.textContent = "既に登録済み";
-    return;
-  }
-
   simpleCustomList.push(text);
   saveSimple();
 
@@ -1105,14 +1100,27 @@ function pickCustom(enList, excludeEn){
   if (customShowMode === 1) return pickLeastShownCustom(enList, excludeEn);
   return pickRandomFast(enList, excludeEn);
 }
+
+function getCustomRegisteredCount(){
+  // 重複込みの登録件数（空は除外）
+  if (!Array.isArray(simpleCustomList)) return 0;
+  return simpleCustomList
+    .map(t => (t || "").trim())
+    .filter(Boolean)
+    .length;
+}
   
 function showRandomCustomOnly(){
-  if (simpleCustomList.length === 0){
+  const nn = getCustomRegisteredCount();
+  if (nn === 0){
     alert("Customがありません");
     return;
   }
 
-  const en = pickCustom(simpleCustomList, currentSentence?.en);
+  // 空を除いたリストで抽選（安全）
+  const pool = simpleCustomList.map(t => (t||"").trim()).filter(Boolean);
+
+  const en = pickCustom(pool, currentSentence?.en);
   customShowMode = (customShowMode + 1) % 2;
 
   // 先に表示（JP隠す / アニメ無し）
@@ -1210,4 +1218,5 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
