@@ -1133,8 +1133,10 @@ function showRandomCustomOnly(){
   const perTotal = newCustomShown;
   const perToday = customTodayCounts[en] || 0;
 
+  const nn = getCustomRegisteredCount(); // 登録文数（重複・空なし）
+
   topMetaEl.textContent =
-    `Custom：この文 ${perTotal}回（今日 ${perToday}）\n` +
+    `${nn}：この文 ${perTotal}回（今日 ${perToday}）\n` +
     `（${getCustomLast5MinCount()} / ${getCustomLast1HourCount()} / 今日 ${customTodayShownCached} / 合計 ${totalCustom}）`;
 
   document.getElementById("last-shown").textContent = "";
@@ -1208,3 +1210,4 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
