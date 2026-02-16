@@ -1123,10 +1123,8 @@ function showRandomCustomOnly(){
   const en = pickCustom(pool, currentSentence?.en);
   customShowMode = (customShowMode + 1) % 2;
 
-  // 先に表示（JP隠す / アニメ無し）
   presentSentenceByEn(en, false, false, true);
 
-  // --- Customのカウント（文ごと・今日・分リング）---
   const newCustomShown = (customShownCounts[en] || 0) + 1;
   customShownCounts[en] = newCustomShown;
   markDirty(keyPrefix + "customShownCounts");
@@ -1140,8 +1138,6 @@ function showRandomCustomOnly(){
   const totalCustom = getCustomTotalShown();
   const perTotal = newCustomShown;
   const perToday = customTodayCounts[en] || 0;
-
-  const nn = getCustomRegisteredCount(); // 登録文数（重複・空なし）
 
   topMetaEl.textContent =
     `${nn}：この文 ${perTotal}回（今日 ${perToday}）\n` +
@@ -1218,5 +1214,6 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
 
