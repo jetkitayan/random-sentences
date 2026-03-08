@@ -689,8 +689,9 @@ const enEl      = document.getElementById("sentence-en");
 async function initApp() {
   try {
     const r = await fetch(jsonFile);
-    const data = await r.json();
+    if (!r.ok) throw new Error(`JSON読込失敗: ${jsonFile} (${r.status})`);
 
+    const data = await r.json();
     allSentences = data;
 
     await loadDbState();
@@ -717,11 +718,11 @@ async function initApp() {
     showBtnEl.disabled = false;
     document.getElementById("showStarBtn").disabled = false;
   } catch (err) {
-    topMetaEl.textContent = `初期化失敗: ${jsonFile}`;
+    topMetaEl.textContent = String(err.message || err);
     console.error(err);
   }
 }
-
+  
 initApp();
 
 /* ================================
@@ -1277,4 +1278,5 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
 
