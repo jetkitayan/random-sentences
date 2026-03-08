@@ -9,9 +9,6 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
-/* ==================================================
-   1. Reset / Base
-================================================== */
 *,
 *::before,
 *::after {
@@ -24,9 +21,6 @@ body {
   background-color: #fafafa;
 }
 
-/* ==================================================
-   2. Button Area (fixed)
-================================================== */
 #button-area {
   position: sticky;
   top: 0;
@@ -41,15 +35,13 @@ body {
   transform: translateY(1px);
   filter: brightness(0.95);
 }
-   
-/* 共通幅 */
+
 #button-area .row1,
 #button-area .row2 {
   max-width: 1100px;
   margin: 0 auto;
 }
 
-/* 上段ボタン */
 #button-area .row2 {
   display: grid;
   grid-template-columns: 605fr 395fr;
@@ -57,7 +49,6 @@ body {
   max-width: 900px;
 }
 
-/* 下段ボタン */
 #button-area .row1 {
   display: flex;
   gap: 25px;
@@ -65,16 +56,12 @@ body {
   justify-content: center;
 }
 
-/* ==================================================
-   3. Content Layout
-================================================== */
 #content {
   max-width: 1100px;
   padding-left: 40px;
   padding-right: 40px;
 }
 
-/* 文章ブロック */
 #sentence-frame{
   position: relative;
   margin-top: 25px;
@@ -82,15 +69,10 @@ body {
 #sentence-jp{ position: static; }
 #sentence-en{ display:block; margin-top: 1.2em; min-height: 3.2em; }
 
-/* 回数表示 */
 #last-shown {
   margin-top: 0px;
 }
 
-
-/* ==================================================
-   4. Typography
-================================================== */
 #sentence-jp,
 #sentence-en {
   font-size: 42px;
@@ -103,10 +85,6 @@ body {
   padding-bottom: 46px;
 }
 
-
-/* ==================================================
-   5. Effects / Utilities
-================================================== */
 .hidden {
   opacity: 0;
 }
@@ -119,18 +97,15 @@ body {
   padding: 45px 35px;
   font-size: 40px;
   min-height: 140px;
-
   border: 3px solid #000;
   border-radius: 16px;
   background-color: #d9d9d9;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 表示履歴一覧：初期は非表示 */
 #statsArea {
   display: none;
   padding: 20px 40px;
@@ -149,8 +124,8 @@ body {
 }
 
 #button-area .row1 button {
-  width: 160px;       /* ← 今より少し細く */
-  padding: 32px 0;    /* 横paddingを無くす */
+  width: 160px;
+  padding: 32px 0;
 }
 
 #button-area button {
@@ -158,16 +133,14 @@ body {
 }
 
 #jpText {
-  margin-top: 12px;   /* ← 好きな分だけ */
+  margin-top: 12px;
 }
 
 button.is-locked {
   outline: 4px solid #007aff;
   outline-offset: 4px;
 }
-/* ==================================================
-   6. Add Sentence UI
-================================================== */
+
 #simpleAddArea{ max-width: 900px; margin:0 auto; }
 
 .simpleButtons{
@@ -188,14 +161,12 @@ button.is-locked {
   font-size: 20px;
 }
 
-/* Customエリアは「下にちょい足し」感。元の画面を壊さない */
 #simpleAddArea{
-  max-width: 1300px;   /* もっと広げたければここを増やす or none */
+  max-width: 1300px;
   margin: 0 auto;
   padding: 30px 0px;
 }
 
-/* 3つ並んでも崩れないようにする（折り返しOK） */
 .simpleButtons{
   display: flex;
   gap: 15px;
@@ -206,7 +177,7 @@ button.is-locked {
 .simpleButtons{
   display:flex;
   gap:15px;
-  flex-wrap:wrap;   /* 崩れ防止 */
+  flex-wrap:wrap;
   margin-top: 55px;
 }
 
@@ -215,9 +186,6 @@ button.is-locked {
   border-radius:16px;
   background:#d9d9d9;
   color:#000;
-
-  /*padding:20px 25px;  /* 小さめ */
-  /*font-size:24px;*/
   padding: 45px 35px;
   font-size: 40px;
 }
@@ -233,7 +201,6 @@ button.is-locked {
 <body>
 
 <div id="button-area">
-  <!-- 表示順：上段＝Show/☆Only、下段＝OKほか -->
   <div class="row2">
     <button id="showBtn">Random</button>
     <button id="showStarBtn">★ Only</button>
@@ -247,6 +214,7 @@ button.is-locked {
     <button id="copyBtn">Copy</button>
   </div>
 </div>
+
 <div id="content">
   <div id="sentence-frame">
     <div id="sentence-jp">
@@ -256,6 +224,7 @@ button.is-locked {
     <div id="sentence-en"></div>
     <div id="last-shown"></div>
   </div>
+
   <div id="simpleAddArea">
     <textarea id="customText" placeholder="1文を入力"></textarea>
     <div class="simpleButtons">
@@ -268,7 +237,6 @@ button.is-locked {
   </div>
 </div>
 
-<!-- 表示履歴一覧 -->
 <div id="statsArea">
   <h3>📊 表示履歴一覧</h3>
   <table>
@@ -286,7 +254,14 @@ button.is-locked {
 </div>
 
 <script>
-/* ========= 状態 ========= */
+/* ================================
+   API設定
+================================ */
+const API_BASE = "https://random-sync-api.jetkitayan.workers.dev";
+
+/* ================================
+   状態
+================================ */
 let dataReady = false;
 let nextEn = null;
 
@@ -298,30 +273,26 @@ const keyPrefix = `randomApp_${fileParam}_`;
 
 const sentenceJpEl = document.getElementById("sentence-jp");
 const sentenceEnEl = document.getElementById("sentence-en");
-const showBtnEl    = document.getElementById("showBtn");
+const showBtnEl = document.getElementById("showBtn");
 showBtnEl.disabled = true;
 document.getElementById("showStarBtn").disabled = true;
-const okBtnEl      = document.getElementById("okBtn");
-const starBtnEl    = document.getElementById("starBtn");
-  
-/* 永続データのロード */
-let shownCounts = JSON.parse(localStorage.getItem(keyPrefix + "shownCounts")) || {};
-let yesMarks    = JSON.parse(localStorage.getItem(keyPrefix + "yesMarks")) || {};
-let starMarks   = JSON.parse(localStorage.getItem(keyPrefix + "starMarks")) || {};
-let remainingArr = JSON.parse(localStorage.getItem(keyPrefix + "remaining")) || [];
-let remainingSet = new Set(remainingArr);
-let lastShownMap= JSON.parse(localStorage.getItem(keyPrefix + "lastShown")) || {};
+const okBtnEl = document.getElementById("okBtn");
+const starBtnEl = document.getElementById("starBtn");
 
-let lastShowMode = "all"; // "all" | "star"
+let shownCounts = {};
+let yesMarks = {};
+let starMarks = {};
+let remainingArr = [];
+let remainingSet = new Set();
+let lastShownMap = {};
 
-/* ===== Custom Only カウント（Randomとは別）===== */
+let lastShowMode = "all";
 let customShownCounts = JSON.parse(localStorage.getItem(keyPrefix + "customShownCounts")) || {};
 
 function getCustomTotalShown() {
   return Object.values(customShownCounts).reduce((a,b)=>a+(b||0),0);
 }
 
-/* 今日カウント */
 function getTodayYMD() {
   const now = new Date();
   const tz = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
@@ -332,29 +303,170 @@ function getTodayYMD() {
 }
 const todayKey = getTodayYMD();
 
-/* Random 今日キー */
 const todayCountsKey = keyPrefix + "shownCounts_" + todayKey;
 let todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
 
-/* Custom Only 今日キー */
 const customTodayCountsKey = keyPrefix + "customShownCounts_" + todayKey;
 let customTodayCounts = JSON.parse(localStorage.getItem(customTodayCountsKey)) || {};
 let customTodayShownCached = Object.values(customTodayCounts).reduce((a,b)=>a+(b||0),0);
-  
-/* キャッシュ集計 */
-let totalShownCached = Object.values(shownCounts).reduce((a,b)=>a+(b||0),0);
+
+let totalShownCached = 0;
 let todayShownCached = Object.values(todayCounts).reduce((a,b)=>a+(b||0),0);
 
-/* 画面状態 */
 let currentSentence = null;
-// 0: ランダム / 1: 最少回数 / 2: 最古
 let showMode = 0;
-   
-/* ===== 直近カウントを「分リングバッファ」にする（最終形・超高速） ===== */
+
+/* ================================
+   DB同期
+================================ */
+async function loadDbState() {
+  const res = await fetch(`${API_BASE}/api/random-sync?file=${encodeURIComponent(fileParam)}`);
+  if (!res.ok) throw new Error("DB読込失敗");
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error || "DB読込失敗");
+
+  shownCounts = data.shownCounts || {};
+  yesMarks = data.yesMarks || {};
+  starMarks = data.starMarks || {};
+  lastShownMap = data.lastShownMap || {};
+  simpleCustomList = data.simpleCustomList || [];
+
+  totalShownCached = Object.values(shownCounts).reduce((a,b)=>a+(b||0),0);
+}
+
+async function apiPost(path, body) {
+  const res = await fetch(`${API_BASE}${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+
+  const data = await res.json();
+  if (!res.ok || !data.ok) {
+    throw new Error(data.error || "API失敗");
+  }
+  return data;
+}
+
+async function syncOkToDb(en) {
+  await apiPost("/api/random-sync/ok", {
+    file: fileParam,
+    en
+  });
+}
+
+async function syncStarToDb(en, star) {
+  await apiPost("/api/random-sync/star", {
+    file: fileParam,
+    en,
+    star
+  });
+}
+
+async function syncCustomToDb(text) {
+  await apiPost("/api/random-sync/custom", {
+    file: fileParam,
+    text
+  });
+}
+
+async function syncCustomClearToDb() {
+  await apiPost("/api/random-sync/custom-clear", {
+    file: fileParam
+  });
+}
+
+async function syncResetToDb() {
+  await apiPost("/api/random-sync/reset", {
+    file: fileParam
+  });
+}
+
+/* ================================
+   表示回数まとめ保存
+================================ */
+let pendingShown = {};
+let pendingLastShown = {};
+let pendingShowTotal = 0;
+const SHOW_BATCH_THRESHOLD = 5;
+
+function addPendingShown(en) {
+  pendingShown[en] = (pendingShown[en] || 0) + 1;
+  pendingLastShown[en] = new Date().toISOString();
+  pendingShowTotal++;
+}
+
+async function flushPendingShown() {
+  const entries = Object.entries(pendingShown);
+  if (entries.length === 0) return;
+
+  const items = entries.map(([en, count]) => ({
+    en,
+    count,
+    lastShown: pendingLastShown[en] || new Date().toISOString()
+  }));
+
+  pendingShown = {};
+  pendingLastShown = {};
+  pendingShowTotal = 0;
+
+  try {
+    await apiPost("/api/random-sync/show-batch", {
+      file: fileParam,
+      items
+    });
+  } catch (err) {
+    console.error("flushPendingShown failed", err);
+
+    // 失敗時は戻す
+    for (const item of items) {
+      pendingShown[item.en] = (pendingShown[item.en] || 0) + item.count;
+      pendingLastShown[item.en] = item.lastShown;
+      pendingShowTotal += item.count;
+    }
+  }
+}
+
+function scheduleFlushIfNeeded() {
+  if (pendingShowTotal >= SHOW_BATCH_THRESHOLD) {
+    flushPendingShown();
+  }
+}
+
+window.addEventListener("beforeunload", () => {
+  if (Object.keys(pendingShown).length === 0) return;
+
+  const payload = JSON.stringify({
+    file: fileParam,
+    items: Object.entries(pendingShown).map(([en, count]) => ({
+      en,
+      count,
+      lastShown: pendingLastShown[en] || new Date().toISOString()
+    }))
+  });
+
+  try {
+    navigator.sendBeacon(
+      `${API_BASE}/api/random-sync/show-batch`,
+      new Blob([payload], { type: "application/json" })
+    );
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") {
+    flushPendingShown();
+    flushSaves();
+  }
+});
+
+/* ================================
+   直近カウント
+================================ */
 const minuteKey = keyPrefix + "minuteRing_v1";
 
-// { baseMin:number, ring:number[60] }
-// baseMin = ring[0] が指す Unix 分
 let minuteRing = (() => {
   try {
     const o = JSON.parse(localStorage.getItem(minuteKey));
@@ -392,7 +504,6 @@ function advanceRingTo(nowMin) {
     return;
   }
 
-  // shift() をやめて、手動で左詰め（60固定なので速い）
   const r = minuteRing.ring;
   for (let i = 0; i < 60 - diff; i++) r[i] = r[i + diff];
   for (let i = 60 - diff; i < 60; i++) r[i] = 0;
@@ -418,9 +529,11 @@ function getLastMinutesCount(min) {
 }
 
 const getLast1HourCount = () => getLastMinutesCount(60);
-const getLast5MinCount  = () => getLastMinutesCount(5);
+const getLast5MinCount = () => getLastMinutesCount(5);
 
-/* ===== Custom Only 直近カウント（分リング）===== */
+/* ================================
+   Custom Only 直近カウント
+================================ */
 const customMinuteKey = keyPrefix + "customMinuteRing_v1";
 
 let customMinuteRing = (() => {
@@ -476,21 +589,12 @@ function getCustomLastMinutesCount(min) {
   return sum;
 }
 const getCustomLast1HourCount = () => getCustomLastMinutesCount(60);
-const getCustomLast5MinCount  = () => getCustomLastMinutesCount(5);
-  
-function humanElapsed(iso){
-  try{
-    const t=new Date(iso).getTime(), s=Math.floor((Date.now()-t)/1000);
-    if(s<60) return `${s}秒前`;
-    const m=Math.floor(s/60); if(m<60) return `${m}分前`;
-    const h=Math.floor(m/60); if(h<24) return `${h}時間前`;
-    return `${Math.floor(h/24)}日前`;
-  }catch{return""}
-}
+const getCustomLast5MinCount = () => getCustomLastMinutesCount(5);
 
+/* ================================
+   表示用補助
+================================ */
 function formatTokyoYmdHm(date){
-  // date: Date
-  // Asia/Tokyo の “各要素” を取り出す（ブラウザのローカルTZに影響されにくい）
   const parts = new Intl.DateTimeFormat("ja-JP", {
     timeZone: "Asia/Tokyo",
     year: "numeric",
@@ -502,7 +606,6 @@ function formatTokyoYmdHm(date){
   }).formatToParts(date);
 
   const get = (type) => parts.find(p => p.type === type)?.value ?? "";
-  const y = get("year");
   const m = get("month");
   const d = get("day");
   const hh = get("hour");
@@ -510,7 +613,6 @@ function formatTokyoYmdHm(date){
   return `${m}/${d} ${hh}:${mm}`;
 }
 
-// 「5日前（yyyy/mm/dd hh:mm）」を返す
 function humanElapsedWithDate(iso){
   try{
     if (!iso) return "なし";
@@ -534,37 +636,30 @@ function humanElapsedWithDate(iso){
     return "なし";
   }
 }
-   
-// ===== 保存を「まとめて」やる（超重要）=====
+
+/* ================================
+   ローカル保存（補助）
+================================ */
 const dirtyKeys = new Set();
 let flushTimer = null;
 
 function markDirty(key) {
   dirtyKeys.add(key);
   if (flushTimer) return;
-
-  // まずはすぐ描画させるため、少し遅らせてからまとめて保存
   flushTimer = setTimeout(flushSaves, 800);
 }
 
 function flushSaves() {
   flushTimer = null;
-
-  // ★ ここで確定スナップショット
   const keysToFlush = Array.from(dirtyKeys);
   dirtyKeys.clear();
 
   const run = () => {
     try {
       for (const key of keysToFlush) {
-        if (key === keyPrefix+"shownCounts") localStorage.setItem(key, JSON.stringify(shownCounts));
-        else if (key === todayCountsKey)     localStorage.setItem(key, JSON.stringify(todayCounts));
-        else if (key === keyPrefix+"lastShown") localStorage.setItem(key, JSON.stringify(lastShownMap));
-        else if (key === keyPrefix+"yesMarks")  localStorage.setItem(key, JSON.stringify(yesMarks));
-        else if (key === keyPrefix+"starMarks") localStorage.setItem(key, JSON.stringify(starMarks));
-        else if (key === keyPrefix+"remaining") localStorage.setItem(key, JSON.stringify(remainingArr));
+        if (key === todayCountsKey) localStorage.setItem(key, JSON.stringify(todayCounts));
         else if (key === keyPrefix+"customShownCounts") localStorage.setItem(key, JSON.stringify(customShownCounts));
-        else if (key === customTodayCountsKey)          localStorage.setItem(key, JSON.stringify(customTodayCounts));
+        else if (key === customTodayCountsKey) localStorage.setItem(key, JSON.stringify(customTodayCounts));
       }
     } catch {}
   };
@@ -573,62 +668,61 @@ function flushSaves() {
   else setTimeout(run, 0);
 }
 
-// ページを閉じる/裏に回る直前に強制保存
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "hidden") flushSaves();
-});
-
-/* en → sentence のマップ */
+/* ================================
+   マップ系
+================================ */
 const byEn = Object.create(null);
-
 const simpleKey = keyPrefix + "simpleCustom";
-let simpleCustomList = JSON.parse(localStorage.getItem(simpleKey)) || [];
+let simpleCustomList = [];
 
 const topMetaEl = document.getElementById("topMeta");
+const jpTextEl  = document.getElementById("jpText");
+const enEl      = document.getElementById("sentence-en");
 
-/* ========= データ読み込み ========= */
-fetch(jsonFile)
-  .then(r => r.json())
-   .then(data => {
-   
-      // 1) JSONを読み込む（Random/Stats の母集団）
-      allSentences = data;
+/* ================================
+   初期化
+================================ */
+async function initApp() {
+  try {
+    const r = await fetch(jsonFile);
+    const data = await r.json();
 
-      // ★ remaining が空なら初期化（超重要）
-      if (remainingArr.length === 0) {
-        remainingArr = allSentences.map(s => s.en);
-        remainingSet = new Set(remainingArr);
-        localStorage.setItem(keyPrefix + "remaining", JSON.stringify(remainingArr));
-      } else {
-        remainingSet = new Set(remainingArr);
-      }
+    allSentences = data;
 
-      // 2) byEn を作り直す（JSON分）
-      for (const k in byEn) delete byEn[k];
-      for (const s of allSentences) byEn[s.en] = s;
-      
-      // 3) Custom は byEn にだけ追加（Random/Stats には混ぜない）
-      for (const t of simpleCustomList) {
-        const text = (t || "").trim();
-        if (!text) continue;
-      
-        // JSON側と同じ en があればスキップ
-        if (byEn[text]) continue;
-      
-        byEn[text] = { jp: text, en: text };
-      }
+    await loadDbState();
 
-     // 4) 準備完了
-     dataReady = true;
-     showBtnEl.disabled = false;
-     document.getElementById("showStarBtn").disabled = false;
-   })
-  .catch(err => {
-    topMetaEl.textContent = `JSON読み込み失敗: ${jsonFile}`;
+    for (const k in byEn) delete byEn[k];
+    for (const s of allSentences) byEn[s.en] = s;
+
+    for (const t of simpleCustomList) {
+      const text = (t || "").trim();
+      if (!text) continue;
+      if (byEn[text]) continue;
+      byEn[text] = { jp: text, en: text };
+    }
+
+    remainingArr = allSentences
+      .map(s => s.en)
+      .filter(en => !yesMarks[en]);
+
+    remainingSet = new Set(remainingArr);
+
+    localStorage.setItem(simpleKey, JSON.stringify(simpleCustomList));
+
+    dataReady = true;
+    showBtnEl.disabled = false;
+    document.getElementById("showStarBtn").disabled = false;
+  } catch (err) {
+    topMetaEl.textContent = `初期化失敗: ${jsonFile}`;
     console.error(err);
-});
+  }
+}
 
-/* ========= スターUI（☆固定表示） ========= */
+initApp();
+
+/* ================================
+   UI
+================================ */
 function updateStarUi(){
   document.getElementById("starBtn").textContent = "★";
 }
@@ -642,9 +736,10 @@ function buildOkCountText() {
   const total = allSentences.length;
   return `OK（${okCount} / ${total}）`;
 }
-  
-const jpTextEl  = document.getElementById("jpText");
-const enEl      = document.getElementById("sentence-en");
+
+function buildCountsInlineText(){
+  return `（${getLast5MinCount()} / ${getLast1HourCount()} / ${todayShownCached} / ${totalShownCached}）`;
+}
 
 function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true, hideJp = false){
   const s = byEn[en];
@@ -675,50 +770,122 @@ function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true, hideJ
 
   if (!shouldCount) return;
 
-  // 重い処理はさらに後ろ
   setTimeout(() => {
+    const newShown = (shownCounts[en] || 0) + 1;
+    shownCounts[en] = newShown;
+    totalShownCached++;
 
-     if (!shouldCount) {
-       topMetaEl.textContent = "";
-       return;
-     }
-   
-     const newShown = (shownCounts[en] || 0) + 1;
-     shownCounts[en] = newShown;
-     markDirty(keyPrefix+"shownCounts");
-   
-     totalShownCached++;
-   
-     todayCounts[en] = (todayCounts[en] || 0) + 1;
-     markDirty(todayCountsKey);
-   
-     todayShownCached++;
-   
-     addNowCountFast();
-   
-     const prevIso = lastShownMap[en];
-     const prevText = humanElapsedWithDate(prevIso);
-     lastShownMap[en] = new Date().toISOString();
-     markDirty(keyPrefix+"lastShown");
-   
-     const starMark = starMarks[en] ? "★" : "";
-     topMetaEl.textContent =
-        `${newShown}回目${starMark}${buildCountsInlineText()}\n` +
-        `${prevText}\n` +
-        `${buildOkCountText()}`;
-   
-   }, 0);
+    todayCounts[en] = (todayCounts[en] || 0) + 1;
+    todayShownCached++;
+    markDirty(todayCountsKey);
+
+    addNowCountFast();
+
+    const prevIso = lastShownMap[en];
+    const prevText = humanElapsedWithDate(prevIso);
+    lastShownMap[en] = new Date().toISOString();
+
+    const starMark = starMarks[en] ? "★" : "";
+    topMetaEl.textContent =
+      `${newShown}回目${starMark}${buildCountsInlineText()}\n` +
+      `${prevText}\n` +
+      `${buildOkCountText()}`;
+
+    addPendingShown(en);
+    scheduleFlushIfNeeded();
+  }, 0);
 }
 
-/* ========= 通常ランダム表示 ========= */
-function showRandom(){
+/* ================================
+   表示ロジック
+================================ */
+function pickRandomFast(arr, excludeEn){
+  const n = arr.length;
+  if (n === 0) return null;
+  if (n === 1) return arr[0];
 
+  let idx = (Math.random() * n) | 0;
+  if (arr[idx] !== excludeEn) return arr[idx];
+
+  const offset = 1 + ((Math.random() * (n - 1)) | 0);
+  idx = (idx + offset) % n;
+  return arr[idx];
+}
+
+function pickLeastShown(arr, excludeEn){
+  const n = arr.length;
+  if (n === 0) return null;
+  if (n === 1) return arr[0];
+
+  let min = Infinity;
+  let chosen = null;
+  let seen = 0;
+
+  for (let i = 0; i < n; i++) {
+    const en = arr[i];
+    if (en === excludeEn && n > 1) continue;
+
+    const c = shownCounts[en] || 0;
+
+    if (c < min) {
+      min = c;
+      chosen = en;
+      seen = 1;
+    } else if (c === min) {
+      seen++;
+      if ((Math.random() * seen) < 1) chosen = en;
+    }
+  }
+
+  return chosen ?? arr[0];
+}
+
+function pickOldest(arr, excludeEn){
+  let oldestEn = null;
+  let oldestTime = Infinity;
+
+  for (const en of arr) {
+    if (en === excludeEn && arr.length > 1) continue;
+
+    const iso = lastShownMap[en];
+    const t = iso ? new Date(iso).getTime() : 0;
+
+    if (t < oldestTime) {
+      oldestTime = t;
+      oldestEn = en;
+    }
+  }
+
+  return oldestEn ?? arr[0];
+}
+
+function prepareNext() {
+  if (remainingArr.length === 0) {
+    nextEn = null;
+    return;
+  }
+
+  switch (showMode) {
+    case 0:
+      nextEn = pickRandomFast(remainingArr, currentSentence?.en);
+      break;
+    case 1:
+      nextEn = pickLeastShown(remainingArr, currentSentence?.en);
+      break;
+    case 2:
+      nextEn = pickOldest(remainingArr, currentSentence?.en);
+      break;
+  }
+
+  showMode = (showMode + 1) % 3;
+}
+
+function showRandom(){
   if (!dataReady) {
     topMetaEl.textContent = "Loading...";
     return;
   }
-   
-  // 完了チェック
+
   if (remainingArr.length === 0) {
     topMetaEl.textContent = "すべての英文を表示しました！";
     jpTextEl.textContent = "";
@@ -726,23 +893,18 @@ function showRandom(){
     return;
   }
 
-  // ★ 先読みがあれば即それを使う
   if (!nextEn) {
-    prepareNext(); // 初回だけ
+    prepareNext();
   }
 
   const en = nextEn;
-  nextEn = null;   // 消費
+  nextEn = null;
 
   presentSentenceByEn(en);
-
-  // ★ 表示後、裏で次を仕込む
   requestAnimationFrame(prepareNext);
-
   lastShowMode = "all";
 }
 
-/* ========= ☆のみランダム表示 ========= */
 function showRandomStarred(){
   let pool = remainingArr.filter(en => !!starMarks[en]);
   if (pool.length === 0) {
@@ -757,18 +919,17 @@ function showRandomStarred(){
   presentSentenceByEn(en);
 }
 
-/* ========= OK確定 ========= */
+/* ================================
+   OK / STAR / RESET
+================================ */
 function confirmSentence(){
   if (!currentSentence) return;
   yesMarks[currentSentence.en] = true;
-  markDirty(keyPrefix+"yesMarks");
 
-  remainingSet.delete(currentSentence.en);  // O(1)
+  syncOkToDb(currentSentence.en).catch(err => console.error("ok sync failed", err));
 
-  // 配列は次の ShowRandom の前にまとめて再生成
+  remainingSet.delete(currentSentence.en);
   remainingArr = Array.from(remainingSet);
-  
-  markDirty(keyPrefix + "remaining");
 
   if (remainingArr.length > 0) showRandom();
   else {
@@ -782,21 +943,20 @@ function confirmSentence(){
   }
 }
 
-/* ========= ☆トグル（押したら次へ／見た目は☆固定） ========= */
 function toggleStar(){
   if (!currentSentence) return;
   const en = currentSentence.en;
   const now = !starMarks[en];
   starMarks[en] = now;
-  markDirty(keyPrefix+"starMarks");
 
-  updateStarUi();  // ラベルは常に「☆」
+  syncStarToDb(en, now).catch(err => console.error("star sync failed", err));
+
+  updateStarUi();
 
   if (lastShowMode === "star") showRandomStarred();
   else showRandom();
 }
 
-/* ========= リセット ========= */
 function clearDailyCounts(){
   const prefix = keyPrefix + "shownCounts_";
   for (let i = localStorage.length - 1; i >= 0; i--) {
@@ -804,32 +964,50 @@ function clearDailyCounts(){
     if (k && k.startsWith(prefix)) localStorage.removeItem(k);
   }
 }
-function resetData(){
+
+async function resetData(){
   if (!confirm("Reset？")) return;
-  localStorage.removeItem(keyPrefix+"shownCounts");
-  localStorage.removeItem(keyPrefix+"remaining");
-  localStorage.removeItem(keyPrefix+"yesMarks");
-  localStorage.removeItem(keyPrefix+"lastShown");
-  localStorage.removeItem(keyPrefix+"starMarks");
+
+  try {
+    await flushPendingShown();
+    await syncResetToDb();
+  } catch (err) {
+    console.error(err);
+  }
+
   localStorage.removeItem(minuteKey);
   localStorage.removeItem(keyPrefix+"customShownCounts");
   localStorage.removeItem(customTodayCountsKey);
   localStorage.removeItem(customMinuteKey);
-  minuteRing = { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
-  customMinuteRing = { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
+  localStorage.removeItem(simpleKey);
   clearDailyCounts();
 
-  shownCounts = {}; yesMarks = {}; lastShownMap = {}; starMarks = {};
-  totalShownCached = 0; todayShownCached = 0;
-  todayCounts = {}; localStorage.removeItem(todayCountsKey);
+  shownCounts = {};
+  yesMarks = {};
+  lastShownMap = {};
+  starMarks = {};
+  totalShownCached = 0;
+  todayShownCached = 0;
+  todayCounts = {};
   customShownCounts = {};
   customTodayCounts = {};
   customTodayShownCached = 0;
+  simpleCustomList = [];
+
+  minuteRing = { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
   customMinuteRing = { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
-  
+
+  pendingShown = {};
+  pendingLastShown = {};
+  pendingShowTotal = 0;
+
+  for (const k in byEn) delete byEn[k];
+  for (const s of allSentences) byEn[s.en] = s;
+
   remainingArr = allSentences.map(s => s.en);
   remainingSet = new Set(remainingArr);
   currentSentence = null;
+
   topMetaEl.textContent = 'Press "Random" to start';
   jpTextEl.textContent = "";
   enEl.textContent = "";
@@ -838,12 +1016,11 @@ function resetData(){
   document.getElementById("okBtn").disabled = true;
   document.getElementById("starBtn").disabled = true;
   document.getElementById("statsArea").style.display = "none";
-
-  localStorage.removeItem(simpleKey);
-  simpleCustomList = [];
 }
 
-/* ========= Stats & Copy ========= */
+/* ================================
+   Stats / Copy
+================================ */
 function showStats(){
   const tbody = document.getElementById("statsBody");
   tbody.innerHTML = "";
@@ -862,10 +1039,11 @@ function showStats(){
   }
   document.getElementById("statsArea").style.display = "block";
 }
-  
+
 function copyStats(){
   const table = document.querySelector("#statsArea table");
   if (!table) { alert("一覧が表示されていません。"); return; }
+
   let text = "";
   table.querySelectorAll("tr").forEach(tr => {
     const cols = Array.from(tr.querySelectorAll("th, td")).map(td => td.innerText);
@@ -874,7 +1052,6 @@ function copyStats(){
 
   navigator.clipboard.writeText(text)
     .then(()=>{
-      // コピー成功後に遷移
       window.location.href = "https://jetkitayan.github.io/memo-save/";
     })
     .catch(()=>alert("コピーに失敗しました。もう一度お試しください。"));
@@ -882,7 +1059,6 @@ function copyStats(){
 
 function escapeCsvCell(v){
   const s = String(v ?? "");
-  // ダブルクォートを含む / カンマ / 改行があるなら "..." で囲う
   if (/[",\n\r]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
   return s;
 }
@@ -893,7 +1069,6 @@ function exportCustomOnlyCsv(){
     return;
   }
 
-  // 重複や空を除去して、見やすく整形（順序は維持）
   const seen = new Set();
   const cleaned = [];
   for (const t of simpleCustomList){
@@ -904,19 +1079,16 @@ function exportCustomOnlyCsv(){
     cleaned.push(text);
   }
 
-  // CSV内容（1列だけ：text）
   const lines = [];
-  lines.push("text"); // ヘッダー
+  lines.push("text");
   for (const text of cleaned){
     lines.push(escapeCsvCell(text));
   }
   const csv = lines.join("\r\n");
 
-  // ファイル名（fileParam入れておくと便利）
-  const ymd = getTodayYMD(); // 既存関数を流用
+  const ymd = getTodayYMD();
   const filename = `custom_only_${fileParam}_${ymd}.csv`;
 
-  // ダウンロード
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
   const url = URL.createObjectURL(blob);
 
@@ -929,7 +1101,55 @@ function exportCustomOnlyCsv(){
 
   setTimeout(() => URL.revokeObjectURL(url), 0);
 }
-  
+
+/* ================================
+   Custom
+================================ */
+const customTextEl = document.getElementById("customText");
+const addSimpleBtn = document.getElementById("addSimpleBtn");
+const customOnlyBtn = document.getElementById("customOnlyBtn");
+const clearCustomBtn = document.getElementById("clearCustomBtn");
+const addMsg = document.getElementById("addMsg");
+const exportCustomCsvBtn = document.getElementById("exportCustomCsvBtn");
+
+function saveSimple(){
+  localStorage.setItem(simpleKey, JSON.stringify(simpleCustomList));
+}
+
+async function addSimpleSentence(){
+  const text = (customTextEl.value || "").trim();
+  if (!text){
+    addMsg.textContent = "空です";
+    return;
+  }
+
+  try {
+    await syncCustomToDb(text);
+
+    simpleCustomList.push(text);
+    saveSimple();
+
+    customTextEl.value = "";
+
+    if (!byEn[text]) {
+      byEn[text] = { jp: text, en: text };
+    }
+
+    addMsg.textContent = "追加しました";
+
+    customTextEl.blur();
+
+    setTimeout(() => {
+      const y = window.scrollY;
+      window.scrollTo(0, y + 1);
+      window.scrollTo(0, y);
+    }, 0);
+  } catch (err) {
+    console.error(err);
+    addMsg.textContent = "DB登録に失敗しました";
+  }
+}
+
 function pickLeastShownCustom(arr, excludeEn){
   const n = arr.length;
   if (n === 0) return null;
@@ -943,7 +1163,7 @@ function pickLeastShownCustom(arr, excludeEn){
     const en = arr[i];
     if (en === excludeEn && n > 1) continue;
 
-    const c = customShownCounts[en] || 0; // ← Customの回数で比較
+    const c = customShownCounts[en] || 0;
 
     if (c < min) {
       min = c;
@@ -951,150 +1171,13 @@ function pickLeastShownCustom(arr, excludeEn){
       seen = 1;
     } else if (c === min) {
       seen++;
-      if ((Math.random() * seen) < 1) chosen = en; // 同率はランダム
+      if ((Math.random() * seen) < 1) chosen = en;
     }
   }
   return chosen ?? arr[0];
 }
-  
-function pickLeastShown(remainingArr, excludeEn){
-  const n = remainingArr.length;
-  if (n === 0) return null;
-  if (n === 1) return remainingArr[0];
 
-  let min = Infinity;
-  let chosen = null;
-  let seen = 0; // min と同値の候補を何個見たか
-
-  for (let i = 0; i < n; i++) {
-    const en = remainingArr[i];
-
-    // 直前と同じのを避けたい（ただし残り1なら避けようがない）
-    if (en === excludeEn && n > 1) continue;
-
-    const c = shownCounts[en] || 0;
-
-    if (c < min) {
-      min = c;
-      chosen = en;
-      seen = 1;
-    } else if (c === min) {
-      seen++;
-      // 1/seen の確率で置き換える → min同率から一様ランダム
-      if ((Math.random() * seen) < 1) chosen = en;
-    }
-  }
-
-  // excludeで全部飛んだ等の保険
-  return chosen ?? remainingArr[0];
-}
-
-function pickOldest(remainingArr, excludeEn){
-  let oldestEn = null;
-  let oldestTime = Infinity;
-
-  for (const en of remainingArr) {
-    if (en === excludeEn && remainingArr.length > 1) continue;
-
-    const iso = lastShownMap[en];
-    const t = iso ? new Date(iso).getTime() : 0; // 未表示は最古扱い
-
-    if (t < oldestTime) {
-      oldestTime = t;
-      oldestEn = en;
-    }
-  }
-
-  return oldestEn ?? remainingArr[0];
-}
-   
-function pickRandomFast(arr, excludeEn){
-  const n = arr.length;
-  if (n === 0) return null;
-  if (n === 1) return arr[0];
-
-  let idx = (Math.random() * n) | 0;
-  if (arr[idx] !== excludeEn) return arr[idx];
-
-  // excludeに当たったら、残り(n-1)のどこかへ必ずずらす
-  const offset = 1 + ((Math.random() * (n - 1)) | 0);
-  idx = (idx + offset) % n;
-  return arr[idx];
-}
-
-function prepareNext() {
-  if (remainingArr.length === 0) {
-    nextEn = null;
-    return;
-  }
-
-  switch (showMode) {
-    case 0: // ランダム
-      nextEn = pickRandomFast(remainingArr, currentSentence?.en);
-      break;
-
-    case 1: // 最少回数
-      nextEn = pickLeastShown(remainingArr, currentSentence?.en);
-      break;
-
-    case 2: // 最古
-      nextEn = pickOldest(remainingArr, currentSentence?.en);
-      break;
-  }
-
-  // 次回用にモードを進める（0→1→2→0）
-  showMode = (showMode + 1) % 3;
-}
-
-function buildCountsInlineText(){
-  return `（${getLast5MinCount()} / ${getLast1HourCount()} / ${todayShownCached} / ${totalShownCached}）`;
-}
-
-// ===== 追加：UI参照 =====
-/* ===== シンプル Custom 保存 ===== */
-const customTextEl = document.getElementById("customText");
-const addSimpleBtn = document.getElementById("addSimpleBtn");
-const customOnlyBtn = document.getElementById("customOnlyBtn");
-const clearCustomBtn = document.getElementById("clearCustomBtn");
-const addMsg = document.getElementById("addMsg");
-const exportCustomCsvBtn = document.getElementById("exportCustomCsvBtn");
-
-function saveSimple(){
-  localStorage.setItem(simpleKey, JSON.stringify(simpleCustomList));
-}
-
-function addSimpleSentence(){
-  const text = (customTextEl.value || "").trim();
-  if (!text){
-    addMsg.textContent = "空です";
-    return;
-  }
-
-  simpleCustomList.push(text);
-  saveSimple();
-
-  customTextEl.value = "";
-
-   // 画面側にも即反映（リロード不要）
-   if (!byEn[text]) {
-     byEn[text] = { jp: text, en: text };
-   }
-
-  addMsg.textContent = "追加しました";
-  
-  // iPhone: キーボード閉じ＆ズーム解除を促す
-  customTextEl.blur();
-
-  // iOS Safariは拡大が残ることがあるので、微スクロールで戻す
-  setTimeout(() => {
-    const y = window.scrollY;
-    window.scrollTo(0, y + 1);
-    window.scrollTo(0, y);
-  }, 0);
-
-}
-
-let customShowMode = 0; // 0:ランダム 1:最少
+let customShowMode = 0;
 
 function pickCustom(enList, excludeEn){
   if (customShowMode === 1) return pickLeastShownCustom(enList, excludeEn);
@@ -1102,14 +1185,10 @@ function pickCustom(enList, excludeEn){
 }
 
 function getCustomRegisteredCount(){
-  // 重複込みの登録件数（空は除外）
   if (!Array.isArray(simpleCustomList)) return 0;
-  return simpleCustomList
-    .map(t => (t || "").trim())
-    .filter(Boolean)
-    .length;
+  return simpleCustomList.map(t => (t || "").trim()).filter(Boolean).length;
 }
-  
+
 function showRandomCustomOnly(){
   const nn = getCustomRegisteredCount();
   if (nn === 0){
@@ -1117,9 +1196,7 @@ function showRandomCustomOnly(){
     return;
   }
 
-  // 空を除いたリストで抽選（安全）
   const pool = simpleCustomList.map(t => (t||"").trim()).filter(Boolean);
-
   const en = pickCustom(pool, currentSentence?.en);
   customShowMode = (customShowMode + 1) % 2;
 
@@ -1146,41 +1223,21 @@ function showRandomCustomOnly(){
   document.getElementById("last-shown").textContent = "";
 }
 
-function clearSimple(){
+async function clearSimple(){
   if (!confirm("全部削除する？")) return;
+
+  try {
+    await syncCustomClearToDb();
+  } catch (err) {
+    console.error(err);
+  }
 
   const toRemove = new Set(simpleCustomList.map(t => (t || "").trim()).filter(Boolean));
 
-  // list消す
   simpleCustomList = [];
   saveSimple();
 
-  // 表示データからも除去
   for (const t of toRemove) delete byEn[t];
-
-  // remainingからも除去
-  remainingSet = new Set(Array.from(remainingSet).filter(en => !toRemove.has(en)));
-  remainingArr = Array.from(remainingSet);
-  markDirty(keyPrefix + "remaining");
-
-  // 各種カウント/フラグからも除去（ズレ防止）
-  for (const t of toRemove) {
-    delete shownCounts[t];
-    delete todayCounts[t];
-    delete lastShownMap[t];
-    delete yesMarks[t];
-    delete starMarks[t];
-    delete customShownCounts[t];
-    delete customTodayCounts[t];
-  }
-  markDirty(keyPrefix + "shownCounts");
-  markDirty(todayCountsKey);
-  markDirty(keyPrefix + "lastShown");
-  markDirty(keyPrefix + "yesMarks");
-  markDirty(keyPrefix + "starMarks");
-  markDirty(keyPrefix + "customShownCounts");
-  markDirty(customTodayCountsKey);
-  customTodayShownCached = Object.values(customTodayCounts).reduce((a,b)=>a+(b||0),0);
 
   addMsg.textContent = "削除しました";
 
@@ -1199,8 +1256,10 @@ bindFastTap(addSimpleBtn, addSimpleSentence);
 bindFastTap(customOnlyBtn, showRandomCustomOnly);
 bindFastTap(clearCustomBtn, clearSimple);
 bindFastTap(exportCustomCsvBtn, exportCustomOnlyCsv);
-  
-/* ========= イベント ========= */
+
+/* ================================
+   イベント
+================================ */
 document.getElementById("showBtn").onclick = showRandom;
 document.getElementById("showStarBtn").onclick = showRandomStarred;
 document.getElementById("okBtn").onclick = () => {
@@ -1214,6 +1273,3 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
-
-
-
