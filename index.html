@@ -320,10 +320,26 @@ let showMode = 0;
    DB同期
 ================================ */
 async function loadDbState() {
-  const res = await fetch(`${API_BASE}/api/random-sync?file=${encodeURIComponent(fileParam)}`);
-  if (!res.ok) throw new Error("DB読込失敗");
-  const data = await res.json();
-  if (!data.ok) throw new Error(data.error || "DB読込失敗");
+  const res = await fetch(`${API_BASE}/api/random-sync?file=${encodeURIComponent(fileParam)}`, {
+    headers: {
+      "Authorization": getAuthHeader()
+    }
+  });
+
+  const text = await res.text();
+  let data = {};
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch {
+    throw new Error(`DB読込失敗: HTTP ${res.status}`);
+  }
+
+  if (!res.ok) {
+    throw new Error(data.error || `DB読込失敗: HTTP ${res.status}`);
+  }
+  if (!data.ok) {
+    throw new Error(data.error || "DB読込失敗");
+  }
 
   shownCounts = data.shownCounts || {};
   yesMarks = data.yesMarks || {};
@@ -337,13 +353,23 @@ async function loadDbState() {
 async function apiPost(path, body) {
   const res = await fetch(`${API_BASE}${path}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": getAuthHeader()
+    },
     body: JSON.stringify(body)
   });
 
-  const data = await res.json();
+  const text = await res.text();
+  let data = {};
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch {
+    throw new Error(`API失敗: HTTP ${res.status}`);
+  }
+
   if (!res.ok || !data.ok) {
-    throw new Error(data.error || "API失敗");
+    throw new Error(data.error || `API失敗: HTTP ${res.status}`);
   }
   return data;
 }
@@ -432,28 +458,6 @@ function scheduleFlushIfNeeded() {
     flushPendingShown();
   }
 }
-
-window.addEventListener("beforeunload", () => {
-  if (Object.keys(pendingShown).length === 0) return;
-
-  const payload = JSON.stringify({
-    file: fileParam,
-    items: Object.entries(pendingShown).map(([en, count]) => ({
-      en,
-      count,
-      lastShown: pendingLastShown[en] || new Date().toISOString()
-    }))
-  });
-
-  try {
-    navigator.sendBeacon(
-      `${API_BASE}/api/random-sync/show-batch`,
-      new Blob([payload], { type: "application/json" })
-    );
-  } catch (e) {
-    console.error(e);
-  }
-});
 
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "hidden") {
@@ -1273,3 +1277,4 @@ document.getElementById("copyBtn").onclick = copyStats;
 </script>
 </body>
 </html>
+
