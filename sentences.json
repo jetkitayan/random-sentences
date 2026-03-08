@@ -1,514 +1,490 @@
 [
   {
-    "jp": "状況は多少改善している",
-    "en": "The situation has improved somewhat."
+    "jp": "その計画は理論上は申し分ないが、実際にはうまくいかないだろう",
+    "en": "The plan is good in theory, but it won't work in practice."
   },
   {
-    "jp": "彼の提案は取締役会で承認された",
-    "en": "His proposal was authorized by the board of directors."
+    "jp": "彼の業績は注目に値する",
+    "en": "His achievements are worthy of attention."
   },
   {
-    "jp": "その職には多くの申し込みがあった",
-    "en": "We received a lot of applications for the position."
+    "jp": "人をじろじろ見るのは失礼なことだ",
+    "en": "It is rude to stare at people."
   },
   {
-    "jp": "彼女はその金を借金の支払いに使った",
-    "en": "She applied the money to the payment of debts."
+    "jp": "私は市内を運転していて道に迷った",
+    "en": "I got lost driving in the city."
   },
   {
-    "jp": "彼女はそのプロジェクトに大きく貢献した",
-    "en": "She made a major contribution to the project."
+    "jp": "年次株主総会は4月22日に予定されている",
+    "en": "The annual stockholders' meeting is scheduled for April 22."
   },
   {
-    "jp": "首相は政治改革を実行すると約束した",
-    "en": "The prime minister promised to carry out political reforms."
+    "jp": "これらのおもちゃはすべて手製だ",
+    "en": "All these toys are made by hand."
   },
   {
-    "jp": "彼は自分の仕事、家、そして家庭に満足している",
-    "en": "He is content with his job, his home, and his family."
+    "jp": "あなたはけがの治療を受けたほうがいい",
+    "en": "You should receive treatment for your injuries."
   },
   {
-    "jp": "その問題は解くのが非常に難しい",
-    "en": "The problem is extremely difficult to solve."
+    "jp": "彼は私の車を無料で修理してくれた",
+    "en": "He fixed my car for nothing."
   },
   {
-    "jp": "政府はインフルエンザの突発に備えて準備している",
-    "en": "The government is preparing for an outbreak of flu."
+    "jp": "オーストラリアはイギリスの旧植民地だ",
+    "en": "Australia is a former British colony."
   },
   {
-    "jp": "女性は野菜を切り刻んでいる",
-    "en": "The woman is chopping vegetables."
+    "jp": "一般の人々はその計画に反対している",
+    "en": "People at large are against the plan."
   },
   {
-    "jp": "私たちがこのソフトウエアを設計した",
-    "en": "We designed this software."
+    "jp": "科学者たちはアルツハイマー病の治療法を探し求めている",
+    "en": "Scientists are searching for a cure for Alzheimer's disease."
   },
   {
-    "jp": "電池切れで目覚まし時計が鳴らなかった",
-    "en": "The alarm didn't go off because the batteries were dead."
+    "jp": "誕生と死は彼の小説における一貫した主題になっている",
+    "en": "Birth and death have been a consistent theme in his novels."
   },
   {
-    "jp": "その課程の必要条件を満たさなければ、あなたは面接を受けられないだろう",
-    "en": "If you fail to meet the requirements for the course, you won't be interviewed."
+    "jp": "私たちはその会議の手配をすべてした",
+    "en": "We made all the arrangements for the conference."
   },
   {
-    "jp": "その新しい協定は各国間の貿易を増大させるだろう",
-    "en": "The new agreement will increase trade among countries."
-  },
-  {
-    "jp": "その患者は外科病棟に入院した",
-    "en": "The patient was hospitalized in the surgical ward."
-  },
-  {
-    "jp": "今年の豊作は去年の凶作を埋め合わせた",
-    "en": "This year's good harvest made up for last year's bad one."
-  },
-  {
-    "jp": "ほとんどの子どもは学校での最初の日を不安に感じる",
-    "en": "Most children feel anxious about their first day at school."
-  },
-  {
-    "jp": "彼らは3交替勤務で働いている",
-    "en": "They work three shifts."
-  },
-  {
-    "jp": "まだニックと連絡を取り合っていますか?",
-    "en": "Do you still keep in touch with Nick?"
-  },
-  {
-    "jp": "彼はより多くの時間を家族に充てたいと思っている",
-    "en": "He wants to devote more time to his family."
-  },
-  {
-    "jp": "レッカー車は車を持ち上げている",
-    "en": "The tow truck is lifting the car."
-  },
-  {
-    "jp": "シンガポールは1965年に独立を果たした",
-    "en": "Singapore attained independence in 1965."
-  },
-  {
-    "jp": "この問題についてあなたと話し合いたいのですが",
-    "en": "I would prefer to discuss this issue with you."
-  },
-  {
-    "jp": "警察はその交通事故に関する情報を人々に求めている",
-    "en": "The police are appealing to the public for information about the traffic accident."
-  },
-  {
-    "jp": "彼のほかの小説と比べると、これはそれほど面白くない",
-    "en": "In comparison to his other novels, this one is not so interesting."
-  },
-  {
-    "jp": "彼の同僚は彼のことを楽しくて社交的だと評している",
-    "en": "His colleagues describe him as fun and outgoing."
-  },
-  {
-    "jp": "マリコは経済的に親から自立している",
-    "en": "Mariko is financially independent of her parents."
-  },
-  {
-    "jp": "両者は協定を内密にしておくことで意見が一致した",
-    "en": "Both sides agreed to keep their agreement confidential."
-  },
-  {
-    "jp": "その会社は製品のよりよい流通経路を探している",
-    "en": "The company is looking for better distribution channels for its products."
-  },
-  {
-    "jp": "乗客たちは液体やゼリー状の物質を機内に持ち込むことを許可されていない",
-    "en": "Passengers are not allowed to bring liquids or gels on board."
-  },
-  {
-    "jp": "遊びは幼児の発育に不可欠だ",
-    "en": "Play is essential for infant development."
-  },
-  {
-    "jp": "彼らはその会社から500万ドルを盗んだ",
-    "en": "They robbed the company of $5 million."
-  },
-  {
-    "jp": "記者会見は今日の午後6時に開かれる予定だ",
-    "en": "The press conference will be held at 6 p.m. today."
-  },
-  {
-    "jp": "放射線治療は激しい痛みをもたらすことがある",
-    "en": "Radiation therapy can cause acute pain."
-  },
-  {
-    "jp": "私たちはこの問題を解決するために協力しなければならない",
-    "en": "We must cooperate to solve this problem."
-  },
-  {
-    "jp": "その事務所は、通常の業務時間の月曜日から金曜日の午前9時から午後5時まで開いている",
-    "en": "The office is open during regular business hours. 9 a.m. to 5 p.m. Monday through Friday."
-  },
-  {
-    "jp": "電子メールは手紙やファクスに取って代わった",
-    "en": "E-mail has taken the place of letters and faxes."
-  },
-  {
-    "jp": "教育はすべての人の権利だ",
-    "en": "Education is a right for all."
-  },
-  {
-    "jp": "株主たちはの即時辞任を要求している",
-    "en": "The stockholders have demanded the CEO's immediate resignation."
-  },
-  {
-    "jp": "私は新しい服を買うのを我慢できなかった",
-    "en": "I couldn't resist buying new clothes."
-  },
-  {
-    "jp": "世界経済は大規模な不景気に直面するかもしれない",
-    "en": "The world economy could face a massive depression."
-  },
-  {
-    "jp": "教授陣は明日、会議を開く予定だ",
-    "en": "The faculty will have a meeting tomorrow."
-  },
-  {
-    "jp": "地元の銀行がその無料コンサートを後援した",
-    "en": "A local bank sponsored the free concert."
-  },
-  {
-    "jp": "そのプロジェクトは地元社会に1000人の職を生み出すと期待されている",
-    "en": "The project is expected to create 1,000 jobs in the local community."
-  },
-  {
-    "jp": "彼女は高校の校長になるよう任命された",
-    "en": "She was appointed to be a high school principal."
-  },
-  {
-    "jp": "彼はその建設業者からわいろをもらったことを否定している",
-    "en": "He has denied taking the bribe from the contractor."
-  },
-  {
-    "jp": "雇用が選挙戦の重要問題になるだろう",
-    "en": "Employment is going to be a central issue of the election campaign."
-  },
-  {
-    "jp": "私は彼に新車を買うのを思いとどまらせた",
-    "en": "I discouraged him from buying a new car."
-  },
-  {
-    "jp": "失業率に関しては、10月と比較して11月は02パーセント上昇した",
-    "en": "As for unemployment, it was up 0.2 percent in November compared to October."
-  },
-  {
-    "jp": "私は恥ずべきことは何もしていない",
-    "en": "I have done nothing to be ashamed of."
-  },
-  {
-    "jp": "あなたのために私は水曜日に時間を取ってあります",
-    "en": "I've set aside some time for you on Wednesday."
-  },
-  {
-    "jp": "その市の住民は市立病院の閉鎖に抗議した",
-    "en": "The residents of the city protested the closure of the city hospital."
-  },
-  {
-    "jp": "従業員の解雇は短期的には経費を削減するだろう",
-    "en": "Employee layoffs will reduce costs in the short term."
-  },
-  {
-    "jp": "この薬は処方箋によってのみ入手できる",
-    "en": "This drug is only available by prescription."
-  },
-  {
-    "jp": "彼はパスポートを入国審査官に提出した",
-    "en": "He presented his passport to an immigration officer."
-  },
-  {
-    "jp": "そのプロジェクトを完了するための時間がなくなってきている",
-    "en": "We are running short of time to complete the project."
-  },
-  {
-    "jp": "水面に木々が映っている",
-    "en": "There is a reflection of trees on the water."
-  },
-  {
-    "jp": "私は職場での日常業務に飽きてきている",
-    "en": "I'm getting tired of the daily routine at the office."
-  },
-  {
-    "jp": "皆さんの協力的な姿勢に感謝します",
-    "en": "We appreciate your cooperative attitude."
-  },
-  {
-    "jp": "この映画は子どもにふさわしくない",
-    "en": "This movie is not suitable for children."
-  },
-  {
-    "jp": "クリスマスツリーのためのスペースを作るため、私は観葉植物を移動させた",
-    "en": "I moved the house plants to make room for the Christmas tree."
-  },
-  {
-    "jp": "彼は自分の欠点を自覚していない",
-    "en": "He isn't conscious of his own faults."
-  },
-  {
-    "jp": "彼女はその問題の解決策を見つけようと途方もない時間を費やした",
-    "en": "She spent countless hours trying to find a solution to the problem."
-  },
-  {
-    "jp": "彼は市長に選ばれることを確信している",
-    "en": "He is certain of being elected mayor."
-  },
-  {
-    "jp": "新生児は声やにおいで母親が誰だか分かる",
-    "en": "A new-born baby can identify its mother by her voice and smell."
-  },
-  {
-    "jp": "その会社は5つの海外工場の建設に8億ドルを投資した",
-    "en": "The company invested $800 million in constructing five overseas plants."
-  },
-  {
-    "jp": "彼は私の言ったことを完全に理解しているようだった",
-    "en": "It seemed that he fully understood what I had said."
+    "jp": "チューリップには約1700の種類がある",
+    "en": "There are about 1,700 varieties of tulips."
   },
   {
     "jp": "ストレスは寝不足と密接な関係がある",
     "en": "Stress is closely related to poor sleep."
   },
   {
-    "jp": "誰でも時々失敗はする",
-    "en": "Everyone makes a mistake occasionally."
+    "jp": "新聞広告に載っていた求人についてお尋ねしたくお電話しております",
+    "en": "I'm calling to inquire about the job opening in the newspaper ad."
   },
   {
-    "jp": "政府は国民の願いを無視するべきではない",
-    "en": "The government should not ignore the wishes of its citizens."
+    "jp": "その店はさまざまな商品を売っている",
+    "en": "The store sells a variety of goods."
   },
   {
-    "jp": "その自動車会社はヨーロッパにある2つの組み立て工場の閉鎖を発表した",
-    "en": "The automaker announced that it would close its two assembly plants in Europe."
+    "jp": "かばんを持つのを手伝ってくれますか?",
+    "en": "Could you give me a hand with the bags?"
   },
   {
-    "jp": "いくつかの低所得国では、インフレが制御できなくなってきている",
-    "en": "In some low-income countries, inflation is getting out of control."
+    "jp": "この車はほかの車より性能がはるかに優れている",
+    "en": "This car is far superior in performance to other cars."
   },
   {
-    "jp": "彼は1人暮らしが気に入っている",
-    "en": "He likes living on his own."
+    "jp": "彼女はただ今こちらにはおりません。ご伝言を承りましょうか?",
+    "en": "She's not here right now. Can I take a message?"
   },
   {
-    "jp": "従業員は午前9時までに職場に着くことになっている",
-    "en": "The employees are supposed to be at work by 9 a.m."
+    "jp": "彼は契約条件を受け入れた",
+    "en": "He accepted the terms of the contract."
   },
   {
-    "jp": "タナカさんは人事権を持っている",
-    "en": "Mr. Tanaka has authority over personnel issues."
+    "jp": "ネルソン教授は講堂で午後1時から経済学について講義する",
+    "en": "Professor Nelson will give a lecture on economics at 1 p.m. in the auditorium."
   },
   {
-    "jp": "シートベルトがしっかりと締まっているかお確かめください",
-    "en": "Please make sure that your seat belts are securely fastened."
+    "jp": "おたばこはどうかご遠慮ください",
+    "en": "You are kindly requested not to smoke."
   },
   {
-    "jp": "61号線は洪水のため閉鎖されたままである",
-    "en": "Highway 61 remains closed due to flooding."
+    "jp": "彼女は地元の病院に20万ドルを寄付した",
+    "en": "She made a donation of $200,000 to the local hospital."
   },
   {
-    "jp": "緊急の場合のみ、911に電話してください",
-    "en": "Dial 911 for emergency cases only."
+    "jp": "その計画は社員間のよりよいコミュニケーションの促進を目指している",
+    "en": "The program aims to foster better communication among staff."
   },
   {
-    "jp": "ネットでの注文には小額の取扱手数料がかかる",
-    "en": "There is a small handling charge for online orders."
+    "jp": "その家は6カ月間、売りに出されている",
+    "en": "The house has been for sale for six months."
   },
   {
-    "jp": "経済全体は第2四半期に弱まるに違いない",
-    "en": "The overall economy is bound to weaken in the second quarter."
+    "jp": "すべての製品は出荷される前に欠陥がないか検査される",
+    "en": "All the products are tested for defects before they are shipped."
   },
   {
-    "jp": "彼女は中国語をまあまあうまく話す",
-    "en": "She speaks Chinese fairly well."
+    "jp": "彼女はその歌の歌詞を暗記している",
+    "en": "She knows the lyrics of the song by heart."
   },
   {
-    "jp": "何か困っていることがあったら、遠慮なく私に電話してください",
-    "en": "If you're confused about anything, don't hesitate to call me."
+    "jp": "新生児は声やにおいで母親が誰だか分かる",
+    "en": "A new-born baby can identify its mother by her voice and smell."
   },
   {
-    "jp": "損失時間を埋め合わせるために、建設期間はもう1週間延長される予定だ",
-    "en": "The construction period will be extended for another week to compensate for the lost time."
+    "jp": "小さな店が廃業していることには多くの理由がある",
+    "en": "There are a host of reasons why smaller shops go out of business."
   },
   {
-    "jp": "列車は時間通りに運行している",
-    "en": "The trains are running on time."
+    "jp": "彼女の両親は彼女がボーイフレンドに会うことを禁じた",
+    "en": "Her parents forbade her to see her boyfriend."
   },
   {
-    "jp": "日本では育児休暇を取る男性はほとんどいない",
-    "en": "Few men take child-care leave in Japan."
+    "jp": "スミス氏は人事部の責任者だ",
+    "en": "Mr. Smith is in charge of the personnel department."
   },
   {
-    "jp": "すぐに準備できます",
-    "en": "I'll be ready in a moment."
+    "jp": "スズキさんは製薬業界での幅広い経歴がある",
+    "en": "Mr. Suzuki has an extensive background in the pharmaceutical industry."
   },
   {
-    "jp": "サトウさんは販売部長の職に10年間就いている",
-    "en": "Mr. Sato has held the position of sales manager for 10 years."
+    "jp": "ご迷惑をおかけしたことをおわびしたいと思います",
+    "en": "We wish to apologize for the inconvenience caused to you."
   },
   {
-    "jp": "絵画と彫刻が展示されている",
-    "en": "Paintings and sculptures are on display."
+    "jp": "そのビルに入るには、何か身分証明書を見せるよう求められるだろう",
+    "en": "You will be asked to show some identification to enter the building."
+  },
+  {
+    "jp": "悪天候のため、私たちは旅行計画の一部を変更しなければならなかった",
+    "en": "We had to alter some of our travel plans because of bad weather."
+  },
+  {
+    "jp": "1ドルをくずしてくれませんか?",
+    "en": "Can you make change for a dollar?"
+  },
+  {
+    "jp": "皮膚がんは日光に過度に身をさらすことで起きることがある",
+    "en": "Skin cancer can be caused by excessive exposure to the sun."
+  },
+  {
+    "jp": "幼少時代の思い出が彼女の小説の主題となっている",
+    "en": "Childhood memories are the subject of her novel."
+  },
+  {
+    "jp": "私は都市生活の便利さが好きだ",
+    "en": "I like the convenience of living in the city."
+  },
+  {
+    "jp": "その機器は目に見えない宇宙の物体を検知できる",
+    "en": "The instrument can detect objects in space that we can't see."
+  },
+  {
+    "jp": "その便は機械の故障のため欠航になった",
+    "en": "The flight was canceled due to mechanical faults."
+  },
+  {
+    "jp": "彼がその計画に賛成していないのは明らかだった",
+    "en": "It was plain that he didn't agree with the plan."
+  },
+  {
+    "jp": "私の車は6段変速の手動トランスミッションだ",
+    "en": "My car has a six-speed manual transmission."
+  },
+  {
+    "jp": "彼は死後に芸術家として認められた",
+    "en": "He gained recognition as an artist after his death."
+  },
+  {
+    "jp": "この映画は子ども向けだ",
+    "en": "This movie is aimed at kids."
   },
   {
     "jp": "彼は大望のある、勤勉な従業員だ",
     "en": "He is an ambitious and hardworking employee."
   },
   {
-    "jp": "デビッドは勉強熱心な生徒だ",
-    "en": "David is a student who is eager to learn."
+    "jp": "その会社は彼の辞表を受理するのではなく、彼を解雇した",
+    "en": "The company fired him instead of accepting his resignation."
   },
   {
-    "jp": "その会社は100億ドル近い借金を抱えて破産を申請した",
-    "en": "The company filed for bankruptcy with nearly $10 billion of debt."
+    "jp": "警察はその火事の原因を調査中だ",
+    "en": "Police are investigating the cause of the fire."
   },
   {
-    "jp": "その国の経済は不況に向かっているかもしれない",
-    "en": "The country's economy may be headed for a recession."
+    "jp": "その会社は約200万ドルの赤字を抱えて倒産した",
+    "en": "The company went bankrupt with a deficit of approximately $2 million."
   },
   {
-    "jp": "その患者の容体は安定したままだ",
-    "en": "The patient remains in stable condition."
+    "jp": "多くの民間企業が毎年倒産している",
+    "en": "Many private businesses go bankrupt every year."
   },
   {
-    "jp": "彼は非常に多くのさまざまな仕事を抱えているので、自分がしていることの経過を追うのが困難だと感じている",
-    "en": "He has so many different jobs that he finds it difficult to keep track of what he is doing."
+    "jp": "来年、景気が回復する見込みはありますか?",
+    "en": "Is there any prospect of economic recovery next year?"
   },
   {
-    "jp": "彼女はサンドイッチを作れないし、まして料理を作ることもできない",
-    "en": "She can't make a sandwich much less cook a meal."
+    "jp": "子どもはすぐに新しい環境に慣れる",
+    "en": "Children quickly become accustomed to a new environment."
   },
   {
-    "jp": "羽田空港への行き方を教えていただけますか?",
-    "en": "Could you give me directions to Haneda Airport?"
+    "jp": "天気がよければ、私たちはそこを訪れる予定だ",
+    "en": "We will visit there, provided that the weather is clear."
   },
   {
-    "jp": "昨年、売上高は300万ドルから250万ドルに低下した",
-    "en": "Sales slipped from $3 million to $2.5 million last year."
+    "jp": "クジラは哺乳類に分類される",
+    "en": "Whales are classified as mammals."
   },
   {
-    "jp": "彼はそのプロジェクトに関して何も言及しなかった",
-    "en": "He made no reference to the project."
+    "jp": "多くの人々が宗教の自由を求めてアメリカへ移住した",
+    "en": "Many people emigrated to America in search of religious freedom."
   },
   {
-    "jp": "何かお飲み物をいかがですか?",
-    "en": "Would you care for something to drink?"
+    "jp": "聴衆は音楽に合わせて手をたたいている",
+    "en": "The audience is clapping in time to the music."
   },
   {
-    "jp": "店は人々であふれかえっている",
-    "en": "The store is flooded with people."
+    "jp": "このレストランは当ホテルの宿泊客専用だ",
+    "en": "This restaurant is exclusively for guests staying at our hotel."
   },
   {
-    "jp": "その容疑者は共犯者の名前を明かした",
-    "en": "The suspect disclosed the names of his accomplices."
+    "jp": "駐車はこの辺りでは、もはや認められていない",
+    "en": "Parking is no longer permitted in any areas around here."
   },
   {
-    "jp": "会社を代表して、皆さんのご協力に感謝したいと思います",
-    "en": "On behalf of the company. I would like to thank you for your cooperation."
+    "jp": "私の昇給は8パーセントだった",
+    "en": "My raise was 8 percent."
   },
   {
-    "jp": "何よりも、私は家族に幸せでいてほしい",
-    "en": "Above all, I want my family to be happy."
+    "jp": "自分の人生を誰かの人生と交換できるとしたら、誰の人生がいいですか?",
+    "en": "If you could trade your life for someone else's, whose life would you want?"
   },
   {
-    "jp": "必ず使用法を注意深く読んでください",
-    "en": "Be sure to read the directions carefully."
+    "jp": "なぜそれをメモしているのですか?",
+    "en": "What are you writing that down for?"
   },
   {
-    "jp": "経済が減速しているあらゆる兆候がある",
-    "en": "There is every indication that the economy is slowing."
+    "jp": "その問題に関しては白熱した議論が交わされてきた",
+    "en": "There has been a heated debate on the issue."
   },
   {
-    "jp": "そのホテルは500人の客が宿泊できる",
-    "en": "The hotel has accommodations for 500 guests."
+    "jp": "人員削減によって200万ドル以上が節約されるだろう",
+    "en": "The staff reductions will save over $2 million."
   },
   {
-    "jp": "翌日配達便には追加料金が適用される",
-    "en": "Extra charges apply to overnight deliveries."
+    "jp": "私は今日、顧客との重要な会議がある",
+    "en": "I have an important meeting with my client today."
   },
   {
-    "jp": "そのコンサートは3月22日の午後6時から9時まで行われる予定だ",
-    "en": "The concert will take place on March 22, from 6 to 9 p.m."
+    "jp": "その候補者と支持者たちは選挙の結果を待っている",
+    "en": "The candidate and his supporters are waiting for the outcome of the election."
   },
   {
-    "jp": "現在の経済状況の中で、投資家たちはより慎重になってきている",
-    "en": "Investors are becoming more cautious in the present economic conditions."
+    "jp": "雇用が選挙戦の重要問題になるだろう",
+    "en": "Employment is going to be a central issue of the election campaign."
   },
   {
-    "jp": "提出期限日は今学期の最終日であることを覚えておいてください",
-    "en": "Please keep in mind that the deadline for submissions is the last day of the semester."
+    "jp": "私たちは小さな寝室を2つ目の浴室に変えた",
+    "en": "We converted the small bedroom into a second bathroom."
   },
   {
-    "jp": "その遊園地はこの夏に開園する予定だ",
-    "en": "The amusement park is slated to open this summer."
+    "jp": "有機栽培野菜への需要が増えている",
+    "en": "Demand for organic vegetables is increasing."
   },
   {
-    "jp": "どれでもお好きなものをお召し上がりください",
-    "en": "Please help yourself to whatever you want."
-  },
-  {
-    "jp": "その会談では北朝鮮の核兵器計画を終了させることが目標とされた",
-    "en": "The talks aimed at ending North Korea's nuclear weapons programs."
-  },
-  {
-    "jp": "日本は世界平和の達成において積極的な役割を果たしてきている",
-    "en": "Japan has played an active role in achieving world peace."
-  },
-  {
-    "jp": "前四半期に、ヨーロッパでの売上高は減少した",
-    "en": "Sales in Europe decreased last quarter."
-  },
-  {
-    "jp": "ゴードンさんは昨年、市長に選ばれた",
-    "en": "Miss Gordon was selected as mayor last year."
-  },
-  {
-    "jp": "1人のときは、私はわざわざ料理をしない",
-    "en": "I don't bother to cook when I'm alone."
-  },
-  {
-    "jp": "私たちは環境問題の重要性を確信している",
-    "en": "We are convinced of the importance of environmental issues."
-  },
-  {
-    "jp": "私はパックツアーの予約をするために旅行代理店へ行った",
-    "en": "I went to the travel agency to book a package tour."
-  },
-  {
-    "jp": "その医者の説明を聞いて私は安心した",
-    "en": "The doctor's explanation put my mind at ease."
-  },
-  {
-    "jp": "その男性の身体的特徴を説明してくれますか?",
-    "en": "Can you describe the man's physical characteristics?"
-  },
-  {
-    "jp": "常に所持品から目を離さないでください",
-    "en": "Always keep your belongings in sight."
-  },
-  {
-    "jp": "彼らは私がいることに無関心なようだった",
-    "en": "They seemed indifferent to my presence."
-  },
-  {
-    "jp": "彼女は広告業界に就職した",
-    "en": "She got a job in the advertising industry."
-  },
-  {
-    "jp": "彼は父親としての役割を果たしてこなかった",
-    "en": "He has failed to fulfill his role as a father."
+    "jp": "この地域では窃盗がたびたび起こる",
+    "en": "Thefts are frequent in this area."
   },
   {
     "jp": "多額の金がそのプロジェクトに費やされている",
     "en": "A large amount of money has been spent on the project."
   },
   {
-    "jp": "今年は小売りの売上高が不振だ",
-    "en": "Retail sales have been slow this year."
+    "jp": "その国の主要な輸出品は石油だ",
+    "en": "The country's principal export is oil."
   },
   {
-    "jp": "その会社の概算の総収益は世界中で総計3億ドルになる",
-    "en": "The company's estimated revenue totals $300 million worldwide."
+    "jp": "103便は悪天候のため遅れる予定だ",
+    "en": "Flight 103 will be delayed due to bad weather."
+  },
+  {
+    "jp": "私たちはフランスで素晴らしい休暇を過ごした",
+    "en": "We had a splendid holiday in France."
+  },
+  {
+    "jp": "現生人類と類人猿は共通の祖先から進化した",
+    "en": "Modern humans and apes evolved from a common ancestor."
+  },
+  {
+    "jp": "午後10時までに帰宅するのであれば、そのパーティーに行ってもいい",
+    "en": "You can go to the party as long as you are back by 10 p.m."
+  },
+  {
+    "jp": "当社は顧客満足を達成することを目指している",
+    "en": "Our company aims at achieving customer satisfaction."
+  },
+  {
+    "jp": "そのコンサートでの彼女の演奏は傑出していた",
+    "en": "Her performance at the concert was outstanding."
+  },
+  {
+    "jp": "そのショッピングモールの建設は資金不足のために中止されている",
+    "en": "The building of the mall has been stopped for want of funds."
+  },
+  {
+    "jp": "サラは非常に仕事に熱心だ",
+    "en": "Sarah is very diligent in her work."
+  },
+  {
+    "jp": "その後数週間、株価は下がり続けた",
+    "en": "Stock prices continued to decline in the following weeks."
+  },
+  {
+    "jp": "あなたは自分が売る製品について完全に知っておくべきだ",
+    "en": "You should have thorough knowledge about the product that you sell."
+  },
+  {
+    "jp": "バルコニーからの湖の眺めは本当に素晴らしかった",
+    "en": "We had a really good view of the lake from the balcony."
+  },
+  {
+    "jp": "その用地は居住用に開発されている",
+    "en": "The site is developed for residential purposes."
+  },
+  {
+    "jp": "ペレス氏は勤続30年の献身的な消防士だ",
+    "en": "Mr. Perez has been a dedicated firefighter for 30 years."
+  },
+  {
+    "jp": "私はハリソン氏を同僚として知ってはいるが、親友ではない",
+    "en": "I know Mr. Harrison as an associate, but not as a close friend."
+  },
+  {
+    "jp": "ヨシダさんは年間300万円の年金を受けている",
+    "en": "Mr. Yoshida draws a yearly pension of 3 million yen."
+  },
+  {
+    "jp": "その自動車メーカーは今後2年で1万人の社員の削減を予定している",
+    "en": "The car maker will eliminate 10,000 jobs over the next two years."
+  },
+  {
+    "jp": "彼は東京での滞在をもう1週間延長することにした",
+    "en": "He decided to prolong his stay in Tokyo for another week."
+  },
+  {
+    "jp": "よい教師の重要な特徴は､彼らが生徒たちを気遣うということだ",
+    "en": "An important characteristic of good teachers is that they care about their students."
+  },
+  {
+    "jp": "求職者を選別する通常の方法は何ですか?",
+    "en": "What's the regular procedure for screening applicants?"
+  },
+  {
+    "jp": "その論争は全国的な注目を集めた",
+    "en": "The debate received national publicity."
+  },
+  {
+    "jp": "私たちはパーティーでとても楽しい夜を過ごした",
+    "en": "We had a very pleasant night at the party."
+  },
+  {
+    "jp": "おかけになった電話番号は込み合っています。電話を切っておかけ直しください",
+    "en": "The number you have dialed is busy. Please hang up and dial again."
+  },
+  {
+    "jp": "彼は厳しいという評判だ",
+    "en": "He has a reputation for being strict."
+  },
+  {
+    "jp": "手伝っていただけるとありがたいです",
+    "en": "I'd appreciate it if you could help me."
+  },
+  {
+    "jp": "地球温暖化を食い止めるために私たちはすぐに行動を起こさなければならない",
+    "en": "We must take prompt action to prevent global warming."
+  },
+  {
+    "jp": "その食品会社は食中毒の危険があるため、自社製の缶詰商品の一部を回収した",
+    "en": "The food company recalled some of its canned goods because of the risk of food poisoning."
+  },
+  {
+    "jp": "スコット氏はトンプソン氏に代わってその会社の新CEOになる予定だ",
+    "en": "Mr. Scott will replace Mr. Thompson as the new CEO of the company."
+  },
+  {
+    "jp": "そのホテルは素晴らしい自然環境の中にある",
+    "en": "The hotel is located in a marvelous natural setting."
+  },
+  {
+    "jp": "お客様は神様です",
+    "en": "The customer is always right."
+  },
+  {
+    "jp": "この日本語に相当する英語はない",
+    "en": "This Japanese word has no counterpart in English."
+  },
+  {
+    "jp": "彼らは本棚の本を整頓している",
+    "en": "They are arranging the books on the shelves."
+  },
+  {
+    "jp": "その会社はベーカー氏の副社長への昇進を発表した",
+    "en": "The company announced the promotion of Mr. Baker to vice president."
+  },
+  {
+    "jp": "その店は3カ月の無利息の信用貸しをしている",
+    "en": "The store offers three months of interest-free credit."
+  },
+  {
+    "jp": "彼らは両者にとって満足できる合意に達した",
+    "en": "They came to an arrangement that was acceptable to both sides."
+  },
+  {
+    "jp": "絵画と彫刻が展示されている",
+    "en": "Paintings and sculptures are on display."
+  },
+  {
+    "jp": "私たちはそのプロジェクトを実行するのに十分な資金を持っていない",
+    "en": "We don't have adequate funds to carry out the project."
+  },
+  {
+    "jp": "そのNPOは森林資源の保護に取り組んでいる",
+    "en": "The NPO works on the conservation of forest resources."
+  },
+  {
+    "jp": "デービス医師は一流の外科医だ",
+    "en": "Dr. Davis is a first-rate surgeon."
+  },
+  {
+    "jp": "政府は通信市場の規制を緩和する予定だ",
+    "en": "The government plans to deregulate the communications market."
+  },
+  {
+    "jp": "霧のためその便は4時間出発を遅延された",
+    "en": "The flight was suspended for four hours owing to the fog."
+  },
+  {
+    "jp": "経済全体は第2四半期に弱まるに違いない",
+    "en": "The overall economy is bound to weaken in the second quarter."
+  },
+  {
+    "jp": "株主たちは投資に対する高い利回りを強く要求する",
+    "en": "Shareholders insist on a high return on their investments."
+  },
+  {
+    "jp": "日本は中東の石油に大きく依存している",
+    "en": "Japan relies heavily on Middle Eastern oil."
+  },
+  {
+    "jp": "その会社はビジネス手法を根本的に変える必要がある",
+    "en": "The company needs to make fundamental changes in the way it does its business."
+  },
+  {
+    "jp": "今日の午後4時から6時まで、体育館で新入生の歓迎会がある",
+    "en": "There will be a reception for new students from 4 to 6 p.m. today in the gymnasium."
+  },
+  {
+    "jp": "その候補者は自分が選挙に勝つだろうと自信を持って言った",
+    "en": "The candidate said with confidence that he would win the election."
+  },
+  {
+    "jp": "彼は入試に合格することができなかった",
+    "en": "He failed to pass the entrance exam."
+  },
+  {
+    "jp": "彼はその大学の研究所に勤務している",
+    "en": "He works at a research institute at the university."
+  },
+  {
+    "jp": "彼女はインフルエンザにかかって家にいる",
+    "en": "She is at home with the flu."
+  },
+  {
+    "jp": "女性は食料雑貨類を運んでいる",
+    "en": "The woman is carrying groceries."
   }
 ]
