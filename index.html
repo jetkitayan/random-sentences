@@ -701,8 +701,8 @@ let currentList = [];
 
 async function initApp() {
   try {
-    jsonA = await (await fetch("default.json")).json();
-    jsonB = await (await fetch("advanced.json")).json();
+    jsonA = await (await fetch("sentences.json")).json();
+    jsonB = await (await fetch("sentences_cleared.json")).json();
 
     // 最初は default を選択して起動
     await switchMode("default", jsonA);
