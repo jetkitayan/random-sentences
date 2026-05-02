@@ -757,6 +757,97 @@ async function initApp() {
   
 initApp();
 
+function rebuildKeysFor(file){
+  fileParam = file;
+  jsonFile = `${fileParam}.json`;
+  keyPrefix = `randomApp_${fileParam}_`;
+
+  todayCountsKey = keyPrefix + "shownCounts_" + todayKey;
+  customTodayCountsKey = keyPrefix + "customShownCounts_" + todayKey;
+
+  minuteKey = keyPrefix + "minuteRing_v1";
+  customMinuteKey = keyPrefix + "customMinuteRing_v1";
+  simpleKey = keyPrefix + "simpleCustom";
+}
+
+function loadLocalStateForCurrent(){
+  // localStorage（prefix付き）を読み直す
+  customShownCounts = JSON.parse(localStorage.getItem(keyPrefix + "customShownCounts")) || {};
+
+  todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
+  todayShownCached = Object.values(todayCounts).reduce((a,b)=>a+(b||0),0);
+
+  customTodayCounts = JSON.parse(localStorage.getItem(customTodayCountsKey)) || {};
+  customTodayShownCached = Object.values(customTodayCounts).reduce((a,b)=>a+(b||0),0);
+
+  // minute ring も prefix ごとに復元（壊れてたら初期化）
+  minuteRing = (() => {
+    try {
+      const o = JSON.parse(localStorage.getItem(minuteKey));
+      if (!o || !Number.isFinite(o.baseMin) || !Array.isArray(o.ring) || o.ring.length !== 60) throw 0;
+      return o;
+    } catch {
+      return { baseMin: Math.floor(Date.now()/60000), ring: Array(60).fill(0) };
+    }
+  })();
+
+  customMinuteRing = (() => {
+    try {
+      const o = JSON.parse(localStorage.getItem(customMinuteKey));
+      if (!o || !Number.isFinite(o.baseMin) || !Array.isArray(o.ring) || o.ring.length !== 60) throw 0;
+      return o;
+    } catch {
+      return { baseMin: Math.floor(Date.now()/60000), ring: Array(60).fill(0) };
+    }
+  })();
+}
+
+async function switchMode(file, list){
+  dataReady = false;
+  nextEn = null;
+
+  // ※ バッチ未送信があるなら送ってから切替（安全）
+  await flushPendingShown().catch(()=>{});
+
+  rebuildKeysFor(file);
+  loadLocalStateForCurrent();
+
+  // DBも fileParam が切り替わった状態で読む
+  await loadDbState();
+
+  // ここが重要：allSentences をセット
+  allSentences = list;
+
+  // byEn再構築
+  for (const k in byEn) delete byEn[k];
+  for (const s of allSentences) byEn[s.en] = s;
+
+  // DBから来た custom を反映
+  for (const t of simpleCustomList) {
+    const text = (t || "").trim();
+    if (!text) continue;
+    if (byEn[text]) continue;
+    byEn[text] = { jp: text, en: text };
+  }
+
+  // remaining（OK除外）
+  remainingArr = allSentences
+    .map(s => s.en)
+    .filter(en => !yesMarks[en]);
+  remainingSet = new Set(remainingArr);
+
+  localStorage.setItem(simpleKey, JSON.stringify(simpleCustomList));
+
+  currentSentence = null;
+  dataReady = true;
+
+  showBtnEl.disabled = false;
+  showBtn2El.disabled = false;
+  document.getElementById("showStarBtn").disabled = false;
+
+  topMetaEl.textContent = `Mode: ${fileParam}\nPress "Random" to start`;
+}
+  
 /* ================================
    UI
 ================================ */
