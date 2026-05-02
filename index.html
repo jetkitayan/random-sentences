@@ -1037,6 +1037,7 @@ function confirmSentence(){
     enEl.textContent = "";
     document.getElementById("last-shown").textContent = "";
     document.getElementById("showBtn").disabled = true;
+    document.getElementById("showBtn2").disabled = true;
     document.getElementById("okBtn").disabled = true;
     document.getElementById("starBtn").disabled = true;
   }
@@ -1112,6 +1113,7 @@ async function resetData(){
   enEl.textContent = "";
   document.getElementById("last-shown").textContent = "";
   document.getElementById("showBtn").disabled = false;
+  document.getElementById("showBtn2").disabled = false;
   document.getElementById("okBtn").disabled = true;
   document.getElementById("starBtn").disabled = true;
   document.getElementById("statsArea").style.display = "none";
