@@ -703,6 +703,18 @@ async function initApp() {
 
   currentList = jsonA;
 }
+  
+function setList(list){
+  currentList = list;
+
+  for (const k in byEn) delete byEn[k];
+  for (const s of currentList) {
+    byEn[s.en] = s;
+  }
+
+  remainingArr = currentList.map(s => s.en);
+  remainingSet = new Set(remainingArr);
+}
 
 //async function initApp() {
 //  try {
