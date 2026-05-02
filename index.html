@@ -274,9 +274,9 @@ let nextEn = null;
 
 let allSentences = [];
 const params = new URLSearchParams(window.location.search);
-const fileParam = params.get("file") || "default";
-const jsonFile = `${fileParam}.json`;
-const keyPrefix = `randomApp_${fileParam}_`;
+let fileParam = params.get("file") || "default";
+let jsonFile = `${fileParam}.json`;
+let keyPrefix = `randomApp_${fileParam}_`;
 
 const sentenceJpEl = document.getElementById("sentence-jp");
 const sentenceEnEl = document.getElementById("sentence-en");
@@ -312,10 +312,10 @@ function getTodayYMD() {
 }
 const todayKey = getTodayYMD();
 
-const todayCountsKey = keyPrefix + "shownCounts_" + todayKey;
+let todayCountsKey = keyPrefix + "shownCounts_" + todayKey;
 let todayCounts = JSON.parse(localStorage.getItem(todayCountsKey)) || {};
 
-const customTodayCountsKey = keyPrefix + "customShownCounts_" + todayKey;
+let customTodayCountsKey = keyPrefix + "customShownCounts_" + todayKey;
 let customTodayCounts = JSON.parse(localStorage.getItem(customTodayCountsKey)) || {};
 let customTodayShownCached = Object.values(customTodayCounts).reduce((a,b)=>a+(b||0),0);
 
@@ -478,7 +478,7 @@ document.addEventListener("visibilitychange", () => {
 /* ================================
    直近カウント
 ================================ */
-const minuteKey = keyPrefix + "minuteRing_v1";
+let minuteKey = keyPrefix + "minuteRing_v1";
 
 let minuteRing = (() => {
   try {
@@ -547,7 +547,7 @@ const getLast5MinCount = () => getLastMinutesCount(5);
 /* ================================
    Custom Only 直近カウント
 ================================ */
-const customMinuteKey = keyPrefix + "customMinuteRing_v1";
+let customMinuteKey = keyPrefix + "customMinuteRing_v1";
 
 let customMinuteRing = (() => {
   try {
@@ -685,7 +685,7 @@ function flushSaves() {
    マップ系
 ================================ */
 const byEn = Object.create(null);
-const simpleKey = keyPrefix + "simpleCustom";
+let simpleKey = keyPrefix + "simpleCustom";
 let simpleCustomList = [];
 
 const topMetaEl = document.getElementById("topMeta");
