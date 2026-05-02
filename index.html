@@ -714,20 +714,6 @@ async function initApp() {
 }
 initApp();
   
-function setList(list){
-  currentList = list;
-
-  for (const k in byEn) delete byEn[k];
-  for (const s of currentList) {
-    byEn[s.en] = s;
-  }
-
-  remainingArr = currentList.map(s => s.en);
-  remainingSet = new Set(remainingArr);
-}
-  
-initApp();
-
 function rebuildKeysFor(file){
   fileParam = file;
   jsonFile = `${fileParam}.json`;
@@ -815,6 +801,14 @@ async function switchMode(file, list){
   showBtnEl.disabled = false;
   showBtn2El.disabled = false;
   document.getElementById("showStarBtn").disabled = false;
+
+  okBtnEl.disabled = true;
+  starBtnEl.disabled = true;
+  updateStarUi();
+  
+  document.getElementById("last-shown").textContent = "";
+  jpTextEl.textContent = "";
+  enEl.textContent = "";
 
   topMetaEl.textContent = `Mode: ${fileParam}\nPress "Random" to start`;
 }
