@@ -700,11 +700,19 @@ let jsonB = [];
 let currentList = [];
 
 async function initApp() {
-  jsonA = await (await fetch("default.json")).json();
-  jsonB = await (await fetch("advanced.json")).json();
+  try {
+    jsonA = await (await fetch("default.json")).json();
+    jsonB = await (await fetch("advanced.json")).json();
 
-  currentList = jsonA;
+    // 最初は default を選択して起動
+    await switchMode("default", jsonA);
+
+  } catch (err) {
+    topMetaEl.textContent = String(err.message || err);
+    console.error(err);
+  }
 }
+initApp();
   
 function setList(list){
   currentList = list;
@@ -716,43 +724,6 @@ function setList(list){
 
   remainingArr = currentList.map(s => s.en);
   remainingSet = new Set(remainingArr);
-}
-
-async function initApp() {
-  try {
-    const r = await fetch(jsonFile);
-    if (!r.ok) throw new Error(`JSON読込失敗: ${jsonFile} (${r.status})`);
-
-    const data = await r.json();
-    allSentences = data;
-
-    await loadDbState();
-
-    for (const k in byEn) delete byEn[k];
-    for (const s of allSentences) byEn[s.en] = s;
-
-    for (const t of simpleCustomList) {
-      const text = (t || "").trim();
-      if (!text) continue;
-      if (byEn[text]) continue;
-      byEn[text] = { jp: text, en: text };
-    }
-
-    remainingArr = allSentences
-      .map(s => s.en)
-      .filter(en => !yesMarks[en]);
-
-    remainingSet = new Set(remainingArr);
-
-    localStorage.setItem(simpleKey, JSON.stringify(simpleCustomList));
-
-    dataReady = true;
-    showBtnEl.disabled = false;
-    document.getElementById("showStarBtn").disabled = false;
-  } catch (err) {
-    topMetaEl.textContent = String(err.message || err);
-    console.error(err);
-  }
 }
   
 initApp();
