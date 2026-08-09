@@ -31,6 +31,12 @@ body {
   touch-action: manipulation;
 }
 
+#button-area button {
+  font-size: 2rem;      /* 40px → 相対値 */
+  padding: 2rem 1.5rem; /* 45px 35px → 相対値 */
+  min-height: auto;     /* 140px固定を解除 */
+}
+  
 #button-area button:active {
   transform: translateY(1px);
   filter: brightness(0.95);
