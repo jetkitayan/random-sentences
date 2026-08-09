@@ -25,12 +25,12 @@ body {
   position: sticky;
   top: 0;
   width: 100%;
-  padding: 20px 15px;
+  padding: 65px 25px 13px;
   text-align: center;
   z-index: 999;
   touch-action: manipulation;
 }
-  
+
 #button-area button:active {
   transform: translateY(1px);
   filter: brightness(0.95);
@@ -93,11 +93,13 @@ body {
   transition: opacity 0.12s linear;
 }
 
-#button-area button {
+#button-area button{
+  padding: 45px 35px;
+  font-size: 40px;
+  min-height: 140px;
   border: 3px solid #000;
   border-radius: 16px;
   background-color: #d9d9d9;
-  color: #000;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -123,7 +125,11 @@ body {
 
 #button-area .row1 button {
   width: 160px;
-  padding: 1rem 0;
+  padding: 32px 0;
+}
+
+#button-area button {
+  color: #000;
 }
 
 #jpText {
@@ -137,11 +143,10 @@ button.is-locked {
 
 #simpleAddArea{ max-width: 900px; margin:0 auto; }
 
-.simpleButtons {
+.simpleButtons{
+  margin-top: 15px;
   display: flex;
   gap: 15px;
-  flex-wrap: wrap;
-  margin-top: 25px;
 }
 
 .simpleButtons button{
@@ -162,11 +167,27 @@ button.is-locked {
   padding: 30px 0px;
 }
 
+.simpleButtons{
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.simpleButtons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top: 55px;
+}
+
 #simpleAddArea .simpleButtons button{
   border:3px solid #000;
   border-radius:16px;
   background:#d9d9d9;
   color:#000;
+  padding: 45px 35px;
+  font-size: 40px;
 }
 
 #customText{
@@ -174,45 +195,6 @@ button.is-locked {
   display: block;
   width: 100%;
   padding:20px 25px;
-}
-  
-#button-area button,
-.simpleButtons button {
-  padding: 1rem 1.5rem; /* 高さを半分に */
-  font-size: 1.4rem;    /* 文字サイズも少し調整 */
-}
-
-#simpleAddArea .simpleButtons {
-  display: flex;
-  flex-wrap: nowrap;     /* 折り返さない */
-  justify-content: center; /* 中央寄せ */
-  gap: 15px;             /* ボタン間の余白 */
-}
-  
-@media (max-width: 600px) {
-  #button-area button {
-    font-size: 1.6rem;
-    padding: 1.5rem 1rem;
-  }
-
-  #sentence-jp,
-  #sentence-en {
-    font-size: 2rem; /* 42px → 相対値 */
-  }
-
-  #simpleAddArea .simpleButtons button {
-    font-size: 1.6rem;
-    padding: 1.5rem 1rem;
-  }
-
-  #button-area .row1 button {
-    width: auto;
-    padding: 1.5rem 1rem;
-  }
- 
-  #simpleAddArea .simpleButtons button {
-    flex: 1 1 45%;       /* 2列に並ぶように調整 */
-  }
 }
 </style>
 </head>
