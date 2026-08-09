@@ -177,7 +177,20 @@ button.is-locked {
   width: 100%;
   padding:20px 25px;
 }
+  
+#button-area button,
+.simpleButtons button {
+  padding: 1rem 1.5rem; /* 高さを半分に */
+  font-size: 1.4rem;    /* 文字サイズも少し調整 */
+}
 
+#simpleAddArea .simpleButtons {
+  display: flex;
+  flex-wrap: nowrap;     /* 折り返さない */
+  justify-content: center; /* 中央寄せ */
+  gap: 15px;             /* ボタン間の余白 */
+}
+  
 @media (max-width: 600px) {
   #button-area button {
     font-size: 1.6rem;
@@ -197,6 +210,14 @@ button.is-locked {
   #button-area .row1 button {
     width: auto;
     padding: 1.5rem 1rem;
+  }
+
+  #simpleAddArea .simpleButtons {
+    flex-wrap: wrap;     /* 狭い画面では折り返し許可 */
+  }
+ 
+  #simpleAddArea .simpleButtons button {
+    flex: 1 1 45%;       /* 2列に並ぶように調整 */
   }
 }
 </style>
