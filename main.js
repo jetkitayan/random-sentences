@@ -128,20 +128,7 @@ document.addEventListener("visibilitychange", () => {
 
 let minuteKey = keyPrefix + "minuteRing_v1";
 
-let minuteRing = (() => {
-  try {
-    const o = JSON.parse(localStorage.getItem(minuteKey));
-    if (!o || !Number.isFinite(o.baseMin) || !Array.isArray(o.ring) || o.ring.length !== 60) {
-      throw 0;
-    }
-    return o;
-  } catch {
-    return {
-      baseMin: Math.floor(Date.now() / 60000),
-      ring: Array(60).fill(0),
-    };
-  }
-})();
+let minuteRing = createMinuteRingState(minuteKey);
 
 let ringSaveScheduled = false;
 function scheduleSaveMinuteRing() {
@@ -156,20 +143,7 @@ function scheduleSaveMinuteRing() {
 }
 
 function advanceRingTo(nowMin) {
-  let diff = nowMin - minuteRing.baseMin;
-  if (diff <= 0) return;
-
-  if (diff >= 60) {
-    minuteRing.ring.fill(0);
-    minuteRing.baseMin = nowMin;
-    return;
-  }
-
-  const r = minuteRing.ring;
-  for (let i = 0; i < 60 - diff; i++) r[i] = r[i + diff];
-  for (let i = 60 - diff; i < 60; i++) r[i] = 0;
-
-  minuteRing.baseMin = nowMin;
+  advanceMinuteRing(minuteRing, nowMin);
 }
 
 function addNowCountFast() {
@@ -194,15 +168,7 @@ const getLast5MinCount = () => getLastMinutesCount(5);
 
 let customMinuteKey = keyPrefix + "customMinuteRing_v1";
 
-let customMinuteRing = (() => {
-  try {
-    const o = JSON.parse(localStorage.getItem(customMinuteKey));
-    if (!o || !Number.isFinite(o.baseMin) || !Array.isArray(o.ring) || o.ring.length !== 60) throw 0;
-    return o;
-  } catch {
-    return { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
-  }
-})();
+let customMinuteRing = createMinuteRingState(customMinuteKey);
 
 let customRingSaveScheduled = false;
 function scheduleSaveCustomMinuteRing() {
@@ -215,19 +181,7 @@ function scheduleSaveCustomMinuteRing() {
 }
 
 function advanceCustomRingTo(nowMin) {
-  const diff = nowMin - customMinuteRing.baseMin;
-  if (diff <= 0) return;
-
-  if (diff >= 60) {
-    customMinuteRing.ring.fill(0);
-    customMinuteRing.baseMin = nowMin;
-    return;
-  }
-
-  const r = customMinuteRing.ring;
-  for (let i = 0; i < 60 - diff; i++) r[i] = r[i + diff];
-  for (let i = 60 - diff; i < 60; i++) r[i] = 0;
-  customMinuteRing.baseMin = nowMin;
+  advanceMinuteRing(customMinuteRing, nowMin);
 }
 
 function addCustomNowCountFast() {
@@ -338,25 +292,8 @@ function loadLocalStateForCurrent() {
   customTodayCounts = JSON.parse(localStorage.getItem(customTodayCountsKey)) || {};
   customTodayShownCached = Object.values(customTodayCounts).reduce((a, b) => a + (b || 0), 0);
 
-  minuteRing = (() => {
-    try {
-      const o = JSON.parse(localStorage.getItem(minuteKey));
-      if (!o || !Number.isFinite(o.baseMin) || !Array.isArray(o.ring) || o.ring.length !== 60) throw 0;
-      return o;
-    } catch {
-      return { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
-    }
-  })();
-
-  customMinuteRing = (() => {
-    try {
-      const o = JSON.parse(localStorage.getItem(customMinuteKey));
-      if (!o || !Number.isFinite(o.baseMin) || !Array.isArray(o.ring) || o.ring.length !== 60) throw 0;
-      return o;
-    } catch {
-      return { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
-    }
-  })();
+  minuteRing = createMinuteRingState(minuteKey);
+  customMinuteRing = createMinuteRingState(customMinuteKey);
 }
 
 async function switchMode(file, list) {
@@ -444,8 +381,8 @@ async function resetData() {
   customTodayShownCached = 0;
   simpleCustomList = [];
 
-  minuteRing = { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
-  customMinuteRing = { baseMin: Math.floor(Date.now() / 60000), ring: Array(60).fill(0) };
+  minuteRing = createMinuteRingState(minuteKey);
+  customMinuteRing = createMinuteRingState(customMinuteKey);
 
   pendingShown = {};
   pendingLastShown = {};
