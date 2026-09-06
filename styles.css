@@ -199,4 +199,71 @@ button.is-locked {
   flex-wrap: wrap;
   gap: 15px;
 }
+
+@media (max-width: 600px) {
+  #button-area {
+    padding: 20px 8px 8px;
+  }
+
+  #button-area .row2 {
+    gap: 6px;
+  }
+
+  #button-area .row1 {
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  #button-area button,
+  #button-area .row1 button {
+    width: auto;
+    min-width: 0;
+    min-height: 56px;
+    padding: 12px 4px;
+    font-size: 16px;
+    border-width: 2px;
+    border-radius: 10px;
+  }
+
+  #button-area .row1,
+  #button-area .row2 {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  #button-area .row2 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  #simpleAddArea {
+    padding: 20px 0;
+  }
+
+  .simpleButtons {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 20px;
+  }
+
+  #simpleAddArea .simpleButtons button {
+    min-width: 0;
+    padding: 16px 3px;
+    font-size: 14px;
+    border-width: 2px;
+    border-radius: 10px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  #customText {
+    padding: 12px;
+    font-size: 20px;
+  }
+}
   
