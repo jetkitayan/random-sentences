@@ -406,16 +406,14 @@ async function resetData() {
   document.getElementById("statsArea").style.display = "none";
 }
 
-document.getElementById("showBtn").onclick = async () => {
-  if (!jsonA.length) return;
-  await switchMode("default", jsonA);
+async function showModeRandomly(file, sentences) {
+  if (!sentences.length) return;
+  if (fileParam !== file) await switchMode(file, sentences);
   showRandom();
-};
-document.getElementById("showBtn2").onclick = async () => {
-  if (!jsonB.length) return;
-  await switchMode("advanced", jsonB);
-  showRandom();
-};
+}
+
+document.getElementById("showBtn").onclick = () => showModeRandomly("default", jsonA);
+document.getElementById("showBtn2").onclick = () => showModeRandomly("advanced", jsonB);
 document.getElementById("showStarBtn").onclick = showRandomStarred;
 document.getElementById("okBtn").onclick = () => {
   if (!currentSentence) return;
