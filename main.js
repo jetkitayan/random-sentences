@@ -35,11 +35,16 @@ function getCustomTotalShown() {
 }
 
 function getTodayYMD() {
-  const now = new Date();
-  const tz = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
-  const y = tz.getFullYear();
-  const m = String(tz.getMonth() + 1).padStart(2, "0");
-  const d = String(tz.getDate()).padStart(2, "0");
+  const parts = new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const get = (type) => parts.find((part) => part.type === type)?.value ?? "";
+  const y = get("year");
+  const m = get("month");
+  const d = get("day");
   return `${y}-${m}-${d}`;
 }
 const todayKey = getTodayYMD();
