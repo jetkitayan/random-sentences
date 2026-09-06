@@ -174,10 +174,13 @@ button.is-locked {
   justify-content: flex-start;
 }
 
-.simpleButtons{
-  display:flex;
-  gap:15px;
-  flex-wrap:wrap;
+.flex-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.simpleButtons {
   margin-top: 55px;
 }
 
@@ -328,27 +331,26 @@ let showMode = 0;
 /* ================================
    DB同期
 ================================ */
-async function loadDbState() {
-  const res = await fetch(`${API_BASE}/api/random-sync?file=${encodeURIComponent(fileParam)}`, {
-    headers: {
-      "Authorization": getAuthHeader()
-    }
-  });
+async function fetchData(url, headers) {
+  const res = await fetch(url, { headers });
+  if (!res.ok) throw new Error(`HTTPエラー: ${res.status}`);
+  return res.text();
+}
 
-  const text = await res.text();
-  let data = {};
+function parseDbData(text) {
   try {
-    data = text ? JSON.parse(text) : {};
+    return text ? JSON.parse(text) : {};
   } catch {
-    throw new Error(`DBの読込失敗: HTTP ${res.status}`);
+    throw new Error("DBデータの解析に失敗しました");
   }
+}
 
-  if (!res.ok) {
-    throw new Error(data.error || `DB読込失敗: HTTP ${res.status}`);
-  }
-  if (!data.ok) {
-    throw new Error(data.error || "DB読込失敗");
-  }
+async function loadDbState() {
+  const url = `${API_BASE}/api/random-sync?file=${encodeURIComponent(fileParam)}`;
+  const headers = { "Authorization": getAuthHeader() };
+
+  const text = await fetchData(url, headers);
+  const data = parseDbData(text);
 
   shownCounts = data.shownCounts || {};
   yesMarks = data.yesMarks || {};
@@ -356,7 +358,7 @@ async function loadDbState() {
   lastShownMap = data.lastShownMap || {};
   simpleCustomList = data.simpleCustomList || [];
 
-  totalShownCached = Object.values(shownCounts).reduce((a,b)=>a+(b||0),0);
+  totalShownCached = Object.values(shownCounts).reduce((a, b) => a + (b || 0), 0);
 }
 
 async function apiPost(path, body) {
