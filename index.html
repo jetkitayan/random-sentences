@@ -340,7 +340,7 @@ async function loadDbState() {
   try {
     data = text ? JSON.parse(text) : {};
   } catch {
-    throw new Error(`DB読込失敗: HTTP ${res.status}`);
+    throw new Error(`DBの読込失敗: HTTP ${res.status}`);
   }
 
   if (!res.ok) {
