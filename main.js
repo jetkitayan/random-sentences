@@ -260,8 +260,8 @@ let currentList = [];
 
 async function initApp() {
   try {
-    jsonA = await (await fetch("sentences.json")).json();
-    jsonB = await (await fetch("sentences_cleared.json")).json();
+    jsonA = await (await fetch("data/sentences.json")).json();
+    jsonB = await (await fetch("data/sentences_cleared.json")).json();
     await switchMode("default", jsonA);
   } catch (err) {
     topMetaEl.textContent = String(err.message || err);
