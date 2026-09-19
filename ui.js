@@ -36,7 +36,7 @@ function copyStats() {
 
   navigator.clipboard.writeText(text)
     .then(() => {
-      window.location.href = "https://jetkitayan.github.io/memo-save/";
+      alert("コピーしました。");
     })
     .catch(() => alert("コピーに失敗しました。もう一度お試しください。"));
 }
