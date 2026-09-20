@@ -7,14 +7,16 @@ function showStats() {
   tbody.innerHTML = "";
   for (const s of allSentences) {
     const c = shownCounts[s.en] || 0;
-    const star = starMarks[s.en] ? "★" : "";
-    const outlineStar = starMarks[s.en] ? "☆" : "";
+    const hasOk = !!yesMarks[s.en];
+    const hasStar = !!starMarks[s.en];
+    const okCell = hasOk ? "☆" : "";
+    const starCell = hasStar ? "★" : "";
     tbody.innerHTML += `
       <tr>
         <td>${s.jp}</td>
         <td>${s.en}</td>
-        <td style="text-align:center;">${star}</td>
-        <td style="text-align:center;">${outlineStar}</td>
+        <td style="text-align:center;">${okCell}</td>
+        <td style="text-align:center;">${starCell}</td>
         <td style="text-align:center;">${c}</td>
       </tr>`;
   }
