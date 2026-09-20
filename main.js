@@ -427,4 +427,4 @@ document.getElementById("okBtn").onclick = () => {
 document.getElementById("starBtn").onclick = toggleStar;
 document.getElementById("resetBtn").onclick = resetData;
 document.getElementById("statsBtn").onclick = showStats;
-document.getElementById("copyBtn").onclick = copyStats;
+document.getElementById("copyBtn").onclick = (event) => copyStats(event);

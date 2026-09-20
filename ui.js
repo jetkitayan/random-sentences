@@ -23,7 +23,8 @@ function showStats() {
   document.getElementById("statsArea").style.display = "block";
 }
 
-function copyStats() {
+function copyStats(event) {
+  event?.preventDefault();
   const table = document.querySelector("#statsArea table");
   if (!table) {
     alert("一覧が表示されていません。");
