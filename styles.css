@@ -60,7 +60,7 @@ button {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 23px;
   max-width: 900px;
-  margin-top: 55px;
+  margin-top: 110px;
 }
 
 #button-area button {
