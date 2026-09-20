@@ -154,11 +154,22 @@ button.is-locked {
 #statsArea td {
   padding: 8px;
   border: 1px solid var(--muted-border);
-  text-align: center;
 }
 
 #statsArea th {
   background: #f0f0f0;
+  text-align: center;
+}
+
+#statsArea td:nth-child(1),
+#statsArea td:nth-child(2) {
+  text-align: left;
+}
+
+#statsArea td:nth-child(3),
+#statsArea td:nth-child(4),
+#statsArea td:nth-child(5) {
+  text-align: center;
 }
 
 #simpleAddArea {
