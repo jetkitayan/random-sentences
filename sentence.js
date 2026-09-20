@@ -10,6 +10,12 @@ function buildCountsInlineText() {
   return `（${getLast5MinCount()} / ${getLast1HourCount()} / ${todayShownCached} / ${totalShownCached}）`;
 }
 
+function renderCurrentOkMarker() {
+  if (!currentSentence) return;
+  const okMark = yesMarks[currentSentence.en] ? " ☆" : "";
+  enEl.textContent = `${currentSentence.en}${okMark}`;
+}
+
 function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true, hideJp = false) {
   const sentence = byEn[en];
   if (!sentence) return;
@@ -21,7 +27,7 @@ function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true, hideJ
 
   const updateText = () => {
     jpTextEl.textContent = hideJp ? "" : sentence.jp;
-    enEl.textContent = sentence.en;
+    renderCurrentOkMarker();
     sentenceJpEl.classList.remove("hidden");
     sentenceEnEl.classList.remove("hidden");
   };
@@ -166,7 +172,9 @@ function showRandomStarred() {
 function confirmSentence() {
   if (!currentSentence) return;
   yesMarks[currentSentence.en] = true;
+  renderCurrentOkMarker();
   syncOkToDb(currentSentence.en).catch((err) => console.error("ok sync failed", err));
+  flushPendingShown().catch((err) => console.error("shown count sync failed", err));
 
   remainingSet.delete(currentSentence.en);
   remainingArr = Array.from(remainingSet);
@@ -193,6 +201,7 @@ function toggleStar() {
   starMarks[en] = isStarred;
 
   syncStarToDb(en, isStarred).catch((err) => console.error("star sync failed", err));
+  flushPendingShown().catch((err) => console.error("shown count sync failed", err));
   updateStarUi();
 
   if (lastShowMode === "star") showRandomStarred();
