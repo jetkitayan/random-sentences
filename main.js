@@ -422,7 +422,7 @@ document.getElementById("showBtn2").onclick = () => showModeRandomly("advanced",
 document.getElementById("showStarBtn").onclick = showRandomStarred;
 document.getElementById("okBtn").onclick = () => {
   if (!currentSentence) return;
-  if (confirm("OK？")) confirmSentence();
+  confirmSentence();
 };
 document.getElementById("starBtn").onclick = toggleStar;
 document.getElementById("resetBtn").onclick = resetData;
