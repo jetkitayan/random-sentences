@@ -140,6 +140,11 @@ button.is-locked {
   padding: 20px 40px;
 }
 
+#statsArea h3 {
+  margin: 0 0 12px;
+  text-align: center;
+}
+
 #statsArea table {
   width: 100%;
   border-collapse: collapse;
@@ -149,7 +154,11 @@ button.is-locked {
 #statsArea td {
   padding: 8px;
   border: 1px solid var(--muted-border);
-  text-align: left;
+  text-align: center;
+}
+
+#statsArea th {
+  background: #f0f0f0;
 }
 
 #simpleAddArea {
