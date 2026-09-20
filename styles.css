@@ -228,6 +228,7 @@ button.is-locked {
 
   #button-area .row2 {
     gap: 6px;
+    margin-top: 25px;
   }
 
   #button-area .row1 {
