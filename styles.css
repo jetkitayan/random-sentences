@@ -220,10 +220,9 @@ button.is-locked {
 }
 
 .simpleButtons {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 15px;
-  justify-content: flex-start;
   margin-top: 8px;
 }
 
@@ -235,6 +234,7 @@ button.is-locked {
 }
 
 #simpleAddArea .simpleButtons button {
+  width: 100%;
   height: 72px !important;
   min-height: 0 !important;
   padding: 0 35px;
