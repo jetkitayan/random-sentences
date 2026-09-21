@@ -21,10 +21,21 @@
 
   <div class="row2">
     <button id="showStarBtn">★ Only</button>
-    <label class="cleared-toggle">
-      <input id="clearedToggle" type="checkbox" />
-      <span>Cleared</span>
-    </label>
+    <fieldset class="source-checklist" disabled>
+      <legend>Data</legend>
+      <label>
+        <input name="sentenceSource" type="checkbox" value="default" checked />
+        <span>通常</span>
+      </label>
+      <label>
+        <input name="sentenceSource" type="checkbox" value="advanced" />
+        <span>Cleared</span>
+      </label>
+      <label>
+        <input name="sentenceSource" type="checkbox" value="memo" />
+        <span>Memo</span>
+      </label>
+    </fieldset>
     <button id="showBtn">Random</button>
   </div>
 </div>

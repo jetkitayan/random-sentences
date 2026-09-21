@@ -14,8 +14,9 @@ const sentenceJpEl = document.getElementById("sentence-jp");
 const sentenceEnEl = document.getElementById("sentence-en");
 const showBtnEl = document.getElementById("showBtn");
 showBtnEl.disabled = true;
-const clearedToggleEl = document.getElementById("clearedToggle");
-clearedToggleEl.disabled = true;
+const sourceChecklistEl = document.querySelector(".source-checklist");
+const sourceInputs = Array.from(document.querySelectorAll('input[name="sentenceSource"]'));
+sourceChecklistEl.disabled = true;
 document.getElementById("showStarBtn").disabled = true;
 const okBtnEl = document.getElementById("okBtn");
 const starBtnEl = document.getElementById("starBtn");
@@ -261,13 +262,39 @@ const enEl = document.getElementById("sentence-en");
 
 let jsonA = [];
 let jsonB = [];
+let jsonMemo = [];
 let currentList = [];
+
+const sentenceSources = {
+  default: { file: "default", path: "data/sentences.json" },
+  advanced: { file: "advanced", path: "data/sentences_cleared.json" },
+  memo: { file: "memo", path: "data/sentences_memo.json" },
+};
+
+function getSelectedSource() {
+  return sourceInputs.find((input) => input.checked)?.value || "default";
+}
+
+function getSourceList(source) {
+  if (source === "advanced") return jsonB;
+  if (source === "memo") return jsonMemo;
+  return jsonA;
+}
+
+async function selectSource(source) {
+  const selectedSource = sentenceSources[source] ? source : "default";
+  sourceInputs.forEach((input) => {
+    input.checked = input.value === selectedSource;
+  });
+  await showModeRandomly(selectedSource, getSourceList(selectedSource));
+}
 
 async function initApp() {
   try {
     jsonA = await (await fetch("data/sentences.json")).json();
     jsonB = await (await fetch("data/sentences_cleared.json")).json();
-    await switchMode("default", jsonA);
+    jsonMemo = await (await fetch("data/sentences_memo.json")).json();
+    await switchMode(sentenceSources.default.file, jsonA);
   } catch (err) {
     topMetaEl.textContent = String(err.message || err);
     console.error(err);
@@ -335,7 +362,7 @@ async function switchMode(file, list) {
   dataReady = true;
 
   showBtnEl.disabled = false;
-  clearedToggleEl.disabled = false;
+  sourceChecklistEl.disabled = false;
   document.getElementById("showStarBtn").disabled = false;
 
   okBtnEl.disabled = true;
@@ -405,7 +432,7 @@ async function resetData() {
   enEl.textContent = "";
   document.getElementById("last-shown").textContent = "";
   document.getElementById("showBtn").disabled = false;
-  clearedToggleEl.disabled = false;
+  sourceChecklistEl.disabled = false;
   document.getElementById("okBtn").disabled = true;
   document.getElementById("starBtn").disabled = true;
   document.getElementById("statsArea").style.display = "none";
@@ -418,9 +445,11 @@ async function showModeRandomly(file, sentences) {
 }
 
 document.getElementById("showBtn").onclick = () => {
-  if (clearedToggleEl.checked) showModeRandomly("advanced", jsonB);
-  else showModeRandomly("default", jsonA);
+  selectSource(getSelectedSource());
 };
+sourceInputs.forEach((input) => {
+  input.onchange = () => selectSource(input.value);
+});
 document.getElementById("showStarBtn").onclick = showRandomStarred;
 document.getElementById("okBtn").onclick = () => {
   if (!currentSentence) return;

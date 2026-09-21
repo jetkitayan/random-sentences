@@ -63,21 +63,33 @@ button {
   margin-top: 25px;
 }
 
-.cleared-toggle {
+.source-checklist {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   min-height: 140px;
-  padding: 45px 35px;
-  font-size: 40px;
+  margin: 0;
+  padding: 20px 25px;
+  font-size: 28px;
   border: 3px solid var(--border-color);
   border-radius: var(--button-radius);
   background: var(--panel-color);
+}
+
+.source-checklist legend {
+  padding: 0 8px;
+  font-size: 22px;
+}
+
+.source-checklist label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
 }
 
-.cleared-toggle input {
+.source-checklist input {
   width: 32px;
   height: 32px;
 }
@@ -271,7 +283,7 @@ button.is-locked {
     border-radius: 10px;
   }
 
-  .cleared-toggle {
+  .source-checklist {
     min-height: 56px;
     padding: 12px 4px;
     font-size: 16px;
@@ -279,7 +291,11 @@ button.is-locked {
     border-radius: 10px;
   }
 
-  .cleared-toggle input {
+  .source-checklist legend {
+    font-size: 13px;
+  }
+
+  .source-checklist input {
     width: 18px;
     height: 18px;
   }
