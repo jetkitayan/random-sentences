@@ -222,7 +222,8 @@ button.is-locked {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 15px;
-  margin-top: 8px;
+  width: calc(100% - 50px);
+  margin: 8px 25px 0;
 }
 
 .simpleButtons button {
@@ -254,7 +255,8 @@ button.is-locked {
   display: block;
   height: 72px !important;
   min-height: 0;
-  width: 100%;
+  width: calc(100% - 50px);
+  margin: 0 25px;
   padding: 4px 25px;
   font-size: 24px;
 }
