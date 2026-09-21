@@ -346,7 +346,7 @@ async function switchMode(file, list) {
   jpTextEl.textContent = "";
   enEl.textContent = "";
 
-  topMetaEl.textContent = `Let's Study English\nMode: ${fileParam}\nPress "Random" to start\n`;
+  topMetaEl.textContent = `TK Memorization System\nMode: ${fileParam}\nPress "Random" to start\n`;
 }
 
 function clearDailyCounts() {
