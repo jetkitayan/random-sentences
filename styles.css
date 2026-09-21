@@ -212,7 +212,7 @@ button.is-locked {
   left: 0;
   z-index: 998;
   width: 100%;
-  padding: 4px 23px 6px;
+  padding: 23px 23px 6px;
   background: var(--bg-color);
   border-top: 2px solid var(--muted-border);
   box-shadow: 0 -4px 12px rgb(0 0 0 / 10%);
@@ -223,7 +223,7 @@ button.is-locked {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 15px;
   width: 100%;
-  margin: 8px 0 0;
+  margin: 23px 0 0;
 }
 
 .simpleButtons button {
@@ -323,7 +323,7 @@ button.is-locked {
   }
 
   #simpleAddArea {
-    padding: 3px 23px 4px;
+    padding: 23px 23px 4px;
   }
 
   .simpleButtons {
@@ -331,7 +331,7 @@ button.is-locked {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 6px;
     width: 100% !important;
-    margin: 5px 0 0 !important;
+    margin: 23px 0 0 !important;
   }
 
   #simpleAddArea .simpleButtons button {
