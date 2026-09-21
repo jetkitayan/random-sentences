@@ -212,7 +212,7 @@ button.is-locked {
   left: 0;
   z-index: 998;
   width: 100%;
-  padding: 4px 0 6px;
+  padding: 4px 25px 6px;
   background: var(--bg-color);
   border-top: 2px solid var(--muted-border);
   box-shadow: 0 -4px 12px rgb(0 0 0 / 10%);
@@ -222,8 +222,8 @@ button.is-locked {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 15px;
-  width: calc(100% - 50px);
-  margin: 8px 25px 0;
+  width: 100%;
+  margin: 8px 0 0;
 }
 
 .simpleButtons button {
@@ -255,8 +255,8 @@ button.is-locked {
   display: block;
   height: 72px !important;
   min-height: 0;
-  width: calc(100% - 50px);
-  margin: 0 25px;
+  width: 100%;
+  margin: 0;
   padding: 4px 25px;
   font-size: 24px;
 }
@@ -323,15 +323,15 @@ button.is-locked {
   }
 
   #simpleAddArea {
-    padding: 3px 0 4px;
+    padding: 3px 25px 4px;
   }
 
   .simpleButtons {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 6px;
-    width: calc(100% - 50px) !important;
-    margin: 5px 25px 0 !important;
+    width: 100% !important;
+    margin: 5px 0 0 !important;
   }
 
   #simpleAddArea .simpleButtons button {
@@ -346,9 +346,9 @@ button.is-locked {
   }
 
   #customText {
-    width: calc(100% - 50px) !important;
+    width: 100% !important;
     height: 42px !important;
-    margin: 0 25px;
+    margin: 0;
     padding: 2px 6px;
     font-size: 16px;
   }
