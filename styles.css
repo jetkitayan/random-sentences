@@ -67,7 +67,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+  gap: 26px;
   min-width: 0;
   width: 100%;
   min-height: 140px;
@@ -279,7 +279,7 @@ button.is-locked {
   }
 
   .source-checklist {
-    gap: 24px;
+    gap: 20px;
     min-height: 56px;
     padding: 12px 4px;
     border-width: 2px;
