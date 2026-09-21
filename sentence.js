@@ -189,7 +189,7 @@ function confirmSentence() {
   enEl.textContent = "";
   document.getElementById("last-shown").textContent = "";
   showBtnEl.disabled = true;
-  showBtn2El.disabled = true;
+  clearedToggleEl.disabled = true;
   okBtnEl.disabled = true;
   starBtnEl.disabled = true;
 }

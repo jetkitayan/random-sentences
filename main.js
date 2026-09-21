@@ -14,8 +14,8 @@ const sentenceJpEl = document.getElementById("sentence-jp");
 const sentenceEnEl = document.getElementById("sentence-en");
 const showBtnEl = document.getElementById("showBtn");
 showBtnEl.disabled = true;
-const showBtn2El = document.getElementById("showBtn2");
-showBtn2El.disabled = true;
+const clearedToggleEl = document.getElementById("clearedToggle");
+clearedToggleEl.disabled = true;
 document.getElementById("showStarBtn").disabled = true;
 const okBtnEl = document.getElementById("okBtn");
 const starBtnEl = document.getElementById("starBtn");
@@ -335,7 +335,7 @@ async function switchMode(file, list) {
   dataReady = true;
 
   showBtnEl.disabled = false;
-  showBtn2El.disabled = false;
+  clearedToggleEl.disabled = false;
   document.getElementById("showStarBtn").disabled = false;
 
   okBtnEl.disabled = true;
@@ -405,7 +405,7 @@ async function resetData() {
   enEl.textContent = "";
   document.getElementById("last-shown").textContent = "";
   document.getElementById("showBtn").disabled = false;
-  document.getElementById("showBtn2").disabled = false;
+  clearedToggleEl.disabled = false;
   document.getElementById("okBtn").disabled = true;
   document.getElementById("starBtn").disabled = true;
   document.getElementById("statsArea").style.display = "none";
@@ -417,8 +417,10 @@ async function showModeRandomly(file, sentences) {
   showRandom();
 }
 
-document.getElementById("showBtn").onclick = () => showModeRandomly("default", jsonA);
-document.getElementById("showBtn2").onclick = () => showModeRandomly("advanced", jsonB);
+document.getElementById("showBtn").onclick = () => {
+  if (clearedToggleEl.checked) showModeRandomly("advanced", jsonB);
+  else showModeRandomly("default", jsonA);
+};
 document.getElementById("showStarBtn").onclick = showRandomStarred;
 document.getElementById("okBtn").onclick = () => {
   if (!currentSentence) return;

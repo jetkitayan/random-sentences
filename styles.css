@@ -63,6 +63,25 @@ button {
   margin-top: 25px;
 }
 
+.cleared-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 140px;
+  padding: 45px 35px;
+  font-size: 40px;
+  border: 3px solid var(--border-color);
+  border-radius: var(--button-radius);
+  background: var(--panel-color);
+  cursor: pointer;
+}
+
+.cleared-toggle input {
+  width: 32px;
+  height: 32px;
+}
+
 #button-area button {
   display: flex;
   align-items: center;
@@ -249,6 +268,19 @@ button.is-locked {
     font-size: 16px;
     border-width: 2px;
     border-radius: 10px;
+  }
+
+  .cleared-toggle {
+    min-height: 56px;
+    padding: 12px 4px;
+    font-size: 16px;
+    border-width: 2px;
+    border-radius: 10px;
+  }
+
+  .cleared-toggle input {
+    width: 18px;
+    height: 18px;
   }
 
   #button-area .row1,
