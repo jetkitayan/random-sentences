@@ -60,7 +60,7 @@ async function addSimpleSentence() {
 
     if (!byEn[text]) byEn[text] = { jp: text, en: text };
 
-    addMsg.textContent = "追加しました";
+    addMsg.textContent = "";
     customTextEl.blur();
     setTimeout(() => {
       const y = window.scrollY;
@@ -152,7 +152,7 @@ async function clearSimple() {
   saveSimple();
 
   for (const text of toRemove) delete byEn[text];
-  addMsg.textContent = "削除しました";
+  addMsg.textContent = "";
   flushSaves();
 }
 
