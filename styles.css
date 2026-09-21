@@ -235,8 +235,10 @@ button.is-locked {
 }
 
 #simpleAddArea .simpleButtons button {
+  height: 60px;
+  min-height: 0;
   padding: 22px 35px;
-  font-size: 40px;
+  font-size: 24px;
   border: 3px solid var(--border-color);
   border-radius: var(--button-radius);
   background: var(--panel-color);
@@ -250,9 +252,10 @@ button.is-locked {
 
 #customText {
   display: block;
+  height: 60px;
   width: 100%;
   padding: 10px 25px;
-  font-size: 42px;
+  font-size: 24px;
 }
 
 .flex-container {
@@ -329,7 +332,8 @@ button.is-locked {
 
   #simpleAddArea .simpleButtons button {
     min-width: 0;
-    padding: 8px 3px;
+    height: 32px;
+    padding: 4px 3px;
     font-size: 14px;
     border-width: 2px;
     border-radius: 10px;
@@ -338,8 +342,9 @@ button.is-locked {
   }
 
   #customText {
+    height: 36px;
     padding: 6px;
-    font-size: 20px;
+    font-size: 16px;
   }
 }
   
