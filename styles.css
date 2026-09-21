@@ -330,7 +330,8 @@ button.is-locked {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 6px;
-    margin-top: 5px;
+    width: calc(100% - 50px) !important;
+    margin: 5px 25px 0 !important;
   }
 
   #simpleAddArea .simpleButtons button {
@@ -345,7 +346,9 @@ button.is-locked {
   }
 
   #customText {
+    width: calc(100% - 50px) !important;
     height: 42px !important;
+    margin: 0 25px;
     padding: 2px 6px;
     font-size: 16px;
   }
