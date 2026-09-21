@@ -60,7 +60,7 @@ button {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 23px;
   max-width: 900px;
-  margin-top: 110px;
+  margin-top: 25px;
 }
 
 #button-area button {
@@ -232,7 +232,7 @@ button.is-locked {
 
   #button-area .row2 {
     gap: 6px;
-    margin-top: 110px;
+    margin-top: 25px;
   }
 
   #button-area .row1 {
