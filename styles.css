@@ -68,24 +68,19 @@ button {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  min-width: 0;
+  width: 100%;
   min-height: 140px;
   margin: 0;
-  padding: 20px 25px;
-  font-size: 28px;
+  padding: 20px 10px;
   border: 3px solid var(--border-color);
   border-radius: var(--button-radius);
   background: var(--panel-color);
 }
 
-.source-checklist legend {
-  padding: 0 8px;
-  font-size: 22px;
-}
-
 .source-checklist label {
   display: flex;
   align-items: center;
-  gap: 10px;
   cursor: pointer;
 }
 
@@ -286,13 +281,8 @@ button.is-locked {
   .source-checklist {
     min-height: 56px;
     padding: 12px 4px;
-    font-size: 16px;
     border-width: 2px;
     border-radius: 10px;
-  }
-
-  .source-checklist legend {
-    font-size: 13px;
   }
 
   .source-checklist input {
