@@ -211,9 +211,8 @@ button.is-locked {
   bottom: 0;
   left: 0;
   z-index: 998;
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 4px 40px 6px;
+  width: 100%;
+  padding: 4px 0 6px;
   background: var(--bg-color);
   border-top: 2px solid var(--muted-border);
   box-shadow: 0 -4px 12px rgb(0 0 0 / 10%);
@@ -322,7 +321,7 @@ button.is-locked {
   }
 
   #simpleAddArea {
-    padding: 3px 12px 4px;
+    padding: 3px 0 4px;
   }
 
   .simpleButtons {
