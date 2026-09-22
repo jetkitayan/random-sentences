@@ -153,6 +153,7 @@ function showRandom() {
   nextEn = null;
 
   presentSentenceByEn(en);
+  copySentenceToClipboard(en);
   requestAnimationFrame(prepareNext);
   lastShowMode = "all";
 }
@@ -166,7 +167,9 @@ function showRandomStarred() {
   }
 
   lastShowMode = "star";
-  presentSentenceByEn(pickRandomFast(pool, currentSentence?.en));
+  const en = pickRandomFast(pool, currentSentence?.en);
+  presentSentenceByEn(en);
+  copySentenceToClipboard(en);
 }
 
 function confirmSentence() {

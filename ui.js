@@ -2,6 +2,14 @@ function updateStarUi() {
   document.getElementById("starBtn").textContent = "★";
 }
 
+function copySentenceToClipboard(text) {
+  if (!text || !navigator.clipboard) return;
+  const prompt = `${text}\n上記の文章の文法について教えて`;
+  navigator.clipboard.writeText(prompt).catch((err) => {
+    console.error("sentence copy failed", err);
+  });
+}
+
 function showStats() {
   const tbody = document.getElementById("statsBody");
   tbody.innerHTML = "";
