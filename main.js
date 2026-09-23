@@ -444,13 +444,20 @@ async function showModeRandomly(file, sentences) {
   showRandom();
 }
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 document.getElementById("showBtn").onclick = () => {
-  selectSource(getSelectedSource());
+  selectSource(getSelectedSource()).then(scrollToTop);
 };
 sourceInputs.forEach((input) => {
   input.onchange = () => selectSource(input.value);
 });
-document.getElementById("showStarBtn").onclick = showRandomStarred;
+document.getElementById("showStarBtn").onclick = () => {
+  showRandomStarred();
+  scrollToTop();
+};
 document.getElementById("okBtn").onclick = () => {
   if (!currentSentence) return;
   confirmSentence();
