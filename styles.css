@@ -37,9 +37,10 @@ button {
   top: 0;
   z-index: 999;
   width: 100%;
-  padding: 65px 25px 13px;
+  padding: 65px 25px 26px;
   background: #fff;
   border-bottom: 2px solid var(--muted-border);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   text-align: center;
   touch-action: manipulation;
 }
