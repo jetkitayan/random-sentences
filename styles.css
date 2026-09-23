@@ -148,7 +148,7 @@ button.is-locked {
 }
 
 #sentence-en.memo-sentence {
-  font-size: 31.5px;
+  display: none;
 }
 
 #last-shown {

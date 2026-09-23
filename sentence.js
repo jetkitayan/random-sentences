@@ -17,8 +17,11 @@ function convertBreakTagsToNewlines(text) {
 function renderCurrentOkMarker() {
   if (!currentSentence) return;
   const okMark = yesMarks[currentSentence.en] ? " ☆" : "";
-  enEl.classList.toggle("memo-sentence", fileParam === "memo");
-  enEl.textContent = `${convertBreakTagsToNewlines(currentSentence.en)}${okMark}`;
+  const isMemo = fileParam === "memo";
+  enEl.classList.toggle("memo-sentence", isMemo);
+  enEl.textContent = isMemo
+    ? ""
+    : `${convertBreakTagsToNewlines(currentSentence.en)}${okMark}`;
 }
 
 function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true, hideJp = false) {
