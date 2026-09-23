@@ -39,6 +39,7 @@ button {
   width: 100%;
   padding: 65px 25px 13px;
   background: #fff;
+  border-bottom: 2px solid var(--muted-border);
   text-align: center;
   touch-action: manipulation;
 }
