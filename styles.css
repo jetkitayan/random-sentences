@@ -37,7 +37,7 @@ button {
   top: 0;
   z-index: 999;
   width: 100%;
-  padding: 65px 25px 26px;
+  padding: 32.5px 25px 26px;
   background: var(--bg-color);
   border-bottom: 2px solid var(--muted-border);
   box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
@@ -229,7 +229,7 @@ button.is-locked {
   flex-direction: column;
   gap: 23px;
   width: 100%;
-  padding: 23px 23px 6px;
+  padding: 25px 23px 6px;
   background: var(--bg-color);
   border-top: 2px solid var(--muted-border);
   box-shadow: 0 -4px 12px rgb(0 0 0 / 10%);
@@ -286,7 +286,7 @@ button.is-locked {
 
 @media (max-width: 600px) {
   #button-area {
-    padding: 20px 8px 8px;
+    padding: 10px 8px 8px;
   }
 
   #button-area .row2 {
@@ -340,7 +340,7 @@ button.is-locked {
   }
 
   #simpleAddArea {
-    padding: 23px 23px 4px;
+    padding: 25px 23px 4px;
   }
 
   .simpleButtons {
