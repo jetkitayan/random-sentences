@@ -19,6 +19,7 @@ function renderCurrentOkMarker() {
   const okMark = yesMarks[currentSentence.en] ? " ☆" : "";
   const isMemo = fileParam === "memo";
   enEl.classList.toggle("memo-sentence", isMemo);
+  document.getElementById("sentence-frame").classList.toggle("memo-sentence-frame", isMemo);
   enEl.textContent = isMemo
     ? ""
     : `${convertBreakTagsToNewlines(currentSentence.en)}${okMark}`;
