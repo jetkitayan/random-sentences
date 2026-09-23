@@ -132,6 +132,7 @@ button.is-locked {
 #sentence-en {
   font-size: 42px;
   line-height: 1.6;
+  white-space: pre-line;
   color: var(--text-color);
 }
 

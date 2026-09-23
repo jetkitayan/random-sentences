@@ -10,11 +10,15 @@ function buildCountsInlineText() {
   return `（${getLast5MinCount()} / ${getLast1HourCount()} / ${todayShownCached} / ${totalShownCached}）`;
 }
 
+function convertBreakTagsToNewlines(text) {
+  return String(text ?? "").replace(/<br\s*\/?>/gi, "\n");
+}
+
 function renderCurrentOkMarker() {
   if (!currentSentence) return;
   const okMark = yesMarks[currentSentence.en] ? " ☆" : "";
   enEl.classList.toggle("memo-sentence", fileParam === "memo");
-  enEl.textContent = `${currentSentence.en}${okMark}`;
+  enEl.textContent = `${convertBreakTagsToNewlines(currentSentence.en)}${okMark}`;
 }
 
 function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true, hideJp = false) {
@@ -27,7 +31,7 @@ function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true, hideJ
   updateStarUi();
 
   const updateText = () => {
-    jpTextEl.textContent = hideJp ? "" : sentence.jp;
+    jpTextEl.textContent = hideJp ? "" : convertBreakTagsToNewlines(sentence.jp);
     renderCurrentOkMarker();
     sentenceJpEl.classList.remove("hidden");
     sentenceEnEl.classList.remove("hidden");
