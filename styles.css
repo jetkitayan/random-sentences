@@ -123,16 +123,16 @@ button.is-locked {
   max-width: var(--content-width);
   padding-left: 40px;
   padding-right: 40px;
-  padding-bottom: 0;
+  padding-bottom: 165px;
 }
 
 #sentence-frame {
   position: relative;
-  margin-top: -25px;
+  margin-top: -40px;
 }
 
 #sentence-frame.memo-sentence-frame {
-  margin-top: -25px;
+  margin-top: -40px;
 }
 
 #sentence-jp,
@@ -336,7 +336,7 @@ button.is-locked {
   #content {
     padding-left: 12px;
     padding-right: 12px;
-    padding-bottom: 0;
+    padding-bottom: 165px;
   }
 
   #simpleAddArea {
