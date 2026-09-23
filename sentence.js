@@ -13,7 +13,8 @@ function buildCountsInlineText() {
 function renderCurrentOkMarker() {
   if (!currentSentence) return;
   const okMark = yesMarks[currentSentence.en] ? " ☆" : "";
-  enEl.textContent = fileParam === "memo" ? "" : `${currentSentence.en}${okMark}`;
+  enEl.classList.toggle("memo-sentence", fileParam === "memo");
+  enEl.textContent = `${currentSentence.en}${okMark}`;
 }
 
 function presentSentenceByEn(en, shouldCount = true, shouldAnimate = true, hideJp = false) {

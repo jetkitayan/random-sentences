@@ -146,6 +146,10 @@ button.is-locked {
   transition: opacity 0.12s linear;
 }
 
+#sentence-en.memo-sentence {
+  font-size: 31.5px;
+}
+
 #last-shown {
   margin-top: 0;
 }
