@@ -284,6 +284,13 @@ function getSourceList(source) {
   return jsonA;
 }
 
+function normalizeSentences(sentences) {
+  return sentences.map((sentence) => ({
+    jp: sentence["1st"],
+    en: sentence["2nd"],
+  }));
+}
+
 async function selectSource(source) {
   const selectedSource = sentenceSources[source] ? source : "default";
   sourceInputs.forEach((input) => {
@@ -294,10 +301,10 @@ async function selectSource(source) {
 
 async function initApp() {
   try {
-    jsonA = await (await fetch("data/sentences.json")).json();
-    jsonB = await (await fetch("data/sentences_cleared.json")).json();
-    jsonMemo = await (await fetch("data/sentences_memo.json")).json();
-    jsonLong = await (await fetch("data/sentences_long.json")).json();
+    jsonA = normalizeSentences(await (await fetch("data/sentences.json")).json());
+    jsonB = normalizeSentences(await (await fetch("data/sentences_cleared.json")).json());
+    jsonMemo = normalizeSentences(await (await fetch("data/sentences_memo.json")).json());
+    jsonLong = normalizeSentences(await (await fetch("data/sentences_long.json")).json());
     await switchMode(sentenceSources.default.file, jsonA);
   } catch (err) {
     topMetaEl.textContent = String(err.message || err);
