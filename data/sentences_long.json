@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "1st": "",
     "2nd": "is open during regular business hours. 9 am. to 5 pm. Monday through Friday."
   },
@@ -1198,5 +1199,21 @@
   {
     "1st": "",
     "2nd": "a few people"
+=======
+    "jp": "店の奥の事務所の机の上に置いておいてくれたら、私が戻ったときに処理するわ。 ほかに何か起こったら、繁華街にあるお店のマネージャーに電話をすればいいわ。 彼には、すべて問題ないかを確認するために次の水曜日に立ち寄るように言ったから。",
+    "en": "Just leave them on the desk in the back office, and I'll take care of them when I get back. If anything else comes up, you can call the manager at the downtown store. I told him to drop by next Wednesday to make sure everything's OK."
+  },
+  {
+    "jp": "Mike、 私が町を離れている間、 フラワーショップを引き受けると申し出てくれてありがとう。 毎日、 ウィンドウの中の花のディスプレーを変えることだけ忘れないでね。 そのほかの、お店の管理の詳細はすべて網羅したと思うわ。",
+    "en": "Mike, thank you for offering to take care of the flowers shop while I'm out of town. Just remember to change in the flower display in the window every day. Other than that, I think we've covered all of the details of managing the store, right?"
+  },
+  {
+    "jp": "そうだね、すべてうまくいくだろう。 花の配達の書類で1つだけ質問があるんだ。 送り状はどこに保管しておいたらいい?",
+    "en": "Oh yes, everything will be fine. I just have one question about the paperwork from the flower deliveries. Where do you want me to file the invoices?"
+  },
+  {
+    "jp": "",
+    "en": ""
+>>>>>>> afb4efc254f37dbca84312185dae9904dc7ad308
   }
 ]
