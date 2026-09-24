@@ -263,12 +263,14 @@ const enEl = document.getElementById("sentence-en");
 let jsonA = [];
 let jsonB = [];
 let jsonMemo = [];
+let jsonLong = [];
 let currentList = [];
 
 const sentenceSources = {
   default: { file: "default", path: "data/sentences.json" },
   advanced: { file: "advanced", path: "data/sentences_cleared.json" },
   memo: { file: "memo", path: "data/sentences_memo.json" },
+  long: { file: "long", path: "data/sentences_long.json" },
 };
 
 function getSelectedSource() {
@@ -278,6 +280,7 @@ function getSelectedSource() {
 function getSourceList(source) {
   if (source === "advanced") return jsonB;
   if (source === "memo") return jsonMemo;
+  if (source === "long") return jsonLong;
   return jsonA;
 }
 
@@ -294,6 +297,7 @@ async function initApp() {
     jsonA = await (await fetch("data/sentences.json")).json();
     jsonB = await (await fetch("data/sentences_cleared.json")).json();
     jsonMemo = await (await fetch("data/sentences_memo.json")).json();
+    jsonLong = await (await fetch("data/sentences_long.json")).json();
     await switchMode(sentenceSources.default.file, jsonA);
   } catch (err) {
     topMetaEl.textContent = String(err.message || err);

@@ -67,10 +67,11 @@ button {
 }
 
 .source-checklist {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
-  justify-content: center;
-  gap: 26px;
+  justify-items: center;
+  gap: 12px 26px;
   min-width: 0;
   width: 100%;
   min-height: 140px;
