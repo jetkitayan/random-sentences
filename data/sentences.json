@@ -1,319 +1,179 @@
 [
   {
-    "1st": "その小説は最初の1週間で5万部以上売れた",
-    "2nd": "The novel sold over 50,000 copies in its first week."
-  },
-  {
-    "1st": "その地域の住民はビルの建設に反対する抗議運動を行うつもりだ",
-    "2nd": "The residents in the area are mounting a protest against the construction of the building."
-  },
-  {
-    "1st": "そのコンサートのチケットは、切符売り場、電話、そしてオンラインで入手できる",
-    "2nd": "Tickets for the concert are available at the box office, by phone, and online."
-  },
-  {
-    "1st": "彼女は地元の慈善団体でボランティア活動をしている",
-    "2nd": "She does voluntary work for a local charity."
-  },
-  {
-    "1st": "首相は経済改革の重要性を強調した",
-    "2nd": "The prime minister stressed the significance of economic reforms."
-  },
-  {
-    "1st": "私たちはそのイベントを実施する許可を得た",
-    "2nd": "We received permission to go ahead with the event."
-  },
-  {
-    "1st": "新大阪でしばらくの間停車します",
-    "2nd": "We will be making a brief stop at Shin-Osaka."
-  },
-  {
-    "1st": "市場は世界経済の見通しについて楽観的過ぎた",
-    "2nd": "The market was too optimistic about the prospects of the global economy."
-  },
-  {
-    "1st": "エンジン故障を報告した後、乗務員は緊急着陸を試みた",
-    "2nd": "The crew attempted an emergency landing after reporting engine trouble."
-  },
-  {
-    "1st": "炭素税の目的は地球温暖化の進行を止めることだ",
-    "2nd": "The aim of a carbon tax is to halt the increase of global warming."
-  },
-  {
-    "1st": "気候変動は生態系に重大な影響を及ぼしている",
-    "2nd": "Climate change is having profound effects on the ecosystem."
-  },
-  {
-    "1st": "彼女は英語が着実に上達してきている",
-    "2nd": "She is making steady progress with her English."
-  },
-  {
-    "1st": "そのパーティーにはかなり多くの人々がいた",
-    "2nd": "There were quite a few people at the party."
-  },
-  {
-    "1st": "看護師になるには実地研修が必須だ",
-    "2nd": "Practical training is compulsory to qualify as a nurse."
-  },
-  {
-    "1st": "その工場の労働者たちは書面による一時解雇の通知を受けた",
-    "2nd": "The factory workers were given written notice of layoffs."
-  },
-  {
-    "1st": "彼らは別々の国に住んでいるので、電子メールで連絡を取り合っている",
-    "2nd": "Now that they live in different countries, they communicate by email."
-  },
-  {
-    "1st": "警察はその自動車事故の目撃者を探している",
-    "2nd": "Police are looking for witnesses to the car accident."
-  },
-  {
-    "1st": "肥満にならないために定期的に運動するようその医者は私に勧めた",
-    "2nd": "The doctor advised me to exercise regularly to prevent obesity."
-  },
-  {
-    "1st": "スミス氏は介護職員の監督責任者だ",
-    "2nd": "Mr. Smith is in charge of the supervision of the care staff."
-  },
-  {
-    "1st": "これは最も重要な問題だ",
-    "2nd": "This is a matter of the greatest importance."
-  },
-  {
-    "1st": "異例の事態の下でも彼はその問題に対処することができた",
-    "2nd": "He was able to cope with the problem under exceptional circumstances."
-  },
-  {
-    "1st": "その映画は少し期待外れだった",
-    "2nd": "The movie was somewhat disappointing."
-  },
-  {
-    "1st": "製品を使用する前に、使用説明書をよくお読みください",
-    "2nd": "Please read the instructions carefully before using the product."
-  },
-  {
-    "1st": "原子力発電所の作業員は特定の安全指針に従わなければならない",
-    "2nd": "Nuclear plant workers should follow specific safety guidelines."
-  },
-  {
-    "1st": "520号線は両方向とも渋滞している",
-    "2nd": "Traffic is stalled on Highway 520 in both directions."
-  },
-  {
-    "1st": "彼は新しい仕事を見つけるための助言をいくつか私にしてくれた",
-    "2nd": "He gave me several tips on how to find a new job."
-  },
-  {
-    "1st": "果物は非常に優れたビタミン源だ",
-    "2nd": "Fruit is a very good source of vitamin C."
-  },
-  {
-    "1st": "人々が通りをぶらついている",
-    "2nd": "People are wandering around the street."
-  },
-  {
-    "1st": "そのプロジェクトの総費用は2500万ドルだった",
-    "2nd": "The total cost of the project was $25 million."
-  },
-  {
-    "1st": "その電機メーカーは半導体の生産ラインを一時的に停止させている",
-    "2nd": "The electronics manufacturer has temporarily halted production lines for semiconductors."
-  },
-  {
-    "1st": "彼女は来年、ニュージーランドに行くつもりだ",
-    "2nd": "She intends to go to New Zealand next year."
-  },
-  {
-    "1st": "喫煙の悪影響に気づいていない人もいる",
-    "2nd": "Some people are not aware of the harmful effects of smoking."
+    "1st": "その会社は次期会計年度の予算案を作成した",
+    "2nd": "The company has drawn up a budget for the next fiscal year."
   },
   {
     "1st": "彼はその賞のもう1人の有力候補者だ",
     "2nd": "He is another possible for the award."
   },
   {
-    "1st": "その会社は来年、200人の新入社員の採用を計画している",
-    "2nd": "The company is planning to hire 200 new employees next year."
+    "1st": "その銀行はインターネット上での安全な取引を提供している",
+    "2nd": "The bank offers secure transactions over the Internet."
   },
   {
-    "1st": "損失時間を埋め合わせるために、建設期間はもう1週間延長される予定だ",
-    "2nd": "The construction period will be extended for another week to compensate for the lost time."
-  },
-  {
-    "1st": "政府は今日、新しい経済報告を公表した",
-    "2nd": "The government released a new economic report today."
-  },
-  {
-    "1st": "その会社の本社はパリにある",
-    "2nd": "The company's head office is sited in Paris."
-  },
-  {
-    "1st": "その将官は部下に降伏するよう命じた",
-    "2nd": "The general commanded his men to surrender."
-  },
-  {
-    "1st": "事故のため82号線は渋滞している",
-    "2nd": "The traffic on Highway 82 is backed up due to an accident."
-  },
-  {
-    "1st": "そのガイドにはニューヨークの最高級のホテル20とレストラン50が載っている",
-    "2nd": "The guide lists the 20 best hotels and 50 best restaurants in New York."
-  },
-  {
-    "1st": "あなたは10年間の成人用パスポート代金として60ドルを請求されるだろう",
-    "2nd": "You will be charged $60 for a 10-year adult passport."
-  },
-  {
-    "1st": "彼女は30歳に見えるかもしれないが、実は40歳だ",
-    "2nd": "She may look 30, but she's actually 40."
-  },
-  {
-    "1st": "その大学は今週末に一般公開を開催する予定だ",
-    "2nd": "The university will host an open house this weekend."
-  },
-  {
-    "1st": "私はいつも辞書を手元に置いている",
-    "2nd": "I always keep a dictionary at hand."
-  },
-  {
-    "1st": "彼はその建設業者からわいろをもらったことを否定している",
-    "2nd": "He has denied taking the bribe from the contractor."
-  },
-  {
-    "1st": "これらの統計はアメリカ経済が景気後退にあることを示している",
-    "2nd": "These statistics indicate that the US economy is in a recession."
-  },
-  {
-    "1st": "ご都合のいい時に調査書にご記入いただき､下記の住所まで郵送してください",
-    "2nd": "Please fill out the survey at your convenience and mail it to the address below."
-  },
-  {
-    "1st": "言語は人間に特有なものだ",
-    "2nd": "Language is proper to human beings."
-  },
-  {
-    "1st": "その問題に関しては白熱した議論が交わされてきた",
-    "2nd": "There has been a heated debate on the issue."
-  },
-  {
-    "1st": "出席できない場合は、前もってお知らせください",
-    "2nd": "If you can't attend, please let me know in advance."
-  },
-  {
-    "1st": "私たちはパーティーでとても楽しい夜を過ごした",
-    "2nd": "We had a very pleasant night at the party."
-  },
-  {
-    "1st": "雨の場合は、その花火大会は中止になる",
-    "2nd": "In the event of rain, the fireworks will be canceled."
-  },
-  {
-    "1st": "会社を代表して、皆さんのご協力に感謝したいと思います",
-    "2nd": "On behalf of the company. I would like to thank you for your cooperation."
-  },
-  {
-    "1st": "放射性物質の保管は細心の注意を払って行われる",
-    "2nd": "The storage of radioactive material is done with extreme care."
-  },
-  {
-    "1st": "その会社は従業員たちにサービス残業するように強制した",
-    "2nd": "The company forced employees to work overtime without pay."
-  },
-  {
-    "1st": "ウエーターはテーブルに皿を置いている",
-    "2nd": "The waiter is laying plates on the table."
-  },
-  {
-    "1st": "その工場は1日に500台の車を作る生産能力がある",
-    "2nd": "The factory has the capacity to manufacture 500 cars a day."
-  },
-  {
-    "1st": "みんなの尽力のおかげで、今年は利益が上がっている",
-    "2nd": "Thanks to everyone's hard work, profits are up this year."
-  },
-  {
-    "1st": "その患者の容体は安定したままだ",
-    "2nd": "The patient remains in stable condition."
-  },
-  {
-    "1st": "彼はいつでも野球のことを話す",
-    "2nd": "He talks about baseball all the time."
-  },
-  {
-    "1st": "サラは非常に仕事に熱心だ",
-    "2nd": "Sarah is very diligent in her work."
-  },
-  {
-    "1st": "その干ばつは8カ月間続いた",
-    "2nd": "The drought lasted for eight months."
-  },
-  {
-    "1st": "その地域は太陽エネルギーを利用できる可能性がある",
-    "2nd": "The area has the potential to tap solar energy."
-  },
-  {
-    "1st": "そのCEOは辞職する意向を発表した",
-    "2nd": "The CEO announced his intent to resign."
-  },
-  {
-    "1st": "人々は年齢に関係なく平等の雇用機会を与えられるべきだ",
-    "2nd": "People should be given equal employment opportunities regardless of their age."
-  },
-  {
-    "1st": "事実上、政府は貧困者に対して増税した",
-    "2nd": "In effect, the government has raised taxes for the poor."
-  },
-  {
-    "1st": "彼は東京での滞在をもう1週間延長することにした",
-    "2nd": "He decided to prolong his stay in Tokyo for another week."
+    "1st": "★スージーはその会社の人事部に勤務している",
+    "2nd": "★Susie works in the personnel division of the company."
   },
   {
     "1st": "来客たちは軽食を取っている",
     "2nd": "The guests are having refreshments."
   },
   {
-    "1st": "昨年、売上高は300万ドルから250万ドルに低下した",
-    "2nd": "Sales slipped from $3 million to $2.5 million last year."
+    "1st": "放射性物質の保管は細心の注意を払って行われる",
+    "2nd": "The storage of radioactive material is done with extreme care."
   },
   {
-    "1st": "試験の前夜は必ず睡眠をたくさん取ること",
-    "2nd": "Make sure you have plenty of sleep the night before your exam."
+    "1st": "★男たちは建設現場で働いている",
+    "2nd": "★The men are working at the building site."
   },
   {
-    "1st": "その候補者と支持者たちは選挙の結果を待っている",
-    "2nd": "The candidate and his supporters are waiting for the outcome of the election."
+    "1st": "その工場は1日に500台の車を作る生産能力がある",
+    "2nd": "The factory has the capacity to manufacture 500 cars a day."
   },
   {
-    "1st": "彼女は国連のアメリカ代表に任命された",
-    "2nd": "She was appointed as the US representative to the United Nations."
+    "1st": "その問題に関しては白熱した議論が交わされてきた",
+    "2nd": "There has been a heated debate on the issue."
   },
   {
-    "1st": "両方の演説者は互いに向かい合っている",
-    "2nd": "Both speakers are facing each other."
+    "1st": "果物は非常に優れたビタミン源だ",
+    "2nd": "Fruit is a very good source of vitamin C."
+  },
+  {
+    "1st": "その店はスーツ、ドレス、そしてその他の衣類を扱っている",
+    "2nd": "The store carries suits, dresses, and other garments."
   },
   {
     "1st": "私たちは明日、企画会議を開く予定だ",
     "2nd": "We will have a planning session tomorrow."
   },
   {
-    "1st": "彼女は高校の校長になるよう任命された",
-    "2nd": "She was appointed to be a high school principal."
+    "1st": "その会議は2週間隔で開催される",
+    "2nd": "The meetings take place at twoweekly intervals."
   },
   {
-    "1st": "働きづめですよね。休憩したらどうですか?",
-    "2nd": "You've been working very hard. Why don't you take a break?"
+    "1st": "異例の事態の下でも彼はその問題に対処することができた",
+    "2nd": "He was able to cope with the problem under exceptional circumstances."
   },
   {
-    "1st": "そのホテルは素晴らしい自然環境の中にある",
-    "2nd": "The hotel is located in a marvelous natural setting."
+    "1st": "これらの統計はアメリカ経済が景気後退にあることを示している",
+    "2nd": "These statistics indicate that the US economy is in a recession."
+  },
+  {
+    "1st": "その建築士は顧客の要望に従って設計図を修正した",
+    "2nd": "The architect modified the design according to the client's wishes."
+  },
+  {
+    "1st": "予防接種に関するさらなる情報については、かかりつけの医師または薬剤師にご相談ください",
+    "2nd": "For further information on vaccinations, consult your doctor or pharmacist."
   },
   {
     "1st": "その会社は借金を400万ドルまで増やしてしまった",
     "2nd": "The company has accumulated $4 million in debt."
   },
   {
-    "1st": "予防接種に関するさらなる情報については、かかりつけの医師または薬剤師にご相談ください",
-    "2nd": "For further information on vaccinations, consult your doctor or pharmacist."
+    "1st": "その地域の住民はビルの建設に反対する抗議運動を行うつもりだ",
+    "2nd": "The residents in the area are mounting a protest against the construction of the building."
+  },
+  {
+    "1st": "★サラは非常に仕事に熱心だ",
+    "2nd": "★Sarah is very diligent in her work."
+  },
+  {
+    "1st": "新大阪でしばらくの間停車します",
+    "2nd": "We will be making a brief stop at Shin-Osaka."
+  },
+  {
+    "1st": "その患者の容体は安定したままだ",
+    "2nd": "The patient remains in stable condition."
+  },
+  {
+    "1st": "そのホテルは素晴らしい自然環境の中にある",
+    "2nd": "The hotel is located in a marvelous natural setting."
+  },
+  {
+    "1st": "規制緩和以降、100を超える運輸会社が倒産している",
+    "2nd": "More than 100 carriers have gone bankrupt since deregulation."
+  },
+  {
+    "1st": "首相は経済改革の重要性を強調した",
+    "2nd": "The prime minister stressed the significance of economic reforms."
+  },
+  {
+    "1st": "スミス氏は介護職員の監督責任者だ",
+    "2nd": "Mr. Smith is in charge of the supervision of the care staff."
+  },
+  {
+    "1st": "その候補者と支持者たちは選挙の結果を待っている",
+    "2nd": "The candidate and his supporters are waiting for the outcome of the election."
+  },
+  {
+    "1st": "気候変動は生態系に重大な影響を及ぼしている",
+    "2nd": "Climate change is having profound effects on the ecosystem."
+  },
+  {
+    "1st": "彼は経費の大まかな計算をした",
+    "2nd": "He made a rough calculation of the costs."
+  },
+  {
+    "1st": "私たちは変化する市場に順応できなければならない",
+    "2nd": "We must be able to adapt to the changing marketplace."
+  },
+  {
+    "1st": "★520号線は両方向とも渋滞している",
+    "2nd": "★Traffic is stalled on Highway 520 in both directions."
+  },
+  {
+    "1st": "人々が通りをぶらついている",
+    "2nd": "People are wandering around the street."
+  },
+  {
+    "1st": "彼は東京での滞在をもう1週間延長することにした",
+    "2nd": "He decided to prolong his stay in Tokyo for another week."
+  },
+  {
+    "1st": "その電機メーカーは半導体の生産ラインを一時的に停止させている",
+    "2nd": "The electronics manufacturer has temporarily halted production lines for semiconductors."
+  },
+  {
+    "1st": "その地域は太陽エネルギーを利用できる可能性がある",
+    "2nd": "The area has the potential to tap solar energy."
+  },
+  {
+    "1st": "昨年、売上高は300万ドルから250万ドルに低下した",
+    "2nd": "Sales slipped from $3 million to $2.5 million last year."
+  },
+  {
+    "1st": "その映画は少し期待外れだった",
+    "2nd": "The movie was somewhat disappointing."
+  },
+  {
+    "1st": "私は1日中働いて疲れ切っている",
+    "2nd": "I'm exhausted from working all day."
+  },
+  {
+    "1st": "遊びは幼児の発育に不可欠だ",
+    "2nd": "Play is essential for infant development."
+  },
+  {
+    "1st": "彼女は地元の慈善団体でボランティア活動をしている",
+    "2nd": "She does voluntary work for a local charity."
+  },
+  {
+    "1st": "彼は有能で勤勉な従業員だ",
+    "2nd": "He is a competent and industrious employee."
+  },
+  {
+    "1st": "そのマンションの建設はおおよそ24カ月後に完了する予定だ",
+    "2nd": "The construction of the condominium will be completed in approximately 24 months."
+  },
+  {
+    "1st": "その会社は従業員たちにサービス残業するように強制した",
+    "2nd": "The company forced employees to work overtime without pay."
+  },
+  {
+    "1st": "肥満にならないために定期的に運動するようその医者は私に勧めた",
+    "2nd": "The doctor advised me to exercise regularly to prevent obesity."
   },
   {
     "1st": "日本の生徒は英語で意志疎通する教育を十分に受けていない",
@@ -324,195 +184,311 @@
     "2nd": "The financial system is functioning efficiently."
   },
   {
-    "1st": "私の車は保証期間中で無料で修理された",
-    "2nd": "My car was repaired under warranty for free."
+    "1st": "損失時間を埋め合わせるために、建設期間はもう1週間延長される予定だ",
+    "2nd": "The construction period will be extended for another week to compensate for the lost time."
   },
   {
-    "1st": "その会議は2週間隔で開催される",
-    "2nd": "The meetings take place at twoweekly intervals."
+    "1st": "私たちはそのイベントを実施する許可を得た",
+    "2nd": "We received permission to go ahead with the event."
   },
   {
-    "1st": "エアバス380は800人以上の乗客を乗せることができる",
-    "2nd": "The Airbus A380 is capable of carrying more than 800 passengers."
+    "1st": "看護師になるには実地研修が必須だ",
+    "2nd": "Practical training is compulsory to qualify as a nurse."
   },
   {
-    "1st": "その労働組合は労働条件を改善しようと努めている",
-    "2nd": "The union is seeking to reform working conditions."
-  },
-  {
-    "1st": "男性は両腕に本の山を抱えている",
-    "2nd": "The man has a pile of books in his arms."
-  },
-  {
-    "1st": "経営陣は新しい支店を開くことの長所を話し合った",
-    "2nd": "The management discussed the merits of opening a new branch."
-  },
-  {
-    "1st": "その建築士は顧客の要望に従って設計図を修正した",
-    "2nd": "The architect modified the design according to the client's wishes."
-  },
-  {
-    "1st": "私は自分の報告書を一語一語綿密に調べた",
-    "2nd": "I went over my report word by word."
-  },
-  {
-    "1st": "その店はスーツ、ドレス、そしてその他の衣類を扱っている",
-    "2nd": "The store carries suits, dresses, and other garments."
-  },
-  {
-    "1st": "グレッグは彼女と結婚すると思いますか?",
-    "2nd": "Do you suppose that Greg will marry her?"
-  },
-  {
-    "1st": "この映画は12歳以上の子ども向けだ",
-    "2nd": "This film is appropriate for children aged 12 and up."
-  },
-  {
-    "1st": "彼は入試に合格することができなかった",
-    "2nd": "He failed to pass the entrance exam."
-  },
-  {
-    "1st": "その件に関しては、私はあなたと同意見です",
-    "2nd": "With regard to that matter, I agree with you."
-  },
-  {
-    "1st": "その商品は中国に空輸される予定だ",
-    "2nd": "The goods will be transported to China by air."
-  },
-  {
-    "1st": "世界的な経済危機が人々にお金を使うのを思いとどまらせている",
-    "2nd": "The global economic crisis has deterred people from spending money."
-  },
-  {
-    "1st": "遊びは幼児の発育に不可欠だ",
-    "2nd": "Play is essential for infant development."
-  },
-  {
-    "1st": "彼女は不本意ながら彼と結婚せざるを得なかった",
-    "2nd": "She was forced to marry him against her will."
-  },
-  {
-    "1st": "すべての子どもは公教育を受ける権利がある",
-    "2nd": "Every child is entitled to public education."
-  },
-  {
-    "1st": "数カ月間探した後、私はついに興味のある仕事を見つけた",
-    "2nd": "After months of searching, I finally found an interesting job."
-  },
-  {
-    "1st": "彼は有能で勤勉な従業員だ",
-    "2nd": "He is a competent and industrious employee."
-  },
-  {
-    "1st": "化学物質は農業で広く使われている",
-    "2nd": "Chemicals are widely used in farming."
-  },
-  {
-    "1st": "警察は行方不明の少年の捜索を打ち切った",
-    "2nd": "Police called off the search for the missing boy."
-  },
-  {
-    "1st": "支払いは8月1日までに行われなければならない",
-    "2nd": "Payment should be received no later than August 1."
-  },
-  {
-    "1st": "男たちは建設現場で働いている",
-    "2nd": "The men are working at the building site."
-  },
-  {
-    "1st": "その銀行はインターネット上での安全な取引を提供している",
-    "2nd": "The bank offers secure transactions over the Internet."
-  },
-  {
-    "1st": "私は1日中働いて疲れ切っている",
-    "2nd": "I'm exhausted from working all day."
-  },
-  {
-    "1st": "当店の営業時間は午前10時から午後8時までです",
-    "2nd": "Our opening hours are 10 a.m to 8 p.m."
-  },
-  {
-    "1st": "政府は年金問題に取り組む気がないようだ",
-    "2nd": "The government seems unwilling to address the issue of pensions."
-  },
-  {
-    "1st": "住所に変更があった場合は私たちにお知らせください",
-    "2nd": "Please keep us informed of any change of address."
-  },
-  {
-    "1st": "前もってチケットを買うことはできますか?",
-    "2nd": "Is it possible to buy tickets in advance?"
-  },
-  {
-    "1st": "彼は経費の大まかな計算をした",
-    "2nd": "He made a rough calculation of the costs."
-  },
-  {
-    "1st": "その会社は次期会計年度の予算案を作成した",
-    "2nd": "The company has drawn up a budget for the next fiscal year."
-  },
-  {
-    "1st": "規制緩和以降、100を超える運輸会社が倒産している",
-    "2nd": "More than 100 carriers have gone bankrupt since deregulation."
-  },
-  {
-    "1st": "ハリケーンの発生数の増加が地球温暖化の証拠だと主張する人もいる",
-    "2nd": "Some claim that the increased frequency of hurricanes is proof of global warming."
-  },
-  {
-    "1st": "彼女は彼の招待に応じることができなかった",
-    "2nd": "She was unable to accept his invitation."
-  },
-  {
-    "1st": "私たちは変化する市場に順応できなければならない",
-    "2nd": "We must be able to adapt to the changing marketplace."
-  },
-  {
-    "1st": "スージーはその会社の人事部に勤務している",
-    "2nd": "Susie works in the personnel division of the company."
-  },
-  {
-    "1st": "彼らはその会社から500万ドルを盗んだ",
-    "2nd": "They robbed the company of $5 million."
-  },
-  {
-    "1st": "教師は生徒たちに勉強を続ける動機を与える必要がある",
-    "2nd": "Teachers need to motivate students to keep studying."
-  },
-  {
-    "1st": "その2つの自動車メーカーは共同で電気自動車の開発を進めている",
-    "2nd": "The two automakers are collaborating to develop electric cars."
-  },
-  {
-    "1st": "今までのところ、その実験は非常にうまくいっている",
-    "2nd": "So far, the experiment is going very well."
-  },
-  {
-    "1st": "新しい政府は消費税を引き上げるといわれている",
-    "2nd": "It is said that the new government will raise the consumption tax."
-  },
-  {
-    "1st": "彼らは船に乗っている",
-    "2nd": "They are on board the ship."
+    "1st": "★事故のため82号線は渋滞している",
+    "2nd": "★The traffic on Highway 82 is backed up due to an accident."
   },
   {
     "1st": "ご迷惑をおかけしたことをおわびしたいと思います",
     "2nd": "We wish to apologize for the inconvenience caused to you."
   },
   {
-    "1st": "彼がその本を書き上げられたのは彼の妻のおかげだ",
-    "2nd": "He owes the completion of the book to his wife."
+    "1st": "その2つの自動車メーカーは共同で電気自動車の開発を進めている",
+    "2nd": "The two automakers are collaborating to develop electric cars."
+  },
+  {
+    "1st": "彼女は高校の校長になるよう任命された",
+    "2nd": "She was appointed to be a high school principal."
+  },
+  {
+    "1st": "教師は生徒たちに勉強を続ける動機を与える必要がある",
+    "2nd": "Teachers need to motivate students to keep studying."
+  },
+  {
+    "1st": "世界的な経済危機が人々にお金を使うのを思いとどまらせている",
+    "2nd": "The global economic crisis has deterred people from spending money."
+  },
+  {
+    "1st": "その将官は部下に降伏するよう命じた",
+    "2nd": "The general commanded his men to surrender."
+  },
+  {
+    "1st": "★市場は世界経済の見通しについて楽観的過ぎた",
+    "2nd": "★The market was too optimistic about the prospects of the global economy."
+  },
+  {
+    "1st": "すべての子どもは公教育を受ける権利がある",
+    "2nd": "Every child is entitled to public education."
+  },
+  {
+    "1st": "この映画は12歳以上の子ども向けだ",
+    "2nd": "This film is appropriate for children aged 12 and up."
+  },
+  {
+    "1st": "★その会社の本社はパリにある",
+    "2nd": "★The company's head office is sited in Paris."
+  },
+  {
+    "1st": "政府は年金問題に取り組む気がないようだ",
+    "2nd": "The government seems unwilling to address the issue of pensions."
+  },
+  {
+    "1st": "ご都合のいい時に調査書にご記入いただき､下記の住所まで郵送してください",
+    "2nd": "Please fill out the survey at your convenience and mail it to the address below."
+  },
+  {
+    "1st": "私の車は保証期間中で無料で修理された",
+    "2nd": "My car was repaired under warranty for free."
+  },
+  {
+    "1st": "その工場の労働者たちは書面による一時解雇の通知を受けた",
+    "2nd": "The factory workers were given written notice of layoffs."
+  },
+  {
+    "1st": "彼は新しい仕事を見つけるための助言をいくつか私にしてくれた",
+    "2nd": "He gave me several tips on how to find a new job."
+  },
+  {
+    "1st": "製品を使用する前に、使用説明書をよくお読みください",
+    "2nd": "Please read the instructions carefully before using the product."
+  },
+  {
+    "1st": "エンジン故障を報告した後、乗務員は緊急着陸を試みた",
+    "2nd": "The crew attempted an emergency landing after reporting engine trouble."
   },
   {
     "1st": "日本語の「さん」は、英語の「ミスタ「一」や「ミセス」と似た敬称だ",
     "2nd": "\"San\" in Japanese is a term of respect similar to \"Mr.\" or \"Mrs.\" in English."
   },
   {
-    "1st": "そのマンションの建設はおおよそ24カ月後に完了する予定だ",
-    "2nd": "The construction of the condominium will be completed in approximately 24 months."
+    "1st": "★そのコンサートのチケットは、切符売り場、電話、そしてオンラインで入手できる",
+    "2nd": "★Tickets for the concert are available at the box office, by phone, and online."
+  },
+  {
+    "1st": "新しい政府は消費税を引き上げるといわれている",
+    "2nd": "It is said that the new government will raise the consumption tax."
+  },
+  {
+    "1st": "彼女は英語が着実に上達してきている",
+    "2nd": "She is making steady progress with her English."
+  },
+  {
+    "1st": "働きづめですよね。休憩したらどうですか?",
+    "2nd": "You've been working very hard. Why don't you take a break?"
+  },
+  {
+    "1st": "その干ばつは8カ月間続いた",
+    "2nd": "The drought lasted for eight months."
+  },
+  {
+    "1st": "あなたは10年間の成人用パスポート代金として60ドルを請求されるだろう",
+    "2nd": "You will be charged $60 for a 10-year adult passport."
+  },
+  {
+    "1st": "両方の演説者は互いに向かい合っている",
+    "2nd": "Both speakers are facing each other."
+  },
+  {
+    "1st": "その大学は今週末に一般公開を開催する予定だ",
+    "2nd": "The university will host an open house this weekend."
+  },
+  {
+    "1st": "政府は今日、新しい経済報告を公表した",
+    "2nd": "The government released a new economic report today."
+  },
+  {
+    "1st": "原子力発電所の作業員は特定の安全指針に従わなければならない",
+    "2nd": "Nuclear plant workers should follow specific safety guidelines."
+  },
+  {
+    "1st": "そのプロジェクトの総費用は2500万ドルだった",
+    "2nd": "The total cost of the project was $25 million."
+  },
+  {
+    "1st": "喫煙の悪影響に気づいていない人もいる",
+    "2nd": "Some people are not aware of the harmful effects of smoking."
+  },
+  {
+    "1st": "ハリケーンの発生数の増加が地球温暖化の証拠だと主張する人もいる",
+    "2nd": "Some claim that the increased frequency of hurricanes is proof of global warming."
+  },
+  {
+    "1st": "その小説は最初の1週間で5万部以上売れた",
+    "2nd": "The novel sold over 50,000 copies in its first week."
   },
   {
     "1st": "並木が通り沿いにある",
     "2nd": "A row of trees lines the street."
+  },
+  {
+    "1st": "★これは最も重要な問題だ",
+    "2nd": "★This is a matter of the greatest importance."
+  },
+  {
+    "1st": "当店の営業時間は午前10時から午後8時までです",
+    "2nd": "Our opening hours are 10 a.m to 8 p.m."
+  },
+  {
+    "1st": "炭素税の目的は地球温暖化の進行を止めることだ",
+    "2nd": "The aim of a carbon tax is to halt the increase of global warming."
+  },
+  {
+    "1st": "警察はその自動車事故の目撃者を探している",
+    "2nd": "Police are looking for witnesses to the car accident."
+  },
+  {
+    "1st": "警察は行方不明の少年の捜索を打ち切った",
+    "2nd": "Police called off the search for the missing boy."
+  },
+  {
+    "1st": "経営陣は新しい支店を開くことの長所を話し合った",
+    "2nd": "The management discussed the merits of opening a new branch."
+  },
+  {
+    "1st": "ウエーターはテーブルに皿を置いている",
+    "2nd": "The waiter is laying plates on the table."
+  },
+  {
+    "1st": "その労働組合は労働条件を改善しようと努めている",
+    "2nd": "The union is seeking to reform working conditions."
+  },
+  {
+    "1st": "そのガイドにはニューヨークの最高級のホテル20とレストラン50が載っている",
+    "2nd": "The guide lists the 20 best hotels and 50 best restaurants in New York."
+  },
+  {
+    "1st": "グレッグは彼女と結婚すると思いますか?",
+    "2nd": "Do you suppose that Greg will marry her?"
+  },
+  {
+    "1st": "その商品は中国に空輸される予定だ",
+    "2nd": "The goods will be transported to China by air."
+  },
+  {
+    "1st": "私たちはパーティーでとても楽しい夜を過ごした",
+    "2nd": "We had a very pleasant night at the party."
+  },
+  {
+    "1st": "数カ月間探した後、私はついに興味のある仕事を見つけた",
+    "2nd": "After months of searching, I finally found an interesting job."
+  },
+  {
+    "1st": "彼女は30歳に見えるかもしれないが、実は40歳だ",
+    "2nd": "She may look 30, but she's actually 40."
+  },
+  {
+    "1st": "私は自分の報告書を一語一語綿密に調べた",
+    "2nd": "I went over my report word by word."
+  },
+  {
+    "1st": "住所に変更があった場合は私たちにお知らせください",
+    "2nd": "Please keep us informed of any change of address."
+  },
+  {
+    "1st": "彼女は国連のアメリカ代表に任命された",
+    "2nd": "She was appointed as the US representative to the United Nations."
+  },
+  {
+    "1st": "★彼がその本を書き上げられたのは彼の妻のおかげだ",
+    "2nd": "★He owes the completion of the book to his wife."
+  },
+  {
+    "1st": "彼らはその会社から500万ドルを盗んだ",
+    "2nd": "They robbed the company of $5 million."
+  },
+  {
+    "1st": "彼はその建設業者からわいろをもらったことを否定している",
+    "2nd": "He has denied taking the bribe from the contractor."
+  },
+  {
+    "1st": "彼女は不本意ながら彼と結婚せざるを得なかった",
+    "2nd": "She was forced to marry him against her will."
+  },
+  {
+    "1st": "エアバス380は800人以上の乗客を乗せることができる",
+    "2nd": "The Airbus A380 is capable of carrying more than 800 passengers."
+  },
+  {
+    "1st": "言語は人間に特有なものだ",
+    "2nd": "Language is proper to human beings."
+  },
+  {
+    "1st": "彼女は彼の招待に応じることができなかった",
+    "2nd": "She was unable to accept his invitation."
+  },
+  {
+    "1st": "出席できない場合は、前もってお知らせください",
+    "2nd": "If you can't attend, please let me know in advance."
+  },
+  {
+    "1st": "事実上、政府は貧困者に対して増税した",
+    "2nd": "In effect, the government has raised taxes for the poor."
+  },
+  {
+    "1st": "今までのところ、その実験は非常にうまくいっている",
+    "2nd": "So far, the experiment is going very well."
+  },
+  {
+    "1st": "彼はいつでも野球のことを話す",
+    "2nd": "He talks about baseball all the time."
+  },
+  {
+    "1st": "私はいつも辞書を手元に置いている",
+    "2nd": "I always keep a dictionary at hand."
+  },
+  {
+    "1st": "会社を代表して、皆さんのご協力に感謝したいと思います",
+    "2nd": "On behalf of the company. I would like to thank you for your cooperation."
+  },
+  {
+    "1st": "人々は年齢に関係なく平等の雇用機会を与えられるべきだ",
+    "2nd": "People should be given equal employment opportunities regardless of their age."
+  },
+  {
+    "1st": "その件に関しては、私はあなたと同意見です",
+    "2nd": "With regard to that matter, I agree with you."
+  },
+  {
+    "1st": "雨の場合は、その花火大会は中止になる",
+    "2nd": "In the event of rain, the fireworks will be canceled."
+  },
+  {
+    "1st": "支払いは8月1日までに行われなければならない",
+    "2nd": "Payment should be received no later than August 1."
+  },
+  {
+    "1st": "★彼らは船に乗っている",
+    "2nd": "★They are on board the ship."
+  },
+  {
+    "1st": "みんなの尽力のおかげで、今年は利益が上がっている",
+    "2nd": "Thanks to everyone's hard work, profits are up this year."
+  },
+  {
+    "1st": "彼らは別々の国に住んでいるので、電子メールで連絡を取り合っている",
+    "2nd": "Now that they live in different countries, they communicate by email."
+  },
+  {
+    "1st": "試験の前夜は必ず睡眠をたくさん取ること",
+    "2nd": "Make sure you have plenty of sleep the night before your exam."
+  },
+  {
+    "1st": "そのパーティーにはかなり多くの人々がいた",
+    "2nd": "There were quite a few people at the party."
+  },
+  {
+    "1st": "男性は両腕に本の山を抱えている",
+    "2nd": "The man has a pile of books in his arms."
   }
 ]
