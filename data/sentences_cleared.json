@@ -1,7 +1,19 @@
 [
   {
+    "1st": "スージーはその会社の人事部に勤務している",
+    "2nd": "Susie works in the personnel division of the company."
+  },
+  {
+    "1st": "男たちは建設現場で働いている",
+    "2nd": "The men are working at the building site."
+  },
+  {
     "1st": "彼女はその会社の宣伝部に勤務している",
     "2nd": "She works in the advertising division of the company."
+  },
+  {
+    "1st": "サラは非常に仕事に熱心だ",
+    "2nd": "Sarah is very diligent in her work."
   },
   {
     "1st": "台風は東アジアにおける、ハリケーンに相当するものだ",
@@ -12,12 +24,28 @@
     "2nd": "Since the age of 5, she has had a deep affection for literature."
   },
   {
+    "1st": "520号線は両方向とも渋滞している",
+    "2nd": "Traffic is stalled on Highway 520 in both directions."
+  },
+  {
     "1st": "野党はその経済対策に強く反対した",
     "2nd": "The opposition parties strongly objected to the economic measures."
   },
   {
+    "1st": "事故のため82号線は渋滞している",
+    "2nd": "The traffic on Highway 82 is backed up due to an accident."
+  },
+  {
     "1st": "すべてのがんの3分の1は喫煙と関連がある可能性がある",
     "2nd": "One-third of all cancers can be linked to smoking."
+  },
+  {
+    "1st": "市場は世界経済の見通しについて楽観的過ぎた",
+    "2nd": "The market was too optimistic about the prospects of the global economy."
+  },
+  {
+    "1st": "その会社の本社はパリにある",
+    "2nd": "The company's head office is sited in Paris."
   },
   {
     "1st": "財務報告書によると、その会社は昨年500万ドルの赤字を出した",
@@ -32,12 +60,28 @@
     "2nd": "The shop sells articles of all kinds for sports."
   },
   {
+    "1st": "そのコンサートのチケットは、切符売り場、電話、そしてオンラインで入手できる",
+    "2nd": "Tickets for the concert are available at the box office, by phone, and online."
+  },
+  {
     "1st": "商品が届き次第、お支払いください",
     "2nd": "Payment is due upon receipt of goods."
   },
   {
+    "1st": "これは最も重要な問題だ",
+    "2nd": "This is a matter of the greatest importance."
+  },
+  {
+    "1st": "彼がその本を書き上げられたのは彼の妻のおかげだ",
+    "2nd": "He owes the completion of the book to his wife."
+  },
+  {
     "1st": "キャンセルは出発の3日前まで可能だ",
     "2nd": "Cancellations will be acceptable up to three days prior to departure."
+  },
+  {
+    "1st": "彼らは船に乗っている",
+    "2nd": "They are on board the ship."
   },
   {
     "1st": "その運動を支持する集会があった",
