@@ -267,10 +267,10 @@ let jsonLong = [];
 let currentList = [];
 
 const sentenceSources = {
-  default: { file: "default", path: "data/sentences.json" },
-  advanced: { file: "advanced", path: "data/sentences_cleared.json" },
-  memo: { file: "memo", path: "data/sentences_memo.json" },
-  long: { file: "long", path: "data/sentences_long.json" },
+  default: { file: "default", path: "data/sentences_01.json" },
+  advanced: { file: "advanced", path: "data/sentences_02.json" },
+  memo: { file: "memo", path: "data/sentences_04.json" },
+  long: { file: "long", path: "data/sentences_03.json" },
 };
 
 function getSelectedSource() {
@@ -301,10 +301,10 @@ async function selectSource(source) {
 
 async function initApp() {
   try {
-    jsonA = normalizeSentences(await (await fetch("data/sentences.json")).json());
-    jsonB = normalizeSentences(await (await fetch("data/sentences_cleared.json")).json());
-    jsonMemo = normalizeSentences(await (await fetch("data/sentences_memo.json")).json());
-    jsonLong = normalizeSentences(await (await fetch("data/sentences_long.json")).json());
+    jsonA = normalizeSentences(await (await fetch("data/sentences_01.json")).json());
+    jsonB = normalizeSentences(await (await fetch("data/sentences_02.json")).json());
+    jsonMemo = normalizeSentences(await (await fetch("data/sentences_04.json")).json());
+    jsonLong = normalizeSentences(await (await fetch("data/sentences_03.json")).json());
     await switchMode(sentenceSources.default.file, jsonA);
   } catch (err) {
     topMetaEl.textContent = String(err.message || err);
