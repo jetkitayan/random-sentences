@@ -4,7 +4,7 @@ function updateStarUi() {
 
 function copySentenceToClipboard(text) {
   if (!text || !navigator.clipboard) return;
-  const prompt = `${text}\n上記の文章の文法について教えて`;
+  const prompt = `${text}\n上記の文章の文法について教えて\n`;
   navigator.clipboard.writeText(prompt).catch((err) => {
     console.error("sentence copy failed", err);
   });
