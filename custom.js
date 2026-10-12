@@ -46,6 +46,7 @@ function saveSimple() {
 }
 
 async function addSimpleSentence() {
+  customTextEl.blur();
   const text = (customTextEl.value || "").trim();
   if (!text) {
     addMsg.textContent = "空です";
@@ -61,11 +62,8 @@ async function addSimpleSentence() {
     if (!byEn[text]) byEn[text] = { jp: text, en: text };
 
     addMsg.textContent = "";
-    customTextEl.blur();
     setTimeout(() => {
-      const y = window.scrollY;
-      window.scrollTo(0, y + 1);
-      window.scrollTo(0, y);
+      window.scrollTo(0, 0);
     }, 0);
   } catch (err) {
     console.error(err);
