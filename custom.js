@@ -156,10 +156,9 @@ async function clearSimple() {
 
 function bindFastTap(element, handler) {
   element.addEventListener("pointerup", (event) => {
-    event.preventDefault();
     event.stopPropagation();
     handler();
-  }, { passive: false });
+  }, { passive: true });
 }
 
 bindFastTap(addSimpleBtn, addSimpleSentence);
