@@ -269,8 +269,8 @@ let currentList = [];
 const sentenceSources = {
   default: { file: "default", path: "data/sentences_01.json" },
   advanced: { file: "advanced", path: "data/sentences_02.json" },
-  memo: { file: "memo", path: "data/sentences_04.json" },
-  long: { file: "long", path: "data/sentences_03.json" },
+  memo: { file: "memo", path: "data/sentences_03.json" },
+  long: { file: "long", path: "data/sentences_04.json" },
 };
 
 function getSelectedSource() {
@@ -303,8 +303,8 @@ async function initApp() {
   try {
     jsonA = normalizeSentences(await (await fetch("data/sentences_01.json")).json());
     jsonB = normalizeSentences(await (await fetch("data/sentences_02.json")).json());
-    jsonMemo = normalizeSentences(await (await fetch("data/sentences_04.json")).json());
-    jsonLong = normalizeSentences(await (await fetch("data/sentences_03.json")).json());
+    jsonMemo = normalizeSentences(await (await fetch("data/sentences_03.json")).json());
+    jsonLong = normalizeSentences(await (await fetch("data/sentences_04.json")).json());
     await switchMode(sentenceSources.default.file, jsonA);
   } catch (err) {
     topMetaEl.textContent = String(err.message || err);
